@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 1 - Why AI + Ads</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, 'SF Pro Display', 'Segoe UI', Helvetica, sans-serif;
+    background: #0a0a1a;
+    color: #fff;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+  }
+
+  .slide {
+    display: none;
+    width: 100vw;
+    height: 100vh;
+    padding: 60px 80px;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .slide.active { display: flex; }
+
+  h1 {
+    font-size: 64px;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -2px;
+  }
+  h2 {
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -1px;
+  }
+  .subtitle {
+    font-size: 28px;
+    color: #a0a0b0;
+    margin-top: 16px;
+    font-weight: 400;
+  }
+  .accent { color: #e8b931; }
+  .dim { color: #666; }
+
+  .big-number {
+    font-size: 120px;
+    font-weight: 900;
+    color: #e8b931;
+    line-height: 1;
+    letter-spacing: -4px;
+  }
+
+  .comparison {
+    display: grid;
+    grid-template-columns: 1fr 80px 1fr;
+    gap: 0;
+    align-items: center;
+    margin-top: 40px;
+  }
+  .compare-box {
+    background: rgba(255,255,255,0.05);
+    border-radius: 16px;
+    padding: 40px;
+  }
+  .compare-box.highlight {
+    background: rgba(232,185,49,0.1);
+    border: 2px solid #e8b931;
+  }
+  .compare-box h3 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+  .compare-box ul {
+    list-style: none;
+    font-size: 22px;
+    line-height: 1.8;
+  }
+  .compare-box ul li::before {
+    content: ">";
+    color: #e8b931;
+    font-weight: 800;
+    margin-right: 12px;
+  }
+  .vs {
+    text-align: center;
+    font-size: 32px;
+    font-weight: 800;
+    color: #444;
+  }
+
+  .stat-row {
+    display: flex;
+    gap: 60px;
+    margin-top: 50px;
+  }
+  .stat {
+    text-align: center;
+  }
+  .stat .number {
+    font-size: 72px;
+    font-weight: 900;
+    color: #e8b931;
+    line-height: 1;
+  }
+  .stat .label {
+    font-size: 20px;
+    color: #a0a0b0;
+    margin-top: 8px;
+  }
+
+  .cta-slide {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+  }
+  .cta-slide h1 {
+    font-size: 72px;
+  }
+
+  /* Navigation */
+  .nav {
+    position: fixed;
+    bottom: 30px;
+    right: 40px;
+    display: flex;
+    gap: 12px;
+    z-index: 100;
+  }
+  .nav button {
+    background: rgba(255,255,255,0.1);
+    border: none;
+    color: #fff;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .nav button:hover { background: rgba(255,255,255,0.2); }
+
+  .slide-counter {
+    position: fixed;
+    bottom: 36px;
+    left: 40px;
+    font-size: 16px;
+    color: #444;
+    z-index: 100;
+  }
+
+  .speaker-notes {
+    display: none;
+  }
+</style>
+</head>
+<body>
+
+<!-- SLIDE 1: Title -->
+<div class="slide active" id="s1">
+  <h1>AI Ads<br>Launch Lab</h1>
+  <p class="subtitle">Build & Launch Your First Lead Gen Campaign in 3 Hours</p>
+  <p style="margin-top: 40px; font-size: 22px; color: #666;">Leo Tan</p>
+</div>
+
+<!-- SLIDE 2: The Problem -->
+<div class="slide" id="s2">
+  <h2>The way most FAs prospect:</h2>
+  <div class="stat-row">
+    <div class="stat">
+      <div class="number">100</div>
+      <div class="label">cold calls</div>
+    </div>
+    <div class="stat">
+      <div class="number">30</div>
+      <div class="label">pick up</div>
+    </div>
+    <div class="stat">
+      <div class="number">5</div>
+      <div class="label">meetings</div>
+    </div>
+    <div class="stat">
+      <div class="number">1</div>
+      <div class="label">client</div>
+    </div>
+  </div>
+  <p style="margin-top: 40px; font-size: 24px; color: #666;">2-3 hours of work. High rejection. Every single day.</p>
+</div>
+
+<!-- SLIDE 3: The Alternative -->
+<div class="slide" id="s3">
+  <h2>What if your leads <span class="accent">came to you?</span></h2>
+  <div class="comparison">
+    <div class="compare-box">
+      <h3 class="dim">Cold Calling</h3>
+      <ul>
+        <li>2-3 hours daily</li>
+        <li>High rejection</li>
+        <li>Stops when you stop</li>
+        <li>They don't know you</li>
+      </ul>
+    </div>
+    <div class="vs">vs</div>
+    <div class="compare-box highlight">
+      <h3 class="accent">$10/day Meta Ad</h3>
+      <ul>
+        <li>30 min to set up</li>
+        <li>They opted in</li>
+        <li>Runs while you sleep</li>
+        <li>They want to hear from you</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 4: Proof (screenshot placeholder) -->
+<div class="slide" id="s4">
+  <h2>This is my <span class="accent">actual</span> Ads Manager</h2>
+  <div style="margin-top: 40px; background: rgba(255,255,255,0.05); border-radius: 16px; padding: 80px; text-align: center; border: 2px dashed #333;">
+    <p style="font-size: 28px; color: #666;">[YOUR CAMPAIGN SCREENSHOT HERE]</p>
+    <p style="font-size: 18px; color: #444; margin-top: 12px;">Replace this with a screenshot of your real Meta Ads Manager results</p>
+  </div>
+  <p style="margin-top: 30px; font-size: 22px; color: #a0a0b0;">Not a course example. Not a template. My real account.</p>
+</div>
+
+<!-- SLIDE 5: AI Demo -->
+<div class="slide" id="s5">
+  <h2>Now watch this</h2>
+  <p class="subtitle" style="margin-bottom: 30px;">Live demo: Claude writes your ad copy in 30 seconds</p>
+  <div style="background: rgba(255,255,255,0.05); border-radius: 12px; padding: 30px; font-family: 'SF Mono', monospace; font-size: 18px; line-height: 1.8; color: #a0a0b0; max-width: 900px;">
+    <span style="color: #e8b931;">></span> Open claude.ai on the projector now<br>
+    <span style="color: #e8b931;">></span> Type the lead magnet prompt live<br>
+    <span style="color: #e8b931;">></span> Let them watch AI generate the content in real time
+  </div>
+  <p style="margin-top: 30px; font-size: 24px;">Writing that yourself? <span class="accent">30 minutes.</span><br>Claude? <span class="accent">30 seconds.</span></p>
+</div>
+
+<!-- SLIDE 6: What You'll Build Today -->
+<div class="slide" id="s6">
+  <h2>In the next 3 hours, you will:</h2>
+  <div style="margin-top: 40px; font-size: 32px; line-height: 2.2;">
+    <p><span class="accent" style="font-weight: 800; font-size: 40px;">1</span> &nbsp; Build a lead magnet using AI</p>
+    <p><span class="accent" style="font-weight: 800; font-size: 40px;">2</span> &nbsp; Create a Meta ad campaign</p>
+    <p><span class="accent" style="font-weight: 800; font-size: 40px;">3</span> &nbsp; Launch it. Today. Live. From this room.</p>
+  </div>
+</div>
+
+<!-- SLIDE 7: Let's Go -->
+<div class="slide cta-slide" id="s7">
+  <h1>Open your laptops.</h1>
+  <p style="font-size: 36px; color: #e8b931; margin-top: 20px; font-weight: 700;">Let's go.</p>
+</div>
+
+<div class="slide-counter"><span id="current">1</span> / <span id="total">7</span></div>
+
+<div class="nav">
+  <button onclick="prevSlide()">&#8592;</button>
+  <button onclick="nextSlide()">&#8594;</button>
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  let current = 0;
+  const total = slides.length;
+  document.getElementById('total').textContent = total;
+
+  function showSlide(n) {
+    slides[current].classList.remove('active');
+    current = (n + total) % total;
+    slides[current].classList.add('active');
+    document.getElementById('current').textContent = current + 1;
+  }
+
+  function nextSlide() { showSlide(current + 1); }
+  function prevSlide() { showSlide(current - 1); }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); nextSlide(); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); prevSlide(); }
+  });
+</script>
+
+</body>
+</html>

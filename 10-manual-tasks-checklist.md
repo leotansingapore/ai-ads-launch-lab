@@ -1,0 +1,67 @@
+# Manual Tasks -- Things Only Leo Can Do
+
+These tasks require your own accounts, screenshots, or physical setup. The text content is ready in the other files -- these are the "last mile" tasks.
+
+---
+
+## Design Tasks (Canva)
+
+- [ ] Create cheat sheet PDF in Canva using content from `01-claude-prompt-cheat-sheet.md`
+- [ ] Create 4 lead magnet templates in Canva using content from `02-lead-magnet-content-templates.md`
+- [ ] Set all Canva templates to "Anyone with link can view" and collect share links
+- [ ] Test template duplication flow in incognito browser
+- [ ] Create pre-flight checklist PDF in Canva using `03-pre-flight-checklist.md`
+
+## Screenshots (Meta Ads Manager)
+
+- [ ] Take screenshot of your real campaign results (for Module 1 proof)
+- [ ] Walk through Ads Manager setup and capture 4-6 screenshots for the setup guide (`05-meta-ads-setup-guide.md`)
+- [ ] Annotate screenshots with red circles/arrows (Canva or Preview)
+- [ ] Compile into setup guide PDF
+
+## Demo Campaign
+
+- [ ] Create a demo campaign in your Ads Manager (mirroring what attendees will build)
+- [ ] Document every click as you build it (verify against `08-module4-facilitator-guide.md`)
+- [ ] Take screenshots of each step as projector backup
+
+## Slides
+
+- [ ] Create Module 1 slides (max 4) in Google Slides using `06-module1-talking-points.md`
+- [ ] Create Module 3 slides (7 slides) in Google Slides using `07-module3-slide-content.md`
+
+## WhatsApp Group
+
+- [ ] Create WhatsApp group ("AI Ads Launch Lab" or "Leo's Lead Gen Lab")
+- [ ] Generate invite link
+- [ ] Generate QR code from invite link (Canva QR tool or qr-code-generator.com)
+- [ ] Add QR code to the closing slide
+
+## Comms
+
+- [ ] Send pre-workshop message 3 days before (template in `04-pre-workshop-comms.md`)
+- [ ] Send day-before reminder
+- [ ] Send follow-up message day after (template in `09-post-workshop-followup.md`)
+
+## Logistics
+
+- [ ] Print cheat sheets (1 per attendee, front and back)
+- [ ] Print pre-flight checklists (extras for the day)
+- [ ] Test projector + Wi-Fi at venue
+- [ ] Bring extension cords / power strips
+- [ ] Have phone hotspot ready as Wi-Fi backup
+- [ ] Create Google Drive folder with all resources and generate a short link
+
+## Timeline
+
+| Day | Do |
+|-----|-----|
+| T-7 | Canva templates + cheat sheet design |
+| T-5 | Screenshots + setup guide + slides |
+| T-4 | Demo campaign + facilitator guide walkthrough |
+| T-3 | Send pre-workshop comms |
+| T-2 | WhatsApp group + QR code + closing slide |
+| T-1 | Print materials, test venue AV, run-through |
+| T-0 | Workshop |
+| T+1 | Send follow-up pack |
+| T+3 | Check-in message |

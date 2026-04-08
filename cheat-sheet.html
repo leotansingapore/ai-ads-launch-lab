@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Ads Launch Lab - Claude Prompt Cheat Sheet</title>
+<style>
+  @page {
+    size: A4;
+    margin: 15mm;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+    color: #1a1a2e;
+    background: #fff;
+    font-size: 11pt;
+    line-height: 1.5;
+  }
+  .page {
+    max-width: 210mm;
+    margin: 0 auto;
+    padding: 15mm;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: avoid; }
+
+  .header {
+    text-align: center;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 3px solid #1a1a2e;
+  }
+  .header h1 {
+    font-size: 20pt;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    color: #1a1a2e;
+  }
+  .header p {
+    font-size: 10pt;
+    color: #666;
+    margin-top: 4px;
+  }
+
+  .prompt-card {
+    border: 2px solid #1a1a2e;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    overflow: hidden;
+  }
+  .prompt-card-header {
+    background: #1a1a2e;
+    color: #fff;
+    padding: 8px 14px;
+    font-weight: 700;
+    font-size: 11pt;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .prompt-number {
+    background: #e8b931;
+    color: #1a1a2e;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 12pt;
+    flex-shrink: 0;
+  }
+  .prompt-card-body {
+    padding: 12px 14px;
+  }
+  .prompt-text {
+    background: #f5f5f0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px 12px;
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+    font-size: 9pt;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    color: #333;
+  }
+  .prompt-hint {
+    margin-top: 8px;
+    font-size: 9pt;
+    color: #666;
+  }
+  .prompt-hint strong { color: #1a1a2e; }
+
+  .tips-section {
+    border: 2px dashed #e8b931;
+    border-radius: 8px;
+    padding: 14px;
+    margin-top: 10px;
+  }
+  .tips-section h3 {
+    font-size: 11pt;
+    color: #1a1a2e;
+    margin-bottom: 8px;
+  }
+  .tips-section ul {
+    list-style: none;
+    padding: 0;
+  }
+  .tips-section li {
+    padding: 3px 0;
+    font-size: 9.5pt;
+    padding-left: 18px;
+    position: relative;
+  }
+  .tips-section li::before {
+    content: ">";
+    position: absolute;
+    left: 2px;
+    color: #e8b931;
+    font-weight: 800;
+  }
+
+  .footer {
+    text-align: center;
+    margin-top: 16px;
+    padding-top: 10px;
+    border-top: 1px solid #ddd;
+    font-size: 9pt;
+    color: #999;
+  }
+
+  /* Page 2 */
+  .page2-header {
+    text-align: center;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 3px solid #1a1a2e;
+  }
+  .page2-header h2 {
+    font-size: 16pt;
+    color: #1a1a2e;
+  }
+
+  .example-section {
+    margin-bottom: 20px;
+  }
+  .example-section h3 {
+    font-size: 11pt;
+    color: #1a1a2e;
+    margin-bottom: 8px;
+    padding-bottom: 4px;
+    border-bottom: 2px solid #e8b931;
+  }
+  .example-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .example-box {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 10px;
+    font-size: 9pt;
+  }
+  .example-box .label {
+    font-weight: 700;
+    font-size: 8pt;
+    text-transform: uppercase;
+    color: #999;
+    margin-bottom: 4px;
+  }
+
+  .quick-ref {
+    border: 2px solid #1a1a2e;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 16px;
+  }
+  .quick-ref-header {
+    background: #1a1a2e;
+    color: #fff;
+    padding: 8px 14px;
+    font-weight: 700;
+    font-size: 11pt;
+  }
+  .quick-ref-body {
+    padding: 12px 14px;
+  }
+  .quick-ref-body table {
+    width: 100%;
+    font-size: 9pt;
+    border-collapse: collapse;
+  }
+  .quick-ref-body td {
+    padding: 4px 0;
+    vertical-align: top;
+  }
+  .quick-ref-body td:first-child {
+    font-weight: 600;
+    white-space: nowrap;
+    padding-right: 12px;
+    width: 35%;
+  }
+
+  @media print {
+    body { font-size: 10pt; }
+    .page { padding: 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1: FRONT -->
+<div class="page">
+  <div class="header">
+    <h1>AI Ads Launch Lab</h1>
+    <p>Your Claude Prompt Cheat Sheet</p>
+  </div>
+
+  <div class="prompt-card">
+    <div class="prompt-card-header">
+      <div class="prompt-number">1</div>
+      Generate Your Lead Magnet Content
+    </div>
+    <div class="prompt-card-body">
+      <div class="prompt-text">I'm a financial advisor in Singapore. Help me write a short lead magnet PDF (5-7 key points) on the topic: [TOPIC].
+
+My target audience is working adults aged 25-40 in Singapore.
+
+Keep the tone practical, friendly, and jargon-free. Include a brief intro, the main points, and a closing that invites them to book a free consultation.</div>
+      <div class="prompt-hint">Replace <strong>[TOPIC]</strong> with your chosen topic, e.g. "5 Retirement Mistakes Singaporeans Make Before 40"</div>
+    </div>
+  </div>
+
+  <div class="prompt-card">
+    <div class="prompt-card-header">
+      <div class="prompt-number">2</div>
+      Write Your Ad Copy
+    </div>
+    <div class="prompt-card-body">
+      <div class="prompt-text">I'm running a Meta lead gen ad for my financial advisory practice in Singapore. My lead magnet is: [LEAD MAGNET TITLE]. My target audience is [AGE RANGE] year old working adults in Singapore interested in [TOPIC].
+
+Write me:
+1) Primary text (under 125 characters for above-the-fold)
+2) Headline (under 40 characters)
+3) Description (under 30 characters)
+
+Keep it benefit-focused and conversational. Give me 3 variations.</div>
+    </div>
+  </div>
+
+  <div class="prompt-card">
+    <div class="prompt-card-header">
+      <div class="prompt-number">3</div>
+      Write Your Lead Follow-Up Message
+    </div>
+    <div class="prompt-card-body">
+      <div class="prompt-text">Someone just filled in my Meta lead form. Their details:
+- Name: [NAME]
+- Phone: [PHONE]
+- Biggest financial concern: [CONCERN]
+
+Write me a short WhatsApp message (under 100 words) to follow up. Be warm, reference their specific concern, and suggest a quick 15-min call. No hard sell.</div>
+    </div>
+  </div>
+
+  <div class="tips-section">
+    <h3>Pro Tips</h3>
+    <ul>
+      <li>Replace <strong>[BRACKETED TEXT]</strong> with your own details before sending</li>
+      <li>Add <strong>"Give me 3 versions"</strong> to any prompt for options</li>
+      <li>Say <strong>"Make it more casual"</strong> or <strong>"Make it shorter"</strong> to adjust</li>
+      <li>If the first result isn't right, tell Claude what to change -- just iterate</li>
+      <li>Save your best prompts -- you'll reuse them every new campaign</li>
+    </ul>
+  </div>
+
+  <div class="footer">claude.ai (free tier works) &nbsp;|&nbsp; AI Ads Launch Lab by Leo Tan</div>
+</div>
+
+<!-- PAGE 2: BACK -->
+<div class="page">
+  <div class="page2-header">
+    <h2>Quick Reference &amp; Examples</h2>
+  </div>
+
+  <div class="quick-ref">
+    <div class="quick-ref-header">Meta Ads Cheat Sheet</div>
+    <div class="quick-ref-body">
+      <table>
+        <tr><td>Campaign objective</td><td>Leads (always for lead gen)</td></tr>
+        <tr><td>Location</td><td>Singapore</td></tr>
+        <tr><td>Age range</td><td>25-45 (adjust to your niche)</td></tr>
+        <tr><td>Interests</td><td>Financial planning, Investments, CPF, Retirement, Insurance</td></tr>
+        <tr><td>Budget</td><td>$5-10/day to start</td></tr>
+        <tr><td>Test period</td><td>Minimum 3 days before judging results</td></tr>
+        <tr><td>Expected CPL</td><td>$3-15 per lead in Singapore</td></tr>
+        <tr><td>Form type</td><td>Instant Form > More Volume</td></tr>
+        <tr><td>Form fields</td><td>Name, Phone, "Biggest financial concern?"</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="example-section">
+    <h3>Example Ad Copy (Generated by Claude)</h3>
+    <div class="example-grid">
+      <div class="example-box">
+        <div class="label">Primary Text</div>
+        Most Singaporeans make these 5 retirement mistakes. Are you one of them? Grab the free guide.
+      </div>
+      <div class="example-box">
+        <div class="label">Headline</div>
+        Free Retirement Guide
+      </div>
+      <div class="example-box">
+        <div class="label">Description</div>
+        Download your copy now
+      </div>
+      <div class="example-box">
+        <div class="label">Follow-Up Message</div>
+        Hi [Name]! Thanks for downloading the retirement guide. I noticed you mentioned [concern] -- that's actually something I help clients with regularly. Would you be free for a quick 15-min call this week? No obligations, just a chat.
+      </div>
+    </div>
+  </div>
+
+  <div class="quick-ref">
+    <div class="quick-ref-header">After the Workshop</div>
+    <div class="quick-ref-body">
+      <table>
+        <tr><td>Check results</td><td>Ads Manager > Your Campaign > Results column</td></tr>
+        <tr><td>Find your leads</td><td>Ads Manager > Your Ad > Instant Form > Download Leads</td></tr>
+        <tr><td>Follow up speed</td><td>Within 2 hours of lead coming in</td></tr>
+        <tr><td>When to kill an ad</td><td>After 48 hours with $0 results and 500+ impressions</td></tr>
+        <tr><td>When to scale</td><td>CPL under $10 for 3+ days -- increase budget by 20%</td></tr>
+        <tr><td>Ad rejected?</td><td>Edit > remove "guaranteed" or income claims > resubmit</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="quick-ref">
+    <div class="quick-ref-header">Lead Magnet Topic Ideas</div>
+    <div class="quick-ref-body">
+      <table>
+        <tr><td>Retirement</td><td>"5 Retirement Mistakes Singaporeans Make Before 40"</td></tr>
+        <tr><td>CPF</td><td>"CPF Optimization Checklist for Working Adults"</td></tr>
+        <tr><td>Insurance</td><td>"How Much Insurance Do You Actually Need?"</td></tr>
+        <tr><td>Savings</td><td>"The 50/30/20 Budget That Actually Works in Singapore"</td></tr>
+        <tr><td>Young adults</td><td>"Your First $100K: A Financial Roadmap for Your 20s"</td></tr>
+        <tr><td>Parents</td><td>"Financial Planning Checklist for New Parents in SG"</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="footer">AI Ads Launch Lab by Leo Tan &nbsp;|&nbsp; claude.ai</div>
+</div>
+
+</body>
+</html>

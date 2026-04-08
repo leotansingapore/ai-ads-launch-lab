@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 5 - Closing</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, 'SF Pro Display', 'Segoe UI', Helvetica, sans-serif;
+    background: #0a0a1a;
+    color: #fff;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+  }
+  .slide {
+    display: none;
+    width: 100vw;
+    height: 100vh;
+    padding: 60px 80px;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .slide.active { display: flex; }
+  h1 { font-size: 56px; font-weight: 800; line-height: 1.1; letter-spacing: -2px; }
+  h2 { font-size: 44px; font-weight: 700; line-height: 1.2; letter-spacing: -1px; }
+  .accent { color: #e8b931; }
+  .subtitle { font-size: 24px; color: #a0a0b0; margin-top: 12px; }
+
+  .checklist {
+    margin-top: 40px;
+    font-size: 28px;
+    line-height: 2.2;
+    list-style: none;
+  }
+  .checklist li::before {
+    content: ">";
+    color: #e8b931;
+    font-weight: 800;
+    margin-right: 16px;
+  }
+
+  .rules-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 40px;
+    max-width: 900px;
+  }
+  .rule-card {
+    background: rgba(255,255,255,0.05);
+    border-radius: 12px;
+    padding: 28px;
+  }
+  .rule-card h3 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #e8b931;
+    margin-bottom: 8px;
+  }
+  .rule-card p {
+    font-size: 18px;
+    color: #ccc;
+    line-height: 1.5;
+  }
+
+  .qr-section {
+    text-align: center;
+    align-items: center;
+  }
+  .qr-box {
+    width: 280px;
+    height: 280px;
+    background: #fff;
+    border-radius: 16px;
+    margin: 30px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #333;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .system-box {
+    margin-top: 50px;
+    text-align: center;
+    font-size: 32px;
+    line-height: 1.8;
+  }
+  .system-box .step { color: #888; }
+  .system-box .arrow { color: #444; margin: 0 12px; }
+
+  .nav {
+    position: fixed;
+    bottom: 30px;
+    right: 40px;
+    display: flex;
+    gap: 12px;
+    z-index: 100;
+  }
+  .nav button {
+    background: rgba(255,255,255,0.1);
+    border: none;
+    color: #fff;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  .nav button:hover { background: rgba(255,255,255,0.2); }
+  .slide-counter {
+    position: fixed;
+    bottom: 36px;
+    left: 40px;
+    font-size: 16px;
+    color: #444;
+    z-index: 100;
+  }
+</style>
+</head>
+<body>
+
+<!-- SLIDE 1: What to do with leads -->
+<div class="slide active" id="s1">
+  <h2>Your campaign is live. <span class="accent">Now what?</span></h2>
+  <ul class="checklist">
+    <li>Check results: Ads Manager > Your Campaign > Results</li>
+    <li>Download leads: Your Ad > Instant Form > Download</li>
+    <li>Follow up within <span class="accent">2 hours</span> (use Prompt #3)</li>
+    <li>Call > WhatsApp > ignore. Speed wins.</li>
+  </ul>
+</div>
+
+<!-- SLIDE 2: Rules -->
+<div class="slide" id="s2">
+  <h2>The <span class="accent">rules</span></h2>
+  <div class="rules-grid">
+    <div class="rule-card">
+      <h3>The 48-Hour Rule</h3>
+      <p>Don't touch your ad for 48 hours. Meta's algorithm needs time to learn. Changing things too early resets the learning.</p>
+    </div>
+    <div class="rule-card">
+      <h3>When to Kill an Ad</h3>
+      <p>After 48 hours + 500 impressions with zero leads. Edit the copy or image and relaunch. Don't delete -- edit.</p>
+    </div>
+    <div class="rule-card">
+      <h3>When to Scale</h3>
+      <p>If your cost per lead is under $10 for 3+ days, increase budget by 20%. Don't double it overnight.</p>
+    </div>
+    <div class="rule-card">
+      <h3>Ad Rejected?</h3>
+      <p>Normal for finance. Remove words like "guaranteed", "100%", or income claims. Edit and resubmit. Not a failure.</p>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 3: The System -->
+<div class="slide" id="s3">
+  <h2>The <span class="accent">system</span></h2>
+  <div class="system-box">
+    <span class="accent" style="font-weight: 700;">AI writes</span>
+    <span class="arrow">-></span>
+    <span class="accent" style="font-weight: 700;">Meta distributes</span>
+    <span class="arrow">-></span>
+    <span class="accent" style="font-weight: 700;">You close</span>
+  </div>
+  <p style="margin-top: 40px; font-size: 24px; color: #888; text-align: center;">
+    Rinse and repeat. New lead magnet. New audience. New campaign.<br>
+    The system works while you focus on what you do best -- advising.
+  </p>
+</div>
+
+<!-- SLIDE 4: QR / Join -->
+<div class="slide qr-section" id="s4">
+  <h1>Keep going.</h1>
+  <p class="subtitle">Scan to join the support group</p>
+  <div class="qr-box">
+    [PASTE QR CODE IMAGE]
+  </div>
+  <p style="font-size: 22px; color: #888;">Share wins, ask questions, get help with your ads</p>
+  <p style="font-size: 18px; color: #555; margin-top: 16px;">Or message Leo directly: [YOUR WHATSAPP LINK]</p>
+</div>
+
+<!-- SLIDE 5: Closing -->
+<div class="slide" style="text-align: center; align-items: center;" id="s5">
+  <h1>You now have something<br><span class="accent">95% of FAs don't.</span></h1>
+  <p style="font-size: 28px; color: #888; margin-top: 24px;">A live digital lead generation system.</p>
+  <p style="font-size: 24px; color: #555; margin-top: 40px;">AI Ads Launch Lab &nbsp;|&nbsp; Leo Tan</p>
+</div>
+
+<div class="slide-counter"><span id="current">1</span> / <span id="total">5</span></div>
+
+<div class="nav">
+  <button onclick="prevSlide()">&#8592;</button>
+  <button onclick="nextSlide()">&#8594;</button>
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  let current = 0;
+  const total = slides.length;
+  document.getElementById('total').textContent = total;
+
+  function showSlide(n) {
+    slides[current].classList.remove('active');
+    current = (n + total) % total;
+    slides[current].classList.add('active');
+    document.getElementById('current').textContent = current + 1;
+  }
+
+  function nextSlide() { showSlide(current + 1); }
+  function prevSlide() { showSlide(current - 1); }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); nextSlide(); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); prevSlide(); }
+  });
+</script>
+
+</body>
+</html>

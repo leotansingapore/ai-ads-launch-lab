@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 3 - Meta Ads 101</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, 'SF Pro Display', 'Segoe UI', Helvetica, sans-serif;
+    background: #0a0a1a;
+    color: #fff;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+  }
+
+  .slide {
+    display: none;
+    width: 100vw;
+    height: 100vh;
+    padding: 60px 80px;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .slide.active { display: flex; }
+
+  h1 {
+    font-size: 64px;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -2px;
+  }
+  h2 {
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -1px;
+  }
+  .subtitle {
+    font-size: 28px;
+    color: #a0a0b0;
+    margin-top: 16px;
+    font-weight: 400;
+  }
+  .accent { color: #e8b931; }
+  .dim { color: #555; }
+  .green { color: #22c55e; }
+  .red { color: #ef4444; }
+
+  /* Filing cabinet diagram */
+  .cabinet {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    max-width: 700px;
+  }
+  .cabinet-level {
+    border: 2px solid;
+    border-radius: 12px;
+    padding: 24px 30px;
+    position: relative;
+  }
+  .cabinet-level.l1 {
+    border-color: #e8b931;
+    background: rgba(232,185,49,0.08);
+  }
+  .cabinet-level.l2 {
+    border-color: #60a5fa;
+    background: rgba(96,165,250,0.08);
+    margin: 16px 0 0 40px;
+  }
+  .cabinet-level.l3 {
+    border-color: #a78bfa;
+    background: rgba(167,139,250,0.08);
+    margin: 16px 0 0 80px;
+  }
+  .cabinet-level .level-label {
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+  }
+  .cabinet-level.l1 .level-label { color: #e8b931; }
+  .cabinet-level.l2 .level-label { color: #60a5fa; }
+  .cabinet-level.l3 .level-label { color: #a78bfa; }
+  .cabinet-level .level-text {
+    font-size: 24px;
+    font-weight: 600;
+  }
+  .cabinet-level .level-desc {
+    font-size: 16px;
+    color: #888;
+    margin-top: 2px;
+  }
+
+  /* Three things */
+  .three-things {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 30px;
+    margin-top: 50px;
+  }
+  .thing {
+    background: rgba(255,255,255,0.05);
+    border-radius: 16px;
+    padding: 40px 30px;
+    text-align: center;
+  }
+  .thing .icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+  }
+  .thing h3 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .thing p {
+    font-size: 18px;
+    color: #888;
+  }
+
+  /* Flow comparison */
+  .flow {
+    margin-top: 40px;
+    font-size: 22px;
+    line-height: 2;
+  }
+  .flow .arrow { color: #444; margin: 0 8px; }
+
+  /* Targeting list */
+  .target-list {
+    margin-top: 40px;
+    font-size: 26px;
+    line-height: 2;
+    list-style: none;
+  }
+  .target-list li::before {
+    content: ">";
+    color: #e8b931;
+    font-weight: 800;
+    margin-right: 16px;
+  }
+
+  /* Budget stats */
+  .budget-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 40px;
+    max-width: 800px;
+  }
+  .budget-card {
+    background: rgba(255,255,255,0.05);
+    border-radius: 12px;
+    padding: 30px;
+  }
+  .budget-card .val {
+    font-size: 40px;
+    font-weight: 800;
+    color: #e8b931;
+  }
+  .budget-card .desc {
+    font-size: 18px;
+    color: #888;
+    margin-top: 4px;
+  }
+
+  .cta-slide {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* Navigation */
+  .nav {
+    position: fixed;
+    bottom: 30px;
+    right: 40px;
+    display: flex;
+    gap: 12px;
+    z-index: 100;
+  }
+  .nav button {
+    background: rgba(255,255,255,0.1);
+    border: none;
+    color: #fff;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .nav button:hover { background: rgba(255,255,255,0.2); }
+
+  .slide-counter {
+    position: fixed;
+    bottom: 36px;
+    left: 40px;
+    font-size: 16px;
+    color: #444;
+    z-index: 100;
+  }
+</style>
+</head>
+<body>
+
+<!-- SLIDE 1: Title -->
+<div class="slide active" id="s1">
+  <h1>Meta Ads 101</h1>
+  <p class="subtitle">How It Actually Works</p>
+</div>
+
+<!-- SLIDE 2: The Filing Cabinet -->
+<div class="slide" id="s2">
+  <h2>Think of it like a <span class="accent">filing cabinet</span></h2>
+  <div class="cabinet">
+    <div class="cabinet-level l1">
+      <div class="level-label">Campaign</div>
+      <div class="level-text">The Drawer</div>
+      <div class="level-desc">Your goal -- "I want leads"</div>
+    </div>
+    <div class="cabinet-level l2">
+      <div class="level-label">Ad Set</div>
+      <div class="level-text">The Folder</div>
+      <div class="level-desc">Who sees it + how much you spend</div>
+    </div>
+    <div class="cabinet-level l3">
+      <div class="level-label">Ad</div>
+      <div class="level-text">The Document</div>
+      <div class="level-desc">What they actually see in their feed</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 3: Three Things -->
+<div class="slide" id="s3">
+  <h2>Meta needs <span class="accent">3 things</span> from you</h2>
+  <div class="three-things">
+    <div class="thing">
+      <div class="icon">&#127919;</div>
+      <h3>WHO</h3>
+      <p>Who should see your ad<br>(targeting)</p>
+    </div>
+    <div class="thing">
+      <div class="icon">&#128196;</div>
+      <h3>WHAT</h3>
+      <p>What they'll see<br>(your ad creative + copy)</p>
+    </div>
+    <div class="thing">
+      <div class="icon">&#128176;</div>
+      <h3>HOW MUCH</h3>
+      <p>Your daily budget<br>($5-10/day is enough)</p>
+    </div>
+  </div>
+  <p style="margin-top: 30px; font-size: 22px; color: #666;">Get these 3 right and you'll get leads. Everything else is details.</p>
+</div>
+
+<!-- SLIDE 4: Lead Form vs Traffic -->
+<div class="slide" id="s4">
+  <h2>Lead Form Ads <span class="accent">win</span></h2>
+  <div class="flow" style="margin-top: 50px;">
+    <p style="margin-bottom: 12px;">
+      <span class="red">Traffic ad:</span>
+      See ad <span class="arrow">-></span> Click <span class="arrow">-></span> Go to website <span class="arrow">-></span> Find form <span class="arrow">-></span> Fill it in <span class="arrow">-></span> <span class="dim">...maybe</span>
+    </p>
+    <p>
+      <span class="green">Lead form ad:</span>
+      See ad <span class="arrow">-></span> Click <span class="arrow">-></span> <span class="accent">Form pops up inside Facebook</span> <span class="arrow">-></span> Done
+    </p>
+  </div>
+  <div style="margin-top: 50px; background: rgba(232,185,49,0.08); border-radius: 12px; padding: 24px 30px; max-width: 700px;">
+    <p style="font-size: 22px;"><span class="accent" style="font-weight: 700;">Why this matters:</span></p>
+    <ul style="list-style: none; font-size: 20px; margin-top: 8px; line-height: 1.8; color: #ccc;">
+      <li>> No website needed</li>
+      <li>> Facebook auto-fills their name and email</li>
+      <li>> Fewer steps = more people complete it</li>
+    </ul>
+  </div>
+</div>
+
+<!-- SLIDE 5: Targeting -->
+<div class="slide" id="s5">
+  <h2>Targeting for <span class="accent">Financial Advisors</span></h2>
+  <ul class="target-list">
+    <li><strong>Location:</strong> Singapore</li>
+    <li><strong>Age:</strong> 25-45 (adjust to your niche)</li>
+    <li><strong>Interests:</strong> Financial planning, Investments, CPF, Retirement, Insurance</li>
+  </ul>
+  <div style="margin-top: 50px; background: rgba(255,255,255,0.05); border-radius: 12px; padding: 24px 30px; max-width: 700px;">
+    <p style="font-size: 22px; color: #e8b931; font-weight: 700;">Pro tip</p>
+    <p style="font-size: 20px; color: #ccc; margin-top: 6px;">Start broad. Don't over-target. Meta's algorithm is smart -- it'll find the right people. The more you restrict, the more expensive each lead becomes.</p>
+  </div>
+</div>
+
+<!-- SLIDE 6: Budget -->
+<div class="slide" id="s6">
+  <h2>Budget <span class="accent">reality check</span></h2>
+  <div class="budget-grid">
+    <div class="budget-card">
+      <div class="val">$5-10</div>
+      <div class="desc">Daily budget to start</div>
+    </div>
+    <div class="budget-card">
+      <div class="val">$3-15</div>
+      <div class="desc">Cost per lead in Singapore</div>
+    </div>
+    <div class="budget-card">
+      <div class="val">3 days</div>
+      <div class="desc">Minimum test before judging</div>
+    </div>
+    <div class="budget-card">
+      <div class="val">$15-30</div>
+      <div class="desc">Total cost for your first test</div>
+    </div>
+  </div>
+  <p style="margin-top: 40px; font-size: 24px; color: #888;">"You're about to spend less than a nice dinner to get real leads."</p>
+</div>
+
+<!-- SLIDE 7: Ready -->
+<div class="slide cta-slide" id="s7">
+  <h1>Time to build.</h1>
+  <p style="font-size: 28px; color: #a0a0b0; margin-top: 20px; max-width: 600px; line-height: 1.6;">
+    Create your campaign. Set your targeting.<br>
+    Write your ad with Claude. Launch it.
+  </p>
+  <p style="font-size: 36px; color: #e8b931; margin-top: 30px; font-weight: 700;">Let's go.</p>
+</div>
+
+<div class="slide-counter"><span id="current">1</span> / <span id="total">7</span></div>
+
+<div class="nav">
+  <button onclick="prevSlide()">&#8592;</button>
+  <button onclick="nextSlide()">&#8594;</button>
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  let current = 0;
+  const total = slides.length;
+  document.getElementById('total').textContent = total;
+
+  function showSlide(n) {
+    slides[current].classList.remove('active');
+    current = (n + total) % total;
+    slides[current].classList.add('active');
+    document.getElementById('current').textContent = current + 1;
+  }
+
+  function nextSlide() { showSlide(current + 1); }
+  function prevSlide() { showSlide(current - 1); }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); nextSlide(); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); prevSlide(); }
+  });
+</script>
+
+</body>
+</html>
