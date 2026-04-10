@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 4 - Launch Your Campaign</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, 'SF Pro Display', 'Segoe UI', Helvetica, sans-serif;
+    background: #0a0a1a;
+    color: #fff;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+  }
+
+  .slide {
+    display: none;
+    width: 100vw;
+    height: 100vh;
+    padding: 40px 60px;
+    flex-direction: column;
+  }
+  .slide.active { display: flex; }
+
+  .slide-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #1a1a2e;
+  }
+  .step-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(232,185,49,0.1);
+    border: 1px solid #e8b931;
+    border-radius: 999px;
+    padding: 6px 16px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #e8b931;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .step-title {
+    font-size: 36px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    color: #fff;
+  }
+  .time-badge {
+    font-size: 13px;
+    color: #666;
+    font-weight: 600;
+  }
+
+  .slide-body {
+    display: grid;
+    grid-template-columns: 45% 55%;
+    gap: 40px;
+    flex: 1;
+    align-items: center;
+  }
+
+  .instructions {
+    padding-right: 20px;
+  }
+  .instructions h3 {
+    font-size: 18px;
+    color: #e8b931;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+  }
+  .instructions p {
+    font-size: 17px;
+    line-height: 1.6;
+    color: #ccc;
+    margin-bottom: 16px;
+  }
+  .instructions ul {
+    list-style: none;
+    margin-top: 12px;
+  }
+  .instructions ul li {
+    padding: 8px 0;
+    font-size: 16px;
+    color: #ccc;
+    padding-left: 24px;
+    position: relative;
+  }
+  .instructions ul li::before {
+    content: ">";
+    position: absolute;
+    left: 0;
+    color: #e8b931;
+    font-weight: 800;
+  }
+  .instructions .pro-tip {
+    background: rgba(232,185,49,0.08);
+    border-left: 3px solid #e8b931;
+    padding: 12px 16px;
+    margin-top: 16px;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #ddd;
+  }
+  .instructions .pro-tip strong {
+    color: #e8b931;
+    display: block;
+    margin-bottom: 4px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  /* Meta Ads Manager UI Mockup */
+  .mock-browser {
+    background: #18191a;
+    border-radius: 12px;
+    border: 1px solid #2a2a3a;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    max-height: 560px;
+  }
+  .mock-browser-bar {
+    background: #242526;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid #333;
+  }
+  .mock-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+  }
+  .mock-dot.r { background: #ff5f56; }
+  .mock-dot.y { background: #ffbd2e; }
+  .mock-dot.g { background: #27c93f; }
+  .mock-url {
+    background: #18191a;
+    color: #8a8d91;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    margin-left: 12px;
+    flex: 1;
+  }
+
+  .mock-meta-header {
+    background: #242526;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border-bottom: 1px solid #3a3b3c;
+    color: #e4e6eb;
+  }
+  .meta-logo {
+    width: 28px;
+    height: 28px;
+    background: linear-gradient(135deg, #0866ff, #8a3ffc);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    color: #fff;
+    font-size: 14px;
+  }
+  .meta-title {
+    font-weight: 700;
+    font-size: 15px;
+    color: #e4e6eb;
+  }
+  .create-btn {
+    margin-left: auto;
+    background: #0866ff;
+    color: #fff;
+    padding: 8px 18px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 13px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .create-btn.pulsing {
+    box-shadow: 0 0 0 0 rgba(232,185,49,0.7);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(232,185,49,0.7); }
+    70% { box-shadow: 0 0 0 14px rgba(232,185,49,0); }
+    100% { box-shadow: 0 0 0 0 rgba(232,185,49,0); }
+  }
+
+  .mock-body {
+    background: #18191a;
+    color: #e4e6eb;
+    padding: 24px;
+    min-height: 400px;
+  }
+
+  /* Objective selector cards */
+  .obj-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+  }
+  .obj-card {
+    background: #242526;
+    border: 2px solid #3a3b3c;
+    border-radius: 8px;
+    padding: 16px 14px;
+    cursor: pointer;
+  }
+  .obj-card.selected {
+    border-color: #e8b931;
+    background: rgba(232,185,49,0.06);
+    box-shadow: 0 0 20px rgba(232,185,49,0.2);
+  }
+  .obj-icon {
+    font-size: 24px;
+    margin-bottom: 8px;
+  }
+  .obj-name {
+    font-weight: 700;
+    font-size: 14px;
+    color: #e4e6eb;
+    margin-bottom: 4px;
+  }
+  .obj-desc {
+    font-size: 11px;
+    color: #8a8d91;
+    line-height: 1.4;
+  }
+
+  /* Form fields */
+  .form-row {
+    margin-bottom: 16px;
+  }
+  .form-label {
+    font-size: 12px;
+    color: #b0b3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    display: block;
+  }
+  .form-input {
+    background: #3a3b3c;
+    border: 1px solid #4e4f50;
+    border-radius: 6px;
+    padding: 10px 14px;
+    color: #e4e6eb;
+    font-size: 13px;
+    width: 100%;
+  }
+  .form-input.highlighted {
+    border-color: #e8b931;
+    box-shadow: 0 0 0 3px rgba(232,185,49,0.15);
+  }
+  .form-select {
+    background: #3a3b3c;
+    border: 1px solid #4e4f50;
+    border-radius: 6px;
+    padding: 10px 14px;
+    color: #e4e6eb;
+    font-size: 13px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .form-select .chev { color: #8a8d91; }
+
+  /* Targeting mock */
+  .target-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+  }
+  .target-chip {
+    background: rgba(8,102,255,0.15);
+    border: 1px solid #0866ff;
+    color: #4599ff;
+    padding: 4px 10px;
+    border-radius: 14px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+
+  .budget-display {
+    display: flex;
+    justify-content: space-between;
+    background: #242526;
+    padding: 14px 16px;
+    border-radius: 8px;
+    border: 1px solid #3a3b3c;
+  }
+  .budget-amount {
+    font-size: 22px;
+    font-weight: 800;
+    color: #e8b931;
+  }
+  .budget-label {
+    font-size: 11px;
+    color: #8a8d91;
+    text-transform: uppercase;
+  }
+  .budget-est {
+    text-align: right;
+    font-size: 11px;
+    color: #8a8d91;
+  }
+  .budget-est strong { color: #42b72a; display: block; font-size: 14px; }
+
+  /* Ad preview mock */
+  .ad-preview {
+    background: #242526;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #3a3b3c;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+  .ad-preview-header {
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid #3a3b3c;
+  }
+  .ad-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #e8b931, #f59e0b);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    color: #1a1a2e;
+    font-size: 14px;
+  }
+  .ad-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: #e4e6eb;
+  }
+  .ad-sponsored {
+    font-size: 11px;
+    color: #8a8d91;
+  }
+  .ad-body {
+    padding: 10px 12px;
+    font-size: 12px;
+    color: #e4e6eb;
+    line-height: 1.4;
+  }
+  .ad-image {
+    background: linear-gradient(135deg, #1a1a2e 0%, #0a0a1a 100%);
+    height: 280px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .ad-image::before {
+    content: "";
+    position: absolute;
+    width: 80%;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #e8b931, transparent);
+    top: 50%;
+    left: 10%;
+    box-shadow: 0 0 30px #e8b931;
+    border-radius: 999px;
+  }
+  .ad-image-label {
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    font-size: 10px;
+    color: #666;
+  }
+  .ad-cta-bar {
+    background: #18191a;
+    padding: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #3a3b3c;
+  }
+  .ad-cta-label {
+    font-size: 10px;
+    color: #8a8d91;
+  }
+  .ad-cta-headline {
+    font-size: 14px;
+    font-weight: 700;
+    color: #e4e6eb;
+  }
+  .ad-cta-btn {
+    background: #3a3b3c;
+    color: #e4e6eb;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  /* Lead form mock */
+  .lead-form-mock {
+    background: #242526;
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid #3a3b3c;
+  }
+  .lead-form-mock h4 {
+    font-size: 15px;
+    color: #e4e6eb;
+    margin-bottom: 16px;
+  }
+  .lead-form-field {
+    margin-bottom: 12px;
+  }
+  .lead-form-field label {
+    display: block;
+    font-size: 11px;
+    color: #8a8d91;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+  }
+  .lead-form-field .input-look {
+    background: #18191a;
+    border: 1px solid #3a3b3c;
+    border-radius: 6px;
+    padding: 10px;
+    font-size: 12px;
+    color: #666;
+  }
+  .autofilled {
+    color: #42b72a !important;
+  }
+  .autofill-tag {
+    float: right;
+    font-size: 9px;
+    background: rgba(66,183,42,0.15);
+    color: #42b72a;
+    padding: 2px 6px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .review-checklist {
+    background: #242526;
+    border-radius: 8px;
+    padding: 18px;
+    border: 1px solid #3a3b3c;
+  }
+  .review-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid #1a1a2e;
+    font-size: 12px;
+  }
+  .review-item:last-child { border: none; }
+  .review-check {
+    color: #42b72a;
+    font-weight: 800;
+  }
+  .review-label { color: #b0b3b8; }
+  .review-value { color: #e4e6eb; margin-left: auto; font-weight: 600; }
+
+  .publish-btn {
+    background: #0866ff;
+    color: #fff;
+    padding: 12px 32px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 14px;
+    text-align: center;
+    display: inline-block;
+  }
+
+  /* Title slide */
+  .title-slide {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .title-slide h1 {
+    font-size: 72px;
+    font-weight: 800;
+    letter-spacing: -3px;
+    line-height: 1;
+  }
+  .title-slide .accent { color: #e8b931; }
+  .title-slide p {
+    font-size: 24px;
+    color: #a0a0b0;
+    margin-top: 20px;
+  }
+
+  /* Progress slide */
+  .progress-slide {
+    align-items: center;
+    justify-content: center;
+  }
+  .progress-steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    max-width: 1000px;
+  }
+  .progress-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid #1e1e30;
+    border-radius: 12px;
+    padding: 24px;
+  }
+  .progress-card .num {
+    font-size: 32px;
+    font-weight: 900;
+    color: #e8b931;
+    line-height: 1;
+  }
+  .progress-card .name {
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    margin: 8px 0 4px;
+  }
+  .progress-card .dur {
+    font-size: 12px;
+    color: #666;
+  }
+
+  /* Nav */
+  .nav {
+    position: fixed;
+    bottom: 24px;
+    right: 32px;
+    display: flex;
+    gap: 10px;
+    z-index: 100;
+  }
+  .nav button {
+    background: rgba(255,255,255,0.1);
+    border: none;
+    color: #fff;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    font-size: 18px;
+    cursor: pointer;
+  }
+  .nav button:hover { background: rgba(255,255,255,0.2); }
+  .slide-counter {
+    position: fixed;
+    bottom: 30px;
+    left: 32px;
+    font-size: 14px;
+    color: #444;
+    z-index: 100;
+  }
+</style>
+</head>
+<body>
+
+<!-- SLIDE 1: Title -->
+<div class="slide active title-slide" id="s1">
+  <h1>Build & Launch<br>Your <span class="accent">First Campaign</span></h1>
+  <p>60 minutes. Step by step. Live Meta Ads Manager walkthrough.</p>
+</div>
+
+<!-- SLIDE 2: What we'll do -->
+<div class="slide progress-slide" id="s2">
+  <h2 style="font-size: 40px; font-weight: 800; margin-bottom: 30px; text-align: center;">In the next 60 minutes</h2>
+  <div class="progress-steps">
+    <div class="progress-card">
+      <div class="num">01</div>
+      <div class="name">Create Campaign</div>
+      <div class="dur">5 min</div>
+    </div>
+    <div class="progress-card">
+      <div class="num">02</div>
+      <div class="name">Set Audience</div>
+      <div class="dur">10 min</div>
+    </div>
+    <div class="progress-card">
+      <div class="num">03</div>
+      <div class="name">Budget & Schedule</div>
+      <div class="dur">5 min</div>
+    </div>
+    <div class="progress-card">
+      <div class="num">04</div>
+      <div class="name">Build Ad Creative</div>
+      <div class="dur">15 min</div>
+    </div>
+    <div class="progress-card">
+      <div class="num">05</div>
+      <div class="name">Instant Lead Form</div>
+      <div class="dur">10 min</div>
+    </div>
+    <div class="progress-card">
+      <div class="num">06</div>
+      <div class="name">Launch Live</div>
+      <div class="dur">5 min</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 3: Step 1 - Click Create -->
+<div class="slide" id="s3">
+  <div class="slide-header">
+    <div>
+      <div class="step-badge">Step 1</div>
+      <div class="step-title" style="margin-top: 8px;">Click the Create Button</div>
+    </div>
+    <div class="time-badge">~ 1 minute</div>
+  </div>
+  <div class="slide-body">
+    <div class="instructions">
+      <h3>What to do</h3>
+      <p>Open <strong>adsmanager.facebook.com</strong> and log in. You'll see your dashboard.</p>
+      <ul>
+        <li>Click the green <strong>+ Create</strong> button (top left)</li>
+        <li>A modal will pop up asking for your campaign objective</li>
+      </ul>
+      <div class="pro-tip">
+        <strong>Pro tip</strong>
+        If you see "You don't have permission", make sure you're logged into the right Facebook account that owns your Business Page.
+      </div>
+    </div>
+    <div class="mock-browser">
+      <div class="mock-browser-bar">
+        <div class="mock-dot r"></div>
+        <div class="mock-dot y"></div>
+        <div class="mock-dot g"></div>
+        <div class="mock-url">adsmanager.facebook.com</div>
+      </div>
+      <div class="mock-meta-header">
+        <div class="meta-logo">M</div>
+        <div>
+          <div class="meta-title">Meta Ads Manager</div>
+          <div style="font-size: 11px; color: #8a8d91;">Campaigns</div>
+        </div>
+        <div class="create-btn pulsing">+ Create</div>
+      </div>
+      <div class="mock-body" style="padding: 40px 24px;">
+        <div style="text-align: center; color: #8a8d91; padding: 40px 0;">
+          <div style="font-size: 48px; opacity: 0.3;">📊</div>
+          <p style="font-size: 14px; margin-top: 12px;">No campaigns yet. Click Create to start.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 4: Step 2 - Select Leads Objective -->
+<div class="slide" id="s4">
+  <div class="slide-header">
+    <div>
+      <div class="step-badge">Step 2</div>
+      <div class="step-title" style="margin-top: 8px;">Select "Leads" Objective</div>
+    </div>
+    <div class="time-badge">~ 1 minute</div>
+  </div>
+  <div class="slide-body">
+    <div class="instructions">
+      <h3>What to do</h3>
+      <p>You'll see 6 campaign objectives. Pick <strong>Leads</strong> -- this tells Meta's algorithm to optimize for people who will fill in your form.</p>
+      <ul>
+        <li>Click the <strong>Leads</strong> card</li>
+        <li>Click <strong>Continue</strong> at the bottom</li>
+        <li>Select <strong>"Manual leads campaign"</strong> when asked (more control)</li>
+      </ul>
+      <div class="pro-tip">
+        <strong>2026 update</strong>
+        All Leads campaigns default to Advantage+ mode -- Meta's AI handles optimization. Lower cost per lead by ~10% vs manual setup.
+      </div>
+    </div>
+    <div class="mock-browser">
+      <div class="mock-browser-bar">
+        <div class="mock-dot r"></div>
+        <div class="mock-dot y"></div>
+        <div class="mock-dot g"></div>
+        <div class="mock-url">adsmanager.facebook.com/create</div>
+      </div>
+      <div class="mock-body">
+        <div style="font-size: 16px; font-weight: 700; margin-bottom: 4px;">Choose a campaign objective</div>
+        <div style="font-size: 12px; color: #8a8d91; margin-bottom: 20px;">What results do you want from this campaign?</div>
+        <div class="obj-grid">
+          <div class="obj-card">
+            <div class="obj-icon">👁️</div>
+            <div class="obj-name">Awareness</div>
+            <div class="obj-desc">Reach people likely to remember your ad</div>
+          </div>
+          <div class="obj-card">
+            <div class="obj-icon">🔗</div>
+            <div class="obj-name">Traffic</div>
+            <div class="obj-desc">Send people to your destination</div>
+          </div>
+          <div class="obj-card">
+            <div class="obj-icon">💬</div>
+            <div class="obj-name">Engagement</div>
+            <div class="obj-desc">Get messages, video views, posts</div>
+          </div>
+          <div class="obj-card selected">
+            <div class="obj-icon">📝</div>
+            <div class="obj-name">Leads</div>
+            <div class="obj-desc">Collect leads for your business</div>
+          </div>
+          <div class="obj-card">
+            <div class="obj-icon">📱</div>
+            <div class="obj-name">App Promo</div>
+            <div class="obj-desc">Promote your app</div>
+          </div>
+          <div class="obj-card">
+            <div class="obj-icon">🛒</div>
+            <div class="obj-name">Sales</div>
+            <div class="obj-desc">Find people likely to purchase</div>
+          </div>
+        </div>
+        <div style="margin-top: 20px; display: flex; justify-content: flex-end; gap: 10px;">
+          <div style="padding: 8px 20px; color: #8a8d91; font-size: 13px;">Cancel</div>
+          <div style="padding: 8px 20px; background: #0866ff; color: #fff; border-radius: 6px; font-weight: 600; font-size: 13px;">Continue</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 5: Step 3 - Name campaign + Conversion location -->
+<div class="slide" id="s5">
+  <div class="slide-header">
+    <div>
+      <div class="step-badge">Step 3</div>
+      <div class="step-title" style="margin-top: 8px;">Name It & Choose Instant Forms</div>
+    </div>
+    <div class="time-badge">~ 2 minutes</div>
+  </div>
+  <div class="slide-body">
+    <div class="instructions">
+      <h3>What to do</h3>
+      <p>Give your campaign a clear name so you can recognize it later. Then pick where leads will come from.</p>
+      <ul>
+        <li>Campaign name: <strong>"Retirement Guide Lead Gen"</strong></li>
+        <li>Conversion Location: <strong>Instant Forms</strong></li>
+        <li>Performance Goal: <strong>Maximize number of leads</strong></li>
+      </ul>
+      <div class="pro-tip">
+        <strong>Why Instant Forms?</strong>
+        The form pops up inside Facebook -- no website needed. Facebook auto-fills their name, email, and phone. Less friction = more leads.
+      </div>
+    </div>
+    <div class="mock-browser">
+      <div class="mock-browser-bar">
+        <div class="mock-dot r"></div>
+        <div class="mock-dot y"></div>
+        <div class="mock-dot g"></div>
+        <div class="mock-url">adsmanager.facebook.com/create</div>
+      </div>
+      <div class="mock-body">
+        <div style="font-size: 14px; font-weight: 700; margin-bottom: 20px;">Campaign setup</div>
+        <div class="form-row">
+          <label class="form-label">Campaign Name</label>
+          <div class="form-input highlighted">Retirement Guide Lead Gen</div>
+        </div>
+        <div class="form-row">
+          <label class="form-label">Buying Type</label>
+          <div class="form-select">
+            <span>Auction</span>
+            <span class="chev">▼</span>
+          </div>
+        </div>
+        <div class="form-row">
+          <label class="form-label">Campaign Objective</label>
+          <div class="form-select">
+            <span style="color: #e8b931;">📝 Leads</span>
+            <span class="chev">▼</span>
+          </div>
+        </div>
+        <div class="form-row">
+          <label class="form-label">Conversion Location</label>
+          <div class="form-select highlighted" style="border-color: #e8b931; box-shadow: 0 0 0 3px rgba(232,185,49,0.15);">
+            <span>Instant Forms</span>
+            <span class="chev">▼</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 6: Step 4 - Audience Targeting -->
+<div class="slide" id="s6">
+  <div class="slide-header">
+    <div>
+      <div class="step-badge">Step 4</div>
+      <div class="step-title" style="margin-top: 8px;">Target Your Audience</div>
+    </div>
+    <div class="time-badge">~ 10 minutes</div>
+  </div>
+  <div class="slide-body">
+    <div class="instructions">
+      <h3>What to do</h3>
+      <p>Tell Meta who should see your ad. Keep it simple -- start broad.</p>
+      <ul>
+        <li><strong>Location:</strong> Singapore</li>
+        <li><strong>Age:</strong> 25-45</li>
+        <li><strong>Interests:</strong> Financial planning, CPF, Investments, Retirement</li>
+        <li>Gender: All</li>
+      </ul>
+      <div class="pro-tip">
+        <strong>Don't over-target</strong>
+        3-5 interests is the sweet spot. Adding 10+ narrows your audience and makes leads more expensive. Let Meta's algorithm find the right people.
+      </div>
+    </div>
+    <div class="mock-browser">
+      <div class="mock-browser-bar">
+        <div class="mock-dot r"></div>
+        <div class="mock-dot y"></div>
+        <div class="mock-dot g"></div>
+        <div class="mock-url">adsmanager.facebook.com/create</div>
+      </div>
+      <div class="mock-body">
+        <div style="font-size: 14px; font-weight: 700; margin-bottom: 16px;">Audience</div>
+        <div class="form-row">
+          <label class="form-label">📍 Locations</label>
+          <div class="form-input">
+            <span class="target-chip" style="background: rgba(8,102,255,0.15); display: inline-block;">Singapore</span>
+          </div>
+        </div>
+        <div class="form-row">
+          <label class="form-label">Age</label>
+          <div class="form-input highlighted">25 — 45</div>
+        </div>
+        <div class="form-row">
+          <label class="form-label">Detailed Targeting</label>
+          <div class="form-input" style="min-height: 60px;">
+            <div class="target-row">
+              <span class="target-chip">Financial planning</span>
+              <span class="target-chip">CPF</span>
+              <span class="target-chip">Investments</span>
+              <span class="target-chip">Retirement</span>
+              <span class="target-chip">Insurance</span>
+            </div>
+          </div>
+        </div>
+        <div style="background: rgba(66,183,42,0.08); border: 1px solid rgba(66,183,42,0.3); border-radius: 6px; padding: 10px 12px; margin-top: 12px; font-size: 11px; color: #42b72a;">
+          ✓ Audience size: 480K — 560K people. Defined.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 7: Step 5 - Budget -->
+<div class="slide" id="s7">
+  <div class="slide-header">
+    <div>
+      <div class="step-badge">Step 5</div>
+      <div class="step-title" style="margin-top: 8px;">Set Budget & Schedule</div>
+    </div>
+    <div class="time-badge">~ 2 minutes</div>
+  </div>
+  <div class="slide-body">
+    <div class="instructions">
+      <h3>What to do</h3>
+      <p>$5-10/day is plenty to start. Run for 3 days minimum before judging results.</p>
+      <ul>
+        <li>Budget type: <strong>Daily budget</strong></li>
+        <li>Amount: <strong>$5</strong> (or $10 if comfortable)</li>
+        <li>Start date: <strong>Today</strong></li>
+        <li>End date: <strong>3 days from now</strong></li>
+      </ul>
+      <div class="pro-tip">
+        <strong>Steady beats spiky</strong>
+        In 2026, Meta's algorithm rewards consistent daily spending. Don't run $50 for 1 day. Run $5/day for 10 days.
+      </div>
+    </div>
+    <div class="mock-browser">
+      <div class="mock-browser-bar">
+        <div class="mock-dot r"></div>
+        <div class="mock-dot y"></div>
+        <div class="mock-dot g"></div>
+        <div class="mock-url">adsmanager.facebook.com/create</div>
+      </div>
+      <div class="mock-body">
+        <div style="font-size: 14px; font-weight: 700; margin-bottom: 16px;">Budget & Schedule</div>
+        <div class="budget-display">
+          <div>
+            <div class="budget-label">Daily Budget</div>
+            <div class="budget-amount">$5.00</div>
+          </div>
+          <div class="budget-est">
+            <div class="budget-label">Est. Reach</div>
+            <strong>800 — 2,300 /day</strong>
+          </div>
+        </div>
+        <div class="form-row" style="margin-top: 16px;">
+          <label class="form-label">Start Date</label>
+          <div class="form-input">Today, 10:00 AM</div>
+        </div>
+        <div class="form-row">
+          <label class="form-label">End Date</label>
+          <div class="form-input highlighted">3 days from now</div>
+        </div>
+        <div style="background: rgba(232,185,49,0.08); border-left: 3px solid #e8b931; padding: 10px 12px; margin-top: 12px; font-size: 11px; color: #e4e6eb;">
+          💡 Est. results: 3-9 leads total at $1.67-$5.00 per lead
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 8: Step 6 - Build Ad Creative -->
+<div class="slide" id="s8">
+  <div class="slide-header">
+    <div>
+      <div class="step-badge">Step 6</div>
+      <div class="step-title" style="margin-top: 8px;">Build Your Ad with Claude</div>
+    </div>
+    <div class="time-badge">~ 15 minutes</div>
+  </div>
+  <div class="slide-body">
+    <div class="instructions">
+      <h3>What to do</h3>
+      <p>This is where AI does the heavy lifting. Open Claude in another tab and use Prompt #2 from the cheat sheet.</p>
+      <ul>
+        <li>Upload your lead magnet cover image</li>
+        <li>Paste Claude's primary text into "Primary Text"</li>
+        <li>Paste the headline and description</li>
+        <li>Select CTA: <strong>"Sign Up"</strong> or <strong>"Learn More"</strong></li>
+      </ul>
+      <div class="pro-tip">
+        <strong>Image size matters</strong>
+        Square (1080×1080) or portrait (1080×1350) works best. Meta auto-crops for all placements.
+      </div>
+    </div>
+    <div class="ad-preview">
+      <div class="ad-preview-header">
+        <div class="ad-avatar">LT</div>
+        <div>
+          <div class="ad-name">Leo Tan</div>
+          <div class="ad-sponsored">Sponsored · 🌍</div>
+        </div>
+      </div>
+      <div class="ad-body">Stop cold calling. Start getting leads that come to you. Free 3-hour workshop in Singapore. Walk out with a live ad running.</div>
+      <div class="ad-image">
+        <span class="ad-image-label">your Canva cover</span>
+      </div>
+      <div class="ad-cta-bar">
+        <div>
+          <div class="ad-cta-label">fa-ads-toolkit.vercel.app</div>
+          <div class="ad-cta-headline">Free AI Ads Workshop</div>
+        </div>
+        <div class="ad-cta-btn">Sign Up</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 9: Step 7 - Instant Form -->
+<div class="slide" id="s9">
+  <div class="slide-header">
+    <div>
+      <div class="step-badge">Step 7</div>
+      <div class="step-title" style="margin-top: 8px;">Create the Instant Form</div>
+    </div>
+    <div class="time-badge">~ 10 minutes</div>
+  </div>
+  <div class="slide-body">
+    <div class="instructions">
+      <h3>What to do</h3>
+      <p>This is the form that pops up inside Facebook when someone clicks your ad.</p>
+      <ul>
+        <li>Click <strong>"Create Form"</strong> under Destination</li>
+        <li>Form Type: <strong>More Volume</strong> (fewer friction)</li>
+        <li>Fields: Name, Phone (auto-filled), + custom question</li>
+        <li>Custom question: <strong>"What's your biggest financial concern?"</strong></li>
+      </ul>
+      <div class="pro-tip">
+        <strong>Keep it under 6 fields</strong>
+        More fields = fewer completions. The custom question qualifies the lead AND gives you a conversation starter.
+      </div>
+    </div>
+    <div class="lead-form-mock">
+      <h4 style="color: #e4e6eb;">Get Your Free Retirement Guide</h4>
+      <div class="lead-form-field">
+        <label>Full Name <span class="autofill-tag">auto</span></label>
+        <div class="input-look autofilled">Sarah Chen</div>
+      </div>
+      <div class="lead-form-field">
+        <label>Phone Number <span class="autofill-tag">auto</span></label>
+        <div class="input-look autofilled">+65 9123 4567</div>
+      </div>
+      <div class="lead-form-field">
+        <label>What's your biggest financial concern?</label>
+        <div class="input-look" style="color: #666; font-style: italic;">Type your answer...</div>
+      </div>
+      <div style="background: #0866ff; color: #fff; text-align: center; padding: 12px; border-radius: 6px; font-weight: 700; font-size: 13px; margin-top: 16px;">
+        Submit
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 10: Step 8 - Review -->
+<div class="slide" id="s10">
+  <div class="slide-header">
+    <div>
+      <div class="step-badge">Step 8</div>
+      <div class="step-title" style="margin-top: 8px;">Review Everything</div>
+    </div>
+    <div class="time-badge">~ 3 minutes</div>
+  </div>
+  <div class="slide-body">
+    <div class="instructions">
+      <h3>What to do</h3>
+      <p>Before hitting publish, double-check every setting. Meta shows you a summary of your campaign -- walk through it together.</p>
+      <ul>
+        <li>Objective matches your goal</li>
+        <li>Audience size is 100K+ (not too narrow)</li>
+        <li>Budget is set correctly</li>
+        <li>Ad preview looks good on mobile</li>
+        <li>Form is linked to the ad</li>
+      </ul>
+      <div class="pro-tip">
+        <strong>No landing page?</strong>
+        Good. Instant Forms don't need one. If you see a "landing page URL" field, it's optional.
+      </div>
+    </div>
+    <div class="mock-browser">
+      <div class="mock-browser-bar">
+        <div class="mock-dot r"></div>
+        <div class="mock-dot y"></div>
+        <div class="mock-dot g"></div>
+        <div class="mock-url">adsmanager.facebook.com/create/review</div>
+      </div>
+      <div class="mock-body">
+        <div style="font-size: 14px; font-weight: 700; margin-bottom: 12px;">Campaign Review</div>
+        <div class="review-checklist">
+          <div class="review-item">
+            <span class="review-check">✓</span>
+            <span class="review-label">Objective</span>
+            <span class="review-value">Leads</span>
+          </div>
+          <div class="review-item">
+            <span class="review-check">✓</span>
+            <span class="review-label">Location</span>
+            <span class="review-value">Singapore</span>
+          </div>
+          <div class="review-item">
+            <span class="review-check">✓</span>
+            <span class="review-label">Age</span>
+            <span class="review-value">25-45</span>
+          </div>
+          <div class="review-item">
+            <span class="review-check">✓</span>
+            <span class="review-label">Daily Budget</span>
+            <span class="review-value">$5.00</span>
+          </div>
+          <div class="review-item">
+            <span class="review-check">✓</span>
+            <span class="review-label">Ad Image</span>
+            <span class="review-value">Uploaded</span>
+          </div>
+          <div class="review-item">
+            <span class="review-check">✓</span>
+            <span class="review-label">Instant Form</span>
+            <span class="review-value">3 fields</span>
+          </div>
+        </div>
+        <div style="margin-top: 16px; text-align: right;">
+          <div class="publish-btn" style="background: #42b72a;">Publish</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 11: Step 9 - Countdown Launch -->
+<div class="slide title-slide" id="s11">
+  <h1>3... 2... 1...<br><span class="accent">Publish.</span></h1>
+  <p style="margin-top: 40px; font-size: 20px;">Your first Meta ad campaign is live. Congratulations.</p>
+  <div style="margin-top: 40px; font-size: 16px; color: #666; max-width: 600px; text-align: center; line-height: 1.6;">
+    Meta will review your ad within 15-60 minutes. You'll see "In Review" status — that's normal. Once approved, it starts running.
+  </div>
+</div>
+
+<!-- SLIDE 12: What to do next -->
+<div class="slide" id="s12" style="justify-content: center;">
+  <div style="max-width: 900px; margin: 0 auto; width: 100%;">
+    <h2 style="font-size: 44px; font-weight: 800; margin-bottom: 30px; text-align: center;">After Launch</h2>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+      <div style="background: rgba(255,255,255,0.04); border: 1px solid #1e1e30; border-radius: 12px; padding: 24px;">
+        <div style="font-size: 12px; color: #e8b931; text-transform: uppercase; font-weight: 700; letter-spacing: 2px; margin-bottom: 8px;">First 24 Hours</div>
+        <p style="color: #ccc; font-size: 16px; line-height: 1.6;">Don't change anything. Let Meta's algorithm learn. Just verify the status moves from "In Review" to "Active".</p>
+      </div>
+      <div style="background: rgba(255,255,255,0.04); border: 1px solid #1e1e30; border-radius: 12px; padding: 24px;">
+        <div style="font-size: 12px; color: #e8b931; text-transform: uppercase; font-weight: 700; letter-spacing: 2px; margin-bottom: 8px;">After 48 Hours</div>
+        <p style="color: #ccc; font-size: 16px; line-height: 1.6;">Check your results. Download leads. Follow up using Claude prompt #3. Speed wins.</p>
+      </div>
+      <div style="background: rgba(255,255,255,0.04); border: 1px solid #1e1e30; border-radius: 12px; padding: 24px;">
+        <div style="font-size: 12px; color: #e8b931; text-transform: uppercase; font-weight: 700; letter-spacing: 2px; margin-bottom: 8px;">CPL Under $10?</div>
+        <p style="color: #ccc; font-size: 16px; line-height: 1.6;">Scale it. Increase budget by 20%. Don't double it overnight -- incremental changes keep the algorithm stable.</p>
+      </div>
+      <div style="background: rgba(255,255,255,0.04); border: 1px solid #1e1e30; border-radius: 12px; padding: 24px;">
+        <div style="font-size: 12px; color: #e8b931; text-transform: uppercase; font-weight: 700; letter-spacing: 2px; margin-bottom: 8px;">CPL Too High?</div>
+        <p style="color: #ccc; font-size: 16px; line-height: 1.6;">Edit the ad copy or image. Don't delete the campaign. Let it re-optimize with the new creative.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide-counter"><span id="current">1</span> / <span id="total">12</span></div>
+
+<div class="nav">
+  <button onclick="prevSlide()">&#8592;</button>
+  <button onclick="nextSlide()">&#8594;</button>
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  let current = 0;
+  const total = slides.length;
+  document.getElementById('total').textContent = total;
+
+  function showSlide(n) {
+    slides[current].classList.remove('active');
+    current = (n + total) % total;
+    slides[current].classList.add('active');
+    document.getElementById('current').textContent = current + 1;
+  }
+
+  function nextSlide() { showSlide(current + 1); }
+  function prevSlide() { showSlide(current - 1); }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); nextSlide(); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); prevSlide(); }
+  });
+</script>
+
+</body>
+</html>
