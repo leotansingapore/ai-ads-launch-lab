@@ -101,8 +101,8 @@
     border: 1px solid var(--line);
     border-left: 4px solid var(--gold);
     border-radius: 10px;
-    padding: clamp(16px, 2vw, 26px);
-    margin-top: 28px;
+    padding: clamp(14px, 1.8vw, 22px);
+    margin-top: 18px;
     max-width: 980px;
   }
   .prompt pre {
@@ -129,7 +129,7 @@
   .copy-btn:hover { background: rgba(232,185,49,0.25); }
 
   .checkpoint {
-    margin-top: 36px;
+    margin-top: 22px;
     background: rgba(34,197,94,0.09);
     border: 1px solid rgba(34,197,94,0.4);
     border-radius: 10px;
@@ -178,7 +178,7 @@
     display: flex;
     gap: 20px;
     align-items: baseline;
-    padding: 14px 0;
+    padding: 11px 0;
     border-bottom: 1px solid var(--line);
     font-size: clamp(17px, 2vw, 24px);
   }
@@ -192,7 +192,7 @@
   .step-row .note { color: var(--dim); font-size: 0.75em; margin-left: auto; text-align: right; }
 
   table.sched { width: 100%; max-width: 900px; border-collapse: collapse; margin-top: 32px; font-size: clamp(15px, 1.8vw, 21px); }
-  table.sched td { padding: 12px 8px; border-bottom: 1px solid var(--line); }
+  table.sched td { padding: 9px 8px; border-bottom: 1px solid var(--line); }
   table.sched .t { color: var(--gold); font-weight: 700; width: 90px; white-space: nowrap; }
   table.sched .m { color: var(--dim); text-align: right; }
 
@@ -228,6 +228,10 @@
     text-align: center;
     padding: 24px;
   }
+
+  .dense .card { padding: 14px 20px; }
+  .dense .card h3 { font-size: clamp(15px, 1.6vw, 19px); margin-bottom: 6px; }
+  .dense .card p { font-size: clamp(13px, 1.4vw, 16px); }
 
   .notes { display: none; }
   body.show-notes .slide.active .notes {
@@ -446,7 +450,7 @@ practical, friendly, and jargon-free.</pre>
 
 <!-- 12 -->
 <div class="slide" data-section="Module 2">
-  <p class="kicker">Step 1 of 4</p>
+  <p class="kicker">Step 1 of 5</p>
   <h2>Pick your topic. <span class="accent">Don't overthink it.</span></h2>
   <div class="cols three">
     <div class="card"><h3>Retirement</h3><p>"5 Retirement Mistakes Singaporeans Make Before 40"</p></div>
@@ -459,7 +463,7 @@ practical, friendly, and jargon-free.</pre>
 
 <!-- 13 -->
 <div class="slide" data-section="Module 2">
-  <p class="kicker">Step 2 of 4</p>
+  <p class="kicker">Step 2 of 5</p>
   <h2>Generate your content <span class="accent">(Prompt 1)</span></h2>
   <div class="split" style="align-items: start;">
     <div>
@@ -483,7 +487,7 @@ Keep the tone practical, friendly, and jargon-free. Include a brief intro, the m
 
 <!-- 14 -->
 <div class="slide" data-section="Module 2">
-  <p class="kicker">Step 3 of 4</p>
+  <p class="kicker">Step 3 of 5</p>
   <h2>The first draft is a draft. <span class="accent">Talk to it.</span></h2>
   <div class="cols">
     <div class="card">
@@ -510,23 +514,37 @@ Keep the tone practical, friendly, and jargon-free. Include a brief intro, the m
 
 <!-- 15 -->
 <div class="slide" data-section="Module 2">
-  <p class="kicker">Step 4 of 4</p>
-  <h2>Make it look good in <span class="accent">Canva</span></h2>
+  <p class="kicker">Step 4 of 5</p>
+  <h2>Open your <span class="accent">template</span></h2>
   <div class="split">
     <div>
       <div class="steps" style="margin-top: 24px;">
         <div class="step-row">Open the template link from your cheat sheet <span class="note">pick the one matching your topic</span></div>
-        <div class="step-row">Click "Use this template"</div>
-        <div class="step-row">Paste your Claude content, one point per page</div>
-        <div class="step-row">Put your name and contact on the cover and last page</div>
+        <div class="step-row">Click <b style="color: var(--gold);">"Use this template"</b></div>
+        <div class="step-row">Canva opens a copy that's yours to edit <span class="note">7 pages, already designed</span></div>
       </div>
+      <div class="checkpoint">The template is open in the Canva editor, all 7 pages visible. Thumbs up.</div>
     </div>
     <div>
       <img class="shot" src="shots/canva-templates.png" alt="Canva template gallery showing financial guide ebook covers">
       <p class="shot-cap">Canva has thousands of these. Your cheat sheet links to 4 pre-built ones so you skip the browsing.</p>
     </div>
   </div>
-  <aside class="notes">Templates are pre-built, so this is copy-paste, not design. Anyone fighting with fonts or colours: stop them. "The template is already designed. Your job is the words." 15 minutes for this step.</aside>
+  <aside class="notes">The template links are on the printed cheat sheet AND in the pre-workshop message. If someone lost both, project one link on screen. "Use this template" makes their own editable copy; nobody can break the original.</aside>
+</div>
+
+<!-- Step 5: paste page by page -->
+<div class="slide" data-section="Module 2">
+  <p class="kicker">Step 5 of 5</p>
+  <h2>Paste, <span class="accent">one point per page</span></h2>
+  <div class="steps">
+    <div class="step-row"><span>Page 1 (cover): swap in <b style="color: var(--gold);">your title + your name</b></span></div>
+    <div class="step-row"><span>Pages 2-6: Claude's point 1 &rarr; page 2, point 2 &rarr; page 3, and so on <span class="note">heading on top, 3-4 sentences below</span></span></div>
+    <div class="step-row"><span>Page 7 (closing): keep the "book a free consultation" text, add <b style="color: var(--gold);">your phone and email</b></span></div>
+    <div class="step-row"><span>Don't touch fonts or colours. The design is done. <b style="color: var(--gold);">Your job is the words.</b></span></div>
+  </div>
+  <div class="checkpoint">All 7 pages filled, your name and contact on the cover and closing page. Thumbs up.</div>
+  <aside class="notes">This is where the 45 minutes goes, so walk the room. Watch for the two time sinks: perfectionists rewriting Claude's copy from scratch (tell them: edit later, tonight, at home) and fiddlers redesigning the template. Anyone done early helps a neighbour. 15 minutes for this step.</aside>
 </div>
 
 <!-- 16 -->
@@ -655,7 +673,7 @@ Keep the tone practical, friendly, and jargon-free. Include a brief intro, the m
 
 <!-- 25 -->
 <div class="slide" data-section="Module 4">
-  <p class="kicker">Step 1 of 8</p>
+  <p class="kicker">Step 1 of 10</p>
   <h2>Open <span class="accent">Ads Manager</span></h2>
   <p class="subtitle" style="font-size: clamp(22px, 3vw, 36px); margin-top: 36px;">adsmanager.facebook.com</p>
   <div class="checkpoint">You see a dashboard. Error or setup screen instead? Raise your hand.</div>
@@ -664,7 +682,7 @@ Keep the tone practical, friendly, and jargon-free. Include a brief intro, the m
 
 <!-- 26 -->
 <div class="slide" data-section="Module 4">
-  <p class="kicker">Step 2 of 8</p>
+  <p class="kicker">Step 2 of 10</p>
   <h2>Create the campaign</h2>
   <div class="split">
     <div>
@@ -686,11 +704,12 @@ Keep the tone practical, friendly, and jargon-free. Include a brief intro, the m
 
 <!-- 27 -->
 <div class="slide" data-section="Module 4">
-  <p class="kicker">Step 3 of 8</p>
+  <p class="kicker">Step 3 of 10</p>
   <h2>Audience: the <span class="accent">WHO</span></h2>
   <div class="split">
     <div>
       <div class="steps" style="margin-top: 24px;">
+        <div class="step-row">Performance goal: <b style="color: var(--gold);">Maximise number of leads</b> <span class="note">usually pre-selected; leave it</span></div>
         <div class="step-row">Location: <b style="color: var(--gold);">Singapore</b></div>
         <div class="step-row">Age: <b style="color: var(--gold);">25-45</b> <span class="note">or your ideal client's range</span></div>
         <div class="step-row">Detailed Targeting &rarr; Browse &rarr; add <b style="color: var(--gold);">3-5 interests</b> matching your topic <span class="note">financial planning, investments, CPF, retirement planning, insurance</span></div>
@@ -707,7 +726,7 @@ Keep the tone practical, friendly, and jargon-free. Include a brief intro, the m
 
 <!-- 28 -->
 <div class="slide" data-section="Module 4">
-  <p class="kicker">Step 4 of 8</p>
+  <p class="kicker">Step 4 of 10</p>
   <h2>Budget: the <span class="accent">HOW MUCH</span></h2>
   <div class="split">
     <div>
@@ -729,29 +748,49 @@ Keep the tone practical, friendly, and jargon-free. Include a brief intro, the m
 
 <!-- 29 -->
 <div class="slide" data-section="Module 4">
-  <p class="kicker">Step 5 of 8</p>
-  <h2>The ad: the <span class="accent">WHAT</span></h2>
+  <p class="kicker">Step 5 of 10</p>
+  <h2>Pick your <span class="accent">Page</span></h2>
   <div class="split">
     <div>
       <div class="steps" style="margin-top: 24px;">
-        <div class="step-row">Identity: select your <b style="color: var(--gold);">Facebook Business Page</b> <span class="note">this is who the ad comes from</span></div>
-        <div class="step-row">Ad Creative &rarr; Add Media &rarr; Add Image</div>
-        <div class="step-row">Upload your <b style="color: var(--gold);">Canva cover PNG</b> from Module 2</div>
+        <div class="step-row"><span>Under "Identity", select your <b style="color: var(--gold);">Facebook Business Page</b>. This is who the ad comes from.</span></div>
+        <div class="step-row"><span>First time? A prompt asks you to accept <b style="color: var(--gold);">Meta's Lead Ads Terms</b>. Click through and accept; it takes 10 seconds.</span></div>
       </div>
-      <div class="checkpoint">Your lead magnet cover shows as the ad image. Thumbs up.</div>
+      <div class="checkpoint">Your Page is selected and the terms banner shows accepted. Thumbs up.</div>
+    </div>
+    <div>
+      <img class="shot" src="shots/meta-identity-page.png" alt="Facebook Page selector with the Lead Ads Terms accepted notice">
+      <p class="shot-cap">The Page dropdown, and the terms notice you want to see under it.</p>
+    </div>
+  </div>
+  <aside class="notes">The Lead Ads Terms acceptance is the hidden blocker on this screen; nobody knows about it in advance and it looks scarier than it is. Page missing from the dropdown usually means they're not admin of that Page; quick fix is creating a fresh Page at facebook.com/pages/create.</aside>
+</div>
+
+<!-- Step 6: upload image -->
+<div class="slide" data-section="Module 4">
+  <p class="kicker">Step 6 of 10</p>
+  <h2>Upload your <span class="accent">image</span></h2>
+  <div class="split">
+    <div>
+      <div class="steps" style="margin-top: 24px;">
+        <div class="step-row">Ad Creative &rarr; <b style="color: var(--gold);">Add Media</b> &rarr; Add Image</div>
+        <div class="step-row">Upload your <b style="color: var(--gold);">Canva cover PNG</b> from Module 2</div>
+        <div class="step-row">Watch the preview panel on the right; your cover appears in a fake Facebook feed</div>
+      </div>
+      <div class="checkpoint">Your lead magnet cover shows as the ad image in the preview. Thumbs up.</div>
     </div>
     <div>
       <img class="shot" src="shots/meta-ad-creative.png" alt="Meta Ads Manager ad creative section with live ad preview panel">
       <p class="shot-cap">Ad creative on the left, live preview on the right. Watch your ad take shape there.</p>
     </div>
   </div>
-  <aside class="notes">Someone will have skipped the PNG export. Fix: Canva &rarr; page 1 &rarr; Share &rarr; Download &rarr; PNG, just that page. If the crop looks off, re-export at 1080x1080. Page missing from the dropdown usually means they're not admin of their Page.</aside>
+  <aside class="notes">Someone will have skipped the PNG export. Fix: Canva &rarr; page 1 &rarr; Share &rarr; Download &rarr; PNG, just that page. If the crop looks off, re-export at 1080x1080.</aside>
 </div>
 
 <!-- 30 -->
 <div class="slide" data-section="Module 4">
-  <p class="kicker">Step 6 of 8</p>
-  <h2>Ad copy, written by <span class="accent">Claude</span> (Prompt 2)</h2>
+  <p class="kicker">Step 7 of 10</p>
+  <h2>Generate your ad copy <span class="accent">(Prompt 2)</span></h2>
   <div class="prompt">
     <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
     <pre>I'm running a Meta lead gen ad for my financial advisory practice in Singapore.
@@ -767,13 +806,28 @@ Write me:
 
 Keep it benefit-focused and conversational. Give me 3 variations.</pre>
   </div>
-  <div class="checkpoint">Image, headline and text all show in the ad preview on the right. Thumbs up.</div>
-  <aside class="notes">Open Claude in a second tab. Pick the best of the 3 variations and paste each piece into its matching field: primary text, headline, description. Copy too long? Tell Claude: "make the primary text shorter, under 125 characters."</aside>
+  <div class="checkpoint">Claude gave you 3 variations. Read them, pick your favourite. Thumbs up.</div>
+  <aside class="notes">Open Claude in a second tab; keep Ads Manager in the first. Have them actually read all 3 variations before picking; the first one isn't automatically the best. Copy too long? "Make the primary text shorter, under 125 characters."</aside>
+</div>
+
+<!-- Step 8: paste into fields -->
+<div class="slide" data-section="Module 4">
+  <p class="kicker">Step 8 of 10</p>
+  <h2>Paste into the <span class="accent">three fields</span></h2>
+  <div class="steps">
+    <div class="step-row"><span>Claude's <b style="color: var(--gold);">primary text</b> &rarr; the "Primary text" field <span class="note">the sentence above your image in the feed</span></span></div>
+    <div class="step-row"><span>Claude's <b style="color: var(--gold);">headline</b> &rarr; the "Headline" field <span class="note">bold line under the image</span></span></div>
+    <div class="step-row"><span>Claude's <b style="color: var(--gold);">description</b> &rarr; the "Description" field <span class="note">small grey line, sometimes hidden</span></span></div>
+    <div class="step-row"><span>Call to action button: pick <b style="color: var(--gold);">"Download"</b> or "Learn more"</span></div>
+  </div>
+  <p class="subtitle" style="margin-top: 14px;">Paste one piece at a time and watch the preview update. If it reads like a real ad, it is one.</p>
+  <div class="checkpoint">Image, headline and text all show in the ad preview. It looks like an ad you'd scroll past. Thumbs up.</div>
+  <aside class="notes">The classic mistake: pasting all three pieces into the Primary text field. Do this step on the projector deliberately slowly, one field at a time, pointing at where each piece lands in the preview. The preview updating live is the payoff moment; let them enjoy it.</aside>
 </div>
 
 <!-- 31 -->
 <div class="slide" data-section="Module 4">
-  <p class="kicker">Step 7 of 8</p>
+  <p class="kicker">Step 9 of 10</p>
   <h2>The <span class="accent">instant form</span></h2>
   <div class="split">
     <div>
@@ -796,7 +850,7 @@ Keep it benefit-focused and conversational. Give me 3 variations.</pre>
 
 <!-- 32 -->
 <div class="slide" data-section="Module 4">
-  <p class="kicker">Step 8 of 8</p>
+  <p class="kicker">Step 10 of 10</p>
   <h2>Final check before <span class="accent">launch</span></h2>
   <ul class="points" style="columns: 2; column-gap: 60px; font-size: clamp(15px, 1.8vw, 21px); margin-top: 28px;">
     <li>Objective: Leads</li>
@@ -805,8 +859,10 @@ Keep it benefit-focused and conversational. Give me 3 variations.</pre>
     <li>3-5 interests added</li>
     <li>Budget: $5-10/day</li>
     <li>Schedule: 3 days, starting today</li>
+    <li>Page selected, Lead Ads Terms accepted</li>
     <li>Image: your lead magnet cover</li>
     <li>Copy: primary text, headline, description</li>
+    <li>Call-to-action button set</li>
     <li>Instant form: name, phone, custom question</li>
   </ul>
   <aside class="notes">Read each item aloud, room checks along. Give 2-3 minutes for fixes. Hands up for help. Nobody publishes yet; we launch together on the next slide.</aside>
@@ -843,14 +899,33 @@ Keep it benefit-focused and conversational. Give me 3 variations.</pre>
 <!-- 35 -->
 <div class="slide" data-section="Module 5">
   <p class="kicker">Module 5 &middot; What happens next</p>
-  <h2>A lead came in. <span class="accent">Speed wins.</span></h2>
-  <div class="steps">
-    <div class="step-row">Check results: Ads Manager &rarr; your campaign &rarr; Results</div>
-    <div class="step-row">Download leads: your ad &rarr; Instant Form &rarr; Download</div>
-    <div class="step-row">Follow up within <b style="color: var(--gold);">2 hours</b>, with Prompt 3</div>
-    <div class="step-row">Call first. Then WhatsApp. Never ignore.</div>
+  <h2>Where your <span class="accent">leads live</span></h2>
+  <div class="split">
+    <div>
+      <div class="steps" style="margin-top: 24px;">
+        <div class="step-row"><span>Campaign numbers: Ads Manager &rarr; your campaign &rarr; <b style="color: var(--gold);">Results column</b></span></div>
+        <div class="step-row"><span>The actual people: business.facebook.com &rarr; <b style="color: var(--gold);">Leads Centre</b>. Name, phone, and their answer to your question.</span></div>
+        <div class="step-row"><span>Or download a spreadsheet: your ad &rarr; Instant Form &rarr; <b style="color: var(--gold);">Download</b></span></div>
+        <div class="step-row"><span>Turn on notifications in the Meta Business Suite app so leads ping your phone</span></div>
+      </div>
+    </div>
+    <div>
+      <img class="shot" src="shots/meta-leads-center.png" alt="Meta Business Suite sidebar with Leads Centre highlighted" style="max-height: 54vh;">
+      <p class="shot-cap">Leads Centre in Meta Business Suite. Every form fill lands here.</p>
+    </div>
   </div>
-  <div class="prompt" style="margin-top: 24px;">
+  <aside class="notes">Most beginners never find their own leads; they see "3 results" in Ads Manager and don't know where the phone numbers are. Leads Centre is the answer, and the mobile app notification is what makes the 2-hour follow-up rule physically possible.</aside>
+</div>
+
+<!-- follow-up message -->
+<div class="slide" data-section="Module 5">
+  <p class="kicker">The follow-up</p>
+  <h2>Reply within <span class="accent">2 hours</span> (Prompt 3)</h2>
+  <div class="steps" style="margin-top: 8px;">
+    <div class="step-row">Call first. Then WhatsApp. Never ignore.</div>
+    <div class="step-row"><span>Their answer to <b style="color: var(--gold);">"biggest financial concern"</b> goes into the prompt; that's your opening line</span></div>
+  </div>
+  <div class="prompt" style="margin-top: 20px;">
     <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
     <pre>Someone just filled in my Meta lead form. Their details:
 - Name: <span class="ph">[NAME]</span>
@@ -861,7 +936,7 @@ Write me a short WhatsApp message (under 100 words) to follow up.
 Be warm, reference their specific concern, and suggest a quick 15-min call.
 No hard sell.</pre>
   </div>
-  <aside class="notes">A lead contacted in 5 minutes is warm; the same lead tomorrow is cold. The custom question answer goes into [CONCERN], which is why we added it to the form. This prompt is on their cheat sheet.</aside>
+  <aside class="notes">A lead contacted in 5 minutes is warm; the same lead tomorrow is cold. Speed beats craft: a decent message in 2 hours outperforms a perfect one tomorrow. This prompt is on their cheat sheet.</aside>
 </div>
 
 <!-- 36 -->
@@ -932,7 +1007,7 @@ No hard sell.</pre>
 <div class="slide" data-section="Appendix">
   <p class="kicker">Appendix</p>
   <h2>Quick <span class="accent">fixes</span></h2>
-  <div class="cols" style="margin-top: 20px; gap: 16px;">
+  <div class="cols dense" style="margin-top: 20px; gap: 14px;">
     <div class="card">
       <h3>Can't find the Create button</h3>
       <p>Top-left corner of Ads Manager. It's green. If the whole layout looks different, you're on business.facebook.com; go to adsmanager.facebook.com.</p>
