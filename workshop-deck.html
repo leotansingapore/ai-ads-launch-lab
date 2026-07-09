@@ -65,7 +65,20 @@
   ul.points .sub { color: var(--dim); font-size: 0.78em; display: block; margin-top: 2px; }
 
   .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 36px; }
-  @media (max-width: 700px) { .cols { grid-template-columns: 1fr; } }
+  .cols.three { grid-template-columns: 1fr 1fr 1fr; }
+  @media (max-width: 700px) { .cols, .cols.three { grid-template-columns: 1fr; } }
+  .split { display: grid; grid-template-columns: 1.15fr 1fr; gap: clamp(24px, 4vw, 56px); align-items: center; }
+  @media (max-width: 900px) { .split { grid-template-columns: 1fr; } }
+  .shot {
+    width: 100%;
+    max-height: 62vh;
+    object-fit: contain;
+    border: 1px solid #333;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 18px 50px rgba(0,0,0,0.5);
+  }
+  .shot-cap { font-size: 13px; color: var(--faint); margin-top: 10px; text-align: center; }
 
   .card {
     background: var(--card);
@@ -127,6 +140,9 @@
   }
   .checkpoint::before { content: "CHECKPOINT"; display: block; font-size: 12px; letter-spacing: 2px; margin-bottom: 4px; opacity: 0.8; }
 
+  .divider, .slide.center {
+    background: radial-gradient(ellipse 70% 55% at 68% 58%, rgba(232,185,49,0.055), transparent 72%);
+  }
   .divider { text-align: left; position: relative; overflow: hidden; }
   .divider .big-num {
     position: absolute;
@@ -255,8 +271,9 @@
   }
   .hud button:hover { background: rgba(255,255,255,0.18); }
 
+  @page { size: landscape; margin: 0; }
   @media print {
-    body { overflow: visible; }
+    body { overflow: visible; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     .slide { display: flex !important; page-break-after: always; height: 100vh; }
     .progress, .hud, .copy-btn, .notes { display: none !important; }
   }
@@ -429,7 +446,7 @@ practical, friendly, and jargon-free.</pre>
 <div class="slide" data-section="Module 2">
   <p class="kicker">Step 1 of 4</p>
   <h2>Pick your topic. <span class="accent">Don't overthink it.</span></h2>
-  <div class="cols" style="grid-template-columns: 1fr 1fr 1fr;">
+  <div class="cols three">
     <div class="card"><h3>Retirement</h3><p>"5 Retirement Mistakes Singaporeans Make Before 40"</p></div>
     <div class="card"><h3>CPF</h3><p>"CPF Optimization Checklist for Working Adults"</p></div>
     <div class="card"><h3>Insurance</h3><p>"How Much Insurance Do You Actually Need?"</p></div>
@@ -550,7 +567,7 @@ the main points, and a closing that invites them to book a free consultation.</p
 <div class="slide" data-section="Module 3">
   <p class="kicker">The inputs</p>
   <h2>Meta needs <span class="accent">3 things</span> from you</h2>
-  <div class="cols" style="grid-template-columns: 1fr 1fr 1fr;">
+  <div class="cols three">
     <div class="card"><h3>WHO</h3><p>Who should see your ad. Targeting.</p></div>
     <div class="card"><h3>WHAT</h3><p>What they see. Your image and copy.</p></div>
     <div class="card"><h3>HOW MUCH</h3><p>Your daily budget.</p></div>
@@ -563,22 +580,23 @@ the main points, and a closing that invites them to book a free consultation.</p
 <div class="slide" data-section="Module 3">
   <p class="kicker">The format</p>
   <h2>Why we use <span class="accent">lead form ads</span></h2>
-  <div class="cols">
-    <div class="card bad">
-      <h3>Traffic ad (the old way)</h3>
-      <p>See ad &rarr; click &rarr; your website &rarr; find the form &rarr; type everything &rarr; maybe submit</p>
+  <div class="split" style="margin-top: 32px;">
+    <div>
+      <div class="card bad" style="margin-bottom: 20px;">
+        <h3>Traffic ad (the old way)</h3>
+        <p>See ad &rarr; click &rarr; your website &rarr; find the form &rarr; type everything &rarr; maybe submit</p>
+      </div>
+      <div class="card">
+        <h3>Lead form ad (our way)</h3>
+        <p>See ad &rarr; click &rarr; form opens inside Facebook, name and number already filled in &rarr; done</p>
+      </div>
     </div>
-    <div class="card">
-      <h3>Lead form ad (our way)</h3>
-      <p>See ad &rarr; click &rarr; form opens inside Facebook, name and number already filled in &rarr; done</p>
+    <div>
+      <img class="shot" src="shots/lead-ad-example.png" alt="A real financial services lead ad offering a free first home buyers guide">
+      <p class="shot-cap">A real one: a free guide, traded for contact details. Yours will look like this.</p>
     </div>
   </div>
-  <ul class="points" style="margin-top: 32px;">
-    <li>No website needed</li>
-    <li>Fewer steps, so more people finish</li>
-    <li>Facebook fills in their details for them</li>
-  </ul>
-  <aside class="notes">This is why beginners can do this today: no landing page to build, no web developer, no domain. The form lives inside Facebook.</aside>
+  <aside class="notes">The screenshot is a real lead ad from a mortgage advisor: free ebook as the magnet, exactly the structure they're building today. Point at it: profile, short copy, guide cover as the image. Why lead forms win: no website needed, fewer steps so more people finish, and Facebook fills in their details for them. No landing page, no web developer, no domain.</aside>
 </div>
 
 <!-- 22 -->
@@ -632,13 +650,21 @@ the main points, and a closing that invites them to book a free consultation.</p
 <div class="slide" data-section="Module 4">
   <p class="kicker">Step 2 of 8</p>
   <h2>Create the campaign</h2>
-  <div class="steps">
-    <div class="step-row">Click the green <b style="color: var(--gold);">+ Create</b> button, top left</div>
-    <div class="step-row">Objective: <b style="color: var(--gold);">Leads</b> <span class="note">we want a form filled, not a website visit</span></div>
-    <div class="step-row">Continue</div>
-    <div class="step-row">Name it something you'll recognise <span class="note">"Retirement Guide Lead Gen"</span></div>
+  <div class="split">
+    <div>
+      <div class="steps" style="margin-top: 24px;">
+        <div class="step-row">Click the green <b style="color: var(--gold);">+ Create</b> button, top left</div>
+        <div class="step-row">Objective: <b style="color: var(--gold);">Leads</b> <span class="note">we want a form filled, not a website visit</span></div>
+        <div class="step-row">Continue</div>
+        <div class="step-row">Name it something you'll recognise <span class="note">"Retirement Guide Lead Gen"</span></div>
+      </div>
+      <div class="checkpoint">You're on the Ad Set screen. Thumbs up.</div>
+    </div>
+    <div>
+      <img class="shot" src="shots/meta-objective-leads.jpg" alt="Meta Ads Manager campaign objective screen with Leads selected">
+      <p class="shot-cap">The screen you'll see. Pick Leads, then Continue.</p>
+    </div>
   </div>
-  <div class="checkpoint">You're on the Ad Set screen. Thumbs up.</div>
   <aside class="notes">3 min. Say why Leads: "we're asking Meta to find people who fill in forms, not people who click links." Naming matters when they have 5 campaigns in 3 months.</aside>
 </div>
 
@@ -646,12 +672,20 @@ the main points, and a closing that invites them to book a free consultation.</p
 <div class="slide" data-section="Module 4">
   <p class="kicker">Step 3 of 8</p>
   <h2>Audience: the <span class="accent">WHO</span></h2>
-  <div class="steps">
-    <div class="step-row">Location: <b style="color: var(--gold);">Singapore</b></div>
-    <div class="step-row">Age: <b style="color: var(--gold);">25-45</b> <span class="note">or your ideal client's range</span></div>
-    <div class="step-row">Detailed Targeting &rarr; Browse &rarr; add <b style="color: var(--gold);">3-5 interests</b> matching your topic <span class="note">financial planning, investments, CPF, retirement planning, insurance</span></div>
+  <div class="split">
+    <div>
+      <div class="steps" style="margin-top: 24px;">
+        <div class="step-row">Location: <b style="color: var(--gold);">Singapore</b></div>
+        <div class="step-row">Age: <b style="color: var(--gold);">25-45</b> <span class="note">or your ideal client's range</span></div>
+        <div class="step-row">Detailed Targeting &rarr; Browse &rarr; add <b style="color: var(--gold);">3-5 interests</b> matching your topic <span class="note">financial planning, investments, CPF, retirement planning, insurance</span></div>
+      </div>
+      <div class="checkpoint">Audience shows Singapore, an age range, and 3-5 interests. Thumbs up.</div>
+    </div>
+    <div>
+      <img class="shot" src="shots/meta-audience.png" alt="Meta Ads Manager audience section showing location, age, gender and detailed targeting">
+      <p class="shot-cap">The Audience section. This example shows Italy and 18-65+. Yours: Singapore, 25-45.</p>
+    </div>
   </div>
-  <div class="checkpoint">Audience shows Singapore, an age range, and 3-5 interests. Thumbs up.</div>
   <aside class="notes">10 min, the longest setup step. Type the interests one at a time on the projector; the search box is fussy about naming ("Central Provident Fund (CPF)"). Retirement guide gets retirement interests; insurance guide gets insurance.</aside>
 </div>
 
@@ -659,13 +693,21 @@ the main points, and a closing that invites them to book a free consultation.</p
 <div class="slide" data-section="Module 4">
   <p class="kicker">Step 4 of 8</p>
   <h2>Budget: the <span class="accent">HOW MUCH</span></h2>
-  <div class="steps">
-    <div class="step-row">Daily budget: <b style="color: var(--gold);">$5</b> <span class="note">$10 if you're comfortable</span></div>
-    <div class="step-row">Start date: <b style="color: var(--gold);">today</b></div>
-    <div class="step-row">End date: <b style="color: var(--gold);">3 days from today</b></div>
+  <div class="split">
+    <div>
+      <div class="steps" style="margin-top: 24px;">
+        <div class="step-row">Daily budget: <b style="color: var(--gold);">$5</b> <span class="note">$10 if you're comfortable</span></div>
+        <div class="step-row">Start date: <b style="color: var(--gold);">today</b></div>
+        <div class="step-row">Tick "Set an end date": <b style="color: var(--gold);">3 days from today</b></div>
+      </div>
+      <p class="subtitle" style="margin-top: 24px; font-size: clamp(15px, 1.7vw, 20px);">$5 a day. Less than your kopi and lunch.</p>
+      <div class="checkpoint">$5/day, running 3 days from today. Thumbs up.</div>
+    </div>
+    <div>
+      <img class="shot" src="shots/meta-budget.png" alt="Meta Ads Manager budget and schedule section with daily budget and start date">
+      <p class="shot-cap">Budget &amp; schedule. Set Daily budget to $5 and tick the end-date box.</p>
+    </div>
   </div>
-  <p class="subtitle" style="margin-top: 32px;">$5 a day. Less than your kopi and lunch. Increase it later once you see what works.</p>
-  <div class="checkpoint">$5/day, running 3 days from today. Thumbs up.</div>
   <aside class="notes">5 min. The 3-day end date protects them: worst case, a forgotten campaign costs $15-30, not $300. Repeat the rule: don't judge results after day 1, Meta is still learning.</aside>
 </div>
 
@@ -673,12 +715,20 @@ the main points, and a closing that invites them to book a free consultation.</p
 <div class="slide" data-section="Module 4">
   <p class="kicker">Step 5 of 8</p>
   <h2>The ad: the <span class="accent">WHAT</span></h2>
-  <div class="steps">
-    <div class="step-row">Identity: select your <b style="color: var(--gold);">Facebook Business Page</b> <span class="note">this is who the ad comes from</span></div>
-    <div class="step-row">Ad Creative &rarr; Add Media &rarr; Add Image</div>
-    <div class="step-row">Upload your <b style="color: var(--gold);">Canva cover PNG</b> from Module 2</div>
+  <div class="split">
+    <div>
+      <div class="steps" style="margin-top: 24px;">
+        <div class="step-row">Identity: select your <b style="color: var(--gold);">Facebook Business Page</b> <span class="note">this is who the ad comes from</span></div>
+        <div class="step-row">Ad Creative &rarr; Add Media &rarr; Add Image</div>
+        <div class="step-row">Upload your <b style="color: var(--gold);">Canva cover PNG</b> from Module 2</div>
+      </div>
+      <div class="checkpoint">Your lead magnet cover shows as the ad image. Thumbs up.</div>
+    </div>
+    <div>
+      <img class="shot" src="shots/meta-ad-creative.png" alt="Meta Ads Manager ad creative section with live ad preview panel">
+      <p class="shot-cap">Ad creative on the left, live preview on the right. Watch your ad take shape there.</p>
+    </div>
   </div>
-  <div class="checkpoint">Your lead magnet cover shows as the ad image. Thumbs up.</div>
   <aside class="notes">Someone will have skipped the PNG export. Fix: Canva &rarr; page 1 &rarr; Share &rarr; Download &rarr; PNG, just that page. If the crop looks off, re-export at 1080x1080. Page missing from the dropdown usually means they're not admin of their Page.</aside>
 </div>
 
@@ -709,14 +759,22 @@ Keep it benefit-focused and conversational. Give me 3 variations.</pre>
 <div class="slide" data-section="Module 4">
   <p class="kicker">Step 7 of 8</p>
   <h2>The <span class="accent">instant form</span></h2>
-  <div class="steps">
-    <div class="step-row">Destination &rarr; <b style="color: var(--gold);">Instant Form</b> &rarr; Create Form</div>
-    <div class="step-row">Form type: <b style="color: var(--gold);">More Volume</b> <span class="note">not Higher Intent</span></div>
-    <div class="step-row">Questions: full name + phone <span class="note">Facebook pre-fills both</span></div>
-    <div class="step-row">Add one custom question: <b style="color: var(--gold);">"What's your biggest financial concern right now?"</b> <span class="note">short answer</span></div>
-    <div class="step-row">Thank-you screen: "Thanks! I'll be in touch within 24 hours." &rarr; Publish</div>
+  <div class="split">
+    <div>
+      <div class="steps" style="margin-top: 24px;">
+        <div class="step-row">Destination &rarr; <b style="color: var(--gold);">Instant Form</b> &rarr; Create Form</div>
+        <div class="step-row">Form type: <b style="color: var(--gold);">More Volume</b> <span class="note">not Higher Intent</span></div>
+        <div class="step-row">Questions: full name + phone <span class="note">Facebook pre-fills both</span></div>
+        <div class="step-row">Add question &rarr; Short answer: <b style="color: var(--gold);">"What's your biggest financial concern right now?"</b></div>
+        <div class="step-row">Thank-you screen: "Thanks! I'll be in touch within 24 hours." &rarr; Publish</div>
+      </div>
+      <div class="checkpoint">The form is attached and visible in the ad preview. Thumbs up.</div>
+    </div>
+    <div>
+      <img class="shot" src="shots/meta-instant-form.png" alt="Meta instant form builder showing Add question menu and form preview">
+      <p class="shot-cap">The form builder. "Add question" is where your custom question goes; preview on the right.</p>
+    </div>
   </div>
-  <div class="checkpoint">The form is attached and visible in the ad preview. Thumbs up.</div>
   <aside class="notes">10 min. The custom question is the gold: it hands them the opening line for the follow-up call. More Volume over Higher Intent because beginners need lead flow to learn from. Form won't save: check required fields, or switch browser.</aside>
 </div>
 
@@ -844,8 +902,8 @@ No hard sell.</pre>
 <div class="hud">
   <span class="section-label" id="sectionLabel"></span>
   <span class="counter"><span id="current">1</span> / <span id="total"></span></span>
-  <button onclick="prevSlide()" aria-label="Previous">&#8592;</button>
-  <button onclick="nextSlide()" aria-label="Next">&#8594;</button>
+  <button onclick="prevSlide(); this.blur()" aria-label="Previous">&#8592;</button>
+  <button onclick="nextSlide(); this.blur()" aria-label="Next">&#8594;</button>
 </div>
 
 <script>
@@ -873,6 +931,9 @@ No hard sell.</pre>
     if (e.key === 'Home') { e.preventDefault(); showSlide(0); }
     if (e.key === 'End') { e.preventDefault(); showSlide(total - 1); }
     if (e.key === 'n' || e.key === 'N') { document.body.classList.toggle('show-notes'); }
+    if (e.key === 'f' || e.key === 'F') {
+      document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
+    }
   });
 
   let touchX = null;
@@ -886,11 +947,26 @@ No hard sell.</pre>
   });
 
   function copyPrompt(btn) {
-    const pre = btn.parentElement.querySelector('pre');
-    navigator.clipboard.writeText(pre.textContent.trim()).then(() => {
+    const text = btn.parentElement.querySelector('pre').textContent.trim();
+    const done = () => {
       btn.textContent = 'Copied';
       setTimeout(() => { btn.textContent = 'Copy'; }, 1500);
-    });
+    };
+    const fallback = () => {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand('copy'); done(); } catch (err) { btn.textContent = 'Copy failed'; }
+      ta.remove();
+    };
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text).then(done).catch(fallback);
+    } else {
+      fallback();
+    }
   }
 
   function goToHash() {
