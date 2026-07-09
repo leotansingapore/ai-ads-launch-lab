@@ -31,7 +31,8 @@
     height: 100vh;
     padding: clamp(24px, 5vh, 60px) clamp(24px, 6vw, 90px) clamp(70px, 10vh, 100px);
     flex-direction: column;
-    justify-content: center;
+    justify-content: safe center;
+    overflow-y: auto;
   }
   .slide.active { display: flex; }
 
@@ -352,10 +353,11 @@
 <!-- 6 -->
 <div class="slide" data-section="Module 1">
   <p class="kicker">Proof</p>
-  <h2>This is my <span class="accent">actual account</span></h2>
-  <div class="screenshot-box">[ PASTE YOUR REAL META ADS MANAGER SCREENSHOT HERE ]<br><br>Show: campaign name, cost per lead, total leads, date range</div>
-  <p class="subtitle" style="margin-top: 24px;">Not a course screenshot. In 3 hours, you build your own version of this.</p>
-  <aside class="notes">Tell your story first, before showing this. Hit the beats: cold calling, door knocking, referrals from friends and family. Your specific numbers: calls per day, pick-up rate, appointments per week. Then: "First campaign, $5 a day, [X] leads in the first week." Point at the screenshot numbers one by one. <b>"I'm not showing you this to impress you. I'm showing you because you're going to build your own."</b></aside>
+  <h2>This is what a <span class="accent">lead machine</span> looks like</h2>
+  <img class="shot" src="shots/ads-dashboard-results.png" alt="Meta Ads Manager campaigns table showing lead campaigns with cost per lead from $0.32" style="max-height: 44vh; margin-top: 28px; max-width: 980px;">
+  <p class="shot-cap" style="text-align: left; max-width: 980px;">A real Ads Manager account running lead campaigns. Look at the Cost per Result column: the good ones deliver leads for under a dollar.</p>
+  <p class="subtitle" style="margin-top: 20px;">In 3 hours, you build your own version of this.</p>
+  <aside class="notes">Tell your story first, before showing this. Hit the beats: cold calling, door knocking, referrals from friends and family. Your specific numbers: calls per day, pick-up rate, appointments per week. Then: "First campaign, $5 a day, [X] leads in the first week." Walk the columns: campaign names, Results (leads), Cost per Result ($0.32-$0.43 on the winners, $31-$34 on the tests that taught them something - both are normal). <b>SWAP THIS for your own Ads Manager screenshot before workshop day - "this is MY actual account" lands far harder than any example. Until then, do not claim this one is yours; call it "a real account".</b></aside>
 </div>
 
 <!-- 7 -->
@@ -459,17 +461,23 @@ practical, friendly, and jargon-free.</pre>
 <div class="slide" data-section="Module 2">
   <p class="kicker">Step 2 of 4</p>
   <h2>Generate your content <span class="accent">(Prompt 1)</span></h2>
-  <div class="prompt">
-    <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
-    <pre>I'm a financial advisor in Singapore. Help me write a short lead magnet PDF
-(5-7 key points) on the topic: <span class="ph">[YOUR TOPIC]</span>.
+  <div class="split" style="align-items: start;">
+    <div>
+      <div class="prompt" style="margin-top: 24px;">
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+        <pre>I'm a financial advisor in Singapore. Help me write a short lead magnet PDF (5-7 key points) on the topic: <span class="ph">[YOUR TOPIC]</span>.
 
 My target audience is working adults aged 25-40 in Singapore.
 
-Keep the tone practical, friendly, and jargon-free. Include a brief intro,
-the main points, and a closing that invites them to book a free consultation.</pre>
+Keep the tone practical, friendly, and jargon-free. Include a brief intro, the main points, and a closing that invites them to book a free consultation.</pre>
+      </div>
+      <div class="checkpoint">Claude has written your 5-7 points. Thumbs up when you're here.</div>
+    </div>
+    <div>
+      <img class="shot" src="shots/claude-home.png" alt="The claude.ai home screen with the message box">
+      <p class="shot-cap">claude.ai. One box. Paste the prompt there, swap in your topic, hit enter.</p>
+    </div>
   </div>
-  <div class="checkpoint">Claude has written your 5-7 points. Thumbs up when you're here.</div>
   <aside class="notes">Do it on the projector first with your own topic. Then they go. Remind them: replace the bracketed part before hitting enter. This prompt is on their printed cheat sheet too. Wait for the room.</aside>
 </div>
 
@@ -504,11 +512,19 @@ the main points, and a closing that invites them to book a free consultation.</p
 <div class="slide" data-section="Module 2">
   <p class="kicker">Step 4 of 4</p>
   <h2>Make it look good in <span class="accent">Canva</span></h2>
-  <div class="steps">
-    <div class="step-row">Open the template link from your cheat sheet <span class="note">pick the one matching your topic</span></div>
-    <div class="step-row">Click "Use this template"</div>
-    <div class="step-row">Paste your Claude content, one point per page</div>
-    <div class="step-row">Put your name and contact on the cover and last page</div>
+  <div class="split">
+    <div>
+      <div class="steps" style="margin-top: 24px;">
+        <div class="step-row">Open the template link from your cheat sheet <span class="note">pick the one matching your topic</span></div>
+        <div class="step-row">Click "Use this template"</div>
+        <div class="step-row">Paste your Claude content, one point per page</div>
+        <div class="step-row">Put your name and contact on the cover and last page</div>
+      </div>
+    </div>
+    <div>
+      <img class="shot" src="shots/canva-templates.png" alt="Canva template gallery showing financial guide ebook covers">
+      <p class="shot-cap">Canva has thousands of these. Your cheat sheet links to 4 pre-built ones so you skip the browsing.</p>
+    </div>
   </div>
   <aside class="notes">Templates are pre-built, so this is copy-paste, not design. Anyone fighting with fonts or colours: stop them. "The template is already designed. Your job is the words." 15 minutes for this step.</aside>
 </div>
@@ -812,14 +828,14 @@ Keep it benefit-focused and conversational. Give me 3 variations.</pre>
   <div class="cols">
     <div class="card">
       <h3>Ad rejected?</h3>
-      <p>Normal for financial services. Remove words like "guaranteed" or "100%", any income claims. Edit and resubmit. Not a failure.</p>
+      <p>Normal for financial services. The usual offenders: "guaranteed", "100%", "risk-free", "no risk", any income promise ("earn $X"), before/after money claims. Remove the word, resubmit, approved. Not a failure.</p>
     </div>
     <div class="card">
       <h3>Still "In Review" tonight?</h3>
       <p>Also normal. Finance ads get extra checks. Leave it alone; most approve within a few hours.</p>
     </div>
   </div>
-  <aside class="notes">Pre-empt the two panic messages you'd otherwise get tonight. Rejection is a policy filter, not a verdict on them. Then straight into Module 5: "so what do you do when the leads arrive?"</aside>
+  <aside class="notes">Pre-empt the two panic messages you'd otherwise get tonight. Rejection is a policy filter, not a verdict on them. The banned-word list doubles as compliance hygiene: if Meta rejects it, their company's compliance team probably would too. Then straight into Module 5: "so what do you do when the leads arrive?"</aside>
 </div>
 
 <!-- ============ MODULE 5 ============ -->
@@ -873,7 +889,21 @@ No hard sell.</pre>
   <aside class="notes">The 48-hour rule is the one they'll break. They'll check at 10pm, see 2 dollars spent and no leads, and want to change everything. Say it twice: leave it alone for 48 hours.</aside>
 </div>
 
-<!-- 37 -->
+<!-- 37: first week timeline -->
+<div class="slide" data-section="Module 5">
+  <p class="kicker">The plan</p>
+  <h2>Your first week, <span class="accent">day by day</span></h2>
+  <div class="steps">
+    <div class="step-row"><span><b style="color: var(--gold);">Today:</b> launched. Close the laptop. Seriously.</span></div>
+    <div class="step-row"><span><b style="color: var(--gold);">Day 1-2:</b> don't touch the ad. Follow up any lead within 2 hours.</span></div>
+    <div class="step-row"><span><b style="color: var(--gold);">Day 3:</b> check cost per lead. Under $10 = working. Over $15 or zero leads = edit copy or image, relaunch.</span></div>
+    <div class="step-row"><span><b style="color: var(--gold);">Day 5-7:</b> working? Raise budget 20% and extend the end date. Not working? New angle, relaunch. Either way you've spent under $30 to learn.</span></div>
+    <div class="step-row"><span><b style="color: var(--gold);">Week 2:</b> build lead magnet #2 with the same three prompts. 30 minutes this time.</span></div>
+  </div>
+  <aside class="notes">This slide is the anti-abandonment plan. Most first campaigns die because nobody told the owner what "normal" looks like on day 2 (a few dollars spent, maybe zero leads). Walk each day slowly. Day 3 check-in message from you comes on cue, so they know they're not alone.</aside>
+</div>
+
+<!-- 38 -->
 <div class="slide" data-section="Module 5">
   <p class="kicker">Zoom out</p>
   <h2>You now own a <span class="accent">system</span></h2>
@@ -891,11 +921,44 @@ No hard sell.</pre>
 <!-- 38 -->
 <div class="slide center" data-section="Module 5">
   <h1>Keep <span class="accent">going</span></h1>
-  <p class="subtitle">Scan to join the support group. Share wins, ask questions, get help with your ads.</p>
-  <div class="qr-box">[ PASTE QR CODE IMAGE ]</div>
-  <p style="font-size: clamp(15px,1.7vw,19px); color: var(--dim);">Or message Leo directly: [YOUR WHATSAPP LINK]</p>
-  <p style="font-size: clamp(16px,1.9vw,22px); color: var(--muted); margin-top: 44px;">Tomorrow you get: the cheat sheet, the Canva templates, and a check-in.<br>Let the ad run. Follow up fast. See you in the group.</p>
-  <aside class="notes">Q&amp;A happens on this slide. Mention the day-3 check-in so they expect it. Last line of the day: "You walked in this morning without a lead system. You're walking out with one that's already live."</aside>
+  <p class="subtitle">Scan, follow, and DM the word <span class="accent" style="font-weight:700;">ADS</span> to get the support group invite.</p>
+  <div class="qr-box" style="padding: 12px;"><img src="shots/qr-instagram.png" alt="QR code linking to Leo Tan's Instagram @leotan_js" style="width: 100%; height: 100%; object-fit: contain;"></div>
+  <p style="font-size: clamp(15px,1.7vw,19px); color: var(--dim);">@leotan_js &middot; share wins, ask questions, get help with your ads</p>
+  <p style="font-size: clamp(16px,1.9vw,22px); color: var(--muted); margin-top: 40px;">Tomorrow you get: the cheat sheet, the Canva templates, and a check-in.<br>Let the ad run. Follow up fast. See you in the group.</p>
+  <aside class="notes">Q&amp;A happens on this slide. The QR goes to instagram.com/leotan_js; DMs with the word ADS get the WhatsApp group invite (swap the QR for a direct WhatsApp group QR once the group link exists - regenerate at api.qrserver.com). Mention the day-3 check-in so they expect it. Last line of the day: "You walked in this morning without a lead system. You're walking out with one that's already live."</aside>
+</div>
+
+<!-- 40: appendix quick fixes -->
+<div class="slide" data-section="Appendix">
+  <p class="kicker">Appendix</p>
+  <h2>Quick <span class="accent">fixes</span></h2>
+  <div class="cols" style="margin-top: 20px; gap: 16px;">
+    <div class="card">
+      <h3>Can't find the Create button</h3>
+      <p>Top-left corner of Ads Manager. It's green. If the whole layout looks different, you're on business.facebook.com; go to adsmanager.facebook.com.</p>
+    </div>
+    <div class="card">
+      <h3>My Page isn't in the dropdown</h3>
+      <p>You're probably not an admin of that Page. Check the Page's settings, or create a new Page at facebook.com/pages/create (2 minutes).</p>
+    </div>
+    <div class="card">
+      <h3>Image looks cropped or blurry</h3>
+      <p>Re-export from Canva at 1080x1080: select page 1, Share &rarr; Download &rarr; PNG, size 1080x1080.</p>
+    </div>
+    <div class="card">
+      <h3>Claude's copy is too long</h3>
+      <p>Reply: "Make the primary text shorter, under 125 characters." It will comply.</p>
+    </div>
+    <div class="card">
+      <h3>Form won't save</h3>
+      <p>A required field is empty (usually the privacy policy or thank-you screen). Fill everything, or switch browser.</p>
+    </div>
+    <div class="card">
+      <h3>Way behind everyone?</h3>
+      <p>Pair with a neighbour who's done, watch the projector, and finish at home tonight with the cheat sheet. Launching tomorrow still counts.</p>
+    </div>
+  </div>
+  <aside class="notes">Backup slide, not part of the main flow. Jump here during hands-on chaos by typing the slide number in the URL hash, or just read fixes aloud. Mirrors the troubleshooting table in the Module 4 facilitator guide.</aside>
 </div>
 
 <div class="progress" id="progress"></div>
