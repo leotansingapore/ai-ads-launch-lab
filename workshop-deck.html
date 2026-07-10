@@ -393,7 +393,7 @@
     <li>adsmanager.facebook.com shows a dashboard, not an error</li>
     <li>A card is linked <span class="sub" style="display:inline; color: var(--dim); font-size: 0.75em;">(Ads Manager &rarr; menu &#9776; &rarr; Billing &amp; Payments &rarr; Payment Methods)</span></li>
     <li>claude.ai logs in</li>
-    <li>canva.com logs in</li>
+    <li>chatgpt.com logs in</li>
   </ul>
   <div class="checkpoint">Anything broken? Raise your hand right now. We fix it before we begin.</div>
   <aside class="notes">This is the pre-flight checklist they got before the workshop. Walk the room while people check. Anyone with a restricted Ads Manager account pairs up with a neighbour for the day. <b>Do not start Module 1 until every hand is down.</b></aside>
@@ -520,7 +520,7 @@ practical, friendly, and jargon-free.</pre>
   <div><span class="pill">Module 2 &middot; 45 min</span><span class="pill mode">Hands-on</span></div>
   <h1>Build your lead magnet <span class="accent">with Claude</span></h1>
   <p class="subtitle">A PDF guide prospects actually want, written in minutes.</p>
-  <aside class="notes">Everyone needs two tabs open: claude.ai and canva.com. Walk the room during this module. The most common failure is people silently stuck, so keep asking for thumbs up.</aside>
+  <aside class="notes">Everyone needs two tabs open: claude.ai and chatgpt.com. Walk the room during this module. The most common failure is people silently stuck, so keep asking for thumbs up.</aside>
 </div>
 
 <!-- 11 -->
@@ -594,11 +594,11 @@ practical, friendly, and jargon-free.</pre>
     <div class="step-row"><span>Repeat. Two or three rounds usually gets there.</span></div>
   </div>
   <p class="subtitle" style="margin-top: 24px; max-width: 900px;">You're not being tested. You're directing an intern who never gets tired, never gets offended, and never bills you. You'll run this loop ten times today; by tonight it's a habit.</p>
-  <aside class="notes">This loop IS the workshop: every module from here (Claude, Canva words, ad copy, Lovable, ChatGPT images) is say-see-shape with different output. Land that sentence and the rest of the day feels like practice instead of new material each time.</aside>
+  <aside class="notes">This loop IS the workshop: every module from here (the guide, its design, ad copy, Lovable, ChatGPT images) is say-see-shape with different output. Land that sentence and the rest of the day feels like practice instead of new material each time.</aside>
 </div>
 
 <div class="slide" data-section="Module 2">
-  <p class="kicker">Step 1 of 5</p>
+  <p class="kicker">Step 1 of 6</p>
   <h2>Pick your topic. <span class="accent">Don't overthink it.</span></h2>
   <div class="cols three">
     <div class="card"><h3>Retirement</h3><p>"5 Retirement Mistakes Singaporeans Make Before 40"</p></div>
@@ -606,12 +606,12 @@ practical, friendly, and jargon-free.</pre>
     <div class="card"><h3>Insurance</h3><p>"How Much Insurance Do You Actually Need?"</p></div>
   </div>
   <p class="subtitle" style="margin-top: 36px;">Pick the one closest to your niche. You can build another one next week; today is about learning the machine.</p>
-  <aside class="notes">Give them 60 seconds max to choose. If someone agonises, assign them retirement. Speed matters more than the perfect topic. All three have matching Canva templates ready.</aside>
+  <aside class="notes">Give them 60 seconds max to choose. If someone agonises, assign them retirement. Speed matters more than the perfect topic; the design step later handles all three equally.</aside>
 </div>
 
 <!-- 13 -->
 <div class="slide" data-section="Module 2">
-  <p class="kicker">Step 2 of 5</p>
+  <p class="kicker">Step 2 of 6</p>
   <h2>Generate your content <span class="accent">(Prompt 1)</span></h2>
   <div class="split" style="align-items: start;">
     <div>
@@ -651,7 +651,7 @@ Keep the tone practical, friendly, and jargon-free. Include a brief intro, the m
 
 <!-- 14 -->
 <div class="slide" data-section="Module 2">
-  <p class="kicker">Step 3 of 5</p>
+  <p class="kicker">Step 3 of 6</p>
   <h2>The first draft is a draft. <span class="accent">Talk to it.</span></h2>
   <div class="cols">
     <div class="card">
@@ -678,60 +678,68 @@ Keep the tone practical, friendly, and jargon-free. Include a brief intro, the m
 
 <!-- 15 -->
 <div class="slide" data-section="Module 2">
-  <p class="kicker">Step 4 of 5</p>
-  <h2>Open your <span class="accent">template</span></h2>
-  <div class="split">
+  <p class="kicker">Step 4 of 6</p>
+  <h2>Design it, <span class="accent">same chat</span> (Prompt 1b)</h2>
+  <div class="split" style="align-items: start;">
     <div>
-      <div class="steps" style="margin-top: 24px;">
-        <div class="step-row">Open the template link from your cheat sheet <span class="note">pick the one matching your topic</span></div>
-        <div class="step-row">Click <b style="color: var(--gold);">"Customize free template"</b> <span class="note">log in to Canva if it asks</span></div>
-        <div class="step-row">Canva opens a copy that's yours to edit <span class="note">nobody can break the original</span></div>
+      <div class="prompt" style="margin-top: 20px;">
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+        <pre>Now turn this guide into a polished, professionally designed document.
+
+Layout: a cover with the title and "A free guide by <span class="ph">[YOUR NAME]</span>", one clean section per point, and a closing section with a "Book your free consultation" call to action plus my contact: <span class="ph">[PHONE]</span> / <span class="ph">[EMAIL]</span>.
+
+Style: navy blue and gold, modern, large readable text, no clutter.</pre>
       </div>
-      <div class="checkpoint">The template is open in the Canva editor with its pages listed. Thumbs up.</div>
+      <div class="checkpoint">A designed version of your guide opens in a panel beside the chat. Thumbs up.</div>
     </div>
     <div>
       <div class="shot-wrap">
-        <img class="shot" src="shots/canva-template-page.png" alt="Canva template page with the Customize free template button">
-        <div class="pin" style="left: 65.5%; top: 49.5%; width: 30%; height: 10%;"></div>
-        <div class="pin-label" style="left: 65.5%; top: 62%;">click this</div>
+        <img class="shot" src="shots/claude-artifact.png" alt="Claude chat with a designed document open in the artifact panel beside it">
+        <div class="pin" style="left: 44%; top: 0.5%; width: 55.5%; height: 97%;"></div>
+        <div class="pin-label" style="left: 44%; top: 10%;">your designed guide appears here</div>
       </div>
-      <p class="shot-cap">The template page your cheat sheet link opens. One purple button and it's yours.</p>
+      <p class="shot-cap">Same chat, no new tool. Claude designs it in a side panel (contents will be your guide, not this chart).</p>
     </div>
   </div>
-  <aside class="notes">The template links are on the printed cheat sheet AND in the pre-workshop message. If someone lost both, project one link on screen. Button label is "Customize free template" (Canva renames it occasionally; it's always the big purple one).</aside>
+  <aside class="notes">The magic moment of Module 2: the wall of text becomes a designed document in one message, in the same conversation. No template hunting, no design decisions. If the design misses (cramped, wrong colours), it's say-see-shape again: "more space between sections", "make the cover bolder". ChatGPT users: same prompt works there too.</aside>
 </div>
 
-<!-- Step 5: paste page by page -->
+<!-- Step 5: save as PDF -->
 <div class="slide" data-section="Module 2">
-  <p class="kicker">Step 5 of 5</p>
-  <h2>Paste, <span class="accent">one point per page</span></h2>
-  <div class="steps">
-    <div class="step-row"><span>Getting text out of Claude: select the sentences you need and copy, or hover the reply and use the <b style="color: var(--gold);">copy button</b> under it <span class="note">keep both tabs open, you'll bounce between them</span></span></div>
-    <div class="step-row"><span>Page 1 (cover): swap in <b style="color: var(--gold);">your title + your name</b></span></div>
-    <div class="step-row"><span>Pages 2-6: Claude's point 1 &rarr; page 2, point 2 &rarr; page 3, and so on <span class="note">heading on top, 3-4 sentences below</span></span></div>
-    <div class="step-row"><span>Page 7 (closing): keep the "book a free consultation" text, add <b style="color: var(--gold);">your phone and email</b></span></div>
-    <div class="step-row"><span>Don't touch fonts or colours. The design is done. <b style="color: var(--gold);">Your job is the words.</b></span></div>
-  </div>
-  <div class="checkpoint">All 7 pages filled, your name and contact on the cover and closing page. Thumbs up.</div>
-  <aside class="notes">This is where the 45 minutes goes, so walk the room. Watch for the two time sinks: perfectionists rewriting Claude's copy from scratch (tell them: edit later, tonight, at home) and fiddlers redesigning the template. Anyone done early helps a neighbour. 15 minutes for this step.</aside>
-</div>
-
-<!-- 16 -->
-<div class="slide" data-section="Module 2">
-  <p class="kicker">Export</p>
-  <h2>Two files leave Canva</h2>
+  <p class="kicker">Step 5 of 6</p>
+  <h2>Save it as a <span class="accent">PDF</span></h2>
   <div class="cols">
     <div class="card">
-      <h3>Cover page as PNG</h3>
-      <p>Share &rarr; Download &rarr; file type <b style="color: var(--gold);">PNG</b>. Under "Select pages", untick All pages and tick <b style="color: var(--gold);">page 1 only</b>.<br><br>This becomes your ad image in Module 4.</p>
+      <h3>Claude route</h3>
+      <p>Click the designed document &rarr; <b style="color: var(--gold);">Download</b> (top right of the panel) &rarr; open the downloaded file in your browser &rarr; <b style="color: var(--gold);">Cmd+P</b> (Ctrl+P on Windows) &rarr; Save as PDF.</p>
     </div>
     <div class="card">
-      <h3>Whole guide as PDF</h3>
-      <p>Share &rarr; Download &rarr; PDF Standard.<br><br>This is what your leads receive.</p>
+      <h3>ChatGPT route (one step)</h3>
+      <p>Paste your guide into chatgpt.com and say: <b style="color: var(--gold);">"Turn this into a nicely designed PDF I can download."</b> It replies with a download link. Done.</p>
     </div>
   </div>
-  <div class="checkpoint">You have a finished PDF and a cover PNG on your laptop. Thumbs up.</div>
-  <aside class="notes">Common snag: downloading all pages as PNG instead of just page 1. Show the page-selection step in the download dialog. Nobody goes to break until they have both files.</aside>
+  <p class="subtitle" style="margin-top: 24px;">Either route works. Open the PDF and read it once, cover to closing; this file goes out under your name.</p>
+  <div class="checkpoint">A finished PDF is saved on your laptop and you've read it. Thumbs up.</div>
+  <aside class="notes">Demo the Claude route on the projector (download, open, print-to-PDF takes 20 seconds); offer ChatGPT as the shortcut for anyone with an account. The read-through matters: this is the compliance moment, their name is on the cover. Nobody goes to break without the PDF.</aside>
+</div>
+
+<!-- Step 6: cover image -->
+<div class="slide" data-section="Module 2">
+  <p class="kicker">Step 6 of 6</p>
+  <h2>Your cover image, from <span class="accent">ChatGPT</span></h2>
+  <div class="prompt">
+    <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    <pre>Create a square 1:1 cover image for a free PDF guide called
+"<span class="ph">[GUIDE TITLE]</span>". Professional financial-services style, navy blue
+and gold, the title in large bold text, a small "FREE GUIDE" badge,
+clean simple background, no people, space around the text.</pre>
+  </div>
+  <div class="steps" style="margin-top: 8px;">
+    <div class="step-row"><span>chatgpt.com &rarr; paste the prompt &rarr; <b style="color: var(--gold);">check the spelling in the image</b>, regenerate if the title is garbled</span></div>
+    <div class="step-row"><span>Hover the image &rarr; download. This becomes your ad image in Module 4.</span></div>
+  </div>
+  <div class="checkpoint">A PDF and a square cover image, both saved on your laptop. Thumbs up.</div>
+  <aside class="notes">Claude doesn't generate images, so this one step uses ChatGPT (free tier includes image generation with daily limits). The spelling check is non-negotiable: a garbled title reads as a scam. Anyone without a ChatGPT account pairs with a neighbour for this step and signs up tonight. Bonus B later builds on exactly this skill for A/B testing.</aside>
 </div>
 
 <!-- 17 -->
@@ -851,7 +859,7 @@ Keep the tone practical, friendly, and jargon-free. Include a brief intro, the m
       <li>Audience: Singapore, 25-45, 3-5 interests</li>
       <li>Budget: $5/day, end date 3 days out</li>
       <li>Identity: your Page + accept Lead Ads Terms</li>
-      <li>Upload your Canva cover PNG</li>
+      <li>Upload your ChatGPT cover image</li>
       <li>Claude writes 3 copy variations (Prompt 2)</li>
       <li>Paste: primary text, headline, description + CTA</li>
       <li>Instant form: More Volume, name + phone + concern</li>
@@ -1007,7 +1015,7 @@ Keep the tone practical, friendly, and jargon-free. Include a brief intro, the m
     <div>
       <div class="steps" style="margin-top: 24px;">
         <div class="step-row">Ad Creative &rarr; <b style="color: var(--gold);">Add Media</b> &rarr; Add Image</div>
-        <div class="step-row">Upload your <b style="color: var(--gold);">Canva cover PNG</b> from Module 2</div>
+        <div class="step-row">Upload your <b style="color: var(--gold);">ChatGPT cover image</b> from Module 2</div>
         <div class="step-row">Watch the preview panel on the right; your cover appears in a fake Facebook feed</div>
       </div>
       <div class="checkpoint">Your lead magnet cover shows as the ad image in the preview. Thumbs up.</div>
@@ -1021,7 +1029,7 @@ Keep the tone practical, friendly, and jargon-free. Include a brief intro, the m
       <p class="shot-cap">Ad creative on the left, live preview on the right. Watch your ad take shape there.</p>
     </div>
   </div>
-  <aside class="notes">Someone will have skipped the PNG export. Fix: Canva &rarr; page 1 &rarr; Share &rarr; Download &rarr; PNG, just that page. If the crop looks off, re-export at 1080x1080.</aside>
+  <aside class="notes">Someone will have skipped the cover step. Fix: chatgpt.com, the cover prompt from Module 2 step 6, download, back here. If the crop looks off, ask ChatGPT for "the same image, square 1:1".</aside>
 </div>
 
 <!-- 30 -->
@@ -1269,7 +1277,7 @@ No hard sell.</pre>
     <div class="pm">
       <div class="stage">
         <h4>1 &middot; BUILD</h4>
-        <p>Claude drafts the guide (Prompt 1)<br>Canva makes it a PDF + cover<br>~45 min, reusable forever</p>
+        <p>Claude writes + designs it (Prompts 1, 1b)<br>ChatGPT makes the cover image<br>~45 min, reusable forever</p>
       </div>
       <div class="arr">&rarr;</div>
       <div class="stage">
@@ -1303,7 +1311,7 @@ No hard sell.</pre>
   <p class="subtitle">Scan, follow, and DM the word <span class="accent" style="font-weight:700;">ADS</span> to get the support group invite.</p>
   <div class="qr-box" style="padding: 12px;"><img src="shots/qr-instagram.png" alt="QR code linking to Leo Tan's Instagram @leotan_js" style="width: 100%; height: 100%; object-fit: contain;"></div>
   <p style="font-size: clamp(15px,1.7vw,19px); color: var(--dim);">@leotan_js &middot; share wins, ask questions, get help with your ads</p>
-  <p style="font-size: clamp(16px,1.9vw,22px); color: var(--muted); margin-top: 40px;">Tomorrow you get: the cheat sheet, the Canva templates, this deck, and a check-in.<br>Let the ad run. Follow up fast. See you in the group.</p>
+  <p style="font-size: clamp(16px,1.9vw,22px); color: var(--muted); margin-top: 40px;">Tomorrow you get: the cheat sheet, this deck, and a check-in.<br>Let the ad run. Follow up fast. See you in the group.</p>
   <p style="font-size: clamp(14px,1.6vw,18px); color: var(--dim); margin-top: 24px;">And when your campaign is running: <a class="jump" href="#bonus">three bonus modules</a> wait after this slide.</p>
   <aside class="notes">Q&amp;A happens on this slide. The QR goes to instagram.com/leotan_js; DMs with the word ADS get the WhatsApp group invite (swap the QR for a direct WhatsApp group QR once the group link exists - regenerate at api.qrserver.com). Mention the day-3 check-in so they expect it. Last line of the day: "You walked in this morning without a lead system. You're walking out with one that's already live."</aside>
 </div>
@@ -1443,7 +1451,7 @@ Style: clean and professional, navy blue and gold, large text, mobile-first.</pr
   <h2>One image is a guess. <span class="accent">Three is a test.</span></h2>
   <ul class="points" style="margin-top: 28px;">
     <li>The image decides whether anyone stops scrolling. It's most of your ad's performance.</li>
-    <li>Your Canva cover is image #1. ChatGPT can generate #2 and #3 from a text prompt.</li>
+    <li>Your Module 2 cover is image #1. The same trick generates #2 and #3 in a minute.</li>
     <li>Run them against each other and let the numbers pick, not your taste.</li>
     <li>Your prompts travel: Prompt 2 from today works in ChatGPT word for word.<span class="sub">Claude, ChatGPT, Lovable: same skill, different tools. Describe, look, refine.</span></li>
   </ul>
@@ -1654,7 +1662,7 @@ badge, clean simple background, no people, space around the text.</pre>
     </div>
     <div class="card">
       <h3>Image looks cropped or blurry</h3>
-      <p>Re-export from Canva at 1080x1080: select page 1, Share &rarr; Download &rarr; PNG, size 1080x1080.</p>
+      <p>Ask ChatGPT: "give me the same image as a square 1:1, high resolution" and download the new version.</p>
     </div>
     <div class="card">
       <h3>Claude's copy is too long</h3>
