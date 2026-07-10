@@ -1,4 +1,4 @@
-# AI Ads Launch Lab -- Your Claude Prompts
+# AI Ads Launch Lab -- Your AI Prompts (ChatGPT or Claude)
 
 ## Prompt 1: Generate Your Lead Magnet Content
 
@@ -16,6 +16,35 @@ the main points, and a closing that invites them to book a free consultation.
 - "5 Retirement Mistakes Singaporeans Make Before 40"
 - "CPF Optimization Checklist for Working Adults"
 - "How Much Insurance Do You Actually Need?"
+
+
+## Prompt 1b: Design Your Guide + Get the PDF (same chat)
+
+```
+Now turn this guide into a nicely designed PDF I can download.
+
+Layout: a cover with the title and "A free guide by [YOUR NAME]", one clean
+section per point, and a closing section with a "Book your free consultation"
+call to action plus my contact: [PHONE] / [EMAIL].
+
+Style: navy blue and gold, modern, large readable text, no clutter.
+```
+
+**In ChatGPT:** it replies with a PDF download link -- click and save.
+**In Claude:** click the designed document > Download, open the file, Cmd+P > Save as PDF.
+
+
+## Prompt 1c: Cover Image (ChatGPT)
+
+```
+Create a square 1:1 cover image for a free PDF guide called "[GUIDE TITLE]".
+Professional financial-services style, navy blue and gold, the title in large
+bold text, a small "FREE GUIDE" badge, clean simple background, no people,
+space around the text.
+```
+
+**Check the spelling in the image.** If the title is garbled: "regenerate with
+the exact text [TITLE]". This image becomes your Meta ad image.
 
 
 ## Prompt 2: Write Your Ad Copy
@@ -54,12 +83,13 @@ No hard sell.
 
 ## Pro Tips
 
+- **Stay in one chat** for prompts 1, 1b and 1c -- each builds on the last
 - **Replace [BRACKETED TEXT]** with your own details before sending
 - **Ask for variations:** Add "Give me 3 versions" to any prompt
 - **Adjust the tone:** Add "Make it more casual" or "Make it more professional"
-- **Iterate:** If the first result isn't right, tell Claude what to change -- "Make it shorter", "Focus more on CPF", "Remove jargon"
+- **Iterate:** If the first result isn't right, say what to change -- "Make it shorter", "Focus more on CPF", "Remove jargon"
 - **Save your best prompts** -- you'll reuse them every time you create a new campaign
 
 ---
 
-Claude: claude.ai (free tier works)
+ChatGPT: chatgpt.com | Claude: claude.ai (free tiers work; same prompts)

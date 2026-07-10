@@ -96,12 +96,12 @@ CLICK: Under "Identity", select your **Facebook Business Page**
 SAY: "Pick the Facebook Page you created. This is who the ad comes from."
 
 ### Upload Image
-SAY: "Remember the lead magnet cover you made in Canva? We're going to use that as your ad image."
+SAY: "Remember the cover image ChatGPT made for you in Module 2? We're going to use that as your ad image."
 
 CLICK: Under "Ad Creative", click **"Add Media" > "Add Image"**
-CLICK: **Upload** the Canva cover image (the first page of their lead magnet, exported as PNG/JPG)
+CLICK: **Upload** the cover image (the square ChatGPT image from Module 2, step 6)
 
-TIP: "If you didn't export just the cover page, go back to Canva, click on page 1, click Share > Download > PNG, download just that page, and upload it here."
+TIP: "If you skipped the cover step, open chatgpt.com, run the cover prompt (1c on your cheat sheet), download the image, and upload it here."
 
 CHECKPOINT: "You should see your lead magnet cover as the ad image. Thumbs up."
 
@@ -207,7 +207,7 @@ CELEBRATE: "You just did something 95% of financial advisors have never done. Yo
 |-------|-----|
 | "I can't find the Create button" | Top left corner of Ads Manager. Green button. |
 | "My Page isn't showing up" | They may not be admin of their Page. Check Page settings. |
-| "The image is wrong size" | Canva exports at correct size by default. If cropped weird, re-export as 1080x1080. |
+| "The image is wrong size" | Ask ChatGPT: "give me the same image as a square 1:1" and download the new version. |
 | "Claude gave me copy that's too long" | Ask Claude: "Make the primary text shorter, under 125 characters" |
 | "My ad was rejected" | Common for finance. Usually policy review. Click "Edit" and check for restricted words (guaranteed returns, etc). Remove and resubmit. |
 | "Form won't save" | Make sure all required fields are filled. Try a different browser if stuck. |

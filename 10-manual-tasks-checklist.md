@@ -4,19 +4,18 @@ These tasks require your own accounts, screenshots, or physical setup. The text 
 
 ---
 
-## Design Tasks (Canva)
+## Design Tasks
 
-- [ ] Create cheat sheet PDF in Canva using content from `01-claude-prompt-cheat-sheet.md`
-- [ ] Create 4 lead magnet templates in Canva using content from `02-lead-magnet-content-templates.md`
-- [ ] Set all Canva templates to "Anyone with link can view" and collect share links
+- [ ] Print cheat-sheet.html to PDF (already designed; open it, Cmd+P, save)
+- [x] ~~Lead magnet templates~~ RETIRED: attendees design their guide in ChatGPT live (Prompt 1b); no templates needed
 - [ ] Test template duplication flow in incognito browser
-- [ ] Create pre-flight checklist PDF in Canva using `03-pre-flight-checklist.md`
+- [ ] Print pre-flight-checklist.html to PDF (already designed)
 
 ## Screenshots (Meta Ads Manager)
 
 - [ ] Take screenshot of your real campaign results (for Module 1 proof)
 - [ ] Walk through Ads Manager setup and capture 4-6 screenshots for the setup guide (`05-meta-ads-setup-guide.md`)
-- [ ] Annotate screenshots with red circles/arrows (Canva or Preview)
+- [x] ~~Annotate screenshots~~ DONE: the unified deck has annotated screenshots on every hands-on step
 - [ ] Compile into setup guide PDF
 
 ## Demo Campaign
@@ -34,7 +33,7 @@ These tasks require your own accounts, screenshots, or physical setup. The text 
 
 - [ ] Create WhatsApp group ("AI Ads Launch Lab" or "Leo's Lead Gen Lab")
 - [ ] Generate invite link
-- [ ] Generate QR code from invite link (Canva QR tool or qr-code-generator.com)
+- [ ] Swap the deck's QR (currently Instagram) for the WhatsApp group QR once the group exists (api.qrserver.com)
 - [ ] Add QR code to the closing slide
 
 ## Comms
@@ -56,7 +55,7 @@ These tasks require your own accounts, screenshots, or physical setup. The text 
 
 | Day | Do |
 |-----|-----|
-| T-7 | Canva templates + cheat sheet design |
+| T-7 | Print handouts: cheat sheet + pre-flight (both are ready HTML pages) |
 | T-5 | Screenshots + setup guide + slides |
 | T-4 | Demo campaign + facilitator guide walkthrough |
 | T-3 | Send pre-workshop comms |

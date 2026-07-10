@@ -68,7 +68,7 @@ Quick reminder -- AI Ads Launch Lab is tomorrow!
 
 Bring:
 - Laptop + charger
-- All accounts set up (Facebook, Ads Manager, Claude, Canva)
+- All accounts set up (Facebook, Ads Manager, ChatGPT; Claude optional)
 - $10-20 loaded on your Ads Manager payment method
 
 If you haven't completed the Pre-Flight Checklist yet, please do it tonight. It takes 10 minutes and saves us time tomorrow.

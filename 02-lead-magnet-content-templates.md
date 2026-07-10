@@ -1,4 +1,6 @@
-# Lead Magnet Template Content (x4)
+# ARCHIVED - Lead Magnet Template Content (x4)
+
+> **ARCHIVED 2026-07-10.** The workshop no longer uses Canva templates. Attendees write AND design their lead magnet in one ChatGPT chat (Prompts 1, 1b, 1c on the cheat sheet). This file is kept only as topic/content reference.
 
 Use this content as placeholder text in your Canva templates. Attendees will
 replace it with their Claude-generated content during the workshop.

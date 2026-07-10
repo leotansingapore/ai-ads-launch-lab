@@ -21,12 +21,12 @@ Complete ALL items BEFORE workshop day. If you get stuck, reply to this message 
     - Add a credit or debit card with at least $20 available
     - This is for your ad budget ($5-10/day) -- you can pause anytime
 
-[ ] I have a Claude account and can log in
-    - Go to claude.ai and sign up (free tier is fine)
-    - Try asking it something to make sure it works
+[ ] Optional: a Claude account (claude.ai, free tier)
+    - Backup tool; every prompt we use works in both
 
-[ ] I have a Canva account and can log in
-    - Go to canva.com and sign up (free tier is fine)
+[ ] I have a ChatGPT account and can log in
+    - Go to chatgpt.com and sign up (free tier is fine)
+    - This is the tool that builds your lead magnet on the day
 
 [ ] I'm bringing my laptop (not tablet, not phone)
 

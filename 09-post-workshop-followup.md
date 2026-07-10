@@ -9,7 +9,7 @@ Hi [Name],
 Great session yesterday! Here's everything you need to keep going:
 
 1. Claude Prompt Cheat Sheet: [LINK]
-2. Canva lead magnet templates: [LINK]
+2. The full workshop deck (all steps + bonus modules): https://workshop-materials.vercel.app/workshop-deck.html
 3. Join our support group: [WHATSAPP GROUP LINK]
 
 Quick reminders:
@@ -75,7 +75,7 @@ Create a shared Google Drive folder with:
 ```
 AI Ads Launch Lab -- Resources/
   01-Claude-Prompt-Cheat-Sheet.pdf
-  02-Canva-Templates.txt          (links to all 4 templates)
+  02-Workshop-Deck-Link.txt       (https://workshop-materials.vercel.app/workshop-deck.html)
   03-Meta-Ads-Setup-Guide.pdf
   04-Pre-Flight-Checklist.pdf
 ```
