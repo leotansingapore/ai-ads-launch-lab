@@ -229,6 +229,44 @@
     padding: 24px;
   }
 
+  .shot-wrap { position: relative; }
+  .shot-wrap .shot { display: block; }
+  .pin {
+    position: absolute;
+    border: 3px solid var(--gold);
+    border-radius: 8px;
+    box-shadow: 0 0 0 2px rgba(0,0,0,0.45), 0 0 16px rgba(232,185,49,0.45);
+    pointer-events: none;
+  }
+  .pin-label {
+    position: absolute;
+    background: var(--gold);
+    color: #14140a;
+    font-weight: 800;
+    font-size: clamp(11px, 1.2vw, 14px);
+    padding: 3px 10px;
+    border-radius: 999px;
+    white-space: nowrap;
+    pointer-events: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+  }
+
+  .doc-panel {
+    background: #faf9f5;
+    color: #292824;
+    border-radius: 12px;
+    padding: clamp(18px, 2.4vw, 30px);
+    max-width: 880px;
+    margin-top: 20px;
+    font-size: clamp(13px, 1.5vw, 17px);
+    line-height: 1.55;
+    box-shadow: 0 18px 50px rgba(0,0,0,0.5);
+  }
+  .doc-panel h4 { font-size: 1.25em; margin-bottom: 8px; }
+  .doc-panel p { margin-bottom: 10px; }
+  .doc-panel .pt { font-weight: 700; }
+  .doc-panel .skip { color: #8a877e; }
+
   .dense .card { padding: 14px 20px; }
   .dense .card h3 { font-size: clamp(15px, 1.6vw, 19px); margin-bottom: 6px; }
   .dense .card p { font-size: clamp(13px, 1.4vw, 16px); }
@@ -303,7 +341,7 @@
   <ul class="points" style="margin-top: 28px;">
     <li>facebook.com logs in</li>
     <li>adsmanager.facebook.com shows a dashboard, not an error</li>
-    <li>A card is linked under Billing &amp; Payments</li>
+    <li>A card is linked <span class="sub" style="display:inline; color: var(--dim); font-size: 0.75em;">(Ads Manager &rarr; menu &#9776; &rarr; Billing &amp; Payments &rarr; Payment Methods)</span></li>
     <li>claude.ai logs in</li>
     <li>canva.com logs in</li>
   </ul>
@@ -485,6 +523,22 @@ Keep the tone practical, friendly, and jargon-free. Include a brief intro, the m
   <aside class="notes">Do it on the projector first with your own topic. Then they go. Remind them: replace the bracketed part before hitting enter. This prompt is on their printed cheat sheet too. Wait for the room.</aside>
 </div>
 
+<!-- what good looks like -->
+<div class="slide" data-section="Module 2">
+  <p class="kicker">Check your result</p>
+  <h2>What a good reply <span class="accent">looks like</span></h2>
+  <div class="doc-panel">
+    <h4>5 Retirement Mistakes Singaporeans Make Before 40</h4>
+    <p>Most people in their 20s and 30s treat retirement as a someday problem. By the time it becomes urgent, the easiest years to fix it are already gone...</p>
+    <p><span class="pt">1. Treating CPF as the whole plan</span><br>CPF is a solid base, not a full retirement plan. Between the Full Retirement Sum and rising costs of living, most people need savings outside CPF...</p>
+    <p><span class="pt">2. Letting cash sit idle for a decade</span> <span class="skip">...3-4 sentences...</span></p>
+    <p><span class="skip">3, 4, 5 ... same shape, one mistake each ...</span></p>
+    <p><span class="pt">Closing:</span> "If you'd like a second pair of eyes on your retirement plan, book a free, no-obligation consultation."</p>
+  </div>
+  <p class="shot-cap" style="text-align: left; max-width: 880px;">Real Claude output from the exact prompt. Yours will differ; check the shape: intro, 5-7 points with short explanations, and a closing that asks for the meeting.</p>
+  <aside class="notes">This slide answers "did I do it right?" without you checking 20 laptops. Have them compare shape, not words: an intro, numbered points with 3-4 sentences each, a consultation CTA at the end. Missing the CTA? Tell Claude: "add a closing that invites them to book a free consultation."</aside>
+</div>
+
 <!-- 14 -->
 <div class="slide" data-section="Module 2">
   <p class="kicker">Step 3 of 5</p>
@@ -520,17 +574,21 @@ Keep the tone practical, friendly, and jargon-free. Include a brief intro, the m
     <div>
       <div class="steps" style="margin-top: 24px;">
         <div class="step-row">Open the template link from your cheat sheet <span class="note">pick the one matching your topic</span></div>
-        <div class="step-row">Click <b style="color: var(--gold);">"Use this template"</b></div>
-        <div class="step-row">Canva opens a copy that's yours to edit <span class="note">7 pages, already designed</span></div>
+        <div class="step-row">Click <b style="color: var(--gold);">"Customize free template"</b> <span class="note">log in to Canva if it asks</span></div>
+        <div class="step-row">Canva opens a copy that's yours to edit <span class="note">nobody can break the original</span></div>
       </div>
-      <div class="checkpoint">The template is open in the Canva editor, all 7 pages visible. Thumbs up.</div>
+      <div class="checkpoint">The template is open in the Canva editor with its pages listed. Thumbs up.</div>
     </div>
     <div>
-      <img class="shot" src="shots/canva-templates.png" alt="Canva template gallery showing financial guide ebook covers">
-      <p class="shot-cap">Canva has thousands of these. Your cheat sheet links to 4 pre-built ones so you skip the browsing.</p>
+      <div class="shot-wrap">
+        <img class="shot" src="shots/canva-template-page.png" alt="Canva template page with the Customize free template button">
+        <div class="pin" style="left: 65.5%; top: 49.5%; width: 30%; height: 10%;"></div>
+        <div class="pin-label" style="left: 65.5%; top: 62%;">click this</div>
+      </div>
+      <p class="shot-cap">The template page your cheat sheet link opens. One purple button and it's yours.</p>
     </div>
   </div>
-  <aside class="notes">The template links are on the printed cheat sheet AND in the pre-workshop message. If someone lost both, project one link on screen. "Use this template" makes their own editable copy; nobody can break the original.</aside>
+  <aside class="notes">The template links are on the printed cheat sheet AND in the pre-workshop message. If someone lost both, project one link on screen. Button label is "Customize free template" (Canva renames it occasionally; it's always the big purple one).</aside>
 </div>
 
 <!-- Step 5: paste page by page -->
@@ -554,7 +612,7 @@ Keep the tone practical, friendly, and jargon-free. Include a brief intro, the m
   <div class="cols">
     <div class="card">
       <h3>Cover page as PNG</h3>
-      <p>Share &rarr; Download &rarr; PNG, page 1 only.<br><br>This becomes your ad image in Module 4.</p>
+      <p>Share &rarr; Download &rarr; file type <b style="color: var(--gold);">PNG</b>. Under "Select pages", untick All pages and tick <b style="color: var(--gold);">page 1 only</b>.<br><br>This becomes your ad image in Module 4.</p>
     </div>
     <div class="card">
       <h3>Whole guide as PDF</h3>
@@ -675,8 +733,20 @@ Keep the tone practical, friendly, and jargon-free. Include a brief intro, the m
 <div class="slide" data-section="Module 4">
   <p class="kicker">Step 1 of 10</p>
   <h2>Open <span class="accent">Ads Manager</span></h2>
-  <p class="subtitle" style="font-size: clamp(22px, 3vw, 36px); margin-top: 36px;">adsmanager.facebook.com</p>
-  <div class="checkpoint">You see a dashboard. Error or setup screen instead? Raise your hand.</div>
+  <div class="split">
+    <div>
+      <p class="subtitle" style="font-size: clamp(20px, 2.6vw, 32px); margin-top: 28px;">adsmanager.facebook.com</p>
+      <div class="checkpoint">You see a dashboard like this (yours will be emptier). Error or setup screen instead? Raise your hand.</div>
+    </div>
+    <div>
+      <div class="shot-wrap">
+        <img class="shot" src="shots/ads-dashboard-results.png" alt="Meta Ads Manager campaigns dashboard with the green Create button top left">
+        <div class="pin" style="left: 1%; top: 13%; width: 10.5%; height: 14%;"></div>
+        <div class="pin-label" style="left: 13%; top: 14%;">next step starts here</div>
+      </div>
+      <p class="shot-cap">The Campaigns dashboard. Yours has no rows yet; the green Create button is what matters.</p>
+    </div>
+  </div>
   <aside class="notes">2 min. If someone hits an error, try business.facebook.com first. Restricted account: pair them with a neighbour for the rest of the session, sort their account after the workshop.</aside>
 </div>
 
@@ -695,8 +765,14 @@ Keep the tone practical, friendly, and jargon-free. Include a brief intro, the m
       <div class="checkpoint">You're on the Ad Set screen. Thumbs up.</div>
     </div>
     <div>
-      <img class="shot" src="shots/meta-objective-leads.jpg" alt="Meta Ads Manager campaign objective screen with Leads selected">
-      <p class="shot-cap">The screen you'll see. Pick Leads, then Continue.</p>
+      <div class="shot-wrap">
+        <img class="shot" src="shots/meta-objective-leads.jpg" alt="Meta Ads Manager campaign objective screen with Leads selected">
+        <div class="pin" style="left: 0.8%; top: 46%; width: 49%; height: 8%;"></div>
+        <div class="pin-label" style="left: 52%; top: 48%;">1. pick Leads</div>
+        <div class="pin" style="left: 74.5%; top: 92%; width: 11.5%; height: 6.5%;"></div>
+        <div class="pin-label" style="left: 48%; top: 93%;">2. Continue</div>
+      </div>
+      <p class="shot-cap">The screen you'll see. Two clicks.</p>
     </div>
   </div>
   <aside class="notes">3 min. Say why Leads: "we're asking Meta to find people who fill in forms, not people who click links." Naming matters when they have 5 campaigns in 3 months.</aside>
@@ -712,13 +788,19 @@ Keep the tone practical, friendly, and jargon-free. Include a brief intro, the m
         <div class="step-row">Performance goal: <b style="color: var(--gold);">Maximise number of leads</b> <span class="note">usually pre-selected; leave it</span></div>
         <div class="step-row">Location: <b style="color: var(--gold);">Singapore</b></div>
         <div class="step-row">Age: <b style="color: var(--gold);">25-45</b> <span class="note">or your ideal client's range</span></div>
-        <div class="step-row">Detailed Targeting &rarr; Browse &rarr; add <b style="color: var(--gold);">3-5 interests</b> matching your topic <span class="note">financial planning, investments, CPF, retirement planning, insurance</span></div>
+        <div class="step-row"><span>Detailed Targeting &rarr; Browse &rarr; add <b style="color: var(--gold);">3-5 interests</b> matching your topic <span class="note" style="display:block;">financial planning, investments, CPF, retirement planning, insurance</span></span></div>
       </div>
       <div class="checkpoint">Audience shows Singapore, an age range, and 3-5 interests. Thumbs up.</div>
     </div>
     <div>
-      <img class="shot" src="shots/meta-audience.png" alt="Meta Ads Manager audience section showing location, age, gender and detailed targeting">
-      <p class="shot-cap">The Audience section. This example shows Italy and 18-65+. Yours: Singapore, 25-45.</p>
+      <div class="shot-wrap">
+        <img class="shot" src="shots/meta-audience.png" alt="Meta Ads Manager audience section showing location, age, gender and detailed targeting">
+        <div class="pin" style="left: 1.5%; top: 42.5%; width: 42%; height: 10%;"></div>
+        <div class="pin-label" style="left: 46%; top: 45%;">yours: Singapore</div>
+        <div class="pin" style="left: 1.5%; top: 55.5%; width: 30%; height: 7.5%;"></div>
+        <div class="pin-label" style="left: 34%; top: 57%;">yours: 25-45</div>
+      </div>
+      <p class="shot-cap">The Audience section. The example shows Italy, 18-65+; set yours as labelled.</p>
     </div>
   </div>
   <aside class="notes">10 min, the longest setup step. Type the interests one at a time on the projector; the search box is fussy about naming ("Central Provident Fund (CPF)"). Retirement guide gets retirement interests; insurance guide gets insurance.</aside>
@@ -739,8 +821,14 @@ Keep the tone practical, friendly, and jargon-free. Include a brief intro, the m
       <div class="checkpoint">$5/day, running 3 days from today. Thumbs up.</div>
     </div>
     <div>
-      <img class="shot" src="shots/meta-budget.png" alt="Meta Ads Manager budget and schedule section with daily budget and start date">
-      <p class="shot-cap">Budget &amp; schedule. Set Daily budget to $5 and tick the end-date box.</p>
+      <div class="shot-wrap">
+        <img class="shot" src="shots/meta-budget.png" alt="Meta Ads Manager budget and schedule section with daily budget and start date">
+        <div class="pin" style="left: 48%; top: 19%; width: 49%; height: 10.5%;"></div>
+        <div class="pin-label" style="left: 48%; top: 31%;">type 5 here</div>
+        <div class="pin" style="left: 2.5%; top: 70.5%; width: 24%; height: 9%;"></div>
+        <div class="pin-label" style="left: 28%; top: 72.5%;">tick this, +3 days</div>
+      </div>
+      <p class="shot-cap">Budget &amp; schedule. Two changes: the amount, and the end date.</p>
     </div>
   </div>
   <aside class="notes">5 min. The 3-day end date protects them: worst case, a forgotten campaign costs $15-30, not $300. Repeat the rule: don't judge results after day 1, Meta is still learning.</aside>
@@ -780,7 +868,11 @@ Keep the tone practical, friendly, and jargon-free. Include a brief intro, the m
       <div class="checkpoint">Your lead magnet cover shows as the ad image in the preview. Thumbs up.</div>
     </div>
     <div>
-      <img class="shot" src="shots/meta-ad-creative.png" alt="Meta Ads Manager ad creative section with live ad preview panel">
+      <div class="shot-wrap">
+        <img class="shot" src="shots/meta-ad-creative.png" alt="Meta Ads Manager ad creative section with live ad preview panel">
+        <div class="pin" style="left: 46.5%; top: 24%; width: 28%; height: 72%;"></div>
+        <div class="pin-label" style="left: 46.5%; top: 15%;">your ad, live preview</div>
+      </div>
       <p class="shot-cap">Ad creative on the left, live preview on the right. Watch your ad take shape there.</p>
     </div>
   </div>
@@ -841,8 +933,14 @@ Keep it benefit-focused and conversational. Give me 3 variations.</pre>
       <div class="checkpoint">The form is attached and visible in the ad preview. Thumbs up.</div>
     </div>
     <div>
-      <img class="shot" src="shots/meta-instant-form.png" alt="Meta instant form builder showing Add question menu and form preview">
-      <p class="shot-cap">The form builder. "Add question" is where your custom question goes; preview on the right.</p>
+      <div class="shot-wrap">
+        <img class="shot" src="shots/meta-instant-form.png" alt="Meta instant form builder showing Add question menu and form preview">
+        <div class="pin" style="left: 3.5%; top: 61%; width: 13.5%; height: 6.5%;"></div>
+        <div class="pin-label" style="left: 18.5%; top: 62%;">1. click</div>
+        <div class="pin" style="left: 5.5%; top: 76.5%; width: 14%; height: 7%;"></div>
+        <div class="pin-label" style="left: 21%; top: 78%;">2. Short answer</div>
+      </div>
+      <p class="shot-cap">The form builder. Your custom question goes in via "Add question", type Short answer.</p>
     </div>
   </div>
   <aside class="notes">10 min. The custom question is the gold: it hands them the opening line for the follow-up call. More Volume over Higher Intent because beginners need lead flow to learn from. Form won't save: check required fields, or switch browser.</aside>
