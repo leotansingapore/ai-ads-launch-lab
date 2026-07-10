@@ -193,6 +193,8 @@
 
   table.sched { width: 100%; max-width: 900px; border-collapse: collapse; margin-top: 32px; font-size: clamp(15px, 1.8vw, 21px); }
   table.sched td { padding: 9px 8px; border-bottom: 1px solid var(--line); }
+  a.jump { color: inherit; text-decoration: none; border-bottom: 1px dashed rgba(232,185,49,0.5); }
+  a.jump:hover { color: var(--gold); }
   table.sched .t { color: var(--gold); font-weight: 700; width: 90px; white-space: nowrap; }
   table.sched .m { color: var(--dim); text-align: right; }
 
@@ -359,20 +361,21 @@
     <div class="step-row">The prompts to rebuild all of it whenever you want</div>
   </div>
   <table class="sched">
-    <tr><td class="t">20 min</td><td>Why AI + ads</td><td class="m">Talk + demo</td></tr>
-    <tr><td class="t">45 min</td><td>Build your lead magnet with Claude</td><td class="m">Hands-on</td></tr>
+    <tr><td class="t">20 min</td><td><a class="jump" href="#m1">Why AI + ads</a></td><td class="m">Talk + demo</td></tr>
+    <tr><td class="t">45 min</td><td><a class="jump" href="#m2">Build your lead magnet with Claude</a></td><td class="m">Hands-on</td></tr>
     <tr><td class="t">15 min</td><td style="color: var(--dim);">Break</td><td class="m"></td></tr>
-    <tr><td class="t">25 min</td><td>Meta ads 101</td><td class="m">Watch</td></tr>
-    <tr><td class="t">60 min</td><td>Build and launch your campaign</td><td class="m">Hands-on</td></tr>
-    <tr><td class="t">30 min</td><td>What happens next + Q&amp;A</td><td class="m">Discussion</td></tr>
+    <tr><td class="t">25 min</td><td><a class="jump" href="#m3">Meta ads 101</a></td><td class="m">Watch</td></tr>
+    <tr><td class="t">60 min</td><td><a class="jump" href="#m4">Build and launch your campaign</a></td><td class="m">Hands-on</td></tr>
+    <tr><td class="t">30 min</td><td><a class="jump" href="#m5">What happens next + Q&amp;A</a></td><td class="m">Discussion</td></tr>
+    <tr><td class="t" style="color: var(--dim);">later</td><td><a class="jump" href="#bonus">3 bonus modules</a> &middot; <a class="jump" href="#fixes">quick fixes</a></td><td class="m">Self-paced</td></tr>
   </table>
-  <aside class="notes">Point at the three outcomes. "Not theory. Not a certificate. A real campaign, live, before you leave this room." Then run through the schedule fast, 30 seconds max.</aside>
+  <aside class="notes">Point at the three outcomes. "Not theory. Not a certificate. A real campaign, live, before you leave this room." Then run through the schedule fast, 30 seconds max. The module names are clickable, here and in the deck link they take home.</aside>
 </div>
 
 <!-- ============ MODULE 1 ============ -->
 
 <!-- 4 -->
-<div class="slide divider" data-section="Module 1">
+<div class="slide divider" data-section="Module 1" id="m1">
   <div class="big-num">1</div>
   <div><span class="pill">Module 1 &middot; 20 min</span><span class="pill mode">Laptops closed</span></div>
   <h1>Why AI <span class="accent">+</span> ads</h1>
@@ -464,7 +467,7 @@ practical, friendly, and jargon-free.</pre>
 <!-- ============ MODULE 2 ============ -->
 
 <!-- 10 -->
-<div class="slide divider" data-section="Module 2">
+<div class="slide divider" data-section="Module 2" id="m2">
   <div class="big-num">2</div>
   <div><span class="pill">Module 2 &middot; 45 min</span><span class="pill mode">Hands-on</span></div>
   <h1>Build your lead magnet <span class="accent">with Claude</span></h1>
@@ -596,6 +599,7 @@ Keep the tone practical, friendly, and jargon-free. Include a brief intro, the m
   <p class="kicker">Step 5 of 5</p>
   <h2>Paste, <span class="accent">one point per page</span></h2>
   <div class="steps">
+    <div class="step-row"><span>Getting text out of Claude: select the sentences you need and copy, or hover the reply and use the <b style="color: var(--gold);">copy button</b> under it <span class="note">keep both tabs open, you'll bounce between them</span></span></div>
     <div class="step-row"><span>Page 1 (cover): swap in <b style="color: var(--gold);">your title + your name</b></span></div>
     <div class="step-row"><span>Pages 2-6: Claude's point 1 &rarr; page 2, point 2 &rarr; page 3, and so on <span class="note">heading on top, 3-4 sentences below</span></span></div>
     <div class="step-row"><span>Page 7 (closing): keep the "book a free consultation" text, add <b style="color: var(--gold);">your phone and email</b></span></div>
@@ -624,7 +628,7 @@ Keep the tone practical, friendly, and jargon-free. Include a brief intro, the m
 </div>
 
 <!-- 17 -->
-<div class="slide center" data-section="Break">
+<div class="slide center" data-section="Break" id="break">
   <p class="kicker">15 minutes</p>
   <h1>Break</h1>
   <p class="subtitle">Stuck on anything? Come to the front now.<br>Everyone launches in Module 4, so we fix problems during the break.</p>
@@ -634,7 +638,7 @@ Keep the tone practical, friendly, and jargon-free. Include a brief intro, the m
 <!-- ============ MODULE 3 ============ -->
 
 <!-- 18 -->
-<div class="slide divider" data-section="Module 3">
+<div class="slide divider" data-section="Module 3" id="m3">
   <div class="big-num">3</div>
   <div><span class="pill">Module 3 &middot; 25 min</span><span class="pill mode">Laptops closed, just watch</span></div>
   <h1>Meta ads <span class="accent">101</span></h1>
@@ -721,7 +725,7 @@ Keep the tone practical, friendly, and jargon-free. Include a brief intro, the m
 <!-- ============ MODULE 4 ============ -->
 
 <!-- 24 -->
-<div class="slide divider" data-section="Module 4">
+<div class="slide divider" data-section="Module 4" id="m4">
   <div class="big-num">4</div>
   <div><span class="pill">Module 4 &middot; 60 min</span><span class="pill mode">Hands-on</span></div>
   <h1>Build and <span class="accent">launch</span></h1>
@@ -835,6 +839,19 @@ Keep the tone practical, friendly, and jargon-free. Include a brief intro, the m
 </div>
 
 <!-- 29 -->
+<div class="slide" data-section="Module 4">
+  <p class="kicker">Halfway there</p>
+  <h2>Drawer done. Folder done. <span class="accent">Now the document.</span></h2>
+  <div class="steps" style="margin-top: 8px;">
+    <div class="step-row"><span><b style="color: var(--green);">&#10003; Campaign</b> (the drawer): goal set to Leads</span></div>
+    <div class="step-row"><span><b style="color: var(--green);">&#10003; Ad set</b> (the folder): who sees it, $5/day for 3 days</span></div>
+    <div class="step-row"><span><b style="color: var(--gold);">&rarr; The ad</b> (the document): what people actually see. That's steps 5-9.</span></div>
+  </div>
+  <p class="subtitle" style="margin-top: 28px;">Click <b style="color: var(--gold);">Next</b> (bottom right) until the screen says you're editing the <b style="color: var(--gold);">Ad</b>. The left sidebar shows all three levels; you can always click your way back.</p>
+  <div class="checkpoint">Your screen shows the Ad level: Identity, Ad creative, Destination. Thumbs up.</div>
+  <aside class="notes">This is where beginners silently get lost: the budget screen has no obvious "I'm done" moment and the Next button is easy to miss bottom-right. The filing cabinet callback from Module 3 pays off here; point at each line. Anyone who clicked too far: the left sidebar shows Campaign / Ad set / Ad, click Ad.</aside>
+</div>
+
 <div class="slide" data-section="Module 4">
   <p class="kicker">Step 5 of 10</p>
   <h2>Pick your <span class="accent">Page</span></h2>
@@ -995,8 +1012,16 @@ Keep it benefit-focused and conversational. Give me 3 variations.</pre>
 <!-- ============ MODULE 5 ============ -->
 
 <!-- 35 -->
+<div class="slide divider" data-section="Module 5" id="m5">
+  <div class="big-num">5</div>
+  <div><span class="pill">Module 5 &middot; 30 min</span><span class="pill mode">Discussion</span></div>
+  <h1>What happens <span class="accent">next</span></h1>
+  <p class="subtitle">Your ad is in review. Perfect timing to set up everything that happens when the first lead arrives.</p>
+  <aside class="notes">Energy management: the room just peaked at Publish. This module converts that high into follow-through: where leads appear, how fast to reply, the rules that stop them killing the campaign at 10pm tonight, and the week-one plan.</aside>
+</div>
+
 <div class="slide" data-section="Module 5">
-  <p class="kicker">Module 5 &middot; What happens next</p>
+  <p class="kicker">Your leads</p>
   <h2>Where your <span class="accent">leads live</span></h2>
   <div class="split">
     <div>
@@ -1097,20 +1122,21 @@ No hard sell.</pre>
   <p class="subtitle">Scan, follow, and DM the word <span class="accent" style="font-weight:700;">ADS</span> to get the support group invite.</p>
   <div class="qr-box" style="padding: 12px;"><img src="shots/qr-instagram.png" alt="QR code linking to Leo Tan's Instagram @leotan_js" style="width: 100%; height: 100%; object-fit: contain;"></div>
   <p style="font-size: clamp(15px,1.7vw,19px); color: var(--dim);">@leotan_js &middot; share wins, ask questions, get help with your ads</p>
-  <p style="font-size: clamp(16px,1.9vw,22px); color: var(--muted); margin-top: 40px;">Tomorrow you get: the cheat sheet, the Canva templates, and a check-in.<br>Let the ad run. Follow up fast. See you in the group.</p>
+  <p style="font-size: clamp(16px,1.9vw,22px); color: var(--muted); margin-top: 40px;">Tomorrow you get: the cheat sheet, the Canva templates, this deck, and a check-in.<br>Let the ad run. Follow up fast. See you in the group.</p>
+  <p style="font-size: clamp(14px,1.6vw,18px); color: var(--dim); margin-top: 24px;">And when your campaign is running: <a class="jump" href="#bonus">three bonus modules</a> wait after this slide.</p>
   <aside class="notes">Q&amp;A happens on this slide. The QR goes to instagram.com/leotan_js; DMs with the word ADS get the WhatsApp group invite (swap the QR for a direct WhatsApp group QR once the group link exists - regenerate at api.qrserver.com). Mention the day-3 check-in so they expect it. Last line of the day: "You walked in this morning without a lead system. You're walking out with one that's already live."</aside>
 </div>
 
 <!-- ============ BONUS MODULES ============ -->
 
-<div class="slide divider" data-section="Bonus">
+<div class="slide divider" data-section="Bonus" id="bonus">
   <div class="big-num">+</div>
   <div><span class="pill">Bonus modules</span><span class="pill mode">Self-paced, at home this week</span></div>
   <h1>Three <span class="accent">upgrades</span></h1>
   <div class="steps" style="margin-top: 32px; max-width: 820px;">
-    <div class="step-row"><span><b style="color: var(--gold);">A. A landing page</b> built by AI, in Lovable. About 30 minutes.</span></div>
-    <div class="step-row"><span><b style="color: var(--gold);">B. More ad images</b> from ChatGPT, so you can test what works. 15 minutes.</span></div>
-    <div class="step-row"><span><b style="color: var(--gold);">C. Leads auto-saved</b> to a Google Sheet with Zapier. 20 minutes.</span></div>
+    <div class="step-row"><span><a class="jump" href="#bonus-a"><b style="color: var(--gold);">A. A landing page</b> built by AI, in Lovable</a>. About 30 minutes.</span></div>
+    <div class="step-row"><span><a class="jump" href="#bonus-b"><b style="color: var(--gold);">B. More ad images</b> from ChatGPT</a>, so you can test what works. 15 minutes.</span></div>
+    <div class="step-row"><span><a class="jump" href="#bonus-c"><b style="color: var(--gold);">C. Leads auto-saved</b> to a Google Sheet with Zapier</a>. 20 minutes.</span></div>
   </div>
   <p class="subtitle" style="margin-top: 32px;">Your campaign works without any of these. Do them once it's running.</p>
   <aside class="notes">Present these in 5 minutes or skip entirely and let the deck link do the teaching; every slide is written to be followed alone at home. The order matters: campaign first, upgrades after. Don't let anyone build a landing page instead of launching today.</aside>
@@ -1118,7 +1144,7 @@ No hard sell.</pre>
 
 <!-- BONUS A: LOVABLE -->
 
-<div class="slide" data-section="Bonus A">
+<div class="slide" data-section="Bonus A" id="bonus-a">
   <p class="kicker">Bonus A &middot; Landing pages</p>
   <h2>When a form isn't <span class="accent">enough</span></h2>
   <div class="cols">
@@ -1231,7 +1257,7 @@ Style: clean and professional, navy blue and gold, large text, mobile-first.</pr
 
 <!-- BONUS B: CHATGPT ADS -->
 
-<div class="slide" data-section="Bonus B">
+<div class="slide" data-section="Bonus B" id="bonus-b">
   <p class="kicker">Bonus B &middot; Ad images with ChatGPT</p>
   <h2>One image is a guess. <span class="accent">Three is a test.</span></h2>
   <ul class="points" style="margin-top: 28px;">
@@ -1297,7 +1323,7 @@ badge, clean simple background, no people, space around the text.</pre>
 
 <!-- BONUS C: ZAPIER -->
 
-<div class="slide" data-section="Bonus C">
+<div class="slide" data-section="Bonus C" id="bonus-c">
   <p class="kicker">Bonus C &middot; Zapier</p>
   <h2>Every lead, <span class="accent">auto-saved</span> to a sheet</h2>
   <ul class="points" style="margin-top: 24px;">
@@ -1433,7 +1459,7 @@ badge, clean simple background, no people, space around the text.</pre>
 </div>
 
 <!-- appendix quick fixes -->
-<div class="slide" data-section="Appendix">
+<div class="slide" data-section="Appendix" id="fixes">
   <p class="kicker">Appendix</p>
   <h2>Quick <span class="accent">fixes</span></h2>
   <div class="cols dense" style="margin-top: 20px; gap: 14px;">
@@ -1537,8 +1563,12 @@ badge, clean simple background, no people, space around the text.</pre>
   }
 
   function goToHash() {
-    const h = parseInt(location.hash.slice(1), 10);
-    showSlide(!isNaN(h) && h >= 1 && h <= total ? h - 1 : 0);
+    const raw = decodeURIComponent(location.hash.slice(1));
+    const n = parseInt(raw, 10);
+    if (!isNaN(n) && n >= 1 && n <= total) { showSlide(n - 1); return; }
+    const el = raw ? document.getElementById(raw) : null;
+    if (el && el.classList.contains('slide')) { showSlide(Array.prototype.indexOf.call(slides, el)); return; }
+    showSlide(0);
   }
   window.addEventListener('hashchange', goToHash);
   goToHash();
