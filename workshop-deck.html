@@ -1101,7 +1101,338 @@ No hard sell.</pre>
   <aside class="notes">Q&amp;A happens on this slide. The QR goes to instagram.com/leotan_js; DMs with the word ADS get the WhatsApp group invite (swap the QR for a direct WhatsApp group QR once the group link exists - regenerate at api.qrserver.com). Mention the day-3 check-in so they expect it. Last line of the day: "You walked in this morning without a lead system. You're walking out with one that's already live."</aside>
 </div>
 
-<!-- 40: appendix quick fixes -->
+<!-- ============ BONUS MODULES ============ -->
+
+<div class="slide divider" data-section="Bonus">
+  <div class="big-num">+</div>
+  <div><span class="pill">Bonus modules</span><span class="pill mode">Self-paced, at home this week</span></div>
+  <h1>Three <span class="accent">upgrades</span></h1>
+  <div class="steps" style="margin-top: 32px; max-width: 820px;">
+    <div class="step-row"><span><b style="color: var(--gold);">A. A landing page</b> built by AI, in Lovable. About 30 minutes.</span></div>
+    <div class="step-row"><span><b style="color: var(--gold);">B. More ad images</b> from ChatGPT, so you can test what works. 15 minutes.</span></div>
+    <div class="step-row"><span><b style="color: var(--gold);">C. Leads auto-saved</b> to a Google Sheet with Zapier. 20 minutes.</span></div>
+  </div>
+  <p class="subtitle" style="margin-top: 32px;">Your campaign works without any of these. Do them once it's running.</p>
+  <aside class="notes">Present these in 5 minutes or skip entirely and let the deck link do the teaching; every slide is written to be followed alone at home. The order matters: campaign first, upgrades after. Don't let anyone build a landing page instead of launching today.</aside>
+</div>
+
+<!-- BONUS A: LOVABLE -->
+
+<div class="slide" data-section="Bonus A">
+  <p class="kicker">Bonus A &middot; Landing pages</p>
+  <h2>When a form isn't <span class="accent">enough</span></h2>
+  <div class="cols">
+    <div class="card">
+      <h3>Instant form (what you built)</h3>
+      <p>Fastest for cold audiences inside Facebook. Pre-filled, two taps, done. Keep it as your main lead engine.</p>
+    </div>
+    <div class="card">
+      <h3>A landing page</h3>
+      <p>A link you own. Put it in your Instagram bio, WhatsApp status, email signature, or a QR code at a roadshow. Room to build trust: what's inside, who you are, why you.</p>
+    </div>
+  </div>
+  <p class="subtitle" style="margin-top: 28px;">You're not choosing. The form gets leads from ads; the page catches everyone else.</p>
+  <aside class="notes">Frame it as addition, not replacement. Their instant form campaign stays untouched. The landing page serves every channel that is NOT a Meta ad: bio links, QR codes, referrals who want to check them out first.</aside>
+</div>
+
+<div class="slide" data-section="Bonus A">
+  <p class="kicker">Step 1 of 4</p>
+  <h2>Open <span class="accent">Lovable</span></h2>
+  <div class="split">
+    <div>
+      <div class="steps" style="margin-top: 24px;">
+        <div class="step-row"><span>Go to <b style="color: var(--gold);">lovable.dev</b> and sign up (free tier is enough for this)</span></div>
+        <div class="step-row"><span>You get one box. You describe the website you want in plain English; Lovable builds it.</span></div>
+        <div class="step-row"><span>Same skill as Claude and ChatGPT: say what you want, look at the result, ask for changes</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="shot-wrap">
+        <img class="shot" src="shots/lovable-home.png" alt="Lovable homepage with the prompt box">
+        <div class="pin" style="left: 22.5%; top: 46%; width: 54.5%; height: 17.5%;"></div>
+        <div class="pin-label" style="left: 22.5%; top: 65.5%;">your whole website starts here</div>
+      </div>
+      <p class="shot-cap">lovable.dev. One box, plain English.</p>
+    </div>
+  </div>
+  <aside class="notes">Free tier gives daily credits; one landing page fits comfortably. If they've used Claude today, this feels familiar immediately: it's a chat that happens to output a website.</aside>
+</div>
+
+<div class="slide" data-section="Bonus A">
+  <p class="kicker">Step 2 of 4</p>
+  <h2>The landing page <span class="accent">prompt</span></h2>
+  <div class="prompt">
+    <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    <pre>Build me a one-page landing page for my free guide "<span class="ph">[GUIDE TITLE]</span>".
+I'm a financial advisor in Singapore. My audience is working adults aged 25-40.
+
+Sections:
+1. Hero: the guide title, one line on why it matters, and a button
+   "Get the free guide on WhatsApp" linking to
+   https://wa.me/<span class="ph">[YOUR PHONE, e.g. 6591234567]</span>?text=Hi! I'd like the free guide.
+2. What's inside: my guide's 5 points as short bullets
+3. About me: 2-3 sentences and a photo placeholder
+4. Footer: my name, phone, email
+
+Style: clean and professional, navy blue and gold, large text, mobile-first.</pre>
+  </div>
+  <p class="subtitle" style="margin-top: 16px; max-width: 980px;">The button opens WhatsApp instead of a contact form on purpose: a form needs a database behind it, a WhatsApp chat lands straight on your phone.</p>
+  <aside class="notes">The wa.me trick is the whole module: beginner landing pages die because the contact form saves to nowhere. A WhatsApp deep link needs zero setup, and the lead arrives as a conversation they can answer from anywhere. Phone format: country code, no plus, no spaces.</aside>
+</div>
+
+<div class="slide" data-section="Bonus A">
+  <p class="kicker">Step 3 of 4</p>
+  <h2>Talk until it looks <span class="accent">right</span></h2>
+  <div class="split">
+    <div>
+      <div class="steps" style="margin-top: 24px;">
+        <div class="step-row"><span>Lovable builds for a minute, then shows your page in the preview</span></div>
+        <div class="step-row"><span>Ask for changes in the chat, one at a time:<span class="note" style="display:block;">"Make the hero shorter" &middot; "Add 3 client testimonials" &middot; "Feel more premium" &middot; "Show the mobile view"</span></span></div>
+        <div class="step-row"><span>Read every word before you ship it. Your name is on it, compliance rules apply.</span></div>
+      </div>
+      <div class="checkpoint">The preview looks like a page you'd be proud to put in your bio. Thumbs up.</div>
+    </div>
+    <div>
+      <div class="shot-wrap">
+        <img class="shot" src="shots/lovable-editor.png" alt="Lovable editor with chat on the left and live preview on the right">
+        <div class="pin" style="left: 0.8%; top: 87%; width: 28.5%; height: 11.5%;"></div>
+        <div class="pin-label" style="left: 1%; top: 83%;">ask for changes here</div>
+        <div class="pin-label" style="left: 45%; top: 3%;">live preview of your page</div>
+      </div>
+      <p class="shot-cap">The editor: chat on the left, your page on the right. Same rhythm as Claude.</p>
+    </div>
+  </div>
+  <aside class="notes">One change per message beats a paragraph of changes; easier to undo, easier to see what did what. The screenshot shows a real project (mine); theirs will show their landing page in the preview.</aside>
+</div>
+
+<div class="slide" data-section="Bonus A">
+  <p class="kicker">Step 4 of 4</p>
+  <h2>Publish and <span class="accent">use it</span></h2>
+  <div class="split">
+    <div>
+      <div class="steps" style="margin-top: 24px;">
+        <div class="step-row"><span>Click <b style="color: var(--gold);">Publish</b> (top right) and confirm. Your page is live at <b style="color: var(--gold);">yourname.lovable.app</b></span></div>
+        <div class="step-row"><span>Open the link on your phone. Tap the WhatsApp button. It should start a chat with you.</span></div>
+        <div class="step-row"><span>Then put the link to work: Instagram bio, WhatsApp status, email signature</span></div>
+      </div>
+      <div class="checkpoint">The live link works on your phone and the button messages you. Thumbs up.</div>
+    </div>
+    <div>
+      <div class="shot-wrap">
+        <img class="shot" src="shots/lovable-editor.png" alt="Lovable editor with the Publish button top right">
+        <div class="pin" style="left: 93.5%; top: 4.5%; width: 6%; height: 5.5%;"></div>
+        <div class="pin-label" style="left: 68%; top: 5%;">when it's ready</div>
+      </div>
+      <p class="shot-cap">Publish is one button, top right. Free lovable.app address included.</p>
+    </div>
+  </div>
+  <aside class="notes">The phone test matters: most traffic to this page will be mobile. If someone wants their own domain later, Lovable supports custom domains on paid plans; the free lovable.app link is fine to start.</aside>
+</div>
+
+<!-- BONUS B: CHATGPT ADS -->
+
+<div class="slide" data-section="Bonus B">
+  <p class="kicker">Bonus B &middot; Ad images with ChatGPT</p>
+  <h2>One image is a guess. <span class="accent">Three is a test.</span></h2>
+  <ul class="points" style="margin-top: 28px;">
+    <li>The image decides whether anyone stops scrolling. It's most of your ad's performance.</li>
+    <li>Your Canva cover is image #1. ChatGPT can generate #2 and #3 from a text prompt.</li>
+    <li>Run them against each other and let the numbers pick, not your taste.</li>
+    <li>Your prompts travel: Prompt 2 from today works in ChatGPT word for word.<span class="sub">Claude, ChatGPT, Lovable: same skill, different tools. Describe, look, refine.</span></li>
+  </ul>
+  <aside class="notes">This module doubles as the mindset payoff: prompting is one skill they now own, portable across every AI tool. Free ChatGPT includes image generation with daily limits; that's enough for 2-3 ad images.</aside>
+</div>
+
+<div class="slide" data-section="Bonus B">
+  <p class="kicker">Step 1 of 3</p>
+  <h2>Generate the <span class="accent">image</span></h2>
+  <div class="split" style="align-items: start;">
+    <div>
+      <div class="steps" style="margin-top: 20px;">
+        <div class="step-row"><span>Go to <b style="color: var(--gold);">chatgpt.com</b>, log in</span></div>
+        <div class="step-row"><span>Click <b style="color: var(--gold);">Tools &rarr; Create an image</b> (or just paste the prompt; it works either way)</span></div>
+      </div>
+      <div class="prompt" style="margin-top: 16px;">
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+        <pre>Create a square 1:1 Facebook ad image for a free PDF guide called
+"<span class="ph">[GUIDE TITLE]</span>". Professional financial-services style, navy blue
+and gold, the guide title in large bold text, a small "FREE GUIDE"
+badge, clean simple background, no people, space around the text.</pre>
+      </div>
+    </div>
+    <div>
+      <img class="shot" src="shots/chatgpt-create-image.png" alt="ChatGPT Tools menu with Create an image highlighted">
+      <p class="shot-cap">The Tools menu in ChatGPT. "Create an image" is the one boxed in orange.</p>
+    </div>
+  </div>
+  <aside class="notes">Why no people in the prompt: AI faces still look slightly off and finance ads with odd faces get skipped or reported. Text-forward, clean layouts read as trustworthy and pass Meta review easily.</aside>
+</div>
+
+<div class="slide" data-section="Bonus B">
+  <p class="kicker">Step 2 of 3</p>
+  <h2>Fix it with <span class="accent">words</span>, then download</h2>
+  <div class="steps">
+    <div class="step-row"><span>"Make the title text bigger"</span></div>
+    <div class="step-row"><span>"More contrast, the text is hard to read"</span></div>
+    <div class="step-row"><span>"Try a version with a Singapore skyline, subtle, in the background"</span></div>
+    <div class="step-row"><span><b style="color: var(--gold);">Check the spelling in the image.</b> AI images still garble text sometimes; if the title is mangled, say "regenerate with the exact text [TITLE]"</span></div>
+    <div class="step-row"><span>Happy? Hover the image, click download</span></div>
+  </div>
+  <div class="checkpoint">You have 1-2 new ad images saved, titles spelled correctly. Thumbs up.</div>
+  <aside class="notes">The spelling check is non-negotiable; a misspelled guide title in an ad reads as a scam. Two good variants beat five mediocre ones. Keep each image visually different (colour, layout), otherwise the test teaches nothing.</aside>
+</div>
+
+<div class="slide" data-section="Bonus B">
+  <p class="kicker">Step 3 of 3</p>
+  <h2>Test it in <span class="accent">Ads Manager</span></h2>
+  <div class="steps">
+    <div class="step-row"><span>Ads Manager &rarr; your campaign &rarr; select your ad &rarr; <b style="color: var(--gold);">Duplicate</b></span></div>
+    <div class="step-row"><span>In the copy, change <b style="color: var(--gold);">only the image</b>. Same text, same form, same audience.</span></div>
+    <div class="step-row"><span>Run both for 3 days on the same budget</span></div>
+    <div class="step-row"><span>Keep the one with the cheaper leads, pause the other. That's A/B testing; you now do it.</span></div>
+  </div>
+  <div class="checkpoint">Two ads live, identical except the image. Winner decided by cost per lead, not by taste.</div>
+  <aside class="notes">Change one variable only, or the result means nothing. This is the habit that separates people who "ran an ad once" from people with a lead system: every week, one small test.</aside>
+</div>
+
+<!-- BONUS C: ZAPIER -->
+
+<div class="slide" data-section="Bonus C">
+  <p class="kicker">Bonus C &middot; Zapier</p>
+  <h2>Every lead, <span class="accent">auto-saved</span> to a sheet</h2>
+  <ul class="points" style="margin-top: 24px;">
+    <li>Right now your leads live inside Meta's Leads Centre. Fine for one campaign; messy by campaign three.</li>
+    <li>A Zap watches your lead form and copies each new lead into a Google Sheet the second it arrives</li>
+    <li>One sheet = your follow-up list, your notes, your history. Nothing slips.</li>
+  </ul>
+  <div class="checkpoint" style="border-color: rgba(232,185,49,0.5); background: rgba(232,185,49,0.08); color: var(--gold);">Heads up: Facebook Lead Ads is a premium Zapier app. You need a paid Zapier plan (from about US$20/month). Not ready to pay? Download leads from Leads Centre weekly instead; this module will wait.</div>
+  <aside class="notes">Be upfront about the paywall or you'll get angry messages Tuesday night. The value case: one missed lead pays for months of Zapier. But weekly manual CSV downloads are genuinely fine at low volume; this is a convenience upgrade, not a requirement.</aside>
+</div>
+
+<div class="slide" data-section="Bonus C">
+  <p class="kicker">Step 1 of 5</p>
+  <h2>Prepare the <span class="accent">sheet</span></h2>
+  <div class="split">
+    <div>
+      <div class="steps" style="margin-top: 24px;">
+        <div class="step-row"><span>Create a new Google Sheet, name it something like <b style="color: var(--gold);">"My Leads"</b></span></div>
+        <div class="step-row"><span>Row 1 = one column per detail: <b style="color: var(--gold);">Name, Phone, Concern, Date</b></span></div>
+        <div class="step-row"><span>That's it. Zapier will fill the rows.</span></div>
+      </div>
+      <div class="checkpoint">A sheet with 4 headers in row 1. Thumbs up.</div>
+    </div>
+    <div>
+      <div class="shot-wrap">
+        <img class="shot" src="shots/zap-sheet-prep.png" alt="Google Sheet with header columns for lead data">
+        <div class="pin" style="left: 3.5%; top: 31.5%; width: 93%; height: 9.5%;"></div>
+        <div class="pin-label" style="left: 3.5%; top: 43%;">headers = your form's questions</div>
+      </div>
+      <p class="shot-cap">Match the headers to what your instant form collects.</p>
+    </div>
+  </div>
+  <aside class="notes">Zapier reads the header row to offer field mapping later, so set headers BEFORE building the Zap. "Concern" is their answer to the custom question; it's the most valuable column in the sheet.</aside>
+</div>
+
+<div class="slide" data-section="Bonus C">
+  <p class="kicker">Step 2 of 5</p>
+  <h2>The trigger: <span class="accent">a new lead</span></h2>
+  <div class="split">
+    <div>
+      <div class="steps" style="margin-top: 24px;">
+        <div class="step-row"><span>zapier.com &rarr; <b style="color: var(--gold);">Create &rarr; Zap</b></span></div>
+        <div class="step-row"><span>Trigger app: <b style="color: var(--gold);">Facebook Lead Ads</b></span></div>
+        <div class="step-row"><span>Trigger event: <b style="color: var(--gold);">New Lead</b></span></div>
+        <div class="step-row"><span>Connect your Facebook account (same login as Ads Manager)</span></div>
+      </div>
+      <div class="checkpoint">Trigger shows Facebook Lead Ads + New Lead + your account. Thumbs up.</div>
+    </div>
+    <div>
+      <div class="shot-wrap">
+        <img class="shot" src="shots/zap-trigger.png" alt="Zapier trigger setup with Facebook Lead Ads and New Lead event">
+        <div class="pin" style="left: 2%; top: 32.5%; width: 95%; height: 9%;"></div>
+        <div class="pin-label" style="left: 2%; top: 43%;">pick New Lead</div>
+      </div>
+      <p class="shot-cap">The trigger: "when this happens". Note the Premium badge next to the app name.</p>
+    </div>
+  </div>
+  <aside class="notes">A Zap is two halves: trigger (when this happens) and action (do this). If Facebook asks about permissions during connect, grant leads access; business portfolio admins may need the "for Business admins" variant, which the setup screen links to.</aside>
+</div>
+
+<div class="slide" data-section="Bonus C">
+  <p class="kicker">Step 3 of 5</p>
+  <h2>Point it at <span class="accent">your form</span></h2>
+  <div class="split">
+    <div>
+      <div class="steps" style="margin-top: 24px;">
+        <div class="step-row"><span>Page: <b style="color: var(--gold);">your Facebook Business Page</b></span></div>
+        <div class="step-row"><span>Form: <b style="color: var(--gold);">the instant form you built in Module 4</b></span></div>
+        <div class="step-row"><span>Continue, then <b style="color: var(--gold);">Test trigger</b>: Zapier pulls in a sample lead</span></div>
+      </div>
+      <div class="checkpoint">Test trigger finds your form and shows lead data. Thumbs up.</div>
+    </div>
+    <div>
+      <div class="shot-wrap">
+        <img class="shot" src="shots/zap-page-form.png" alt="Zapier configure screen selecting Facebook Page and lead form">
+        <div class="pin" style="left: 2%; top: 26.5%; width: 95%; height: 9.5%;"></div>
+        <div class="pin-label" style="left: 2%; top: 37.5%;">your Page</div>
+        <div class="pin" style="left: 4%; top: 62%; width: 92%; height: 8%;"></div>
+        <div class="pin-label" style="left: 4%; top: 71%;">your form</div>
+      </div>
+      <p class="shot-cap">Pick the Page, then the form. Both dropdowns load from your account.</p>
+    </div>
+  </div>
+  <aside class="notes">Gotcha from the blue banner on this screen: editing a form in Meta gives it a NEW ID, and the Zap keeps watching the old one. Any time you edit your instant form, come back here and re-select it. No test lead found? Submit one via Meta's Lead Ads Testing Tool at facebook.com/business/lead-ads-testing.</aside>
+</div>
+
+<div class="slide" data-section="Bonus C">
+  <p class="kicker">Step 4 of 5</p>
+  <h2>The action: <span class="accent">write a row</span></h2>
+  <div class="split">
+    <div>
+      <div class="steps" style="margin-top: 24px;">
+        <div class="step-row"><span>Action app: <b style="color: var(--gold);">Google Sheets</b></span></div>
+        <div class="step-row"><span>Action event: <b style="color: var(--gold);">Create Spreadsheet Row</b></span></div>
+        <div class="step-row"><span>Connect your Google account, then pick your <b style="color: var(--gold);">"My Leads"</b> sheet and Sheet1</span></div>
+      </div>
+      <div class="checkpoint">Action shows Google Sheets + Create Spreadsheet Row + your sheet. Thumbs up.</div>
+    </div>
+    <div>
+      <div class="shot-wrap">
+        <img class="shot" src="shots/zap-action.png" alt="Zapier action setup with Google Sheets Create Spreadsheet Row">
+        <div class="pin" style="left: 2%; top: 34.5%; width: 95%; height: 8.5%;"></div>
+        <div class="pin-label" style="left: 2%; top: 44.5%;">Create Spreadsheet Row</div>
+      </div>
+      <p class="shot-cap">The action: "do this". One new row per lead.</p>
+    </div>
+  </div>
+  <aside class="notes">"Create Spreadsheet Row" exactly; there's a similarly named "Create Multiple Rows" that confuses people. If their sheet doesn't appear in the dropdown, it's usually the wrong Google account connected.</aside>
+</div>
+
+<div class="slide" data-section="Bonus C">
+  <p class="kicker">Step 5 of 5</p>
+  <h2>Map, test, <span class="accent">switch on</span></h2>
+  <div class="split">
+    <div>
+      <div class="steps" style="margin-top: 24px;">
+        <div class="step-row"><span>Match each column to the lead data: Name &rarr; full name, Phone &rarr; phone number, Concern &rarr; your custom question</span></div>
+        <div class="step-row"><span><b style="color: var(--gold);">Test step</b>: a row appears in your sheet. Go look at it.</span></div>
+        <div class="step-row"><span>Click <b style="color: var(--gold);">Publish</b>. The Zap now runs by itself, every lead, forever.</span></div>
+      </div>
+      <div class="checkpoint">A test row sits in your Google Sheet and the Zap shows "On". Done.</div>
+    </div>
+    <div>
+      <div class="shot-wrap">
+        <img class="shot" src="shots/zap-test.png" alt="Zapier test step showing lead data mapped to sheet columns">
+        <div class="pin" style="left: 2.5%; top: 62%; width: 60%; height: 14%;"></div>
+        <div class="pin-label" style="left: 2.5%; top: 78%;">your lead's details, mapped</div>
+      </div>
+      <p class="shot-cap">The test shows exactly what lands in each column before anything goes live.</p>
+    </div>
+  </div>
+  <aside class="notes">Full-circle moment for the workshop: ad runs 24/7, form fills itself, Zapier files each lead into the sheet, and their only job is the 2-hour follow-up call. That's a lead system, built in an afternoon by someone who'd never run an ad before today.</aside>
+</div>
+
+<!-- appendix quick fixes -->
 <div class="slide" data-section="Appendix">
   <p class="kicker">Appendix</p>
   <h2>Quick <span class="accent">fixes</span></h2>
