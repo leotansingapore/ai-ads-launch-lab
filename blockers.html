@@ -14,7 +14,7 @@
     min-height: 100vh;
     padding: 40px 20px;
   }
-  .container { max-width: 760px; margin: 0 auto; }
+  .container { max-width: 800px; margin: 0 auto; }
   h1 { font-size: 34px; font-weight: 800; letter-spacing: -1px; }
   .accent { color: #e8b931; }
   .sub { color: #888; margin-top: 8px; font-size: 16px; }
@@ -33,25 +33,73 @@
   }
   .blocker.done { opacity: 0.45; }
   .blocker.done h3 { text-decoration: line-through; }
-  .blocker input[type="checkbox"] {
+  .blocker > input[type="checkbox"] {
     width: 22px; height: 22px;
     margin-top: 2px;
     accent-color: #e8b931;
     cursor: pointer;
     flex-shrink: 0;
   }
+  .blocker .body { flex: 1; min-width: 0; }
   .blocker h3 { font-size: 17px; font-weight: 700; }
-  .blocker p { font-size: 14px; color: #999; line-height: 1.55; margin-top: 6px; }
-  .blocker p b { color: #ccc; }
+  .blocker p.why { font-size: 13.5px; color: #888; line-height: 1.5; margin-top: 6px; }
+  .blocker ol {
+    margin: 12px 0 0 18px;
+    font-size: 14px;
+    color: #ccc;
+    line-height: 1.7;
+  }
+  .blocker ol li { margin-bottom: 4px; }
+  .blocker ol li::marker { color: #e8b931; font-weight: 700; }
   .blocker code {
     background: #05050f;
     border: 1px solid #222;
     border-radius: 4px;
     padding: 1px 6px;
-    font-size: 12.5px;
+    font-size: 12px;
     color: #e8e8f0;
   }
-  .chips { margin-top: 10px; }
+  .prompt {
+    position: relative;
+    background: #05050f;
+    border: 1px solid #222;
+    border-left: 3px solid #e8b931;
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin-top: 10px;
+  }
+  .prompt pre {
+    font-family: 'SF Mono', ui-monospace, Menlo, monospace;
+    font-size: 12px;
+    line-height: 1.55;
+    color: #e8e8f0;
+    white-space: pre-wrap;
+  }
+  .copy-btn {
+    position: absolute;
+    top: 8px; right: 8px;
+    background: rgba(232,185,49,0.12);
+    border: 1px solid rgba(232,185,49,0.4);
+    color: #e8b931;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .copy-btn:hover { background: rgba(232,185,49,0.25); }
+  .say {
+    margin-top: 10px;
+    font-size: 13px;
+    color: #22c55e;
+    background: rgba(34,197,94,0.07);
+    border: 1px solid rgba(34,197,94,0.25);
+    border-radius: 8px;
+    padding: 9px 12px;
+    line-height: 1.5;
+  }
+  .say b { color: #4ade80; }
+  .chips { margin-top: 12px; }
   .chip {
     display: inline-block;
     font-size: 11px;
@@ -63,7 +111,6 @@
     margin-right: 6px;
   }
   .chip.critical { background: rgba(248,113,113,0.15); color: #f87171; }
-  .chip.quick { background: rgba(34,197,94,0.15); color: #22c55e; }
   .chip.optional { background: rgba(96,165,250,0.15); color: #60a5fa; }
   .chip.time { background: rgba(255,255,255,0.06); color: #888; }
   a { color: #e8b931; }
@@ -78,52 +125,117 @@
 <body>
 <div class="container">
   <h1>Blockers <span class="accent">&amp; your actions</span></h1>
-  <p class="sub">Everything on the AI Ads Launch Lab that needs Leo's hands, not Claude's. Ticks save in this browser.</p>
+  <p class="sub">Everything on the AI Ads Launch Lab that needs Leo's hands, not Claude's. Every card is self-contained: steps, prompts, and what to tell Claude after. Ticks save in this browser.</p>
   <p class="progress-line" id="progress"></p>
 
   <div class="section-label">Before workshop day</div>
 
   <div class="blocker" data-id="proof-screenshot">
     <input type="checkbox">
-    <div>
+    <div class="body">
       <h3>Swap in your real Ads Manager screenshot (slide 6)</h3>
-      <p>The proof slide currently shows a stranger's account with honest "a real account" wording. "This is MY actual account" is the strongest moment in Module 1. <b>How:</b> screenshot your Ads Manager Campaigns table (with Results and Cost per Result columns visible), save it over <code>shots/ads-dashboard-results.png</code> in the repo, then tell Claude to restore the "my actual account" copy and redeploy.</p>
+      <p class="why">The proof slide shows a stranger's account with careful "a real account" wording. "This is MY actual account" is the strongest line in Module 1, and you can only say it over your own screenshot.</p>
+      <ol>
+        <li>Open <code>adsmanager.facebook.com</code>, Campaigns tab</li>
+        <li>Top-right date picker: pick a range where your lead campaigns show results</li>
+        <li>Check the table shows the <b>Results</b> and <b>Cost per Result</b> columns (Columns menu &rarr; Performance if not)</li>
+        <li>Cmd+Shift+4, drag across the campaigns table, release</li>
+        <li>Find the capture on your Desktop (Screenshot ....png)</li>
+      </ol>
+      <p class="say"><b>Then tell Claude:</b> "proof screenshot is on my Desktop, swap it into slide 6 and restore the my-actual-account wording" &mdash; the crop, file swap, copy change and redeploy are handled.</p>
       <div class="chips"><span class="chip critical">credibility</span><span class="chip time">~5 min</span></div>
     </div>
   </div>
 
   <div class="blocker" data-id="prompt-1c-test">
     <input type="checkbox">
-    <div>
+    <div class="body">
       <h3>Test Prompt 1c (cover image) on your account</h3>
-      <p>Prompts 1 and 1b are verified; the cover-image step is the last untested link in Module 2. <b>How:</b> in the same chat as your guide, paste Prompt 1c from the cheat sheet, confirm an image renders, spelling is right, and it downloads.</p>
-      <div class="chips"><span class="chip critical">module 2</span><span class="chip quick">quick</span><span class="chip time">~1 min</span></div>
+      <p class="why">Prompts 1 and 1b are verified on your account. The cover image is the last untested step of Module 2.</p>
+      <ol>
+        <li>Open the same ChatGPT chat that made your guide</li>
+        <li>Paste this and hit enter:</li>
+      </ol>
+      <div class="prompt">
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+        <pre>Create a square 1:1 cover image for a free PDF guide called "5 Retirement Mistakes Singaporeans Make Before 40". Professional financial-services style, navy blue and gold, the title in large bold text, a small "FREE GUIDE" badge, clean simple background, no people, space around the text.</pre>
+      </div>
+      <ol start="3">
+        <li>Wait ~1 minute for the image</li>
+        <li><b>Read the title text in the image letter by letter</b> &mdash; garbled spelling is the common failure</li>
+        <li>If garbled, paste: <code>regenerate with the exact text "5 Retirement Mistakes Singaporeans Make Before 40"</code></li>
+        <li>Hover the image &rarr; download icon. If it downloads, you're done.</li>
+      </ol>
+      <p class="say"><b>Then tell Claude:</b> "1c passed" (or what went wrong).</p>
+      <div class="chips"><span class="chip critical">module 2</span><span class="chip time">~2 min</span></div>
     </div>
   </div>
 
   <div class="blocker" data-id="free-tier-test">
     <input type="checkbox">
-    <div>
-      <h3>Run prompts 1 / 1b / 1c once on a FREE ChatGPT account</h3>
-      <p>Your room will mostly be on free accounts. Signed-out ChatGPT can't create files (verified); your paid account can (verified). Free-tier is the unverified middle, and it's what students will actually use. <b>How:</b> any free account, paste the three prompts from the cheat sheet, confirm the .html file downloads and image generation works.</p>
+    <div class="body">
+      <h3>Run all three prompts once on a FREE ChatGPT account</h3>
+      <p class="why">Your room will mostly be on free accounts. Signed-out ChatGPT can't create files (verified) and your paid account can (verified). Free tier is the unverified middle, and it's what students will actually be holding.</p>
+      <ol>
+        <li>Log into any free ChatGPT account (or make one at <code>chatgpt.com</code>, 2 minutes) &mdash; a colleague's works too</li>
+        <li>New chat, paste Prompt 1, hit enter, wait for the guide:</li>
+      </ol>
+      <div class="prompt">
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+        <pre>I'm a financial advisor in Singapore. Help me write a short lead magnet PDF (5-7 key points) on the topic: 5 Retirement Mistakes Singaporeans Make Before 40.
+
+My target audience is working adults aged 25-40 in Singapore.
+
+Keep the tone practical, friendly, and jargon-free. Include a brief intro, the main points, and a closing that invites them to book a free consultation.</pre>
+      </div>
+      <ol start="3">
+        <li>Then Prompt 1b &mdash; the test that matters. You want it to return a <b>.html file to download</b>:</li>
+      </ol>
+      <div class="prompt">
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+        <pre>Now turn this guide into a beautifully designed document. Build it as one self-contained HTML file I can download.
+
+Design: navy blue and gold, modern, generous spacing, large readable text. A full-page cover with the title and "A free guide by Leo Tan", one section per point, and a closing page with a "Book your free consultation" call to action plus my contact: 91234567 / leo@example.com.
+
+Make it print-perfect: A4 pages, each section starting on a new page, print styles included. Give me the finished .html file to download.</pre>
+      </div>
+      <ol start="4">
+        <li>Then Prompt 1c (the cover-image prompt from the card above) &mdash; you want an image to render</li>
+        <li>Note anything that refused, asked for an upgrade, or hit a limit</li>
+      </ol>
+      <p class="say"><b>Then tell Claude:</b> "free tier: 1b gave a file / refused, 1c generated / refused" &mdash; if anything fails, the deck's recovery slide gets adjusted before workshop day, not during it.</p>
       <div class="chips"><span class="chip critical">workshop risk</span><span class="chip time">~5 min</span></div>
     </div>
   </div>
 
   <div class="blocker" data-id="whatsapp-qr">
     <input type="checkbox">
-    <div>
+    <div class="body">
       <h3>Create the WhatsApp support group, then swap the QR</h3>
-      <p>The closing slide's QR currently routes to your Instagram with a "DM ADS" mechanic because no group link exists. <b>How:</b> create the group, copy the invite link, tell Claude the link; the QR regenerates and redeploys in one step.</p>
+      <p class="why">The closing slide's QR currently points to your Instagram with a "DM ADS" mechanic, because no group link exists anywhere in the materials.</p>
+      <ol>
+        <li>WhatsApp &rarr; New group &rarr; name it (e.g. "AI Ads Launch Lab")</li>
+        <li>Add one person to create it (you can remove them after), or use a Community</li>
+        <li>Open the group &rarr; tap its name &rarr; <b>Invite via link</b> &rarr; Copy link</li>
+      </ol>
+      <p class="say"><b>Then tell Claude:</b> "WhatsApp group link: https://chat.whatsapp.com/..." &mdash; the QR regenerates, slide 44's wording flips from the Instagram mechanic to a direct scan-to-join, and it redeploys.</p>
       <div class="chips"><span class="chip critical">follow-up system</span><span class="chip time">~5 min</span></div>
     </div>
   </div>
 
   <div class="blocker" data-id="logistics">
     <input type="checkbox">
-    <div>
+    <div class="body">
       <h3>Fill in date / time / venue + print handouts</h3>
-      <p>The pre-workshop comms (04) and pre-flight page still say [DATE] [TIME] [VENUE]. <b>How:</b> give Claude the real details, then print the two handouts: <a href="cheat-sheet.html">cheat sheet</a> and <a href="pre-flight-checklist.html">pre-flight checklist</a> (Cmd+P each).</p>
+      <p class="why">The pre-workshop message templates and the pre-flight page still say [DATE] [TIME] [VENUE], and the room needs paper copies of two handouts.</p>
+      <ol>
+        <li>Decide date, start time, and venue</li>
+        <li>Tell Claude (see below) &mdash; the placeholders in the comms templates and pre-flight page get filled and redeployed</li>
+        <li>Print handouts: open <a href="cheat-sheet.html">cheat-sheet.html</a> &rarr; Cmd+P (2 pages per attendee)</li>
+        <li>Open <a href="pre-flight-checklist.html">pre-flight-checklist.html</a> &rarr; Cmd+P (1 page, mainly for no-shows on the email version)</li>
+        <li>Print ~20% spares</li>
+      </ol>
+      <p class="say"><b>Then tell Claude:</b> "workshop is [date] at [time], venue [name/address], fill the placeholders."</p>
       <div class="chips"><span class="chip critical">logistics</span><span class="chip time">~10 min</span></div>
     </div>
   </div>
@@ -132,27 +244,46 @@
 
   <div class="blocker" data-id="lovable-billing">
     <input type="checkbox">
-    <div>
+    <div class="body">
       <h3>Fix Lovable auto top-up</h3>
-      <p>Your Lovable account shows "auto top-up failed" (payment method declined). Only matters if you demo Bonus A live on stage. <b>How:</b> Lovable &rarr; Settings &rarr; Billing, update the card.</p>
+      <p class="why">Your Lovable account shows "Auto top-up failed because the payment method was declined." Only matters if you demo Bonus A (landing pages) live on stage.</p>
+      <ol>
+        <li>Go to <code>lovable.dev</code>, log in</li>
+        <li>Click your avatar (bottom-left) &rarr; Settings &rarr; <b>Plans &amp; Billing</b></li>
+        <li>Update the payment method (new card or re-enter)</li>
+        <li>Click <b>Retry now</b> on the red banner, or wait for the next auto top-up</li>
+        <li>Done when the red banner is gone from the dashboard</li>
+      </ol>
       <div class="chips"><span class="chip optional">bonus A</span><span class="chip time">~2 min</span></div>
     </div>
   </div>
 
   <div class="blocker" data-id="mobbin-reauth">
     <input type="checkbox">
-    <div>
+    <div class="body">
       <h3>Re-authorize the Mobbin connector</h3>
-      <p>Token expired. Re-auth unlocks Claude pulling real app screenshots from Mobbin's library for any future slide upgrades. <b>How:</b> claude.ai &rarr; Settings &rarr; Connectors &rarr; Mobbin &rarr; reconnect.</p>
+      <p class="why">The Mobbin token expired. Reconnecting lets Claude pull real app screenshots from Mobbin's library for future slide upgrades.</p>
+      <ol>
+        <li>Go to <code>claude.ai</code> &rarr; Settings (bottom-left) &rarr; <b>Connectors</b></li>
+        <li>Find <b>Mobbin</b> in the list &rarr; click Reconnect / Authorize</li>
+        <li>Approve the OAuth screen with your Mobbin login</li>
+      </ol>
+      <p class="say"><b>Then tell Claude:</b> "Mobbin reconnected" and name any screen you want upgraded.</p>
       <div class="chips"><span class="chip optional">screenshots</span><span class="chip time">~1 min</span></div>
     </div>
   </div>
 
   <div class="blocker" data-id="better-sample">
     <input type="checkbox">
-    <div>
+    <div class="body">
       <h3>Swap in your ChatGPT-made guide as the official sample</h3>
-      <p>You rated your ChatGPT output better than the committed sample. The sample at <a href="sample-lead-magnet.pdf">/sample-lead-magnet.pdf</a> is what you flash on stage as the quality bar. <b>How:</b> print your .html to PDF, drop the file in the repo folder (or tell Claude where it is) and it gets swapped and redeployed.</p>
+      <p class="why">You rated your ChatGPT output better than the committed sample at <a href="sample-lead-magnet.pdf">/sample-lead-magnet.pdf</a>. That file is what you flash on stage as the quality bar, so it should be your best version.</p>
+      <ol>
+        <li>Double-click the .html file you downloaded from ChatGPT (opens in your browser)</li>
+        <li>Cmd+P &rarr; destination "Save as PDF" &rarr; Save</li>
+        <li>Note where it saved (Downloads or Desktop)</li>
+      </ol>
+      <p class="say"><b>Then tell Claude:</b> "my guide PDF is at ~/Downloads/[filename].pdf, make it the official sample" &mdash; it replaces /sample-lead-magnet.pdf and redeploys.</p>
       <div class="chips"><span class="chip optional">polish</span><span class="chip time">~2 min</span></div>
     </div>
   </div>
@@ -168,7 +299,7 @@
     let done = 0;
     items.forEach(el => {
       const id = el.dataset.id;
-      const cb = el.querySelector('input');
+      const cb = el.querySelector('input[type="checkbox"]');
       cb.checked = !!state[id];
       el.classList.toggle('done', cb.checked);
       if (cb.checked) done++;
@@ -176,13 +307,27 @@
     document.getElementById('progress').textContent = done + ' of ' + items.length + ' cleared';
   }
   items.forEach(el => {
-    el.querySelector('input').addEventListener('change', (e) => {
+    el.querySelector('input[type="checkbox"]').addEventListener('change', (e) => {
       state[el.dataset.id] = e.target.checked;
       localStorage.setItem(KEY, JSON.stringify(state));
       refresh();
     });
   });
   refresh();
+
+  function copyPrompt(btn) {
+    const text = btn.parentElement.querySelector('pre').textContent.trim();
+    const done = () => { btn.textContent = 'Copied'; setTimeout(() => { btn.textContent = 'Copy'; }, 1500); };
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text).then(done);
+    } else {
+      const ta = document.createElement('textarea');
+      ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); done(); } catch (e) {}
+      ta.remove();
+    }
+  }
 </script>
 </body>
 </html>
