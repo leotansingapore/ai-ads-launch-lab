@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blockers - AI Ads Launch Lab</title>
+<meta name="robots" content="noindex">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, 'SF Pro Display', 'Segoe UI', Helvetica, sans-serif;
+    background: #0a0a1a;
+    color: #fff;
+    min-height: 100vh;
+    padding: 40px 20px;
+  }
+  .container { max-width: 760px; margin: 0 auto; }
+  h1 { font-size: 34px; font-weight: 800; letter-spacing: -1px; }
+  .accent { color: #e8b931; }
+  .sub { color: #888; margin-top: 8px; font-size: 16px; }
+  .progress-line { margin-top: 18px; font-size: 14px; color: #666; }
+
+  .blocker {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid #222;
+    border-radius: 12px;
+    padding: 20px 22px;
+    margin-top: 16px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    transition: opacity 0.2s;
+  }
+  .blocker.done { opacity: 0.45; }
+  .blocker.done h3 { text-decoration: line-through; }
+  .blocker input[type="checkbox"] {
+    width: 22px; height: 22px;
+    margin-top: 2px;
+    accent-color: #e8b931;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  .blocker h3 { font-size: 17px; font-weight: 700; }
+  .blocker p { font-size: 14px; color: #999; line-height: 1.55; margin-top: 6px; }
+  .blocker p b { color: #ccc; }
+  .blocker code {
+    background: #05050f;
+    border: 1px solid #222;
+    border-radius: 4px;
+    padding: 1px 6px;
+    font-size: 12.5px;
+    color: #e8e8f0;
+  }
+  .chips { margin-top: 10px; }
+  .chip {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 3px 9px;
+    border-radius: 4px;
+    margin-right: 6px;
+  }
+  .chip.critical { background: rgba(248,113,113,0.15); color: #f87171; }
+  .chip.quick { background: rgba(34,197,94,0.15); color: #22c55e; }
+  .chip.optional { background: rgba(96,165,250,0.15); color: #60a5fa; }
+  .chip.time { background: rgba(255,255,255,0.06); color: #888; }
+  a { color: #e8b931; }
+  .footer { text-align: center; margin-top: 50px; color: #444; font-size: 13px; }
+  .section-label {
+    font-size: 13px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 3px; color: #e8b931;
+    margin-top: 40px; padding-bottom: 8px; border-bottom: 1px solid #222;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Blockers <span class="accent">&amp; your actions</span></h1>
+  <p class="sub">Everything on the AI Ads Launch Lab that needs Leo's hands, not Claude's. Ticks save in this browser.</p>
+  <p class="progress-line" id="progress"></p>
+
+  <div class="section-label">Before workshop day</div>
+
+  <div class="blocker" data-id="proof-screenshot">
+    <input type="checkbox">
+    <div>
+      <h3>Swap in your real Ads Manager screenshot (slide 6)</h3>
+      <p>The proof slide currently shows a stranger's account with honest "a real account" wording. "This is MY actual account" is the strongest moment in Module 1. <b>How:</b> screenshot your Ads Manager Campaigns table (with Results and Cost per Result columns visible), save it over <code>shots/ads-dashboard-results.png</code> in the repo, then tell Claude to restore the "my actual account" copy and redeploy.</p>
+      <div class="chips"><span class="chip critical">credibility</span><span class="chip time">~5 min</span></div>
+    </div>
+  </div>
+
+  <div class="blocker" data-id="prompt-1c-test">
+    <input type="checkbox">
+    <div>
+      <h3>Test Prompt 1c (cover image) on your account</h3>
+      <p>Prompts 1 and 1b are verified; the cover-image step is the last untested link in Module 2. <b>How:</b> in the same chat as your guide, paste Prompt 1c from the cheat sheet, confirm an image renders, spelling is right, and it downloads.</p>
+      <div class="chips"><span class="chip critical">module 2</span><span class="chip quick">quick</span><span class="chip time">~1 min</span></div>
+    </div>
+  </div>
+
+  <div class="blocker" data-id="free-tier-test">
+    <input type="checkbox">
+    <div>
+      <h3>Run prompts 1 / 1b / 1c once on a FREE ChatGPT account</h3>
+      <p>Your room will mostly be on free accounts. Signed-out ChatGPT can't create files (verified); your paid account can (verified). Free-tier is the unverified middle, and it's what students will actually use. <b>How:</b> any free account, paste the three prompts from the cheat sheet, confirm the .html file downloads and image generation works.</p>
+      <div class="chips"><span class="chip critical">workshop risk</span><span class="chip time">~5 min</span></div>
+    </div>
+  </div>
+
+  <div class="blocker" data-id="whatsapp-qr">
+    <input type="checkbox">
+    <div>
+      <h3>Create the WhatsApp support group, then swap the QR</h3>
+      <p>The closing slide's QR currently routes to your Instagram with a "DM ADS" mechanic because no group link exists. <b>How:</b> create the group, copy the invite link, tell Claude the link; the QR regenerates and redeploys in one step.</p>
+      <div class="chips"><span class="chip critical">follow-up system</span><span class="chip time">~5 min</span></div>
+    </div>
+  </div>
+
+  <div class="blocker" data-id="logistics">
+    <input type="checkbox">
+    <div>
+      <h3>Fill in date / time / venue + print handouts</h3>
+      <p>The pre-workshop comms (04) and pre-flight page still say [DATE] [TIME] [VENUE]. <b>How:</b> give Claude the real details, then print the two handouts: <a href="cheat-sheet.html">cheat sheet</a> and <a href="pre-flight-checklist.html">pre-flight checklist</a> (Cmd+P each).</p>
+      <div class="chips"><span class="chip critical">logistics</span><span class="chip time">~10 min</span></div>
+    </div>
+  </div>
+
+  <div class="section-label">Nice to have</div>
+
+  <div class="blocker" data-id="lovable-billing">
+    <input type="checkbox">
+    <div>
+      <h3>Fix Lovable auto top-up</h3>
+      <p>Your Lovable account shows "auto top-up failed" (payment method declined). Only matters if you demo Bonus A live on stage. <b>How:</b> Lovable &rarr; Settings &rarr; Billing, update the card.</p>
+      <div class="chips"><span class="chip optional">bonus A</span><span class="chip time">~2 min</span></div>
+    </div>
+  </div>
+
+  <div class="blocker" data-id="mobbin-reauth">
+    <input type="checkbox">
+    <div>
+      <h3>Re-authorize the Mobbin connector</h3>
+      <p>Token expired. Re-auth unlocks Claude pulling real app screenshots from Mobbin's library for any future slide upgrades. <b>How:</b> claude.ai &rarr; Settings &rarr; Connectors &rarr; Mobbin &rarr; reconnect.</p>
+      <div class="chips"><span class="chip optional">screenshots</span><span class="chip time">~1 min</span></div>
+    </div>
+  </div>
+
+  <div class="blocker" data-id="better-sample">
+    <input type="checkbox">
+    <div>
+      <h3>Swap in your ChatGPT-made guide as the official sample</h3>
+      <p>You rated your ChatGPT output better than the committed sample. The sample at <a href="sample-lead-magnet.pdf">/sample-lead-magnet.pdf</a> is what you flash on stage as the quality bar. <b>How:</b> print your .html to PDF, drop the file in the repo folder (or tell Claude where it is) and it gets swapped and redeployed.</p>
+      <div class="chips"><span class="chip optional">polish</span><span class="chip time">~2 min</span></div>
+    </div>
+  </div>
+
+  <div class="footer">AI Ads Launch Lab &middot; updated 2026-07-10 &middot; <a href="index.html">back to hub</a></div>
+</div>
+
+<script>
+  const KEY = 'aial-blockers';
+  const state = JSON.parse(localStorage.getItem(KEY) || '{}');
+  const items = document.querySelectorAll('.blocker');
+  function refresh() {
+    let done = 0;
+    items.forEach(el => {
+      const id = el.dataset.id;
+      const cb = el.querySelector('input');
+      cb.checked = !!state[id];
+      el.classList.toggle('done', cb.checked);
+      if (cb.checked) done++;
+    });
+    document.getElementById('progress').textContent = done + ' of ' + items.length + ' cleared';
+  }
+  items.forEach(el => {
+    el.querySelector('input').addEventListener('change', (e) => {
+      state[el.dataset.id] = e.target.checked;
+      localStorage.setItem(KEY, JSON.stringify(state));
+      refresh();
+    });
+  });
+  refresh();
+</script>
+</body>
+</html>
