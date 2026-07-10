@@ -269,6 +269,54 @@
   .doc-panel .pt { font-weight: 700; }
   .doc-panel .skip { color: #8a877e; }
 
+  .snap {
+    position: relative;
+    border: 2px dashed rgba(232,185,49,0.55);
+    border-radius: 16px;
+    padding: clamp(16px, 2.2vw, 26px);
+    background: rgba(232,185,49,0.03);
+    max-width: 1040px;
+    margin-top: 26px;
+  }
+  .snap::before {
+    content: "SCREENSHOT THIS";
+    position: absolute;
+    top: -11px;
+    left: 24px;
+    background: var(--gold);
+    color: #14140a;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    padding: 3px 12px;
+    border-radius: 999px;
+  }
+  .snap .foot {
+    margin-top: 14px;
+    font-size: 11px;
+    color: var(--faint);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+  .snap ol {
+    columns: 2;
+    column-gap: 44px;
+    padding-left: 22px;
+    font-size: clamp(13px, 1.55vw, 18px);
+    line-height: 1.7;
+    color: #ddd;
+  }
+  .snap ol li::marker { color: var(--gold); font-weight: 800; }
+  table.nums { width: 100%; border-collapse: collapse; font-size: clamp(13px, 1.6vw, 19px); }
+  table.nums td { padding: 8px 10px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  table.nums .n { color: var(--gold); font-weight: 800; white-space: nowrap; width: 220px; }
+  .pm { display: flex; align-items: stretch; gap: 8px; }
+  .pm .stage { flex: 1; background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: clamp(10px, 1.4vw, 16px); }
+  .pm .stage h4 { color: var(--gold); font-size: clamp(12px, 1.35vw, 16px); letter-spacing: 1px; margin-bottom: 8px; }
+  .pm .stage p { font-size: clamp(11px, 1.15vw, 14px); color: #ccc; line-height: 1.5; }
+  .pm .arr { align-self: center; color: var(--faint); font-size: clamp(14px, 1.6vw, 20px); }
+  @media (max-width: 800px) { .pm { flex-direction: column; } .pm .arr { transform: rotate(90deg); } .snap ol { columns: 1; } }
+
   .dense .card { padding: 14px 20px; }
   .dense .card h3 { font-size: clamp(15px, 1.6vw, 19px); margin-bottom: 6px; }
   .dense .card p { font-size: clamp(13px, 1.4vw, 16px); }
@@ -490,6 +538,65 @@ practical, friendly, and jargon-free.</pre>
 </div>
 
 <!-- 12 -->
+<div class="slide" data-section="Module 2">
+  <p class="kicker">Before you type</p>
+  <h2>Prompting is <span class="accent">briefing</span>, not coding</h2>
+  <p class="subtitle" style="max-width: 920px;">You already do this every day: you brief your assistant, you tell a client what to bring, you explain to a junior what "good" looks like. Same skill, new intern.</p>
+  <div class="snap">
+    <div class="prompt" style="margin-top: 4px;">
+      <pre><span style="color:#e8b931;">I'm a financial advisor in Singapore.</span> <span style="color:#60a5fa;">Help me write a short lead magnet PDF (5-7 key points) on the topic: [YOUR TOPIC].</span>
+<span style="color:#22c55e;">My target audience is working adults aged 25-40 in Singapore.</span>
+<span style="color:#a78bfa;">Keep the tone practical, friendly, and jargon-free.</span></pre>
+    </div>
+    <div style="display:flex; gap: 14px; flex-wrap: wrap; margin-top: 14px; font-size: clamp(12px,1.4vw,15px); font-weight: 700;">
+      <span style="color:#e8b931;">WHO you are</span>
+      <span style="color:#60a5fa;">WHAT you want</span>
+      <span style="color:#22c55e;">WHO it's for</span>
+      <span style="color:#a78bfa;">HOW it should sound</span>
+    </div>
+    <p class="foot">The prompt formula &middot; AI Ads Launch Lab &middot; @leotan_js</p>
+  </div>
+  <p class="subtitle" style="margin-top: 14px; font-size: clamp(14px,1.6vw,19px);">That's the whole formula. No syntax, no commands. Typos are fine; it reads intent, not grammar.</p>
+  <aside class="notes">This reframe is what drops shoulders in the room. Ask: "Who has ever briefed an assistant or told an agency what you want? Congratulations, you can prompt." Point at each colour: every prompt on the cheat sheet is these same four parts. When a prompt disappoints, one of the four parts is missing; that's the debugging method too.</aside>
+</div>
+
+<div class="slide" data-section="Module 2">
+  <p class="kicker">The fears</p>
+  <h2>Four beliefs to <span class="accent">leave at the door</span></h2>
+  <div class="cols" style="margin-top: 24px;">
+    <div class="card">
+      <h3>"I'm not technical"</h3>
+      <p>If you can type a WhatsApp message, you're qualified. Today involves zero code. The box takes plain English, Singlish included.</p>
+    </div>
+    <div class="card">
+      <h3>"What if I break something?"</h3>
+      <p>You can't. The worst possible outcome is a bad answer. Delete the chat, start again; it costs nothing and nobody saw it.</p>
+    </div>
+    <div class="card">
+      <h3>"It won't sound like me"</h3>
+      <p>The first draft won't. Then you tell it who you are and how you talk, and edit the result. You always get the final word.</p>
+    </div>
+    <div class="card">
+      <h3>"Isn't this cheating?"</h3>
+      <p>The advice, the judgment, the relationship: still yours. The AI just types faster than you. Nobody calls a calculator cheating.</p>
+    </div>
+  </div>
+  <aside class="notes">Name the fears out loud and the room exhales; these four cover ~everyone. Ask "which one is yours?" and let hands go up, it gets a laugh and permission to be a beginner. If someone raises job-replacement worries: the advisor who uses AI replaces the one who doesn't; the tool doesn't hold a licence.</aside>
+</div>
+
+<div class="slide" data-section="Module 2">
+  <p class="kicker">The rhythm</p>
+  <h2>Say it. See it. <span class="accent">Shape it.</span></h2>
+  <div class="steps" style="margin-top: 8px;">
+    <div class="step-row"><span><b style="color: var(--gold);">Say it:</b> give the four-part brief</span></div>
+    <div class="step-row"><span><b style="color: var(--gold);">See it:</b> read what comes back. It's a draft, not a verdict.</span></div>
+    <div class="step-row"><span><b style="color: var(--gold);">Shape it:</b> "shorter" &middot; "warmer" &middot; "more about CPF" &middot; "less jargon" &middot; "give me 3 versions"</span></div>
+    <div class="step-row"><span>Repeat. Two or three rounds usually gets there.</span></div>
+  </div>
+  <p class="subtitle" style="margin-top: 24px; max-width: 900px;">You're not being tested. You're directing an intern who never gets tired, never gets offended, and never bills you. You'll run this loop ten times today; by tonight it's a habit.</p>
+  <aside class="notes">This loop IS the workshop: every module from here (Claude, Canva words, ad copy, Lovable, ChatGPT images) is say-see-shape with different output. Land that sentence and the rest of the day feels like practice instead of new material each time.</aside>
+</div>
+
 <div class="slide" data-section="Module 2">
   <p class="kicker">Step 1 of 5</p>
   <h2>Pick your topic. <span class="accent">Don't overthink it.</span></h2>
@@ -734,6 +841,27 @@ Keep the tone practical, friendly, and jargon-free. Include a brief intro, the m
 </div>
 
 <!-- 25 -->
+<div class="slide" data-section="Module 4">
+  <p class="kicker">The map</p>
+  <h2>All 10 steps, <span class="accent">one screen</span></h2>
+  <div class="snap">
+    <ol>
+      <li>Open adsmanager.facebook.com</li>
+      <li>+ Create &rarr; objective: Leads &rarr; name it</li>
+      <li>Audience: Singapore, 25-45, 3-5 interests</li>
+      <li>Budget: $5/day, end date 3 days out</li>
+      <li>Identity: your Page + accept Lead Ads Terms</li>
+      <li>Upload your Canva cover PNG</li>
+      <li>Claude writes 3 copy variations (Prompt 2)</li>
+      <li>Paste: primary text, headline, description + CTA</li>
+      <li>Instant form: More Volume, name + phone + concern</li>
+      <li>Final checklist &rarr; Publish</li>
+    </ol>
+    <p class="foot">Launch checklist &middot; AI Ads Launch Lab &middot; @leotan_js</p>
+  </div>
+  <aside class="notes">Say it explicitly: "Take a photo of this slide now." Anyone who falls behind during the next hour has the whole route on their phone. Then advance; each step gets its own slide with the real screen.</aside>
+</div>
+
 <div class="slide" data-section="Module 4">
   <p class="kicker">Step 1 of 10</p>
   <h2>Open <span class="accent">Ads Manager</span></h2>
@@ -1101,6 +1229,24 @@ No hard sell.</pre>
   <aside class="notes">This slide is the anti-abandonment plan. Most first campaigns die because nobody told the owner what "normal" looks like on day 2 (a few dollars spent, maybe zero leads). Walk each day slowly. Day 3 check-in message from you comes on cue, so they know they're not alone.</aside>
 </div>
 
+<div class="slide" data-section="Module 5">
+  <p class="kicker">Keep these</p>
+  <h2>The numbers that <span class="accent">matter</span></h2>
+  <div class="snap">
+    <table class="nums">
+      <tr><td class="n">$5-10 / day</td><td>starting budget. Don't raise it on day one.</td></tr>
+      <tr><td class="n">$3-15</td><td>normal cost per lead in Singapore</td></tr>
+      <tr><td class="n">3 days</td><td>minimum test before judging anything</td></tr>
+      <tr><td class="n">48 hours</td><td>hands off the ad while Meta learns</td></tr>
+      <tr><td class="n">500 + 0</td><td>500 impressions, zero leads: change copy or image, relaunch</td></tr>
+      <tr><td class="n">under $10, 3 days</td><td>cost per lead this good: raise budget 20%</td></tr>
+      <tr><td class="n">2 hours</td><td>maximum time before you contact a new lead</td></tr>
+    </table>
+    <p class="foot">The operating numbers &middot; AI Ads Launch Lab &middot; @leotan_js</p>
+  </div>
+  <aside class="notes">Another phone-photo slide; say so. This one table answers 90% of the WhatsApp group questions in week one: is my CPL normal, when do I touch it, when do I scale.</aside>
+</div>
+
 <!-- 38 -->
 <div class="slide" data-section="Module 5">
   <p class="kicker">Zoom out</p>
@@ -1114,6 +1260,41 @@ No hard sell.</pre>
   </div>
   <p class="subtitle" style="margin-top: 44px; max-width: 880px;">Repeat it: new lead magnet, new audience, new campaign. Same three prompts every time. The system generates leads while you do what you're actually good at: advising.</p>
   <aside class="notes">The mindset close. Today wasn't about one campaign; they learned a repeatable loop. Campaign 2 takes 30 minutes because the prompts and templates are already theirs.</aside>
+</div>
+
+<div class="slide" data-section="Module 5">
+  <p class="kicker">The whole thing</p>
+  <h2>Your lead system, <span class="accent">one screen</span></h2>
+  <div class="snap">
+    <div class="pm">
+      <div class="stage">
+        <h4>1 &middot; BUILD</h4>
+        <p>Claude drafts the guide (Prompt 1)<br>Canva makes it a PDF + cover<br>~45 min, reusable forever</p>
+      </div>
+      <div class="arr">&rarr;</div>
+      <div class="stage">
+        <h4>2 &middot; LAUNCH</h4>
+        <p>Meta Leads campaign<br>$5/day, 3-day test<br>instant form: name + phone + concern</p>
+      </div>
+      <div class="arr">&rarr;</div>
+      <div class="stage">
+        <h4>3 &middot; CAPTURE</h4>
+        <p>Leads land in Leads Centre<br>phone app notifies you<br>(or Zapier &rarr; Google Sheet)</p>
+      </div>
+      <div class="arr">&rarr;</div>
+      <div class="stage">
+        <h4>4 &middot; FOLLOW UP</h4>
+        <p>Within 2 hours<br>Claude writes the message (Prompt 3)<br>call first, then WhatsApp</p>
+      </div>
+      <div class="arr">&rarr;</div>
+      <div class="stage">
+        <h4>5 &middot; IMPROVE</h4>
+        <p>48h hands off, then read the numbers<br>kill or scale 20%<br>new magnet next week &rarr; back to 1</p>
+      </div>
+    </div>
+    <p class="foot">The system &middot; AI writes, Meta distributes, you close &middot; AI Ads Launch Lab &middot; @leotan_js</p>
+  </div>
+  <aside class="notes">The all-in-one. Phone photos welcome; this is the picture they should see when they think "my lead system". Point at stage 5's loop back to stage 1: it's a wheel, not a line. Every bonus module upgrades one box: Lovable adds a front door to stage 2, ChatGPT feeds stage 5's tests, Zapier upgrades stage 3.</aside>
 </div>
 
 <!-- 38 -->
