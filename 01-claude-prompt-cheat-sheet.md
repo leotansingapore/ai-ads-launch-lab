@@ -21,17 +21,21 @@ the main points, and a closing that invites them to book a free consultation.
 ## Prompt 1b: Design Your Guide + Get the PDF (same chat)
 
 ```
-Now turn this guide into a nicely designed PDF I can download.
+Now turn this guide into a beautifully designed document. Build it as one
+self-contained HTML file I can download.
 
-Layout: a cover with the title and "A free guide by [YOUR NAME]", one clean
-section per point, and a closing section with a "Book your free consultation"
+Design: navy blue and gold, modern, generous spacing, large readable text.
+A full-page cover with the title and "A free guide by [YOUR NAME]", one
+section per point, and a closing page with a "Book your free consultation"
 call to action plus my contact: [PHONE] / [EMAIL].
 
-Style: navy blue and gold, modern, large readable text, no clutter.
+Make it print-perfect: A4 pages, each section starting on a new page,
+print styles included. Give me the finished .html file to download.
 ```
 
-**In ChatGPT:** it replies with a PDF download link -- click and save.
-**In Claude:** click the designed document > Download, open the file, Cmd+P > Save as PDF.
+**Both tools:** download the file, double-click to open in your browser,
+Cmd+P > Save as PDF. Do NOT ask for a PDF file directly -- code-generated
+PDFs look crude; the HTML-then-print route is what looks designed.
 
 
 ## Prompt 1c: Cover Image (ChatGPT)

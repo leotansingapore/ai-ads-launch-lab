@@ -113,6 +113,7 @@
     white-space: pre-wrap;
   }
   .prompt .ph { color: var(--gold); font-weight: 700; }
+  .prompt.small pre { font-size: clamp(11px, 1.25vw, 15px); }
   .copy-btn {
     position: absolute;
     top: 12px;
@@ -680,22 +681,21 @@ Keep the tone practical, friendly, and jargon-free. Include a brief intro, the m
 <!-- 15 -->
 <div class="slide" data-section="Module 2">
   <p class="kicker">Step 4 of 6<span style="color: var(--faint); font-weight: 600;"> &middot; ~8 min</span></p>
-  <h2>One message: <span class="accent">designed PDF, done</span> (Prompt 1b)</h2>
-  <div class="prompt" style="margin-top: 10px;">
+  <h2>Make it <span class="accent">beautiful</span> (Prompt 1b)</h2>
+  <div class="prompt small" style="margin-top: 8px;">
     <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
-    <pre>Now turn this guide into a nicely designed PDF I can download.
+    <pre>Now turn this guide into a beautifully designed document. Build it as one self-contained HTML file I can download.
 
-Layout: a cover with the title and "A free guide by <span class="ph">[YOUR NAME]</span>", one clean section per point, and a closing section with a "Book your free consultation" call to action plus my contact: <span class="ph">[PHONE]</span> / <span class="ph">[EMAIL]</span>.
+Design: navy blue and gold, modern, generous spacing, large readable text. A full-page cover with the title and "A free guide by <span class="ph">[YOUR NAME]</span>", one section per point, and a closing page with a "Book your free consultation" call to action plus my contact: <span class="ph">[PHONE]</span> / <span class="ph">[EMAIL]</span>.
 
-Style: navy blue and gold, modern, large readable text, no clutter.</pre>
+Make it print-perfect: A4 pages, each section starting on a new page, print styles included. Give me the finished .html file to download.</pre>
   </div>
-  <div class="steps" style="margin-top: 8px;">
-    <div class="step-row"><span>Paste it into the <b style="color: var(--gold);">same chat</b> that wrote your guide</span></div>
-    <div class="step-row"><span>ChatGPT builds the file (takes a minute) and replies with a <b style="color: var(--gold);">download link</b></span></div>
-    <div class="step-row"><span>Click it. Your designed PDF is on your laptop.</span></div>
+  <div class="steps" style="margin-top: 6px;">
+    <div class="step-row"><span>Paste into the <b style="color: var(--gold);">same chat</b>, download the <b style="color: var(--gold);">.html file</b> it returns</span></div>
+    <div class="step-row"><span>Double-click the file to open it in your browser, then <b style="color: var(--gold);">Cmd+P</b> (Ctrl+P on Windows) &rarr; Save as PDF</span></div>
   </div>
-  <div class="checkpoint">Your designed PDF has downloaded. Thumbs up.</div>
-  <aside class="notes">The magic moment of Module 2: the wall of text becomes a finished, designed PDF in one message, in the same conversation. No template hunting, no design tool, no export dialogs. File creation REQUIRES being logged in; signed-out ChatGPT refuses (verified). If the link doesn't appear, say "give me the download link again". Design misses (cramped, wrong colours) are say-see-shape: "make the cover bolder and regenerate the PDF". The next slide handles the two common snags.</aside>
+  <div class="checkpoint" style="margin-top: 14px;">A PDF that actually looks designed, saved on your laptop. Thumbs up.</div>
+  <aside class="notes">The magic moment of Module 2. WHY HTML and not a PDF directly: asking ChatGPT for a PDF file makes it code-generate one, and those look crude - basic fonts, broken spacing (verified on Leo's paid account 2026-07-10). Asking for a designed HTML file gets designer-grade output, and Cmd+P turns it into a perfect PDF. Demo the steps on the projector; the double-click-then-print part takes 20 seconds. A finished sample of what this produces lives at workshop-materials.vercel.app/sample-lead-magnet.pdf - flash it here to set the quality bar. File downloads REQUIRE being logged in; signed-out ChatGPT refuses (verified). Design misses are say-see-shape: "make the cover bolder and give me the file again". Next slide handles the common snags.</aside>
 </div>
 
 <div class="slide" data-section="Module 2">
@@ -704,7 +704,7 @@ Style: navy blue and gold, modern, large readable text, no clutter.</pre>
   <div class="cols" style="margin-top: 24px;">
     <div class="card">
       <h3>"I can't create a downloadable PDF"</h3>
-      <p>You're probably logged out; signed-out ChatGPT can't make files at all. Log in and resend. Still refusing? Reply <b style="color: var(--gold);">"give me the print-ready version"</b>, open what it produces, press <b style="color: var(--gold);">Cmd+P</b> (Ctrl+P on Windows), Save as PDF. Same result, one extra key.</p>
+      <p>You're probably logged out; signed-out ChatGPT can't make files at all. Log in and resend Prompt 1b. Still no file? Say <b style="color: var(--gold);">"put the full HTML in the chat instead"</b> and raise your hand; we'll save it together in 30 seconds.</p>
     </div>
     <div class="card">
       <h3>Your typing lands inside the document</h3>
@@ -723,7 +723,7 @@ Style: navy blue and gold, modern, large readable text, no clutter.</pre>
     <div>
       <div class="steps" style="margin-top: 24px;">
         <div class="step-row"><span>Open the PDF. Read it once, cover to closing. <b style="color: var(--gold);">Your name is on it</b>; compliance rules apply.</span></div>
-        <div class="step-row"><span>Want changes? Back to the chat: <b style="color: var(--gold);">"change [X] and regenerate the PDF"</b>. Fresh link in a minute.</span></div>
+        <div class="step-row"><span>Want changes? Back to the chat: <b style="color: var(--gold);">"change [X] and give me the file again"</b>. Download, print, done.</span></div>
       </div>
       <div class="checkpoint">A finished PDF you've actually read, saved on your laptop. Thumbs up.</div>
     </div>
@@ -733,7 +733,7 @@ Style: navy blue and gold, modern, large readable text, no clutter.</pre>
         <div class="pin" style="left: 44%; top: 0.5%; width: 55.5%; height: 97%;"></div>
         <div class="pin-label" style="left: 44%; top: 10%;">Claude designs it here instead</div>
       </div>
-      <p class="shot-cap">Using Claude? Same Prompt 1b: it designs in a side panel. Download the file, open it, Cmd+P (Ctrl+P on Windows), Save as PDF.</p>
+      <p class="shot-cap">Using Claude? Identical mechanic: same Prompt 1b, it designs in a side panel. Download, open, Cmd+P, Save as PDF.</p>
     </div>
   </div>
   <aside class="notes">The read-through is the compliance moment; nobody ships a PDF they haven't read. Claude route on the right for anyone working there: artifact panel, Download, open, print to PDF, about 20 extra seconds. Nobody goes to break without the finished PDF.</aside>
