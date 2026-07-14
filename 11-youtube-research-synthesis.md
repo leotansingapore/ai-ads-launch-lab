@@ -95,3 +95,14 @@ screen (pre-frame the WhatsApp so the number isn't screened), follow-up speed (1
 minute bar) and the operating numbers table to match.
 
 v1 stays untouched at workshop-deck.html; v2 is workshop-deck-v2.html (82 slides).
+
+## v3: the ground-up build
+
+workshop-deck-v3.html (59 slides) is authored from this research directly rather than from
+v1. Its structure is the synthesis's own: six acts that assemble the machine (why it works,
+the bait, the ad, the form, the follow-up, running it), the frames come from the videos
+(Fogarty's $1-in-$2-out machine, Davis's stranger-to-client pipeline, Gillen's capture and
+convert), the prompts encode the videos' methods (Burch's feedback loop, Lian's chain,
+PAS with banned words), and every slide's presenter note names its source video. Only the
+repo's Ads Manager screenshots and the Instagram QR carry over as assets. A closing slide
+credits the source channels.

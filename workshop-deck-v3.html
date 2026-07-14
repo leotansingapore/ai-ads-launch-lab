@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>AI Ads Launch Lab - Workshop Deck v3 (research build)</title>
+<style>
+:root{
+  --bg:#0b0e14; --panel:#141a28; --panel2:#101522;
+  --text:#e9ebf1; --dim:#a0a8ba; --faint:#5c657a;
+  --gold:#e9b23d; --bad:#e06868; --line:#242c40;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;overflow:hidden}
+#bar{position:fixed;top:0;left:0;height:4px;background:var(--gold);width:0;z-index:40;transition:width .25s}
+#ctr{position:fixed;bottom:22px;right:26px;color:var(--faint);font-size:14px;z-index:40;letter-spacing:.04em}
+#act{position:fixed;bottom:22px;left:26px;color:var(--faint);font-size:12px;z-index:40;letter-spacing:.14em;text-transform:uppercase;font-weight:700}
+.s{display:none;position:absolute;inset:0;flex-direction:column;justify-content:safe center;overflow-y:auto;overflow-x:hidden;padding:5vh 7vw 9vh}
+.s.on{display:flex}
+.s.center{align-items:center;text-align:center}
+.kicker{color:var(--gold);font-size:clamp(12px,1.3vw,15px);font-weight:800;letter-spacing:.16em;text-transform:uppercase;margin-bottom:14px}
+.kicker .chip{color:var(--faint);font-weight:600;letter-spacing:.06em;text-transform:none}
+h1{font-size:clamp(42px,7vw,86px);line-height:1.05;font-weight:800}
+h2{font-size:clamp(28px,4.1vw,50px);line-height:1.12;font-weight:800;margin-bottom:10px}
+.a{color:var(--gold)}
+.sub{color:var(--dim);font-size:clamp(15px,1.9vw,22px);line-height:1.5;margin-top:14px;max-width:1000px}
+.rows{margin-top:26px;counter-reset:r;max-width:1050px}
+.row{counter-increment:r;display:grid;grid-template-columns:40px 1fr;gap:8px;padding:13px 0;border-bottom:1px solid var(--line);font-size:clamp(15px,1.85vw,21px);line-height:1.45;align-items:baseline}
+.row::before{content:counter(r);color:var(--gold);font-weight:800;font-size:.9em}
+.row.q::before{content:'"';font-size:1.5em}
+.row b{color:var(--gold);font-weight:700}
+.row .note{color:var(--faint);font-size:.75em;display:block;margin-top:3px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:26px}
+.cards.two{grid-template-columns:1fr 1fr}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px 22px}
+.card h3{color:var(--gold);font-size:clamp(15px,1.7vw,20px);margin-bottom:8px}
+.card.bad h3{color:var(--bad)}
+.card p,.card li{color:var(--dim);font-size:clamp(13px,1.5vw,17px);line-height:1.5}
+.card ul{margin-left:18px}
+.tbl{width:100%;max-width:1050px;border-collapse:collapse;margin-top:8px}
+.tbl td{padding:11px 14px;border-bottom:1px solid var(--line);font-size:clamp(14px,1.7vw,19px);line-height:1.4;color:var(--dim)}
+.tbl td.k{color:var(--gold);font-weight:800;white-space:nowrap;width:1%;padding-right:26px}
+.snap{border:2px dashed rgba(233,178,61,.45);border-radius:16px;padding:16px 22px 12px;position:relative;margin-top:30px;max-width:1080px}
+.snap::before{content:'PHOTO THIS';position:absolute;top:-12px;left:20px;background:var(--gold);color:#14161c;font-size:11px;letter-spacing:.14em;font-weight:800;padding:4px 12px;border-radius:99px}
+.snap .foot{color:var(--faint);font-size:11px;letter-spacing:.1em;text-transform:uppercase;margin:10px 4px 4px}
+.prompt{background:var(--panel2);border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:10px;padding:18px 20px;margin-top:22px;position:relative;max-width:1050px}
+.prompt pre{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:clamp(12.5px,1.45vw,16.5px);line-height:1.55;white-space:pre-wrap;color:var(--text)}
+.ph{color:var(--gold);font-weight:700}
+.copy{position:absolute;top:12px;right:12px;background:var(--gold);color:#14161c;border:none;border-radius:7px;font-weight:800;font-size:12px;padding:6px 14px;cursor:pointer}
+.check{margin-top:22px;background:rgba(233,178,61,.09);border:1px solid rgba(233,178,61,.4);border-radius:10px;padding:12px 18px;color:var(--gold);font-size:clamp(13px,1.6vw,18px);font-weight:600;max-width:1050px}
+.check::before{content:'CHECKPOINT  ';font-size:.72em;letter-spacing:.14em;color:var(--faint)}
+.split{display:grid;grid-template-columns:1.05fr .95fr;gap:34px;margin-top:8px;align-items:start}
+.shotwrap{position:relative;display:inline-block;max-width:100%}
+.shot{max-height:52vh;width:auto;max-width:100%;border-radius:10px;border:1px solid var(--line);display:block}
+.pin{position:absolute;border:3px solid var(--gold);border-radius:8px;box-shadow:0 0 0 2px rgba(0,0,0,.35)}
+.pinlab{position:absolute;background:var(--gold);color:#14161c;font-size:12px;font-weight:800;padding:3px 9px;border-radius:99px;white-space:nowrap}
+.shotcap{color:var(--faint);font-size:13px;margin-top:10px;line-height:1.4}
+.divider h1{margin-top:8px}
+.divider .n{color:var(--gold);font-size:clamp(15px,1.8vw,20px);font-weight:800;letter-spacing:.2em}
+.map{margin-top:34px;max-width:760px;width:100%}
+.map a{display:grid;grid-template-columns:52px 1fr auto;gap:14px;align-items:center;padding:13px 18px;border:1px solid var(--line);border-radius:12px;margin-bottom:10px;text-decoration:none;color:var(--text);font-size:clamp(15px,1.9vw,21px);font-weight:600;background:var(--panel)}
+.map a:hover{border-color:var(--gold)}
+.map .no{color:var(--gold);font-weight:800}
+.map .t{color:var(--faint);font-size:.72em;font-weight:600}
+aside.notes{display:none}
+body.shownotes .s.on aside.notes{display:block;position:fixed;left:0;right:0;bottom:0;background:rgba(9,11,16,.97);border-top:2px solid var(--gold);padding:14px 26px 18px;color:var(--dim);font-size:14.5px;line-height:1.55;max-height:36vh;overflow-y:auto;z-index:60}
+body.shownotes .s.on aside.notes::before{content:'PRESENTER NOTES';display:block;color:var(--gold);font-size:10px;letter-spacing:.16em;font-weight:800;margin-bottom:6px}
+img{max-width:100%}
+@media (max-width:760px){
+  .cards,.cards.two{grid-template-columns:1fr}
+  .split{grid-template-columns:1fr}
+  .s{padding:4vh 6vw 10vh}
+}
+@media print{
+  body{overflow:visible}
+  .s{display:flex!important;position:relative;page-break-after:always;height:100vh}
+  #bar,#ctr,#act{display:none}
+}
+</style>
+</head>
+<body>
+<div id="bar"></div>
+<div id="ctr"></div>
+<div id="act"></div>
+
+<!-- ============ WELCOME ============ -->
+
+<section class="s center" data-act="Welcome">
+  <h1>AI Ads <span class="a">Launch Lab</span></h1>
+  <p class="sub">Build a lead machine in one evening: a free guide, a $5-a-day ad,<br>and a follow-up system that runs before you wake up.</p>
+  <p style="margin-top:52px;color:var(--dim);font-size:clamp(15px,1.8vw,20px)">Leo Tan &nbsp;|&nbsp; @leotan_js &nbsp;|&nbsp; v3</p>
+  <p style="margin-top:22px;color:var(--faint);font-size:clamp(12px,1.3vw,15px)">Built from what 16 of the most-watched ads educators on YouTube actually teach</p>
+  <p style="margin-top:10px;color:var(--faint);font-size:clamp(11px,1.2vw,14px)">&rarr; advance &middot; N presenter notes &middot; F fullscreen</p>
+  <aside class="notes">Up as people arrive. This deck is a ground-up build from a 16-video research sweep (July 2026): Ben Heath, Davie Fogarty, Ash Davis, Clients Blackbox, Shauna Thoresen, Hormozi, Gillen, Lalonde and others. Every act's notes cite where its material came from. Workshop is 3.5 hours with one break.</aside>
+</section>
+
+<section class="s" data-act="Welcome">
+  <p class="kicker">Tonight</p>
+  <h2>You leave with <span class="a">three things</span></h2>
+  <div class="rows">
+    <div class="row"><span>A <b>lead magnet PDF</b> you built with AI: one sharp problem, solved in a 10-minute read</span></div>
+    <div class="row"><span>A <b>live Meta lead ad</b> running at $5 a day, collecting names and phone numbers</span></div>
+    <div class="row"><span>A <b>follow-up system</b>: the WhatsApp message and the call script, written before your first lead exists</span></div>
+  </div>
+  <p class="sub">Laptops open. Phones charged. We build, not browse.</p>
+  <aside class="notes">Deliverables up front, because every source video that holds attention opens with the concrete payoff. Scripts-before-leads is Hormozi's "an ounce of pre is worth a pound of post" - we honour it by writing Act 5's scripts tonight, not after the first missed lead.</aside>
+</section>
+
+<section class="s" data-act="Welcome">
+  <p class="kicker">The map <span class="chip">&middot; 3.5 hours, one break</span></p>
+  <h2>Six acts, one <span class="a">machine</span></h2>
+  <div class="map">
+    <a href="#why"><span class="no">1</span><span>Why this machine works</span><span class="t">20 min</span></a>
+    <a href="#bait"><span class="no">2</span><span>The bait: your lead magnet</span><span class="t">50 min + break</span></a>
+    <a href="#ad"><span class="no">3</span><span>The ad</span><span class="t">35 min</span></a>
+    <a href="#form"><span class="no">4</span><span>The form</span><span class="t">25 min</span></a>
+    <a href="#follow"><span class="no">5</span><span>The follow-up</span><span class="t">25 min</span></a>
+    <a href="#operate"><span class="no">6</span><span>Running it</span><span class="t">15 min</span></a>
+  </div>
+  <aside class="notes">The structure mirrors how the machine actually flows: bait, ad, form, follow-up, operations. Links are clickable if you need to jump. Buffer lives inside Act 2's hands-on time.</aside>
+</section>
+
+<!-- ============ ACT 1: WHY ============ -->
+
+<section class="s center divider" id="why" data-act="Act 1">
+  <p class="n">ACT 1 &middot; 20 MIN</p>
+  <h1>Why this <span class="a">machine</span> works</h1>
+  <p class="sub">Everything in this act comes from people who spent millions on Meta ads<br>and published their numbers.</p>
+  <aside class="notes">Act 1 exists to kill the three objections that stop advisors before they start: "ads don't work for us", "my clients aren't on Facebook", "I'll just buy leads". Each gets a slide with someone else's published numbers.</aside>
+</section>
+
+<section class="s" data-act="Act 1">
+  <p class="kicker">The frame</p>
+  <h2>A machine that turns <span class="a">$1 into $2</span></h2>
+  <div class="rows">
+    <div class="row q"><span>"It's basically a machine. I want to put $1 in and I want $2 to come out." <span class="note">Davie Fogarty, after US$100M of his own money on Meta ads</span></span></div>
+    <div class="row"><span>You control two inputs: the <b>settings</b> (tonight we copy the proven ones) and the <b>message</b> (tonight AI drafts it, you make it true)</span></div>
+    <div class="row"><span>The machine runs while you're with clients, at dinner, asleep</span></div>
+    <div class="row"><span>Nobody here needs to become a marketer. You need to assemble a machine once, then check it 10 minutes a day.</span></div>
+  </div>
+  <aside class="notes">Fogarty's framing, from the most-watched beginner course in the research (1.1M views). His credibility line: $10M in year one at age 23, $100M+ of his own spend since. The 10-minutes-a-day promise is Act 6's daily routine - flag that it's coming.</aside>
+</section>
+
+<section class="s" data-act="Act 1">
+  <p class="kicker">The pipeline</p>
+  <h2>Strangers to clients, <span class="a">four stops</span></h2>
+  <div class="rows">
+    <div class="row"><span><b>Stranger</b> scrolls past your ad. Most keep scrolling. The right ones stop.</span></div>
+    <div class="row"><span><b>Lead</b>: they trade name and phone number for your free guide</span></div>
+    <div class="row"><span><b>Appointment</b>: your fast follow-up turns the form-fill into a 15-minute chat</span></div>
+    <div class="row"><span><b>Client</b>: 1 to 3 months later, at the pace financial decisions actually move</span></div>
+  </div>
+  <p class="sub">Each act tonight builds one stop. By the end, the pipe is connected.</p>
+  <aside class="notes">Ash Davis calls this the "automated appointment machine" - his agency builds the same 5-stage funnel for every advisor client. The 1-3 month close lag comes from Clients Blackbox and matters: it is why Act 6 tells them to judge by the quarter.</aside>
+</section>
+
+<section class="s" data-act="Act 1">
+  <p class="kicker">The objection</p>
+  <h2>"My clients aren't <span class="a">scrolling Facebook</span>"</h2>
+  <div class="rows">
+    <div class="row"><span>A US advisor's campaign, published numbers: <b>452 leads at US$5.30 each</b> on $100/day</span></div>
+    <div class="row"><span>The people who booked averaged <b>US$495,000</b> in investable assets</span></div>
+    <div class="row"><span>The single biggest lead held <b>US$2.3 million</b></span></div>
+    <div class="row"><span>Wealthy people scroll like everyone else. The only question is whose ad they stop on.</span></div>
+  </div>
+  <aside class="notes">Ash Davis case study - his agency runs 80-90% financial services clients. Say it before anyone raises the objection. If pressed, the same agency booked a US$7M lead from YouTube. Numbers are US and labelled so; the point is behaviour, not the exchange rate.</aside>
+</section>
+
+<section class="s" data-act="Act 1">
+  <p class="kicker">The alternative</p>
+  <h2>Bought leads are <span class="a">rented</span>. This machine you own.</h2>
+  <table class="tbl">
+    <tr><td class="k">$20-50</td><td>what a lead reseller pays to generate one lead with ads</td></tr>
+    <tr><td class="k">$200-500</td><td>what they resell that same lead to an advisor for</td></tr>
+    <tr><td class="k">1 in 10</td><td>how many bought leads advisors actually reach on the phone</td></tr>
+    <tr><td class="k">$2,000</td><td>the true cost per real conversation once you do that math</td></tr>
+    <tr><td class="k">Yours</td><td>the machine you build tonight generates the same lead for the $20-50, and the list belongs to you forever</td></tr>
+  </table>
+  <aside class="notes">Ash Davis's rent-vs-own breakdown. One of his clients spent $3,000/month buying leads, switched to an owned system, made 10x more revenue - same leads, no middleman markup. This is the strongest single argument for the whole workshop; give it a full beat.</aside>
+</section>
+
+<section class="s" data-act="Act 1">
+  <p class="kicker">Calibration</p>
+  <h2>What the pros <span class="a">pay</span></h2>
+  <div class="snap">
+    <table class="tbl">
+      <tr><td class="k">US$5.30</td><td>cost per lead in the advisor case study above</td></tr>
+      <tr><td class="k">US$120-350</td><td>cost per booked meeting across advisor-agency accounts</td></tr>
+      <tr><td class="k">US$200-1,000</td><td>per appointment as target wealth rises, $100k minimum up to $1M+ portfolios</td></tr>
+      <tr><td class="k">5x</td><td>the average return those agencies report on that spend</td></tr>
+      <tr><td class="k">Your $5/day</td><td>the same machine on a training dial: same math, same levers, smaller stakes</td></tr>
+    </table>
+    <p class="foot">US advisor-agency benchmarks, 2025-26 &middot; AI Ads Launch Lab &middot; @leotan_js</p>
+  </div>
+  <aside class="notes">Benchmarks from Ash Davis (works with hundreds of advisors) and Clients Blackbox (Feb 2026 case: $63k spend, 288 appointments, $219 each). Labelled US so nobody hears SGD promises. The job: when their week-two cost per lead is $8, they should know that's fine, not panic.</aside>
+</section>
+
+<section class="s" data-act="Act 1">
+  <p class="kicker">Before you spend</p>
+  <h2>They Google you <span class="a">before they book</span></h2>
+  <div class="rows">
+    <div class="row"><span>A seminar prospect judges your office. An online lead judges <b>your search results</b>.</span></div>
+    <div class="row"><span>Search your own name tonight. What a stranger sees is what every lead sees.</span></div>
+    <div class="row"><span>Minimum bar: a profile photo, a bio that says what you do, one place where reviews or testimonials live</span></div>
+    <div class="row"><span>Don't be a secret agent. If your profiles hide that you're an advisor, the ad works and the trust check fails.</span></div>
+  </div>
+  <aside class="notes">Clients Blackbox refuses to run ads for advisors before this checklist: "when you're virtual, your office is your Google search." The "secret agent" line is Shauna Thoresen's. Homework, not a blocker - the ad still launches tonight.</aside>
+</section>
+
+<!-- ============ ACT 2: THE BAIT ============ -->
+
+<section class="s center divider" id="bait" data-act="Act 2">
+  <p class="n">ACT 2 &middot; 50 MIN HANDS-ON</p>
+  <h1>The <span class="a">bait</span></h1>
+  <p class="sub">A free guide good enough that strangers trade their phone number for it.<br>Laptops open.</p>
+  <aside class="notes">Hands-on starts here. ChatGPT or Claude in one tab. The next four concept slides take 10 minutes total; the rest of the act is them building.</aside>
+</section>
+
+<section class="s" data-act="Act 2">
+  <p class="kicker">The concept</p>
+  <h2>Capture now, <span class="a">convert later</span></h2>
+  <div class="rows">
+    <div class="row"><span>A stranger won't book a meeting from an ad. Too big an ask, too early.</span></div>
+    <div class="row"><span>They will take a free guide that solves one problem they had this week</span></div>
+    <div class="row"><span>The trade: your guide for their name and phone number. That's <b>capture</b>.</span></div>
+    <div class="row"><span><b>Convert</b> happens later, on the phone. The ad's only job is the trade.</span></div>
+  </div>
+  <aside class="notes">Brendan Gillen's "capture and convert" - his lead ads run at under $1 per lead because the ask is tiny. Keeping capture and convert separate is also why Act 5 exists: the machine without follow-up is a list of strangers.</aside>
+</section>
+
+<section class="s" data-act="Act 2">
+  <p class="kicker">The method</p>
+  <h2>Give away what others <span class="a">charge for</span></h2>
+  <div class="rows">
+    <div class="row"><span>Look at what people in your space charge money for: courses, reviews, reports, consults</span></div>
+    <div class="row"><span>Check what it costs you to give it away as a PDF: <b>nothing</b></span></div>
+    <div class="row"><span>Make a better free version of it. Count the leads. Count the meetings.</span></div>
+    <div class="row q"><span>"You can give away something significantly better for free than what everyone else charges for." <span class="note">Alex Hormozi</span></span></div>
+  </div>
+  <aside class="notes">Hormozi's 5-step lead magnet method, compressed. His other point worth saying out loud: this is build-once, use-forever - he built a free scaling-roadmap tool once and it generates leads indefinitely. Their guide does the same at advisor scale.</aside>
+</section>
+
+<section class="s" data-act="Act 2">
+  <p class="kicker">The bar</p>
+  <h2>Nobody downloads a <span class="a">150-page ebook</span></h2>
+  <div class="rows">
+    <div class="row q"><span>"We're like: no thanks, I'll just ask ChatGPT." <span class="note">Shauna Thoresen, on why generic ebooks stopped converting</span></span></div>
+    <div class="row"><span>Free information is worthless now. Your <b>judgment</b> isn't.</span></div>
+    <div class="row"><span>What still converts: a deadline timeline, a checklist, a calculator, a mistakes list</span></div>
+    <div class="row"><span>Working example: <b>"Turning 65? Three deadlines that cost you money if you miss them"</b> - dates, penalties, what to do, one page each</span></div>
+  </div>
+  <aside class="notes">Thoresen's T65 guide is the template: it feels like insider knowledge from a working agent, not googleable filler. The test for every guide built tonight: would a stranger believe this came from someone who does this daily?</aside>
+</section>
+
+<section class="s" data-act="Act 2">
+  <p class="kicker">The psychology</p>
+  <h2>The fewer beliefs, the more <span class="a">yeses</span></h2>
+  <div class="rows">
+    <div class="row"><span>Count what a stranger must believe before saying yes to your offer</span></div>
+    <div class="row"><span>"Free retirement review" needs three beliefs: reviews help, advisors can be trusted, you specifically can be</span></div>
+    <div class="row"><span>"5 CPF mistakes" needs one: <b>"I might be making one of these"</b></span></div>
+    <div class="row"><span>Lower the belief count and the same ad budget pulls double the leads</span></div>
+  </div>
+  <aside class="notes">Hormozi's "need-to-believes" (he credits Perry Belcher). His examples: Amazon and Uber won by removing almost every required belief. For advisors this decides the guide topic: curiosity about a mistake beats commitment to a process, every time.</aside>
+</section>
+
+<section class="s" data-act="Act 2">
+  <p class="kicker">Principles</p>
+  <h2>What makes the bait <span class="a">work</span></h2>
+  <div class="snap">
+    <table class="tbl">
+      <tr><td class="k">One problem</td><td>the sharpest pain, even though you do more. The rest is for the call.</td></tr>
+      <tr><td class="k">Specific title</td><td>says who it's for and what they get. Clever dies; clear converts.</td></tr>
+      <tr><td class="k">10-minute read</td><td>consumed tonight beats impressive and unread</td></tr>
+      <tr><td class="k">Insider, not googleable</td><td>deadlines, thresholds, mistakes you see weekly - things ChatGPT answers blandly</td></tr>
+      <tr><td class="k">Best advice, free</td><td>held-back content reads as fluff. The generosity is the marketing.</td></tr>
+      <tr><td class="k">One next step</td><td>every page points at the same door: a free 15-minute chat</td></tr>
+    </table>
+    <p class="foot">Lead magnet principles &middot; AI Ads Launch Lab &middot; @leotan_js</p>
+  </div>
+  <aside class="notes">Synthesis of Hormozi (give the best away), Thoresen (insider formats), Davis (one sharp pain even when the practice is broad - his client's ad said "retirement taxes" while the advisor did far more), and Gillen (single next step). Phone-photo slide; say so.</aside>
+</section>
+
+<section class="s" data-act="Act 2">
+  <p class="kicker">The skill</p>
+  <h2>Prompting is a <span class="a">loop</span>, not a spell</h2>
+  <div class="rows">
+    <div class="row"><span>Ask for options <b>with a number</b>: "give me 10". Ask vaguely and you get 5 mediocre ones.</span></div>
+    <div class="row"><span>Pick one and say which: <b>"I like number 4"</b>. The AI builds on your choice.</span></div>
+    <div class="row"><span>Give feedback like a boss, not a fan: "keep 5 through 10, drop the rest, they're for beginners"</span></div>
+    <div class="row"><span>Output too generic? That's your prompt. Add who it's for and what you know, then go again.</span></div>
+  </div>
+  <aside class="notes">Cody Burch's live ChatGPT session is the model: he rejects roughly half of every list the AI gives him and narrates why. The skill being taught tonight is editing and directing, not typing magic words. This loop gets used in every prompt that follows.</aside>
+</section>
+
+<section class="s" data-act="Act 2">
+  <p class="kicker">Hands-on &middot; ~8 min</p>
+  <h2>Prompt 1: find the <span class="a">pain</span></h2>
+  <div class="prompt">
+    <button class="copy" onclick="copyP(this)">Copy</button>
+    <pre>I'm a financial advisor in Singapore. My clients are <span class="ph">[WHO YOU SERVE,
+e.g. working parents in their late 30s]</span>.
+
+List 10 specific money problems they lose sleep over that a short
+free guide could help with. Number them, one line each.</pre>
+  </div>
+  <div class="rows" style="margin-top:16px">
+    <div class="row"><span>Then reply: <b>"I like number X. Give me 5 guide titles for it - specific, no clever wordplay."</b></span></div>
+  </div>
+  <div class="check">You picked a title. Say it to your neighbour. If they wouldn't download it, pick again.</div>
+  <aside class="notes">Burch's exact two-step: pain points first, then titles that expand the chosen pain. Walk the room during this one - the common failure is picking the pain they like teaching, not the pain clients feel. The neighbour test catches it fast.</aside>
+</section>
+
+<section class="s" data-act="Act 2">
+  <p class="kicker">Hands-on &middot; ~5 min</p>
+  <h2>Prompt 1b: the <span class="a">outline</span> first</h2>
+  <div class="prompt">
+    <button class="copy" onclick="copyP(this)">Copy</button>
+    <pre>You're helping me write that guide: <span class="ph">[PASTE YOUR TITLE]</span>.
+
+Give me a 6-section outline, one line per section, ending with a
+final section that invites the reader to a free 15-minute call.
+Wait for my OK before writing anything.</pre>
+  </div>
+  <div class="rows" style="margin-top:16px">
+    <div class="row"><span>Edit the outline in chat before saying OK: cut, reorder, add the section only you would think of</span></div>
+  </div>
+  <div class="check">Outline approved by you, not just generated. Thumbs up.</div>
+  <aside class="notes">Paul Lian's chain discipline: idea, then outline, then content - one step per prompt, "to keep everything organized and easier to control." Skipping the outline is how people end up with a generic guide they then have to rewrite wholesale.</aside>
+</section>
+
+<section class="s" data-act="Act 2">
+  <p class="kicker">Hands-on &middot; ~10 min</p>
+  <h2>Prompt 1c: write it <span class="a">print-ready</span></h2>
+  <div class="prompt">
+    <button class="copy" onclick="copyP(this)">Copy</button>
+    <pre>Write the full guide from that outline as ONE self-contained HTML file,
+styled for print: A4, clean typography, a page break between sections.
+
+Plain English, no jargon, 10-minute read. Use short paragraphs,
+checklists and concrete numbers. End with the free 15-minute call
+invitation and my contact: <span class="ph">[NAME, PHONE]</span>.
+
+Give it to me as a downloadable file.</pre>
+  </div>
+  <div class="rows" style="margin-top:16px">
+    <div class="row"><span>Download &rarr; open in your browser &rarr; <b>Cmd+P &rarr; Save as PDF</b>. That's your guide.</span></div>
+  </div>
+  <div class="check">A PDF exists on your desktop with your name in it.</div>
+  <aside class="notes">HTML-then-print beats asking AI for a PDF directly - direct PDF asks produce code-generated documents that look crude. Browser print of a styled HTML file gives designer-grade output. If the AI balks at file creation: ask for the HTML in a code block, paste into a text file, rename .html.</aside>
+</section>
+
+<section class="s" data-act="Act 2">
+  <p class="kicker">The line</p>
+  <h2>The AI wrote a draft. <span class="a">You</span> make it true.</h2>
+  <div class="rows">
+    <div class="row"><span>Read every line before it ships. You hold the licence, not the AI.</span></div>
+    <div class="row"><span>Wrong or bland? Fix it with words: "section 3 is wrong about CPF rates, rewrite it: ..."</span></div>
+    <div class="row"><span>Add one story only you could tell. That's the part no competitor can copy.</span></div>
+    <div class="row q"><span>"I don't want anybody to copy and paste what the AI comes up with. You still have to do your work." <span class="note">Cody Burch</span></span></div>
+  </div>
+  <aside class="notes">Burch says the don't-copy-paste rule twice in one video, emphatically. For this room it's also compliance: AI text published verbatim as regulated financial content is a licence risk. The read-through takes 10 minutes and is not optional.</aside>
+</section>
+
+<section class="s" data-act="Act 2">
+  <p class="kicker">Hands-on &middot; ~5 min</p>
+  <h2>Prompt 1d: the <span class="a">cover</span></h2>
+  <div class="prompt">
+    <button class="copy" onclick="copyP(this)">Copy</button>
+    <pre>Create a cover image for my guide "<span class="ph">[TITLE]</span>".
+Professional and calm, financial-planning feel, <span class="ph">[YOUR COLOUR]</span> as
+the main colour, clean large title text, no faces, no clutter.</pre>
+  </div>
+  <div class="rows" style="margin-top:16px">
+    <div class="row"><span>AI image tools often mangle text. If the title renders badly: ask for <b>"no text on the image"</b> and add the title yourself</span></div>
+    <div class="row"><span>This cover becomes your <b>ad image</b> in Act 3. One asset, two jobs.</span></div>
+  </div>
+  <div class="check">Cover downloaded. Guide + cover = bait complete.</div>
+  <aside class="notes">The text-mangling warning is Paul Lian's - he routes covers through Ideogram for exactly this reason; the no-text fallback works in any tool. Cover-as-ad-image comes from Ben Heath's consistency rule (ad image = form image), extended one step earlier in the chain.</aside>
+</section>
+
+<section class="s center" data-act="Act 2">
+  <p class="kicker">Checkpoint</p>
+  <h1>Bait <span class="a">built</span></h1>
+  <p class="sub">A guide with your name on it, made in under an hour.<br>Break: 15 minutes. Stuck on anything? Flag me now, not at 9pm.</p>
+  <aside class="notes">Hard break, 15 minutes, say the return time out loud. Use the break to rescue anyone whose PDF didn't come out - the fixes are on the previous slides' notes.</aside>
+</section>
+
+<!-- ============ ACT 3: THE AD ============ -->
+
+<section class="s center divider" id="ad" data-act="Act 3">
+  <p class="n">ACT 3 &middot; 35 MIN</p>
+  <h1>The <span class="a">ad</span></h1>
+  <p class="sub">Five settings, one message. Everything else stays on default.</p>
+  <aside class="notes">Ben Heath's recurring rule shapes this whole act: every advanced feature "complicates the process and becomes a barrier to entry." We touch five things and deliberately ignore the rest.</aside>
+</section>
+
+<section class="s" data-act="Act 3">
+  <p class="kicker">The structure</p>
+  <h2>Three boxes, one <span class="a">instruction</span></h2>
+  <div class="rows">
+    <div class="row"><span><b>Campaign</b>: what you want. Ours: leads.</span></div>
+    <div class="row"><span><b>Ad set</b>: who sees it and how much you spend. Ours: Singapore, $5-10 a day.</span></div>
+    <div class="row"><span><b>Ad</b>: what they see. Ours: your cover image and AI-drafted words.</span></div>
+    <div class="row q"><span>"You're basically saying to Meta: this is what I want." <span class="note">Ben Heath, US$200M managed spend</span></span></div>
+  </div>
+  <aside class="notes">Ben Heath's 2026 beginner tutorial (322k views) is this act's spine. The three-box model matters because every later decision has an obvious home: money questions are ad set questions, message questions are ad questions.</aside>
+</section>
+
+<section class="s" data-act="Act 3">
+  <p class="kicker">The trap</p>
+  <h2>Meta is <span class="a">literal</span></h2>
+  <div class="rows">
+    <div class="row"><span>Ask for link clicks and it finds people who click everything and buy nothing</span></div>
+    <div class="row"><span>Ask for leads and it hunts form-fillers</span></div>
+    <div class="row"><span>Objective: <b>Leads</b>. Every time. Awareness, Traffic, Engagement all spend your money on the wrong humans.</span></div>
+    <div class="row"><span>Same budget, different people. The objective is the single highest-stakes click tonight.</span></div>
+  </div>
+  <aside class="notes">"Meta's optimization system is very literal" - Ben Heath. Clients Blackbox runs the same list for advisors: awareness = no leads, traffic = no leads, engagement = no leads. Heath's subtler warning: even with the right objective, a wrong performance goal (landing page views) silently reverts it - we avoid that screen entirely by keeping defaults.</aside>
+</section>
+
+<section class="s" data-act="Act 3">
+  <p class="kicker">Compliance &middot; one checkbox</p>
+  <h2>The category that keeps your account <span class="a">alive</span></h2>
+  <div class="rows">
+    <div class="row"><span>Campaign setup asks about <b>Special Ad Categories</b>. If it lists <b>Financial products and services</b>, that's you. Declare it.</span></div>
+    <div class="row"><span>Declaring it locks some age and gender targeting. That's fine: your copy does the targeting.</span></div>
+    <div class="row"><span>Skipping it feels clever until Meta notices: rejected ads, then the account. Bans follow the <b>person and IP</b>, not the account.</span></div>
+    <div class="row"><span>A fresh account won't reset you. One honest checkbox versus Meta ads, forever.</span></div>
+  </div>
+  <aside class="notes">Shauna Thoresen verified this directly with Meta staff after bad advice circulated that solo agents were exempt: "I'm sorry to tell you, that's absolutely not true." Her documented case: a group whose marketer gamed the system 5-6 years ago still can't create ad accounts today - the ban is IP and person level. US insurance agents were swept in wholesale in January 2025.</aside>
+</section>
+
+<section class="s" data-act="Act 3">
+  <p class="kicker">Targeting</p>
+  <h2>The algorithm knows before <span class="a">you do</span></h2>
+  <div class="rows">
+    <div class="row"><span>Watch three spider videos tonight and tomorrow your feed is spiders. The same machine finds your future clients.</span></div>
+    <div class="row"><span>Set location: <b>Singapore</b>. Then stop.</span></div>
+    <div class="row"><span>Interest stacking is 2019 advice. Every restriction shrinks the pool and raises the price per lead.</span></div>
+    <div class="row"><span>Your ad copy is the real targeting: the right person stops, the wrong person scrolls, and Meta learns from both</span></div>
+  </div>
+  <aside class="notes">The spider-feed story is Thoresen's own demo of "content finds the user". Fogarty declares the old interest-stacked funnel dead post-iOS; Ben Heath says 0-4 interests as soft hints at most. And the financial category already locked the tight demographic dials - broad isn't just advice here, it's the terrain.</aside>
+</section>
+
+<section class="s" data-act="Act 3">
+  <p class="kicker">Money</p>
+  <h2>A number that <span class="a">stings a little</span></h2>
+  <div class="rows">
+    <div class="row"><span>Ben Heath's budget rule: an amount you could lose without hardship, but big enough that you'll actually check the results</span></div>
+    <div class="row"><span><b>$5-10 a day</b> is the training dial. The advisor agencies start clients at US$10-50.</span></div>
+    <div class="row"><span>First test: <b>$15-30 total</b> over 3 days. Pausable any morning. You pay per view, not per click.</span></div>
+    <div class="row"><span>Never press <b>Boost Post</b>: training wheels, one path, none of the controls you now understand</span></div>
+  </div>
+  <aside class="notes">"Stings a little" is Heath verbatim. The never-boost rule and the training-wheels analogy are Thoresen's. If someone asks whether $5/day is too small: yes, smaller than any pro recommends as a business budget - it's an education budget, and the machine's levers work identically at every dial.</aside>
+</section>
+
+<section class="s" data-act="Act 3">
+  <p class="kicker">The message</p>
+  <h2>Their problem first. Your name <span class="a">never</span>.</h2>
+  <div class="cards">
+    <div class="card"><h3>Problem</h3><p>"Retiring into a market crash can drain your savings years early."</p></div>
+    <div class="card"><h3>Agitate</h3><p>"Most portfolios aren't protected against it, and most people find out too late."</p></div>
+    <div class="card"><h3>Solve</h3><p>"My free guide shows three ways to protect yourself. Download it below."</p></div>
+  </div>
+  <div class="rows" style="margin-top:18px">
+    <div class="row"><span>"Worried about running out of money in retirement?" speaks to <b>2 in 3</b> readers. "Hi, I'm John from XYZ Financial" speaks to almost none.</span></div>
+    <div class="row"><span>Your angle picks your leads: tax content pulls wealthier prospects, income-planning content pulls pre-retirees</span></div>
+  </div>
+  <aside class="notes">Problem-Agitate-Solve, demonstrated live by Clients Blackbox with the exact sequence-of-returns example on the cards. The 2-in-3 versus almost-none contrast is his. The angle-picks-your-leads lever is from his Feb 2026 case study: tax messaging pulled wealthier leads than the client wanted; income messaging held the target band.</aside>
+</section>
+
+<section class="s" data-act="Act 3">
+  <p class="kicker">Hands-on &middot; ~5 min</p>
+  <h2>Create the <span class="a">campaign</span></h2>
+  <div class="split">
+    <div>
+      <div class="rows" style="margin-top:10px">
+        <div class="row"><span>Ads Manager &rarr; <b>+ Create</b></span></div>
+        <div class="row"><span>Objective: <b>Leads</b> &rarr; Continue</span></div>
+        <div class="row"><span>Special Ad Categories: declare <b>Financial products and services</b></span></div>
+        <div class="row"><span>Name it: "Guide leads - <span style="color:var(--gold)">[month]</span>"</span></div>
+      </div>
+      <div class="check">You're on the Ad Set screen.</div>
+    </div>
+    <div>
+      <div class="shotwrap">
+        <img class="shot" src="shots/meta-objective-leads.jpg" alt="Meta Ads Manager objective screen with Leads selected">
+        <div class="pin" style="left:0.8%;top:46%;width:49%;height:8%"></div>
+        <div class="pinlab" style="left:52%;top:48%">1. pick Leads</div>
+        <div class="pin" style="left:74.5%;top:92%;width:11.5%;height:6.5%"></div>
+        <div class="pinlab" style="left:48%;top:93%">2. Continue</div>
+      </div>
+      <p class="shotcap">The objective screen. Two clicks, then the category checkbox.</p>
+    </div>
+  </div>
+  <aside class="notes">Slow here - the objective and the category are the two clicks tonight that can't be wrong. Everyone confirms "Leads" out loud before Continue. If Ads Manager looks different on someone's account: the words survive every redesign, hunt the words not the layout.</aside>
+</section>
+
+<section class="s" data-act="Act 3">
+  <p class="kicker">Hands-on &middot; ~5 min</p>
+  <h2>The ad set: <span class="a">who and how much</span></h2>
+  <div class="split">
+    <div>
+      <div class="rows" style="margin-top:10px">
+        <div class="row"><span>Location: <b>Singapore</b></span></div>
+        <div class="row"><span>Age, gender, interests: leave broad <span class="note">the category locks most of it anyway - that's expected</span></span></div>
+        <div class="row"><span>Daily budget: <b>$5-10</b></span></div>
+        <div class="row"><span>Placements: leave <b>Advantage+</b> on - Meta only spends where it converts</span></div>
+      </div>
+      <div class="check">Budget shows your number. Audience says Singapore. Thumbs up.</div>
+    </div>
+    <div>
+      <div class="shotwrap">
+        <img class="shot" src="shots/meta-budget.png" alt="Meta Ads Manager ad set screen with daily budget field">
+      </div>
+      <p class="shotcap">The ad set screen: location and money live here.</p>
+    </div>
+  </div>
+  <aside class="notes">Default-trusting is deliberate: Ben Heath leaves Advantage+ placements on for lead campaigns because Meta only spends on slots that convert, and Fogarty's broad-targeting doctrine says the same about audiences. Anyone tempted to narrow: remind them of the spider slide.</aside>
+</section>
+
+<section class="s" data-act="Act 3">
+  <p class="kicker">The creative</p>
+  <h2>Two sins: <span class="a">pixelated</span> and <span class="a">boring</span></h2>
+  <div class="split">
+    <div>
+      <div class="rows" style="margin-top:10px">
+        <div class="row"><span>Your guide cover is the ad image: the promise, made visible</span></div>
+        <div class="row"><span>Sharp, bright, title readable on a phone at arm's length</span></div>
+        <div class="row"><span>Got 3 extra minutes? Ask the AI for a vertical version too - stories placements crop squares badly</span></div>
+        <div class="row"><span>Keep it PG. Fear-bait and aggressive claims get rejected, and new accounts are on probation.</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="shotwrap">
+        <img class="shot" src="shots/lead-ad-example.png" alt="A real financial services lead ad with a free guide as the offer">
+      </div>
+      <p class="shotcap">A real advisor lead ad: guide cover as image, problem-first copy, Download button. Yours in 10 minutes.</p>
+    </div>
+  </div>
+  <aside class="notes">"Pixelated product images and boring ads" are Fogarty's two named newbie sins. The square+vertical pair is Gillen's; the be-PG-early warning is Fogarty's account-warming advice. The screenshot is the north star - point at each part and name where tonight it comes from.</aside>
+</section>
+
+<section class="s" data-act="Act 3">
+  <p class="kicker">Hands-on &middot; ~5 min</p>
+  <h2>Prompt 2: the <span class="a">words</span></h2>
+  <div class="prompt">
+    <button class="copy" onclick="copyP(this)">Copy</button>
+    <pre>I'm running a Meta lead form ad for my financial advisory practice
+in Singapore.
+
+My free guide: <span class="ph">[TITLE]</span>.
+The one problem it solves: <span class="ph">[THE PROBLEM]</span>.
+My audience: <span class="ph">[WHO IT'S FOR]</span>.
+
+Write me:
+1) Primary text (under 125 characters). Open with their problem as a
+   question. Never open with my name or my firm.
+2) Headline (under 40 characters): the guide's name plus the word "free"
+3) Description (under 30 characters)
+
+Rules: no "guaranteed", no "100%", no income promises, no jargon.
+Give me 3 variations, each with a different problem angle.</pre>
+  </div>
+  <div class="check">Three variations on screen. Pick the one whose opening question your clients actually say out loud.</div>
+  <aside class="notes">The prompt bakes in the research so the output is right by default: PAS structure and the problem-first rule (Blackbox), short copy - "people just aren't going to bother to read essays" (Ben Heath), and the banned words that trigger rejection in this category. The pick-the-real-question test keeps them from choosing the cleverest variation over the truest.</aside>
+</section>
+
+<section class="s" data-act="Act 3">
+  <p class="kicker">Hands-on &middot; ~5 min</p>
+  <h2>Assemble the <span class="a">ad</span></h2>
+  <div class="rows">
+    <div class="row"><span>Upload your cover image</span></div>
+    <div class="row"><span>Primary text &rarr; the top field. Headline &rarr; the bold line. Description &rarr; the small grey one.</span></div>
+    <div class="row"><span>One piece at a time, watching the preview update</span></div>
+    <div class="row"><span>Button: <b>Download</b>. It matches the promise. Avoid "Sign Up" - it reads like commitment.</span></div>
+  </div>
+  <div class="check">The preview looks like an ad you'd actually see. Boring is the other sin - if it reads flat, swap to variation two.</div>
+  <aside class="notes">The Download-not-Sign-Up microcopy rule is Gillen's: "Sign Up" and "Subscribe" trigger commitment friction even when technically accurate; low-commitment verbs lift completion. The one-piece-at-a-time pacing prevents the classic error of pasting all three texts into one field.</aside>
+</section>
+
+<!-- ============ ACT 4: THE FORM ============ -->
+
+<section class="s center divider" id="form" data-act="Act 4">
+  <p class="n">ACT 4 &middot; 25 MIN</p>
+  <h1>The <span class="a">form</span></h1>
+  <p class="sub">Where a scroller becomes a lead. Small screen, big stakes.</p>
+  <aside class="notes">The instant form is the workshop's core mechanic and the piece most big tutorials skip (Ben Heath's 2026 beginner course routes around it entirely). This act is built from his dedicated instant-forms video plus Lalonde's 2025 features update.</aside>
+</section>
+
+<section class="s" data-act="Act 4">
+  <p class="kicker">Why this format</p>
+  <h2>The form lives <span class="a">inside</span> Facebook</h2>
+  <div class="rows">
+    <div class="row"><span>No website, no landing page, no developer. The form opens in-app, instantly.</span></div>
+    <div class="row"><span>Meta pre-fills their name and number: <b>one tap</b> to finish</span></div>
+    <div class="row"><span>Meta rewards you for keeping users in-app: instant forms get <b>cheaper impressions</b> than off-site funnels</span></div>
+    <div class="row"><span>The honest trade: more leads, rougher quality than a website funnel. At $5/day, volume to learn from wins.</span></div>
+  </div>
+  <aside class="notes">The CPM insight is Lalonde speaking as the algorithm: "I make more money the more time someone spends on my app... so I don't send them out of the app." The volume-vs-quality trade is named by Blake Bauer; we take volume deliberately and fix quality in Act 5 and the upgrade slide.</aside>
+</section>
+
+<section class="s" data-act="Act 4">
+  <p class="kicker">Form type</p>
+  <h2>More volume now, <span class="a">friction</span> later</h2>
+  <div class="rows">
+    <div class="row"><span>Form type: <b>More Volume</b>. The default that fills your diary with practice.</span></div>
+    <div class="row"><span>"Higher Intent" adds a confirm screen: fewer leads, realer ones</span></div>
+    <div class="row"><span>The upgrade rule: add friction only when <b>calls</b>, not lead flow, are your bottleneck</span></div>
+    <div class="row"><span>Week one is for learning. Take the volume.</span></div>
+  </div>
+  <aside class="notes">Ben Heath's decision rule verbatim in spirit: start More Volume; switch to Higher Intent only if the sales side is drowning in unreachable leads. The OTP upgrade that lives under Higher Intent gets its own slide in Act 5 - tease it, don't teach it yet.</aside>
+</section>
+
+<section class="s" data-act="Act 4">
+  <p class="kicker">Hands-on &middot; ~10 min</p>
+  <h2>Three fields and one <span class="a">golden question</span></h2>
+  <div class="split">
+    <div>
+      <div class="rows" style="margin-top:10px">
+        <div class="row"><span>Contact fields, exactly three: <b>name, email, phone</b></span></div>
+        <div class="row"><span>Phone is the follow-up channel. Email alone gets ignored - spam filters and forgotten signups.</span></div>
+        <div class="row"><span>Add one short-answer question: <b>"What's your biggest money worry right now?"</b></span></div>
+        <div class="row"><span>Nothing else. Every extra field loses finishers to a doorbell or a notification.</span></div>
+      </div>
+      <div class="check">Form shows 3 contact fields + your question.</div>
+    </div>
+    <div>
+      <div class="shotwrap">
+        <img class="shot" src="shots/meta-instant-form.png" alt="Meta instant form builder with Add question menu">
+        <div class="pin" style="left:3.5%;top:61%;width:13.5%;height:6.5%"></div>
+        <div class="pinlab" style="left:18.5%;top:62%">1. Add question</div>
+        <div class="pin" style="left:5.5%;top:76.5%;width:14%;height:7%"></div>
+        <div class="pinlab" style="left:21%;top:78%">2. Short answer</div>
+      </div>
+      <p class="shotcap">The form builder. Your golden question goes in as a Short answer.</p>
+    </div>
+  </div>
+  <aside class="notes">Ben Heath: name-email-phone is right "about 90% of the time", phone because email-only contact rates are dismal, and never collect address/demographics/IDs in the form - get those on the call. His abandonment image is worth retelling: a message arrives, the TV, the doorbell, and your fourth field just cost you the lead. The golden question writes Act 5's opening line.</aside>
+</section>
+
+<section class="s" data-act="Act 4">
+  <p class="kicker">The rules</p>
+  <h2>Two rules that keep the form <span class="a">legal</span></h2>
+  <div class="rows">
+    <div class="row"><span>A <b>privacy policy link</b> is mandatory: a real webpage, not a PDF or image</span></div>
+    <div class="row"><span>No website? A one-page site holding just the policy passes. Free page builders do this in 20 minutes.</span></div>
+    <div class="row"><span>Never collect on the form: age, gender, income, NRIC. Once they're in <b>your</b> CRM, ask anything - on the call.</span></div>
+    <div class="row"><span>The form is Meta's turf and Meta's rules. The phone call is yours.</span></div>
+  </div>
+  <aside class="notes">The webpage-not-PDF restriction is Ben Heath's. The capture-vs-CRM distinction is Thoresen's, confirmed in writing with Meta staff: restricted fields are only restricted at the point of capture; downstream nurture can ask for anything. This distinction stops people either over-collecting (violation) or under-asking forever (needless).</aside>
+</section>
+
+<section class="s" data-act="Act 4">
+  <p class="kicker">The exit screen</p>
+  <h2>The thank-you screen sells the <span class="a">next 30 minutes</span></h2>
+  <div class="rows">
+    <div class="row"><span>Copy: <b>"Thanks! I'll WhatsApp your guide today - keep an eye on your phone."</b></span></div>
+    <div class="row"><span>Now your message lands expected instead of screened as spam</span></div>
+    <div class="row"><span>Button options worth knowing: <b>View file</b> hands the PDF over instantly; <b>WhatsApp</b> starts the chat in their app</span></div>
+    <div class="row"><span>Keep the form's image identical to the ad's image. A new picture reads as a wrong room, and they bail.</span></div>
+  </div>
+  <aside class="notes">Pre-framing the contact is Ben Heath's: completion copy that says a call is coming means the unknown number gets answered. View-file delivery and the WhatsApp conversation starter are the 2025 features from his update video and Lalonde's - and WhatsApp matters doubly in Singapore, where it's the default channel. Image consistency is Heath's wrong-room rule.</aside>
+</section>
+
+<section class="s center" data-act="Act 4">
+  <p class="kicker">Hands-on &middot; together</p>
+  <h1>3... 2... 1... <span class="a">Publish</span></h1>
+  <div class="rows" style="max-width:760px;text-align:left">
+    <div class="row"><span>Preview shows: image, copy, form attached</span></div>
+    <div class="row"><span>Hit Publish. Review takes ~30 minutes, longer for brand-new accounts. Normal.</span></div>
+    <div class="row"><span>You now own a running lead machine. Most advisors never will.</span></div>
+  </div>
+  <aside class="notes">Whole room publishes together - the shared moment is the point. The ~30-minute review estimate is Ben Heath's; first-ever ads on fresh accounts can take hours, so nobody should panic at "In review" over dinner.</aside>
+</section>
+
+<!-- ============ ACT 5: THE FOLLOW-UP ============ -->
+
+<section class="s center divider" id="follow" data-act="Act 5">
+  <p class="n">ACT 5 &middot; 25 MIN</p>
+  <h1>The <span class="a">follow-up</span></h1>
+  <p class="sub">Leads decay by the minute. This act is why the machine pays.</p>
+  <aside class="notes">Every agency source agrees the machine's ROI is decided here, not in Ads Manager. Everything in this act is written and rehearsed tonight, before the first lead exists - Hormozi's pre-beats-post applied literally.</aside>
+</section>
+
+<section class="s" data-act="Act 5">
+  <p class="kicker">The inbox</p>
+  <h2>Where your leads <span class="a">live</span></h2>
+  <div class="split">
+    <div>
+      <div class="rows" style="margin-top:10px">
+        <div class="row"><span><b>Leads Center</b> in Meta Business Suite: every form fill, timestamped</span></div>
+        <div class="row"><span>Turn on <b>email delivery</b>: Meta emails you each new lead directly</span></div>
+        <div class="row"><span>Tonight's bonus wires every lead into a Google Sheet automatically</span></div>
+        <div class="row"><span>Sweep twice a day minimum: morning and evening</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="shotwrap">
+        <img class="shot" src="shots/meta-leads-center.png" alt="Meta Leads Center showing collected leads">
+      </div>
+      <p class="shotcap">Leads Center: names, numbers, and their answer to your golden question.</p>
+    </div>
+  </div>
+  <aside class="notes">Email delivery of leads is one of the 2025 features from Ben Heath's update video - a small lever, but it means nobody has to remember to check a dashboard. The twice-daily sweep is his stated floor for teams without a dedicated caller.</aside>
+</section>
+
+<section class="s" data-act="Act 5">
+  <p class="kicker">The bar</p>
+  <h2>15 to 30 <span class="a">minutes</span></h2>
+  <div class="rows">
+    <div class="row"><span>The agency bar: first contact inside <b>15-30 minutes</b> of the form fill</span></div>
+    <div class="row"><span>They filled 2-3 forms in one scrolling session. The first advisor in takes the meeting.</span></div>
+    <div class="row"><span>Phone-first: ring once, then WhatsApp. The missed call makes your name familiar instead of random.</span></div>
+    <div class="row"><span>No team? Twice-daily sweeps are the floor, not the plan. And they were told to expect you - the thank-you screen did that.</span></div>
+  </div>
+  <aside class="notes">15-30 minutes is Ben Heath's number for teams with a dedicated caller; twice-daily is his stated minimum without one. His diagnosed failure case: a client calling Tuesday's leads on Friday, then blaming lead quality. Phone-first because email contact rates are dismal - his reasoning, same video.</aside>
+</section>
+
+<section class="s" data-act="Act 5">
+  <p class="kicker">Hands-on &middot; ~5 min</p>
+  <h2>Prompt 3: the message, written <span class="a">now</span></h2>
+  <div class="prompt">
+    <button class="copy" onclick="copyP(this)">Copy</button>
+    <pre>A lead just filled in my Meta form for my free guide "<span class="ph">[TITLE]</span>".
+
+Name: <span class="ph">[NAME]</span>
+Their biggest money worry: <span class="ph">[THEIR ANSWER]</span>
+
+Write a WhatsApp message under 80 words: warm, reference their exact
+worry in the first line, attach the guide, and offer a 15-minute call
+this week. No selling, no jargon.</pre>
+  </div>
+  <div class="check">Message template saved where you'll find it: notes app, or pinned in your own WhatsApp.</div>
+  <aside class="notes">Scripts before leads - "an ounce of pre is worth a pound of post" (Hormozi). Their golden-question answer becomes the first line, which is why the form asked it (Ben Heath's custom-question play). Run the prompt once now with a fake lead so everyone sees the shape of a good output.</aside>
+</section>
+
+<section class="s" data-act="Act 5">
+  <p class="kicker">The call</p>
+  <h2>What to say when they <span class="a">answer</span></h2>
+  <div class="rows">
+    <div class="row"><span>Open with the magic words: <b>"I have nothing to sell you today."</b> Mean it.</span></div>
+    <div class="row"><span>Confirm the guide arrived, then ask about the worry they typed. Then <b>listen</b>.</span></div>
+    <div class="row"><span>One small ask to close: a <b>15-minute chat</b> if they'd like help applying it</span></div>
+    <div class="row"><span>Educate, educate, conversation. The product waits for the meeting.</span></div>
+  </div>
+  <aside class="notes">"I have nothing to sell you today" is Clients Blackbox's scripted line, placed after the educational hook. "Educate, educate, conversation" is his funnel in three words. Ash Davis's data on why: cold leads pushed straight at a pitch become no-shows and skeptics - the guide plus this call do the trust-building his clients use a video for.</aside>
+</section>
+
+<section class="s" data-act="Act 5">
+  <p class="kicker">The patient ones</p>
+  <h2>Most leads book on message <span class="a">four</span>, not one</h2>
+  <table class="tbl">
+    <tr><td class="k">Day 0</td><td>the guide + one line about who you are ("think of me as the friend who reads the fine print")</td></tr>
+    <tr><td class="k">Day 2</td><td>your story: why you do this work, two sentences</td></tr>
+    <tr><td class="k">Day 4</td><td>proof: one client outcome or review</td></tr>
+    <tr><td class="k">Day 7</td><td>one tip from the guide, expanded with something new</td></tr>
+    <tr><td class="k">Day 10</td><td>soft close: "the 15-minute chat is still open this week"</td></tr>
+  </table>
+  <aside class="notes">Adapted from Gillen's Klaviyo "competition series": instant confirm with brand intro, founder story, social proof, differentiation, then conditional reminders. He calls the sequence "the secret sauce that gets you the extra sales" - the ad captures, the sequence converts. WhatsApp or email, same arc; AI drafts all five in one prompt if they ask it to.</aside>
+</section>
+
+<section class="s" data-act="Act 5">
+  <p class="kicker">Week 2 upgrade</p>
+  <h2>When leads look <span class="a">fake</span></h2>
+  <div class="rows">
+    <div class="row"><span>Wrong numbers usually aren't lies: Meta autofills from profiles that can be 15 years stale</span></div>
+    <div class="row"><span>Fix one: turn <b>autofill off</b> in form settings - typed numbers are current numbers</span></div>
+    <div class="row"><span>Fix two: switch to Higher Intent and enable <b>one-time-passcode verification</b> - every number SMS-confirmed</span></div>
+    <div class="row"><span>The price of clean: fewer leads, each one real. Upgrade only when the diary is full of dead numbers.</span></div>
+  </div>
+  <aside class="notes">Both fixes are 2025 features, from Lalonde and Ben Heath's update videos. Lalonde's reframe matters: businesses called leads liars for years when the real culprit was a 2011 profile number. Heath's warning on OTP: it "significantly" cuts volume and raises cost per lead - a deliberate trade, not a free win.</aside>
+</section>
+
+<!-- ============ ACT 6: RUNNING IT ============ -->
+
+<section class="s center divider" id="operate" data-act="Act 6">
+  <p class="n">ACT 6 &middot; 15 MIN</p>
+  <h1>Running <span class="a">it</span></h1>
+  <p class="sub">Ten minutes a day. Rules, not feelings.</p>
+  <aside class="notes">Act 6 compresses Fogarty's daily media-buyer routine and the agencies' kill/scale discipline into a solo advisor's 10 minutes. The theme: the machine fails from over-touching far more often than from neglect.</aside>
+</section>
+
+<section class="s" data-act="Act 6">
+  <p class="kicker">The habit</p>
+  <h2>Ten minutes with <span class="a">coffee</span></h2>
+  <div class="rows">
+    <div class="row"><span>Sweep new leads first. Speed before analysis, every day.</span></div>
+    <div class="row"><span>Check yesterday: spend, leads, cost per lead. Numbers, not feelings.</span></div>
+    <div class="row"><span>First 48 hours: <b>touch nothing</b>. Every edit resets Meta's learning.</span></div>
+    <div class="row"><span>Once a week: add one fresh image or angle, retire the loser</span></div>
+  </div>
+  <aside class="notes">Fogarty's daily routine (his joke: the media buyer wakes at 4am, ice bath, then the ad account) scaled from $30k/day to $5. The weekly creative swap is his too - creative is the input that wears out, not the settings.</aside>
+</section>
+
+<section class="s" data-act="Act 6">
+  <p class="kicker">The rules</p>
+  <h2>Kill, scale, or <span class="a">leave it alone</span></h2>
+  <div class="cards two">
+    <div class="card bad">
+      <h3>Kill (really: swap)</h3>
+      <p>3 days + 500 impressions + zero leads: change the image or the copy and relaunch. Edit, don't delete - deleting loses the learning.</p>
+    </div>
+    <div class="card">
+      <h3>Scale</h3>
+      <p>Cost per lead good for 3 days running: raise budget 20%. Never double overnight - big jumps restart learning.</p>
+    </div>
+    <div class="card bad">
+      <h3>Rejected?</h3>
+      <p>Remove "guaranteed", "100%", income claims. Edit, resubmit, move on. It happens to everyone.</p>
+    </div>
+    <div class="card">
+      <h3>One change at a time</h3>
+      <p>Change two things and you learn nothing. Duplicate, swap one, compare.</p>
+    </div>
+  </div>
+  <aside class="notes">Fogarty's discipline adapted to $5/day: he judges creatives only after 2x the product's value in spend and caps budget raises at 10-30% per day - our 20% sits in his band. The one-change rule is universal across every source.</aside>
+</section>
+
+<section class="s" data-act="Act 6">
+  <p class="kicker">Expectations</p>
+  <h2>Slow is <span class="a">normal</span></h2>
+  <div class="rows">
+    <div class="row"><span>Day 3, $15 spent, nothing booked? <b>You're on schedule.</b> The agencies see first appointments in week 1-2.</span></div>
+    <div class="row"><span>A lead that books this month becomes a client in 1-3 months. October leads close in December.</span></div>
+    <div class="row"><span>About <b>2 in 3</b> booked appointments show up. For cold traffic that's a good rate, not a failure.</span></div>
+    <div class="row"><span>Lumpy months are the lag, not luck. Judge the machine by the quarter.</span></div>
+  </div>
+  <p class="sub">You're not selling $10 stickers. Nobody moves their retirement savings from one scroll.</p>
+  <aside class="notes">All Clients Blackbox and Ash Davis: "if you spent $300 and got nothing and it's been 3 days - you're not supposed to get anything yet", the October-to-December close lag, and Davis's 65% show rate described as good for cold traffic. The "$10 stickers" line is Blackbox verbatim. The number one first-campaign killer is the day-3 plug pull.</aside>
+</section>
+
+<section class="s" data-act="Act 6">
+  <p class="kicker">Keep these</p>
+  <h2>The operating <span class="a">numbers</span></h2>
+  <div class="snap">
+    <table class="tbl">
+      <tr><td class="k">$5-10 / day</td><td>starting budget. Don't raise it on day one.</td></tr>
+      <tr><td class="k">48 hours</td><td>hands off while Meta learns. Every edit resets the clock.</td></tr>
+      <tr><td class="k">3 days + 500</td><td>minimum spend and impressions before judging anything</td></tr>
+      <tr><td class="k">+20%</td><td>the scale step when cost per lead is good 3 days running</td></tr>
+      <tr><td class="k">30 min</td><td>the contact bar. Two hours is the ceiling, not the target.</td></tr>
+      <tr><td class="k">2 / day</td><td>lead sweeps, morning and evening, even on good weeks</td></tr>
+    </table>
+    <p class="foot">The operating numbers &middot; AI Ads Launch Lab &middot; @leotan_js</p>
+  </div>
+  <aside class="notes">Phone-photo slide; say so. One table answers 90% of week-one questions: is my CPL normal, when do I touch it, when do I scale, how fast do I reply. Sources: Ben Heath (contact bar, sweeps), Fogarty (hands-off learning, scale caps), the agencies (judgment windows).</aside>
+</section>
+
+<section class="s" data-act="Act 6">
+  <p class="kicker">Account safety</p>
+  <h2>Don't get <span class="a">banned</span></h2>
+  <div class="rows">
+    <div class="row"><span>Advertise from Business Manager, real name matching your ID. Turn on <b>2FA</b> and add one trusted backup admin.</span></div>
+    <div class="row"><span>Pay by card, not PayPal. New Pages should post a little before advertising.</span></div>
+    <div class="row"><span>Never boost, never skip the financial category, never run "guaranteed returns"</span></div>
+    <div class="row"><span>Bans follow the person and the IP. There is no fresh-account reset.</span></div>
+  </div>
+  <aside class="notes">Fogarty's ban-avoidance section, the most detailed in the research: aged accounts, matching legal names, 2FA on every user, backup admin, no PayPal (higher observed ban rate), warm up new Pages. Thoresen supplies the permanence: a group whose marketer gamed the rules years ago still can't open ad accounts.</aside>
+</section>
+
+<section class="s" data-act="Act 6">
+  <p class="kicker">Bonus &middot; 10 min if time allows</p>
+  <h2>Every lead in a <span class="a">sheet</span>, automatically</h2>
+  <div class="rows">
+    <div class="row"><span>Google Sheet with columns matching your form: name, email, phone, worry</span></div>
+    <div class="row"><span>Zapier &rarr; trigger: <b>Facebook Lead Ads &rarr; New Lead</b> <span class="note">premium app: needs Zapier's paid plan</span></span></div>
+    <div class="row"><span>Connect account &rarr; pick your Page &rarr; pick your form &rarr; test pulls a sample lead</span></div>
+    <div class="row"><span>Action: <b>Google Sheets &rarr; Create Spreadsheet Row</b> &rarr; map each field &rarr; test &rarr; switch ON</span></div>
+  </div>
+  <p class="sub">No Zapier budget? Meta's own email delivery of leads (Act 5) is the free version of this.</p>
+  <aside class="notes">Steps from the XYZ Lab tutorial. Two gotchas it teaches: the action test fabricates a dummy row even with zero real leads (check the sheet), and an unpublished Zap silently does nothing - the ON switch is a real step. One it doesn't: editing a form mints a new form ID, so the Zap must re-select the form after form edits.</aside>
+</section>
+
+<section class="s" data-act="Act 6">
+  <p class="kicker">Zoom out</p>
+  <h2>The whole machine, <span class="a">one screen</span></h2>
+  <div class="snap">
+    <table class="tbl">
+      <tr><td class="k">Bait</td><td>one sharp problem, solved free, built with AI in an hour</td></tr>
+      <tr><td class="k">Ad</td><td>$5-10/day, problem-first words, your guide cover as the image</td></tr>
+      <tr><td class="k">Form</td><td>three fields plus the golden question, thank-you screen that books the callback</td></tr>
+      <tr><td class="k">Follow-up</td><td>WhatsApp in 30 minutes, "nothing to sell" call, five-touch arc for the quiet ones</td></tr>
+      <tr><td class="k">Operate</td><td>ten minutes a day, one change at a time, judged by the quarter</td></tr>
+    </table>
+    <p class="foot">The lead machine &middot; AI Ads Launch Lab &middot; @leotan_js</p>
+  </div>
+  <aside class="notes">The assembly recap. Everything on this table got built or written tonight. Photo-this slide - it's the one they'll actually look back at.</aside>
+</section>
+
+<section class="s" data-act="Act 6">
+  <p class="kicker">Credit where due</p>
+  <h2>Built from people who've <span class="a">spent the money</span></h2>
+  <table class="tbl">
+    <tr><td class="k">Ben Heath</td><td>US$200M managed - campaign structure, instant forms, follow-up speed</td></tr>
+    <tr><td class="k">Davie Fogarty</td><td>US$100M own spend - the machine frame, account safety, daily routine</td></tr>
+    <tr><td class="k">Ash Davis</td><td>advisor case studies - the pipeline, benchmarks, rent-vs-own math</td></tr>
+    <tr><td class="k">Clients Blackbox</td><td>advisor funnels - PAS copy, sales-cycle patience, the first-call script</td></tr>
+    <tr><td class="k">Shauna Thoresen</td><td>compliance - the ad category, form field rules, the spider story</td></tr>
+    <tr><td class="k">Hormozi &middot; Gillen &middot; Lalonde</td><td>lead magnet economics &middot; nurture arc &middot; 2025 form features</td></tr>
+  </table>
+  <aside class="notes">16 videos transcribed and distilled, July 2026 - full source list and notes in the repo (11-youtube-research-synthesis.md). Saying the sources out loud builds trust in the material and models the behaviour: learn from people with receipts.</aside>
+</section>
+
+<section class="s center" data-act="Closing">
+  <h1>The machine is <span class="a">on</span></h1>
+  <p class="sub">Your ad is in review. Leads land this week.<br>Contact in 30 minutes. Judge in a quarter.</p>
+  <img src="shots/qr-instagram.png" alt="QR code to @leotan_js on Instagram" style="width:clamp(120px,16vw,190px);margin-top:36px;border-radius:12px">
+  <p style="margin-top:14px;color:var(--dim);font-size:clamp(14px,1.7vw,19px)">DM <b style="color:var(--gold)">ADS</b> to @leotan_js for the group + these slides</p>
+  <aside class="notes">Close on the two commitments: reply to leads inside 30 minutes, and don't judge the machine before the quarter. The QR goes to Instagram; "ADS" gets the group invite and the deck link.</aside>
+</section>
+
+<script>
+const S = Array.from(document.querySelectorAll('.s'));
+let cur = 0;
+function go(n){
+  cur = Math.max(0, Math.min(S.length - 1, n));
+  S.forEach((s, j) => s.classList.toggle('on', j === cur));
+  const id = S[cur].id || ('s' + (cur + 1));
+  if (location.hash !== '#' + id) history.replaceState(null, '', '#' + id);
+  document.getElementById('ctr').textContent = (cur + 1) + ' / ' + S.length;
+  document.getElementById('act').textContent = S[cur].dataset.act || '';
+  document.getElementById('bar').style.width = ((cur + 1) / S.length * 100) + '%';
+  S[cur].scrollTop = 0;
+}
+function fromHash(){
+  const h = decodeURIComponent(location.hash.slice(1));
+  if (!h) return go(0);
+  const byId = S.findIndex(s => s.id === h);
+  if (byId >= 0) return go(byId);
+  const n = parseInt(h.replace(/^s/, ''), 10);
+  if (!isNaN(n)) return go(n - 1);
+  go(0);
+}
+addEventListener('hashchange', fromHash);
+addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); go(cur + 1); }
+  else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); go(cur - 1); }
+  else if (e.key === 'n' || e.key === 'N') document.body.classList.toggle('shownotes');
+  else if (e.key === 'f' || e.key === 'F') {
+    document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
+  }
+});
+document.addEventListener('click', e => {
+  const a = e.target.closest('a[href^="#"]');
+  if (a) { e.preventDefault(); location.hash = a.getAttribute('href'); }
+});
+function copyP(btn){
+  navigator.clipboard.writeText(btn.parentElement.querySelector('pre').innerText).then(() => {
+    btn.textContent = 'Copied';
+    setTimeout(() => btn.textContent = 'Copy', 1200);
+  });
+}
+fromHash();
+</script>
+</body>
+</html>
