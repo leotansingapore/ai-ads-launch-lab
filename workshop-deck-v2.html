@@ -1,0 +1,1932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Ads Launch Lab - Full Workshop Deck v2</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --bg: #0a0a1a;
+    --gold: #e8b931;
+    --green: #22c55e;
+    --blue: #60a5fa;
+    --muted: #a0a0b0;
+    --dim: #666;
+    --faint: #444;
+    --card: rgba(255,255,255,0.05);
+    --line: #222;
+  }
+  html, body { height: 100%; }
+  body {
+    font-family: -apple-system, 'SF Pro Display', 'Segoe UI', Helvetica, sans-serif;
+    background: var(--bg);
+    color: #fff;
+    overflow: hidden;
+  }
+
+  .slide {
+    display: none;
+    width: 100vw;
+    height: 100vh;
+    padding: clamp(24px, 5vh, 60px) clamp(24px, 6vw, 90px) clamp(70px, 10vh, 100px);
+    flex-direction: column;
+    justify-content: safe center;
+    overflow-y: auto;
+  }
+  .slide.active { display: flex; }
+
+  .kicker {
+    font-size: clamp(12px, 1.3vw, 16px);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--gold);
+    margin-bottom: 18px;
+  }
+  h1 { font-size: clamp(36px, 5.5vw, 68px); font-weight: 800; line-height: 1.08; letter-spacing: -2px; }
+  h2 { font-size: clamp(28px, 4vw, 48px); font-weight: 700; line-height: 1.15; letter-spacing: -1px; }
+  .accent { color: var(--gold); }
+  .subtitle { font-size: clamp(17px, 2vw, 24px); color: var(--muted); margin-top: 14px; line-height: 1.5; }
+
+  ul.points {
+    margin-top: 32px;
+    font-size: clamp(18px, 2.2vw, 27px);
+    line-height: 1.55;
+    list-style: none;
+  }
+  ul.points li { margin-bottom: 18px; padding-left: 34px; position: relative; }
+  ul.points li::before {
+    content: ">";
+    color: var(--gold);
+    font-weight: 800;
+    position: absolute;
+    left: 0;
+  }
+  ul.points .sub { color: var(--dim); font-size: 0.78em; display: block; margin-top: 2px; }
+
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 36px; }
+  .cols.three { grid-template-columns: 1fr 1fr 1fr; }
+  @media (max-width: 700px) { .cols, .cols.three { grid-template-columns: 1fr; } }
+  .split { display: grid; grid-template-columns: 1.15fr 1fr; gap: clamp(24px, 4vw, 56px); align-items: center; }
+  @media (max-width: 900px) { .split { grid-template-columns: 1fr; } }
+  .shot {
+    width: 100%;
+    max-height: 62vh;
+    object-fit: contain;
+    border: 1px solid #333;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 18px 50px rgba(0,0,0,0.5);
+  }
+  .shot-cap { font-size: 13px; color: var(--faint); margin-top: 10px; text-align: center; }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: clamp(18px, 2.5vw, 30px);
+  }
+  .card h3 { font-size: clamp(17px, 1.9vw, 23px); font-weight: 700; color: var(--gold); margin-bottom: 12px; }
+  .card p, .card li { font-size: clamp(15px, 1.6vw, 19px); color: #ccc; line-height: 1.55; }
+  .card ul { list-style: none; }
+  .card ul li { margin-bottom: 10px; padding-left: 24px; position: relative; }
+  .card ul li::before { content: ">"; color: var(--gold); font-weight: 800; position: absolute; left: 0; }
+  .card.bad h3 { color: #f87171; }
+  .card.bad ul li::before { color: #f87171; }
+
+  .prompt {
+    position: relative;
+    background: #05050f;
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--gold);
+    border-radius: 10px;
+    padding: clamp(14px, 1.8vw, 22px);
+    margin-top: 18px;
+    max-width: 980px;
+  }
+  .prompt pre {
+    font-family: 'SF Mono', ui-monospace, Menlo, monospace;
+    font-size: clamp(13px, 1.5vw, 18px);
+    line-height: 1.6;
+    color: #e8e8f0;
+    white-space: pre-wrap;
+  }
+  .prompt .ph { color: var(--gold); font-weight: 700; }
+  .prompt.small pre { font-size: clamp(11px, 1.25vw, 15px); }
+  .copy-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(232,185,49,0.12);
+    border: 1px solid rgba(232,185,49,0.4);
+    color: var(--gold);
+    font-size: 13px;
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  .copy-btn:hover { background: rgba(232,185,49,0.25); }
+
+  .checkpoint {
+    margin-top: 22px;
+    background: rgba(34,197,94,0.09);
+    border: 1px solid rgba(34,197,94,0.4);
+    border-radius: 10px;
+    padding: 16px 22px;
+    font-size: clamp(16px, 1.9vw, 22px);
+    color: var(--green);
+    font-weight: 600;
+    max-width: 980px;
+  }
+  .checkpoint::before { content: "CHECKPOINT"; display: block; font-size: 12px; letter-spacing: 2px; margin-bottom: 4px; opacity: 0.8; }
+
+  .divider, .slide.center {
+    background: radial-gradient(ellipse 70% 55% at 68% 58%, rgba(232,185,49,0.055), transparent 72%);
+  }
+  .divider { text-align: left; position: relative; overflow: hidden; }
+  .divider .big-num {
+    position: absolute;
+    right: -2vw;
+    bottom: -8vh;
+    font-size: clamp(200px, 38vw, 480px);
+    font-weight: 800;
+    color: rgba(232,185,49,0.06);
+    line-height: 1;
+    pointer-events: none;
+  }
+  .pill {
+    display: inline-block;
+    background: rgba(232,185,49,0.12);
+    border: 1px solid rgba(232,185,49,0.4);
+    color: var(--gold);
+    font-size: clamp(13px, 1.4vw, 16px);
+    font-weight: 700;
+    padding: 6px 16px;
+    border-radius: 999px;
+    margin-bottom: 24px;
+    letter-spacing: 1px;
+  }
+  .pill.mode { background: rgba(96,165,250,0.12); border-color: rgba(96,165,250,0.4); color: var(--blue); margin-left: 10px; }
+
+  .flow { display: flex; align-items: center; gap: clamp(10px, 2vw, 24px); margin-top: 44px; flex-wrap: wrap; font-size: clamp(20px, 2.8vw, 34px); font-weight: 700; }
+  .flow .arrow { color: var(--faint); font-weight: 400; }
+
+  .steps { margin-top: 32px; counter-reset: step; max-width: 980px; }
+  .step-row {
+    counter-increment: step;
+    display: flex;
+    gap: 20px;
+    align-items: baseline;
+    padding: 11px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: clamp(17px, 2vw, 24px);
+  }
+  .step-row::before {
+    content: counter(step);
+    color: var(--gold);
+    font-weight: 800;
+    font-size: 0.9em;
+    min-width: 30px;
+  }
+  .step-row .note { color: var(--dim); font-size: 0.75em; margin-left: auto; text-align: right; }
+
+  table.sched { width: 100%; max-width: 900px; border-collapse: collapse; margin-top: 32px; font-size: clamp(15px, 1.8vw, 21px); }
+  table.sched td { padding: 9px 8px; border-bottom: 1px solid var(--line); }
+  a.jump { color: inherit; text-decoration: none; border-bottom: 1px dashed rgba(232,185,49,0.5); }
+  a.jump:hover { color: var(--gold); }
+  table.sched .t { color: var(--gold); font-weight: 700; width: 90px; white-space: nowrap; }
+  table.sched .m { color: var(--dim); text-align: right; }
+
+  .qr-box {
+    width: clamp(180px, 26vh, 260px);
+    height: clamp(180px, 26vh, 260px);
+    background: #fff;
+    border-radius: 16px;
+    margin: 30px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #333;
+    font-size: 15px;
+    font-weight: 600;
+    text-align: center;
+    padding: 16px;
+  }
+  .center { text-align: center; align-items: center; }
+  .center .qr-box { margin: 30px auto; }
+
+  .screenshot-box {
+    margin-top: 32px;
+    border: 2px dashed var(--faint);
+    border-radius: 14px;
+    max-width: 980px;
+    min-height: 34vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--dim);
+    font-size: clamp(15px, 1.7vw, 19px);
+    text-align: center;
+    padding: 24px;
+  }
+
+  .shot-wrap { position: relative; }
+  .shot-wrap .shot { display: block; }
+  .pin {
+    position: absolute;
+    border: 3px solid var(--gold);
+    border-radius: 8px;
+    box-shadow: 0 0 0 2px rgba(0,0,0,0.45), 0 0 16px rgba(232,185,49,0.45);
+    pointer-events: none;
+  }
+  .pin-label {
+    position: absolute;
+    background: var(--gold);
+    color: #14140a;
+    font-weight: 800;
+    font-size: clamp(11px, 1.2vw, 14px);
+    padding: 3px 10px;
+    border-radius: 999px;
+    white-space: nowrap;
+    pointer-events: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+  }
+
+  .doc-panel {
+    background: #faf9f5;
+    color: #292824;
+    border-radius: 12px;
+    padding: clamp(18px, 2.4vw, 30px);
+    max-width: 880px;
+    margin-top: 20px;
+    font-size: clamp(13px, 1.5vw, 17px);
+    line-height: 1.55;
+    box-shadow: 0 18px 50px rgba(0,0,0,0.5);
+  }
+  .doc-panel h4 { font-size: 1.25em; margin-bottom: 8px; }
+  .doc-panel p { margin-bottom: 10px; }
+  .doc-panel .pt { font-weight: 700; }
+  .doc-panel .skip { color: #8a877e; }
+
+  .snap {
+    position: relative;
+    border: 2px dashed rgba(232,185,49,0.55);
+    border-radius: 16px;
+    padding: clamp(16px, 2.2vw, 26px);
+    background: rgba(232,185,49,0.03);
+    max-width: 1040px;
+    margin-top: 26px;
+  }
+  .snap::before {
+    content: "SCREENSHOT THIS";
+    position: absolute;
+    top: -11px;
+    left: 24px;
+    background: var(--gold);
+    color: #14140a;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    padding: 3px 12px;
+    border-radius: 999px;
+  }
+  .snap .foot {
+    margin-top: 14px;
+    font-size: 11px;
+    color: var(--faint);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+  .snap ol {
+    columns: 2;
+    column-gap: 44px;
+    padding-left: 22px;
+    font-size: clamp(13px, 1.55vw, 18px);
+    line-height: 1.7;
+    color: #ddd;
+  }
+  .snap ol li::marker { color: var(--gold); font-weight: 800; }
+  table.nums { width: 100%; border-collapse: collapse; font-size: clamp(13px, 1.6vw, 19px); }
+  table.nums td { padding: 8px 10px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  table.nums .n { color: var(--gold); font-weight: 800; white-space: nowrap; width: 220px; }
+  .pm { display: flex; align-items: stretch; gap: 8px; }
+  .pm .stage { flex: 1; background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: clamp(10px, 1.4vw, 16px); }
+  .pm .stage h4 { color: var(--gold); font-size: clamp(12px, 1.35vw, 16px); letter-spacing: 1px; margin-bottom: 8px; }
+  .pm .stage p { font-size: clamp(11px, 1.15vw, 14px); color: #ccc; line-height: 1.5; }
+  .pm .arr { align-self: center; color: var(--faint); font-size: clamp(14px, 1.6vw, 20px); }
+  @media (max-width: 800px) { .pm { flex-direction: column; } .pm .arr { transform: rotate(90deg); } .snap ol { columns: 1; } }
+
+  .dense .card { padding: 14px 20px; }
+  .dense .card h3 { font-size: clamp(15px, 1.6vw, 19px); margin-bottom: 6px; }
+  .dense .card p { font-size: clamp(13px, 1.4vw, 16px); }
+
+  .notes { display: none; }
+  body.show-notes .slide.active .notes {
+    display: block;
+    position: fixed;
+    left: 0; right: 0; bottom: 0;
+    background: rgba(10,10,26,0.97);
+    border-top: 2px solid var(--gold);
+    padding: 18px 40px 24px;
+    max-height: 38vh;
+    overflow-y: auto;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #ddd;
+    z-index: 200;
+  }
+  .notes::before { content: "PRESENTER NOTES (press N to hide)"; display: block; font-size: 11px; letter-spacing: 2px; color: var(--gold); margin-bottom: 8px; font-weight: 700; }
+  .notes b { color: var(--gold); }
+
+  .progress { position: fixed; top: 0; left: 0; height: 3px; background: var(--gold); z-index: 100; transition: width 0.25s; }
+  .hud {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    display: flex;
+    align-items: center;
+    padding: 0 40px 24px;
+    z-index: 100;
+    pointer-events: none;
+  }
+  .hud .section-label { font-size: 14px; color: var(--faint); letter-spacing: 1px; text-transform: uppercase; font-weight: 700; }
+  .hud .counter { margin-left: auto; font-size: 15px; color: var(--faint); margin-right: 20px; }
+  .hud button {
+    pointer-events: auto;
+    background: rgba(255,255,255,0.08);
+    border: none;
+    color: #fff;
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    font-size: 18px;
+    cursor: pointer;
+    margin-left: 8px;
+  }
+  .hud button:hover { background: rgba(255,255,255,0.18); }
+
+  @page { size: landscape; margin: 0; }
+  @media print {
+    body { overflow: visible; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .slide { display: flex !important; page-break-after: always; height: 100vh; }
+    .progress, .hud, .copy-btn, .notes { display: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ WELCOME ============ -->
+
+<!-- 1 -->
+<div class="slide center" data-section="Welcome">
+  <h1>AI Ads <span class="accent">Launch Lab</span></h1>
+  <p class="subtitle">Walk in with a laptop.<br>Walk out with a live lead campaign.</p>
+  <p style="margin-top: 60px; font-size: clamp(16px,1.8vw,21px); color: var(--dim);">Leo Tan &nbsp;|&nbsp; @leotan_js &nbsp;|&nbsp; v2</p>
+  <p style="margin-top: 26px; font-size: clamp(12px,1.3vw,15px); color: var(--faint);">&rarr; to advance &middot; N presenter notes &middot; F fullscreen &middot; agenda links are clickable</p>
+  <aside class="notes">Have this up as people arrive. Music on, energy up. Greet people, check laptops are out and charging. Workshop runs 3.5 hours including one break.</aside>
+</div>
+
+<!-- 2 -->
+<div class="slide" data-section="Welcome">
+  <p class="kicker">Before we start</p>
+  <h2>Check your setup <span class="accent">now</span>, not at 3pm</h2>
+  <ul class="points" style="margin-top: 28px;">
+    <li>facebook.com logs in</li>
+    <li>adsmanager.facebook.com shows a dashboard, not an error</li>
+    <li>A card is linked <span class="sub" style="display:inline; color: var(--dim); font-size: 0.75em;">(Ads Manager &rarr; menu &#9776; &rarr; Billing &amp; Payments &rarr; Payment Methods)</span></li>
+    <li>chatgpt.com logs in <span class="sub" style="display:inline; color: var(--dim); font-size: 0.75em;">(this builds your lead magnet today)</span></li>
+    <li>claude.ai logs in <span class="sub" style="display:inline; color: var(--dim); font-size: 0.75em;">(optional backup, same prompts)</span></li>
+  </ul>
+  <div class="checkpoint">Anything broken? Raise your hand right now. We fix it before we begin.</div>
+  <aside class="notes">This is the pre-flight checklist they got before the workshop. Walk the room while people check. Anyone with a restricted Ads Manager account pairs up with a neighbour for the day. <b>Do not start Module 1 until every hand is down.</b></aside>
+</div>
+
+<!-- 3 -->
+<div class="slide" data-section="Welcome">
+  <p class="kicker">Today</p>
+  <h2>You leave with <span class="accent">three things</span></h2>
+  <div class="steps">
+    <div class="step-row">A lead magnet PDF with your name on it</div>
+    <div class="step-row">A live Meta ad campaign, running on $5 a day</div>
+    <div class="step-row">The prompts to rebuild all of it whenever you want</div>
+  </div>
+  <table class="sched">
+    <tr><td class="t">20 min</td><td><a class="jump" href="#m1">Why AI + ads</a></td><td class="m">Talk + demo</td></tr>
+    <tr><td class="t">45 min</td><td><a class="jump" href="#m2">Build your lead magnet with ChatGPT</a></td><td class="m">Hands-on</td></tr>
+    <tr><td class="t">15 min</td><td style="color: var(--dim);">Break</td><td class="m"></td></tr>
+    <tr><td class="t">25 min</td><td><a class="jump" href="#m3">Meta ads 101</a></td><td class="m">Watch</td></tr>
+    <tr><td class="t">60 min</td><td><a class="jump" href="#m4">Build and launch your campaign</a></td><td class="m">Hands-on</td></tr>
+    <tr><td class="t">30 min</td><td><a class="jump" href="#m5">What happens next + Q&amp;A</a></td><td class="m">Discussion</td></tr>
+    <tr><td class="t" style="color: var(--dim);">later</td><td><a class="jump" href="#bonus">3 bonus modules</a> &middot; <a class="jump" href="#fixes">quick fixes</a></td><td class="m">Self-paced</td></tr>
+  </table>
+  <aside class="notes">Point at the three outcomes. "Not theory. Not a certificate. A real campaign, live, before you leave this room." Then run through the schedule fast, 30 seconds max. The module names are clickable, here and in the deck link they take home.</aside>
+</div>
+
+<!-- ============ MODULE 1 ============ -->
+
+<!-- 4 -->
+<div class="slide divider" data-section="Module 1" id="m1">
+  <div class="big-num">1</div>
+  <div><span class="pill">Module 1 &middot; 20 min</span><span class="pill mode">Laptops closed</span></div>
+  <h1>Why AI <span class="accent">+</span> ads</h1>
+  <p class="subtitle">The problem, the math, and proof it works.</p>
+  <aside class="notes">No laptops yet. This module runs on your energy and credibility, not slides. Projector is for the proof screenshot and the live demo only.</aside>
+</div>
+
+<!-- 5 -->
+<div class="slide" data-section="Module 1">
+  <p class="kicker">Two questions</p>
+  <h2>Hands up if you have ever...</h2>
+  <ul class="points" style="margin-top: 40px; font-size: clamp(22px, 2.8vw, 34px);">
+    <li>...run a Facebook or Instagram ad</li>
+    <li>...used ChatGPT or Claude</li>
+  </ul>
+  <p class="subtitle" style="margin-top: 48px;">By the end of today, you'll have combined both.<br>A real campaign, generating leads for your practice, built with AI.</p>
+  <aside class="notes">Expect few hands on ads, more on AI. "And it'll take you less time than your last prospecting session." Pause on the last line, then advance.</aside>
+</div>
+
+<!-- 6 -->
+<div class="slide" data-section="Module 1">
+  <p class="kicker">Proof</p>
+  <h2>This is what a <span class="accent">lead machine</span> looks like</h2>
+  <img class="shot" src="shots/ads-dashboard-results.png" alt="Meta Ads Manager campaigns table showing lead campaigns with cost per lead from $0.32" style="max-height: 44vh; margin-top: 28px; max-width: 980px;">
+  <p class="shot-cap" style="text-align: left; max-width: 980px;">A real Ads Manager account running lead campaigns. Look at the Cost per Result column: the good ones deliver leads for under a dollar.</p>
+  <p class="subtitle" style="margin-top: 20px;">In 3 hours, you build your own version of this.</p>
+  <aside class="notes">Tell your story first, before showing this. Hit the beats: cold calling, door knocking, referrals from friends and family. Your specific numbers: calls per day, pick-up rate, appointments per week. Then: "First campaign, $5 a day, [X] leads in the first week." Walk the columns: campaign names, Results (leads), Cost per Result ($0.32-$0.43 on the winners, $31-$34 on the tests that taught them something - both are normal). <b>SWAP THIS for your own Ads Manager screenshot before workshop day - "this is MY actual account" lands far harder than any example. Until then, do not claim this one is yours; call it "a real account".</b></aside>
+</div>
+
+<!-- 7 -->
+<div class="slide" data-section="Module 1">
+  <p class="kicker">The math</p>
+  <h2>One afternoon of calls vs <span class="accent">$10 a day</span></h2>
+  <div class="cols">
+    <div class="card bad">
+      <h3>Cold calling</h3>
+      <ul>
+        <li>100 calls &rarr; 30 pick up &rarr; 5 meetings &rarr; 1-2 clients</li>
+        <li>2-3 hours of your day, every day</li>
+        <li>Rejection after rejection</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>A $10/day Meta ad</h3>
+      <ul>
+        <li>Runs 24/7, even while you're with clients</li>
+        <li>1-3 leads a day, delivered to your phone</li>
+        <li>They opted in. They want to hear from you.</li>
+        <li>30 minutes to set up. Then it runs itself.</li>
+      </ul>
+    </div>
+  </div>
+  <aside class="notes">Land the closer: <b>"Which one would you rather do? That's what today is about."</b> Don't rush past this slide. This is the mindset shift: leads can come to you.</aside>
+</div>
+
+<!-- 8 -->
+<div class="slide" data-section="Module 1">
+  <p class="kicker">Live demo</p>
+  <h2>Watch the AI do <span class="accent">30 minutes of work</span> in 30 seconds</h2>
+  <div class="prompt">
+    <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    <pre>I'm a financial advisor in Singapore. Help me write a short lead magnet PDF
+(5-7 key points) on the topic: "5 Retirement Mistakes Singaporeans Make
+Before 40". My target audience is working adults aged 25-40. Keep the tone
+practical, friendly, and jargon-free.</pre>
+  </div>
+  <aside class="notes">Switch to claude.ai on the projector and type this LIVE. Let them watch it generate. Narrate: "30 seconds and you have a complete draft. Writing that yourself? 30 minutes minimum, and probably less structured." Then: <b>"This is the AI advantage. And you're about to use it."</b> Switch back to the deck.</aside>
+</div>
+
+<!-- 9 -->
+<div class="slide" data-section="Module 1">
+  <p class="kicker">The next 3 hours</p>
+  <div class="flow">
+    <span class="accent">Build a lead magnet with AI</span>
+    <span class="arrow">&rarr;</span>
+    <span class="accent">Create a Meta campaign</span>
+    <span class="arrow">&rarr;</span>
+    <span class="accent">Launch it. Today.</span>
+  </div>
+  <ul class="points" style="margin-top: 48px;">
+    <li>You don't need to be tech-savvy</li>
+    <li>You don't need marketing experience</li>
+    <li>I do every step on this screen first. You follow on your laptop.</li>
+  </ul>
+  <h2 style="margin-top: 48px;">Open your <span class="accent">laptops</span>. Let's go.</h2>
+  <aside class="notes">Transition slide. Give them a minute to get laptops open and claude.ai loaded while you set up Module 2.</aside>
+</div>
+
+<!-- ============ MODULE 2 ============ -->
+
+<!-- 10 -->
+<div class="slide divider" data-section="Module 2" id="m2">
+  <div class="big-num">2</div>
+  <div><span class="pill">Module 2 &middot; 45 min</span><span class="pill mode">Hands-on</span></div>
+  <h1>Build your lead magnet <span class="accent">with ChatGPT</span></h1>
+  <p class="subtitle">Written, designed, and saved as a PDF, all in one chat.<br>Prefer Claude? Same prompts work there too.</p>
+  <aside class="notes">One tab is enough: chatgpt.com does the whole module (write, design, PDF, cover image). Claude users follow along with the same prompts; only the save-as-PDF step differs. Walk the room; the most common failure is people silently stuck, so keep asking for thumbs up.</aside>
+</div>
+
+<!-- 11 -->
+<div class="slide" data-section="Module 2">
+  <p class="kicker">First, the concept</p>
+  <h2>What is a <span class="accent">lead magnet</span>?</h2>
+  <p class="subtitle" style="max-width: 900px;">A free guide you trade for contact details.</p>
+  <ul class="points">
+    <li>A stranger won't book a call from an ad. Too big an ask.</li>
+    <li>But they will take a free PDF that solves a problem they have.</li>
+    <li>To get it, they give you their name and phone number.</li>
+    <li>That's a lead. Someone who raised their hand about a money problem.<span class="sub">And you're the advisor who helped them first, before asking for anything.</span></li>
+  </ul>
+  <aside class="notes">This is the value-first mindset. You give before you ask. The PDF does the trust-building an ad can't. Keep this under 3 minutes.</aside>
+</div>
+
+<div class="slide" data-section="Module 2">
+  <p class="kicker">Principles</p>
+  <h2>What makes a lead magnet <span class="accent">work</span></h2>
+  <div class="snap">
+    <table class="nums">
+      <tr><td class="n">One problem</td><td>A guide about everything attracts no one. "5 CPF mistakes" pulls exactly your future client.</td></tr>
+      <tr><td class="n">Specific title</td><td>The title says who it's for and what they get. Clever dies; clear converts.</td></tr>
+      <tr><td class="n">10-minute read</td><td>Nobody wants a 150-page ebook; they'd just ask ChatGPT. Checklists, timelines and calculators get opened.</td></tr>
+      <tr><td class="n">Best advice, free</td><td>Held-back content reads as fluff. The generosity is the marketing.</td></tr>
+      <tr><td class="n">One next step</td><td>Every page ends at the same door: the free consultation.</td></tr>
+      <tr><td class="n">Ship, then judge</td><td>Built in an afternoon, judged by cost per lead after 3 days, improved next week.</td></tr>
+    </table>
+    <p class="foot">Lead magnet principles &middot; AI Ads Launch Lab &middot; @leotan_js</p>
+  </div>
+  <aside class="notes">Phone-photo slide; say so. These six survive every topic change: whether the guide is retirement, CPF or insurance, the same rules decide whether it converts. Point at 'best advice free' - the counterintuitive one; advisors fear giving away too much, but held-back guides are the ones that fail.</aside>
+</div>
+
+<!-- 12 -->
+<div class="slide" data-section="Module 2">
+  <p class="kicker">Before you type</p>
+  <h2>Prompting is <span class="accent">briefing</span>, not coding</h2>
+  <p class="subtitle" style="max-width: 920px;">You already do this every day: you brief your assistant, you tell a client what to bring, you explain to a junior what "good" looks like. Same skill, new intern.</p>
+  <div class="snap">
+    <div class="prompt" style="margin-top: 4px;">
+      <pre><span style="color:#e8b931;">I'm a financial advisor in Singapore.</span> <span style="color:#60a5fa;">Help me write a short lead magnet PDF (5-7 key points) on the topic: [YOUR TOPIC].</span>
+<span style="color:#22c55e;">My target audience is working adults aged 25-40 in Singapore.</span>
+<span style="color:#a78bfa;">Keep the tone practical, friendly, and jargon-free.</span></pre>
+    </div>
+    <div style="display:flex; gap: 14px; flex-wrap: wrap; margin-top: 14px; font-size: clamp(12px,1.4vw,15px); font-weight: 700;">
+      <span style="color:#e8b931;">WHO you are</span>
+      <span style="color:#60a5fa;">WHAT you want</span>
+      <span style="color:#22c55e;">WHO it's for</span>
+      <span style="color:#a78bfa;">HOW it should sound</span>
+    </div>
+    <p class="foot">The prompt formula &middot; AI Ads Launch Lab &middot; @leotan_js</p>
+  </div>
+  <p class="subtitle" style="margin-top: 14px; font-size: clamp(14px,1.6vw,19px);">That's the whole formula. No syntax, no commands. Typos are fine; it reads intent, not grammar.</p>
+  <aside class="notes">This reframe is what drops shoulders in the room. Ask: "Who has ever briefed an assistant or told an agency what you want? Congratulations, you can prompt." Point at each colour: every prompt on the cheat sheet is these same four parts. When a prompt disappoints, one of the four parts is missing; that's the debugging method too.</aside>
+</div>
+
+<div class="slide" data-section="Module 2">
+  <p class="kicker">The fears</p>
+  <h2>Four beliefs to <span class="accent">leave at the door</span></h2>
+  <div class="cols" style="margin-top: 24px;">
+    <div class="card">
+      <h3>"I'm not technical"</h3>
+      <p>If you can type a WhatsApp message, you're qualified. Today involves zero code. The box takes plain English, Singlish included.</p>
+    </div>
+    <div class="card">
+      <h3>"What if I break something?"</h3>
+      <p>You can't. The worst possible outcome is a bad answer. Delete the chat, start again; it costs nothing and nobody saw it.</p>
+    </div>
+    <div class="card">
+      <h3>"It won't sound like me"</h3>
+      <p>The first draft won't. Then you tell it who you are and how you talk, and edit the result. You always get the final word.</p>
+    </div>
+    <div class="card">
+      <h3>"Isn't this cheating?"</h3>
+      <p>The advice, the judgment, the relationship: still yours. The AI just types faster than you. Nobody calls a calculator cheating.</p>
+    </div>
+  </div>
+  <aside class="notes">Name the fears out loud and the room exhales; these four cover ~everyone. Ask "which one is yours?" and let hands go up, it gets a laugh and permission to be a beginner. If someone raises job-replacement worries: the advisor who uses AI replaces the one who doesn't; the tool doesn't hold a licence.</aside>
+</div>
+
+<div class="slide" data-section="Module 2">
+  <p class="kicker">The rhythm</p>
+  <h2>Say it. See it. <span class="accent">Shape it.</span></h2>
+  <div class="steps" style="margin-top: 8px;">
+    <div class="step-row"><span><b style="color: var(--gold);">Say it:</b> give the four-part brief</span></div>
+    <div class="step-row"><span><b style="color: var(--gold);">See it:</b> read what comes back. It's a draft, not a verdict.</span></div>
+    <div class="step-row"><span><b style="color: var(--gold);">Shape it:</b> "shorter" &middot; "warmer" &middot; "more about CPF" &middot; "less jargon" &middot; "give me 3 versions"</span></div>
+    <div class="step-row"><span>Repeat. Two or three rounds usually gets there.</span></div>
+  </div>
+  <p class="subtitle" style="margin-top: 24px; max-width: 900px;">You're not being tested. You're directing an intern who never gets tired, never gets offended, and never bills you. You'll run this loop ten times today; by tonight it's a habit.</p>
+  <aside class="notes">This loop IS the workshop: every module from here (the guide, its design, ad copy, Lovable, ChatGPT images) is say-see-shape with different output. Land that sentence and the rest of the day feels like practice instead of new material each time.</aside>
+</div>
+
+<div class="slide" data-section="Module 2">
+  <p class="kicker">Step 1 of 6<span style="color: var(--faint); font-weight: 600;"> &middot; ~2 min</span></p>
+  <h2>Pick your topic. <span class="accent">Don't overthink it.</span></h2>
+  <div class="cols three">
+    <div class="card"><h3>Retirement</h3><p>"5 Retirement Mistakes Singaporeans Make Before 40"</p></div>
+    <div class="card"><h3>CPF</h3><p>"CPF Optimization Checklist for Working Adults"</p></div>
+    <div class="card"><h3>Insurance</h3><p>"How Much Insurance Do You Actually Need?"</p></div>
+  </div>
+  <p class="subtitle" style="margin-top: 36px;">Pick the one closest to your niche. You can build another one next week; today is about learning the machine.</p>
+  <aside class="notes">Give them 60 seconds max to choose. If someone agonises, assign them retirement. Speed matters more than the perfect topic; the design step later handles all three equally.</aside>
+</div>
+
+<!-- 13 -->
+<div class="slide" data-section="Module 2">
+  <p class="kicker">Step 2 of 6<span style="color: var(--faint); font-weight: 600;"> &middot; ~5 min</span></p>
+  <h2>Generate your content <span class="accent">(Prompt 1)</span></h2>
+  <div class="split" style="align-items: start;">
+    <div>
+      <div class="prompt" style="margin-top: 24px;">
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+        <pre>I'm a financial advisor in Singapore. Help me write a short lead magnet PDF (5-7 key points) on the topic: <span class="ph">[YOUR TOPIC]</span>.
+
+My target audience is working adults aged 25-40 in Singapore.
+
+Keep the tone practical, friendly, and jargon-free. Include a brief intro, the main points, and a closing that invites them to book a free consultation.</pre>
+      </div>
+      <div class="checkpoint">The AI has written your 5-7 points. Thumbs up when you're here.</div>
+    </div>
+    <div>
+      <img class="shot" src="shots/chatgpt-home.png" alt="The chatgpt.com home screen with the Ask anything box">
+      <p class="shot-cap">chatgpt.com. One box. Paste the prompt, swap in your topic, hit enter. (claude.ai looks nearly identical.)</p>
+    </div>
+  </div>
+  <aside class="notes">Demonstrate in ChatGPT on the projector with your own topic; the room follows in whichever tool they have. Remind them: replace the bracketed part before hitting enter, and stay in this ONE chat for the whole module; the design and cover steps build on this conversation. This prompt is on their printed cheat sheet too. Wait for the room.</aside>
+</div>
+
+<!-- what good looks like -->
+<div class="slide" data-section="Module 2">
+  <p class="kicker">Check your result</p>
+  <h2>What a good reply <span class="accent">looks like</span></h2>
+  <div class="doc-panel">
+    <h4>5 Retirement Mistakes Singaporeans Make Before 40</h4>
+    <p>Most people in their 20s and 30s treat retirement as a someday problem. By the time it becomes urgent, the easiest years to fix it are already gone...</p>
+    <p><span class="pt">1. Treating CPF as the whole plan</span><br>CPF is a solid base, not a full retirement plan. Between the Full Retirement Sum and rising costs of living, most people need savings outside CPF...</p>
+    <p><span class="pt">2. Letting cash sit idle for a decade</span> <span class="skip">...3-4 sentences...</span></p>
+    <p><span class="skip">3, 4, 5 ... same shape, one mistake each ...</span></p>
+    <p><span class="pt">Closing:</span> "If you'd like a second pair of eyes on your retirement plan, book a free, no-obligation consultation."</p>
+  </div>
+  <p class="shot-cap" style="text-align: left; max-width: 880px;">Real AI output from the exact prompt (this one from Claude; ChatGPT's looks similar). Yours will differ; check the shape: intro, 5-7 points with short explanations, and a closing that asks for the meeting.</p>
+  <aside class="notes">This slide answers "did I do it right?" without you checking 20 laptops. Have them compare shape, not words: an intro, numbered points with 3-4 sentences each, a consultation CTA at the end. Missing the CTA? Tell the AI: "add a closing that invites them to book a free consultation."</aside>
+</div>
+
+<!-- 14 -->
+<div class="slide" data-section="Module 2">
+  <p class="kicker">Step 3 of 6<span style="color: var(--faint); font-weight: 600;"> &middot; ~5 min</span></p>
+  <h2>The first draft is a draft. <span class="accent">Talk to it.</span></h2>
+  <div class="cols">
+    <div class="card">
+      <h3>Tell it what to change</h3>
+      <ul>
+        <li>"Make it shorter"</li>
+        <li>"Focus more on CPF"</li>
+        <li>"Remove jargon"</li>
+        <li>"Give me 3 versions"</li>
+        <li>"Make it more casual"</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Then read it like an advisor</h3>
+      <ul>
+        <li>You're the expert, not the AI</li>
+        <li>Fix anything factually off before it goes out under your name</li>
+        <li>Compliance rules still apply to AI-written content</li>
+      </ul>
+    </div>
+  </div>
+  <aside class="notes">This is the skill that outlasts the workshop: iterating instead of accepting. Show one live iteration on the projector, e.g. "make point 3 more specific to CPF". The right column matters: they are licensed advisors and responsible for every word. 5 minutes here.</aside>
+</div>
+
+<!-- 15 -->
+<div class="slide" data-section="Module 2">
+  <p class="kicker">Step 4 of 6<span style="color: var(--faint); font-weight: 600;"> &middot; ~8 min</span></p>
+  <h2>Make it <span class="accent">beautiful</span> (Prompt 1b)</h2>
+  <div class="prompt small" style="margin-top: 8px;">
+    <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    <pre>Now turn this guide into a beautifully designed document. Build it as one self-contained HTML file I can download.
+
+Design: navy blue and gold, modern, generous spacing, large readable text. A full-page cover with the title and "A free guide by <span class="ph">[YOUR NAME]</span>", one section per point, and a closing page with a "Book your free consultation" call to action plus my contact: <span class="ph">[PHONE]</span> / <span class="ph">[EMAIL]</span>.
+
+Make it print-perfect: A4 pages, each section starting on a new page, print styles included. Give me the finished .html file to download.</pre>
+  </div>
+  <div class="steps" style="margin-top: 6px;">
+    <div class="step-row"><span>Paste into the <b style="color: var(--gold);">same chat</b>, download the <b style="color: var(--gold);">.html file</b> it returns</span></div>
+    <div class="step-row"><span>Double-click the file to open it in your browser, then <b style="color: var(--gold);">Cmd+P</b> (Ctrl+P on Windows) &rarr; Save as PDF</span></div>
+  </div>
+  <div class="checkpoint" style="margin-top: 14px;">A PDF that actually looks designed, saved on your laptop. Thumbs up.</div>
+  <aside class="notes">The magic moment of Module 2. WHY HTML and not a PDF directly: asking ChatGPT for a PDF file makes it code-generate one, and those look crude - basic fonts, broken spacing (verified on Leo's paid account 2026-07-10). Asking for a designed HTML file gets designer-grade output, and Cmd+P turns it into a perfect PDF. Demo the steps on the projector; the double-click-then-print part takes 20 seconds. A finished sample of what this produces lives at workshop-materials.vercel.app/sample-lead-magnet.pdf - flash it here to set the quality bar. File downloads REQUIRE being logged in; signed-out ChatGPT refuses (verified). Design misses are say-see-shape: "make the cover bolder and give me the file again". Next slide handles the common snags.</aside>
+</div>
+
+<div class="slide" data-section="Module 2">
+  <p class="kicker">If it balks</p>
+  <h2>Two fixes when the PDF <span class="accent">won't come</span></h2>
+  <div class="cols" style="margin-top: 24px;">
+    <div class="card">
+      <h3>"I can't create a downloadable PDF"</h3>
+      <p>You're probably logged out; signed-out ChatGPT can't make files at all. Log in and resend Prompt 1b. Still no file? Say <b style="color: var(--gold);">"put the full HTML in the chat instead"</b> and raise your hand; we'll save it together in 30 seconds.</p>
+    </div>
+    <div class="card">
+      <h3>Your typing lands inside the document</h3>
+      <p>ChatGPT sometimes opens your guide in an editable side panel. Anything you type there goes <b style="color: var(--gold);">into the guide</b>, not to ChatGPT. Click the message box at the bottom of the screen first, then type your next prompt.</p>
+    </div>
+  </div>
+  <p class="subtitle" style="margin-top: 22px; max-width: 940px;">Both of these are 10-second fixes. Neither means you did anything wrong.</p>
+  <aside class="notes">Both verified live in testing (2026-07-10): signed-out ChatGPT refuses direct PDF creation and itself offers the print-ready route, and our own first follow-up prompt landed inside the canvas document instead of the chat. Expect a few hands on each. The print-to-PDF route produces the identical file; nobody's workshop dies here.</aside>
+</div>
+
+<!-- Step 5: read + Claude alternate -->
+<div class="slide" data-section="Module 2">
+  <p class="kicker">Step 5 of 6<span style="color: var(--faint); font-weight: 600;"> &middot; ~5 min</span></p>
+  <h2>Read it, then fix it <span class="accent">with words</span></h2>
+  <div class="split">
+    <div>
+      <div class="steps" style="margin-top: 24px;">
+        <div class="step-row"><span>Open the PDF. Read it once, cover to closing. <b style="color: var(--gold);">Your name is on it</b>; compliance rules apply.</span></div>
+        <div class="step-row"><span>Want changes? Back to the chat: <b style="color: var(--gold);">"change [X] and give me the file again"</b>. Download, print, done.</span></div>
+      </div>
+      <div class="checkpoint">A finished PDF you've actually read, saved on your laptop. Thumbs up.</div>
+    </div>
+    <div>
+      <div class="shot-wrap">
+        <img class="shot" src="shots/claude-artifact.png" alt="Claude chat with a designed document open in the artifact panel beside it">
+        <div class="pin" style="left: 44%; top: 0.5%; width: 55.5%; height: 97%;"></div>
+        <div class="pin-label" style="left: 44%; top: 10%;">Claude designs it here instead</div>
+      </div>
+      <p class="shot-cap">Using Claude? Identical mechanic: same Prompt 1b, it designs in a side panel. Download, open, Cmd+P, Save as PDF.</p>
+    </div>
+  </div>
+  <aside class="notes">The read-through is the compliance moment; nobody ships a PDF they haven't read. Claude route on the right for anyone working there: artifact panel, Download, open, print to PDF, about 20 extra seconds. Nobody goes to break without the finished PDF.</aside>
+</div>
+
+<!-- Step 6: cover image -->
+<div class="slide" data-section="Module 2">
+  <p class="kicker">Step 6 of 6<span style="color: var(--faint); font-weight: 600;"> &middot; ~8 min</span></p>
+  <h2>Your cover image, from <span class="accent">ChatGPT</span></h2>
+  <div class="prompt">
+    <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    <pre>Create a square 1:1 cover image for a free PDF guide called
+"<span class="ph">[GUIDE TITLE]</span>". Professional financial-services style, navy blue
+and gold, the title in large bold text, a small "FREE GUIDE" badge,
+clean simple background, no people, space around the text.</pre>
+  </div>
+  <div class="steps" style="margin-top: 8px;">
+    <div class="step-row"><span>Same chat, one more message &rarr; <b style="color: var(--gold);">check the spelling in the image</b>, regenerate if the title is garbled</span></div>
+    <div class="step-row"><span>Hover the image &rarr; download. This becomes your ad image in Module 4.</span></div>
+  </div>
+  <div class="checkpoint">A PDF and a square cover image, both saved on your laptop. Thumbs up.</div>
+  <aside class="notes">Still the same ChatGPT conversation: write, design, PDF, cover, one thread. Claude users hop to chatgpt.com just for this step (Claude doesn't generate images) or pair with a neighbour. The spelling check is non-negotiable: a garbled title reads as a scam. Bonus B later builds on exactly this skill for A/B testing.</aside>
+</div>
+
+<!-- 17 -->
+<div class="slide center" data-section="Break" id="break">
+  <p class="kicker">15 minutes</p>
+  <h1>Break</h1>
+  <p class="subtitle">Stuck on anything? Come to the front now.<br>Everyone launches in Module 4, so we fix problems during the break.</p>
+  <aside class="notes">Troubleshooting time, not rest time for you. Priority: anyone whose Ads Manager or payment method is broken. Second: unfinished lead magnets. Note who is behind so you can watch them in Module 4.</aside>
+</div>
+
+<!-- ============ MODULE 3 ============ -->
+
+<!-- 18 -->
+<div class="slide divider" data-section="Module 3" id="m3">
+  <div class="big-num">3</div>
+  <div><span class="pill">Module 3 &middot; 25 min</span><span class="pill mode">Laptops closed, just watch</span></div>
+  <h1>Meta ads <span class="accent">101</span></h1>
+  <p class="subtitle">How it actually works, in plain English.</p>
+  <aside class="notes">Laptops closed or lids half down. If they build while you explain, they miss the concepts and then get lost in Module 4. 25 minutes, keep moving.</aside>
+</div>
+
+<!-- 19 -->
+<div class="slide" data-section="Module 3">
+  <p class="kicker">The structure</p>
+  <h2>Think of a <span class="accent">filing cabinet</span></h2>
+  <div class="steps">
+    <div class="step-row"><span><b style="color: var(--gold);">Campaign</b> = the drawer. Your goal: get leads.</span></div>
+    <div class="step-row"><span><b style="color: var(--gold);">Ad set</b> = the folder. Who sees it, and how much you spend.</span></div>
+    <div class="step-row"><span><b style="color: var(--gold);">Ad</b> = the document. What they actually see in their feed.</span></div>
+  </div>
+  <p class="subtitle" style="margin-top: 36px;">You create one campaign, one ad set, one ad. That's the whole build.</p>
+  <aside class="notes">Meta's interface looks intimidating because it's built for agencies running hundreds of ads. You need exactly one of each level. Repeat: drawer, folder, document.</aside>
+</div>
+
+<!-- 20 -->
+<div class="slide" data-section="Module 3">
+  <p class="kicker">The inputs</p>
+  <h2>Meta needs <span class="accent">3 things</span> from you</h2>
+  <div class="cols three">
+    <div class="card"><h3>WHO</h3><p>Who should see your ad. Targeting.</p></div>
+    <div class="card"><h3>WHAT</h3><p>What they see. Your image and copy.</p></div>
+    <div class="card"><h3>HOW MUCH</h3><p>Your daily budget.</p></div>
+  </div>
+  <p class="subtitle" style="margin-top: 36px;">Everything else is details. Get these 3 right and you get leads.</p>
+  <aside class="notes">This slide kills overwhelm. Every screen they see in Module 4 answers one of these questions. Refer back to this: "which of the 3 is this screen asking about?"</aside>
+</div>
+
+<!-- 21 -->
+<div class="slide" data-section="Module 3">
+  <p class="kicker">The format</p>
+  <h2>Why we use <span class="accent">lead form ads</span></h2>
+  <div class="split" style="margin-top: 32px;">
+    <div>
+      <div class="card bad" style="margin-bottom: 20px;">
+        <h3>Traffic ad (the old way)</h3>
+        <p>See ad &rarr; click &rarr; your website &rarr; find the form &rarr; type everything &rarr; maybe submit</p>
+      </div>
+      <div class="card">
+        <h3>Lead form ad (our way)</h3>
+        <p>See ad &rarr; click &rarr; form opens inside Facebook, name and number already filled in &rarr; done</p>
+      </div>
+    </div>
+    <div>
+      <img class="shot" src="shots/lead-ad-example.png" alt="A real financial services lead ad offering a free first home buyers guide">
+      <p class="shot-cap">A real one: a free guide, traded for contact details. Yours will look like this.</p>
+    </div>
+  </div>
+  <aside class="notes">The screenshot is a real lead ad from a mortgage advisor: free ebook as the magnet, exactly the structure they're building today. Point at it: profile, short copy, guide cover as the image. Why lead forms win: no website needed, fewer steps so more people finish, and Facebook fills in their details for them. No landing page, no web developer, no domain.</aside>
+</div>
+
+<!-- 22 -->
+<div class="slide" data-section="Module 3">
+  <p class="kicker">Targeting</p>
+  <h2>Who sees your ad</h2>
+  <div class="steps">
+    <div class="step-row"><span>Location: <b style="color: var(--gold);">Singapore</b></span></div>
+    <div class="step-row"><span>Age: <b style="color: var(--gold);">25-45</b></span><span class="note">younger for savings topics, older for retirement</span></div>
+    <div class="step-row"><span>Interests: <b style="color: var(--gold);">financial planning, investments, CPF, retirement, insurance</b></span><span class="note">pick 3-5 that match your topic</span></div>
+  </div>
+  <p class="subtitle" style="margin-top: 36px;">Start broad. Meta's algorithm finds the right people inside your audience. Every extra restriction makes each lead more expensive.</p>
+  <aside class="notes">Beginners want to over-target ("35-37 year old mothers in Tampines"). Small audiences cost more per lead. Trust the algorithm with a broad audience and let it learn.</aside>
+</div>
+
+<!-- 23 -->
+<div class="slide" data-section="Module 3">
+  <p class="kicker">Compliance &middot; One checkbox</p>
+  <h2>The category that keeps your account <span class="accent">alive</span></h2>
+  <div class="steps">
+    <div class="step-row"><span>Campaign setup asks about <b style="color: var(--gold);">Special Ad Categories</b>. If it lists <b style="color: var(--gold);">Financial products and services</b>, that's you. Declare it.</span></div>
+    <div class="step-row"><span>Declaring it removes fine-grained age and gender targeting. That's fine: your copy now does the targeting.</span></div>
+    <div class="step-row"><span>Skipping it feels clever until Meta notices. Rejected ads first, then the account. Bans follow the person, not the account</span><span class="note">a fresh account won't reset you</span></div>
+    <div class="step-row"><span>On the form, collect name, phone and your one custom question. Age, income, everything else: ask on the call, never on the form.</span></div>
+  </div>
+  <p class="subtitle" style="margin-top: 30px;">One honest checkbox costs you a little targeting. Gaming it can cost you Meta ads for good.</p>
+  <aside class="notes">New in v2, from the 2025-26 research sweep. Meta now enforces the financial category hard: US insurance agents were swept in wholesale in January 2025, solo agents included, and the bans documented there are IP-level and permanent. If someone asks "can I still target 55+?": after declaring the category, mostly no, and the fix is copy that names who the ad is for, so the wrong people scroll past and the right ones stop. That behaviour trains the algorithm better than any age box did.</aside>
+</div>
+
+<div class="slide" data-section="Module 3">
+  <p class="kicker">Money</p>
+  <h2>Budget <span class="accent">reality check</span></h2>
+  <div class="steps">
+    <div class="step-row"><span>Daily budget: <b style="color: var(--gold);">$5-10</b> is plenty to start</span></div>
+    <div class="step-row"><span>Cost per lead in Singapore: <b style="color: var(--gold);">$3-15</b></span><span class="note">depends on offer and audience</span></div>
+    <div class="step-row"><span>Minimum test: <b style="color: var(--gold);">3 days</b>. Never judge after day 1.</span></div>
+    <div class="step-row"><span>Total for your first test: <b style="color: var(--gold);">$15-30</b></span></div>
+    <div class="step-row"><span>Never press <b style="color: var(--gold);">Boost Post</b> on your page. Same money, none of the controls you're learning today</span></div>
+  </div>
+  <p class="subtitle" style="margin-top: 36px;">Less than a nice dinner, for real leads on your phone. Pause anytime; you only pay when people see the ad. Agencies start advisors at US$10-50 a day, so $5 is the same machine on a training dial.</p>
+  <aside class="notes">Money worry is the biggest silent objection in the room. Name it directly. $15-30 total, pausable anytime, no contract. Then transition: "Time to build. Laptops open."</aside>
+</div>
+
+<div class="slide" data-section="Module 3">
+  <p class="kicker">The copy</p>
+  <h2>Lead with their problem, <span class="accent">not your name</span></h2>
+  <div class="cols" style="grid-template-columns: 1fr 1fr 1fr; margin-top: 28px;">
+    <div class="card">
+      <h3>Problem</h3>
+      <p>"Retiring into a market crash can drain your savings years earlier than you planned."</p>
+    </div>
+    <div class="card">
+      <h3>Agitate</h3>
+      <p>"Most portfolios aren't protected against it, and most people find out too late."</p>
+    </div>
+    <div class="card">
+      <h3>Solve</h3>
+      <p>"My free guide shows three ways to protect yourself. Download it below."</p>
+    </div>
+  </div>
+  <div class="steps" style="margin-top: 24px;">
+    <div class="step-row"><span>"Worried about running out of money in retirement?" speaks to <b style="color: var(--gold);">2 in 3</b> readers. "Hi, I'm John from XYZ Financial" speaks to almost none.</span></div>
+    <div class="step-row"><span>Your angle also picks your leads: tax content pulls wealthier prospects, income-planning content pulls pre-retirees</span></div>
+  </div>
+  <aside class="notes">Problem-Agitate-Solve, the formula the advisor-marketing agencies run on. Two points to land: copy that opens with the reader's fear massively outreaches copy that opens with your name and firm; and because the ads category limits targeting, the copy IS the targeting. Prompt 2 in Module 4 already produces this structure - this slide is so they recognise good output when they see it, and re-prompt when they don't.</aside>
+</div>
+
+<div class="slide" data-section="Module 3">
+  <p class="kicker">Principles</p>
+  <h2>Rules that outlive <span class="accent">every screen change</span></h2>
+  <div class="snap">
+    <table class="nums">
+      <tr><td class="n">Image, copy, offer</td><td>In that order: the image stops the scroll, the copy earns the tap, the offer wins the lead.</td></tr>
+      <tr><td class="n">Broad targeting</td><td>The algorithm finds your people. Every restriction raises the price of a lead.</td></tr>
+      <tr><td class="n">Data before opinions</td><td>48 hours and 500 impressions before any verdict. Feelings lie; cost per lead doesn't.</td></tr>
+      <tr><td class="n">One change at a time</td><td>Change two things and you learn nothing. Duplicate, swap one, compare.</td></tr>
+      <tr><td class="n">Always-on beats bursts</td><td>$5 every day beats $150 on launch weekend. The machine rewards consistency.</td></tr>
+      <tr><td class="n">Own the list</td><td>Campaigns get paused; the lead list is yours forever. Export it weekly.</td></tr>
+    </table>
+    <p class="foot">Meta ads principles &middot; AI Ads Launch Lab &middot; @leotan_js</p>
+  </div>
+  <aside class="notes">The capstone of Module 3, right before hands-on. Meta redesigns its screens every few months; these six don't move. If a student remembers nothing else from the theory block, this slide is the keeper - say exactly that and give them five seconds to photograph it. 'Own the list' sets up Bonus C (Zapier to a sheet).</aside>
+</div>
+
+<!-- ============ MODULE 4 ============ -->
+
+<!-- 24 -->
+<div class="slide divider" data-section="Module 4" id="m4">
+  <div class="big-num">4</div>
+  <div><span class="pill">Module 4 &middot; 60 min</span><span class="pill mode">Hands-on</span></div>
+  <h1>Build and <span class="accent">launch</span></h1>
+  <p class="subtitle">I do each step on this screen. Then you do it.<br>Thumbs up at every checkpoint before we move on.</p>
+  <aside class="notes">Pace rule: do the step, wait for the room, then advance. Never move with hands still down. Fast finishers help their neighbours; someone hopelessly behind watches your screen and catches up after.</aside>
+</div>
+
+<!-- 25 -->
+<div class="slide" data-section="Module 4">
+  <p class="kicker">The map</p>
+  <h2>All 10 steps, <span class="accent">one screen</span></h2>
+  <div class="snap">
+    <ol>
+      <li>Open adsmanager.facebook.com</li>
+      <li>+ Create &rarr; objective: Leads &rarr; name it</li>
+      <li>Audience: Singapore, 25-45, 3-5 interests</li>
+      <li>Budget: $5/day, end date 3 days out</li>
+      <li>Identity: your Page + accept Lead Ads Terms</li>
+      <li>Upload your ChatGPT cover image</li>
+      <li>AI writes 3 copy variations (Prompt 2)</li>
+      <li>Paste: primary text, headline, description + CTA</li>
+      <li>Instant form: More Volume, name + phone + concern</li>
+      <li>Final checklist &rarr; Publish</li>
+    </ol>
+    <p class="foot">Launch checklist &middot; AI Ads Launch Lab &middot; @leotan_js</p>
+  </div>
+  <aside class="notes">Say it explicitly: "Take a photo of this slide now." Anyone who falls behind during the next hour has the whole route on their phone. Then advance; each step gets its own slide with the real screen.</aside>
+</div>
+
+<div class="slide" data-section="Module 4">
+  <p class="kicker">Step 1 of 10<span style="color: var(--faint); font-weight: 600;"> &middot; ~2 min</span></p>
+  <h2>Open <span class="accent">Ads Manager</span></h2>
+  <div class="split">
+    <div>
+      <p class="subtitle" style="font-size: clamp(20px, 2.6vw, 32px); margin-top: 28px;">adsmanager.facebook.com</p>
+      <div class="checkpoint">You see a dashboard like this (yours will be emptier). Error or setup screen instead? Raise your hand.</div>
+    </div>
+    <div>
+      <div class="shot-wrap">
+        <img class="shot" src="shots/ads-dashboard-results.png" alt="Meta Ads Manager campaigns dashboard with the green Create button top left">
+        <div class="pin" style="left: 1%; top: 13%; width: 10.5%; height: 14%;"></div>
+        <div class="pin-label" style="left: 13%; top: 14%;">next step starts here</div>
+      </div>
+      <p class="shot-cap">The Campaigns dashboard. Yours has no rows yet; the green Create button is what matters.</p>
+    </div>
+  </div>
+  <aside class="notes">2 min. If someone hits an error, try business.facebook.com first. Restricted account: pair them with a neighbour for the rest of the session, sort their account after the workshop.</aside>
+</div>
+
+<!-- 26 -->
+<div class="slide" data-section="Module 4">
+  <p class="kicker">Step 2 of 10<span style="color: var(--faint); font-weight: 600;"> &middot; ~3 min</span></p>
+  <h2>Create the campaign</h2>
+  <div class="split">
+    <div>
+      <div class="steps" style="margin-top: 24px;">
+        <div class="step-row">Click the green <b style="color: var(--gold);">+ Create</b> button, top left</div>
+        <div class="step-row">Objective: <b style="color: var(--gold);">Leads</b> <span class="note">we want a form filled, not a website visit</span></div>
+        <div class="step-row">Continue</div>
+        <div class="step-row">Name it something you'll recognise <span class="note">"Retirement Guide Lead Gen"</span></div>
+      </div>
+      <div class="checkpoint">You're on the Ad Set screen. Thumbs up.</div>
+    </div>
+    <div>
+      <div class="shot-wrap">
+        <img class="shot" src="shots/meta-objective-leads.jpg" alt="Meta Ads Manager campaign objective screen with Leads selected">
+        <div class="pin" style="left: 0.8%; top: 46%; width: 49%; height: 8%;"></div>
+        <div class="pin-label" style="left: 52%; top: 48%;">1. pick Leads</div>
+        <div class="pin" style="left: 74.5%; top: 92%; width: 11.5%; height: 6.5%;"></div>
+        <div class="pin-label" style="left: 48%; top: 93%;">2. Continue</div>
+      </div>
+      <p class="shot-cap">The screen you'll see. Two clicks.</p>
+    </div>
+  </div>
+  <aside class="notes">3 min. Say why Leads: "we're asking Meta to find people who fill in forms, not people who click links." Naming matters when they have 5 campaigns in 3 months.</aside>
+</div>
+
+<!-- 27 -->
+<div class="slide" data-section="Module 4">
+  <p class="kicker">Step 3 of 10<span style="color: var(--faint); font-weight: 600;"> &middot; ~10 min</span></p>
+  <h2>Audience: the <span class="accent">WHO</span></h2>
+  <div class="split">
+    <div>
+      <div class="steps" style="margin-top: 24px;">
+        <div class="step-row">Performance goal: <b style="color: var(--gold);">Maximise number of leads</b> <span class="note">usually pre-selected; leave it</span></div>
+        <div class="step-row">Location: <b style="color: var(--gold);">Singapore</b></div>
+        <div class="step-row">Age: <b style="color: var(--gold);">25-45</b> <span class="note">or your ideal client's range</span></div>
+        <div class="step-row"><span>Detailed Targeting &rarr; Browse &rarr; add <b style="color: var(--gold);">3-5 interests</b> matching your topic <span class="note" style="display:block;">financial planning, investments, CPF, retirement planning, insurance</span></span></div>
+      </div>
+      <div class="checkpoint">Audience shows Singapore, an age range, and 3-5 interests. Thumbs up.</div>
+    </div>
+    <div>
+      <div class="shot-wrap">
+        <img class="shot" src="shots/meta-audience.png" alt="Meta Ads Manager audience section showing location, age, gender and detailed targeting">
+        <div class="pin" style="left: 1.5%; top: 42.5%; width: 42%; height: 10%;"></div>
+        <div class="pin-label" style="left: 46%; top: 45%;">yours: Singapore</div>
+        <div class="pin" style="left: 1.5%; top: 55.5%; width: 30%; height: 7.5%;"></div>
+        <div class="pin-label" style="left: 34%; top: 57%;">yours: 25-45</div>
+      </div>
+      <p class="shot-cap">The Audience section. The example shows Italy, 18-65+; set yours as labelled.</p>
+    </div>
+  </div>
+  <aside class="notes">10 min, the longest setup step. Type the interests one at a time on the projector; the search box is fussy about naming ("Central Provident Fund (CPF)"). Retirement guide gets retirement interests; insurance guide gets insurance.</aside>
+</div>
+
+<!-- 28 -->
+<div class="slide" data-section="Module 4">
+  <p class="kicker">Step 4 of 10<span style="color: var(--faint); font-weight: 600;"> &middot; ~5 min</span></p>
+  <h2>Budget: the <span class="accent">HOW MUCH</span></h2>
+  <div class="split">
+    <div>
+      <div class="steps" style="margin-top: 24px;">
+        <div class="step-row">Daily budget: <b style="color: var(--gold);">$5</b> <span class="note">$10 if you're comfortable</span></div>
+        <div class="step-row">Start date: <b style="color: var(--gold);">today</b></div>
+        <div class="step-row">Tick "Set an end date": <b style="color: var(--gold);">3 days from today</b></div>
+      </div>
+      <p class="subtitle" style="margin-top: 24px; font-size: clamp(15px, 1.7vw, 20px);">$5 a day. Less than your kopi and lunch.</p>
+      <div class="checkpoint">$5/day, running 3 days from today. Thumbs up.</div>
+    </div>
+    <div>
+      <div class="shot-wrap">
+        <img class="shot" src="shots/meta-budget.png" alt="Meta Ads Manager budget and schedule section with daily budget and start date">
+        <div class="pin" style="left: 48%; top: 19%; width: 49%; height: 10.5%;"></div>
+        <div class="pin-label" style="left: 48%; top: 31%;">type 5 here</div>
+        <div class="pin" style="left: 2.5%; top: 70.5%; width: 24%; height: 9%;"></div>
+        <div class="pin-label" style="left: 28%; top: 72.5%;">tick this, +3 days</div>
+      </div>
+      <p class="shot-cap">Budget &amp; schedule. Two changes: the amount, and the end date.</p>
+    </div>
+  </div>
+  <aside class="notes">5 min. The 3-day end date protects them: worst case, a forgotten campaign costs $15-30, not $300. Repeat the rule: don't judge results after day 1, Meta is still learning.</aside>
+</div>
+
+<!-- 29 -->
+<div class="slide" data-section="Module 4">
+  <p class="kicker">Halfway there</p>
+  <h2>Drawer done. Folder done. <span class="accent">Now the document.</span></h2>
+  <div class="steps" style="margin-top: 8px;">
+    <div class="step-row"><span><b style="color: var(--green);">&#10003; Campaign</b> (the drawer): goal set to Leads</span></div>
+    <div class="step-row"><span><b style="color: var(--green);">&#10003; Ad set</b> (the folder): who sees it, $5/day for 3 days</span></div>
+    <div class="step-row"><span><b style="color: var(--gold);">&rarr; The ad</b> (the document): what people actually see. That's steps 5-9.</span></div>
+  </div>
+  <p class="subtitle" style="margin-top: 28px;">Click <b style="color: var(--gold);">Next</b> (bottom right) until the screen says you're editing the <b style="color: var(--gold);">Ad</b>. The left sidebar shows all three levels; you can always click your way back.</p>
+  <div class="checkpoint">Your screen shows the Ad level: Identity, Ad creative, Destination. Thumbs up.</div>
+  <aside class="notes">This is where beginners silently get lost: the budget screen has no obvious "I'm done" moment and the Next button is easy to miss bottom-right. The filing cabinet callback from Module 3 pays off here; point at each line. Anyone who clicked too far: the left sidebar shows Campaign / Ad set / Ad, click Ad.</aside>
+</div>
+
+<div class="slide" data-section="Module 4">
+  <p class="kicker">Step 5 of 10<span style="color: var(--faint); font-weight: 600;"> &middot; ~3 min</span></p>
+  <h2>Pick your <span class="accent">Page</span></h2>
+  <div class="split">
+    <div>
+      <div class="steps" style="margin-top: 24px;">
+        <div class="step-row"><span>Under "Identity", select your <b style="color: var(--gold);">Facebook Business Page</b>. This is who the ad comes from.</span></div>
+        <div class="step-row"><span>First time? A prompt asks you to accept <b style="color: var(--gold);">Meta's Lead Ads Terms</b>. Click through and accept; it takes 10 seconds.</span></div>
+      </div>
+      <div class="checkpoint">Your Page is selected and the terms banner shows accepted. Thumbs up.</div>
+    </div>
+    <div>
+      <img class="shot" src="shots/meta-identity-page.png" alt="Facebook Page selector with the Lead Ads Terms accepted notice">
+      <p class="shot-cap">The Page dropdown, and the terms notice you want to see under it.</p>
+    </div>
+  </div>
+  <aside class="notes">The Lead Ads Terms acceptance is the hidden blocker on this screen; nobody knows about it in advance and it looks scarier than it is. Page missing from the dropdown usually means they're not admin of that Page; quick fix is creating a fresh Page at facebook.com/pages/create.</aside>
+</div>
+
+<!-- Step 6: upload image -->
+<div class="slide" data-section="Module 4">
+  <p class="kicker">Step 6 of 10<span style="color: var(--faint); font-weight: 600;"> &middot; ~4 min</span></p>
+  <h2>Upload your <span class="accent">image</span></h2>
+  <div class="split">
+    <div>
+      <div class="steps" style="margin-top: 24px;">
+        <div class="step-row">Ad Creative &rarr; <b style="color: var(--gold);">Add Media</b> &rarr; Add Image</div>
+        <div class="step-row">Upload your <b style="color: var(--gold);">ChatGPT cover image</b> from Module 2</div>
+        <div class="step-row">Watch the preview panel on the right; your cover appears in a fake Facebook feed</div>
+      </div>
+      <div class="checkpoint">Your lead magnet cover shows as the ad image in the preview. Thumbs up.</div>
+    </div>
+    <div>
+      <div class="shot-wrap">
+        <img class="shot" src="shots/meta-ad-creative.png" alt="Meta Ads Manager ad creative section with live ad preview panel">
+        <div class="pin" style="left: 46.5%; top: 24%; width: 28%; height: 72%;"></div>
+        <div class="pin-label" style="left: 46.5%; top: 15%;">your ad, live preview</div>
+      </div>
+      <p class="shot-cap">Ad creative on the left, live preview on the right. Watch your ad take shape there.</p>
+    </div>
+  </div>
+  <aside class="notes">Someone will have skipped the cover step. Fix: chatgpt.com, the cover prompt from Module 2 step 6, download, back here. If the crop looks off, ask ChatGPT for "the same image, square 1:1".</aside>
+</div>
+
+<!-- 30 -->
+<div class="slide" data-section="Module 4">
+  <p class="kicker">Step 7 of 10<span style="color: var(--faint); font-weight: 600;"> &middot; ~5 min</span></p>
+  <h2>Generate your ad copy <span class="accent">(Prompt 2)</span></h2>
+  <div class="prompt">
+    <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    <pre>I'm running a Meta lead gen ad for my financial advisory practice in Singapore.
+
+My lead magnet is: <span class="ph">[YOUR LEAD MAGNET TITLE]</span>.
+My target audience is 25-40 year old working adults in Singapore
+interested in <span class="ph">[YOUR TOPIC]</span>.
+
+Write me:
+1) Primary text (under 125 characters for above-the-fold)
+2) Headline (under 40 characters)
+3) Description (under 30 characters)
+
+Keep it benefit-focused and conversational. Give me 3 variations.</pre>
+  </div>
+  <div class="checkpoint">Claude gave you 3 variations. Read them, pick your favourite. Thumbs up.</div>
+  <aside class="notes">Open ChatGPT or Claude in a second tab; keep Ads Manager in the first. Have them actually read all 3 variations before picking; the first one isn't automatically the best. Copy too long? "Make the primary text shorter, under 125 characters."</aside>
+</div>
+
+<!-- Step 8: paste into fields -->
+<div class="slide" data-section="Module 4">
+  <p class="kicker">Step 8 of 10<span style="color: var(--faint); font-weight: 600;"> &middot; ~4 min</span></p>
+  <h2>Paste into the <span class="accent">three fields</span></h2>
+  <div class="steps">
+    <div class="step-row"><span>Claude's <b style="color: var(--gold);">primary text</b> &rarr; the "Primary text" field <span class="note">the sentence above your image in the feed</span></span></div>
+    <div class="step-row"><span>Claude's <b style="color: var(--gold);">headline</b> &rarr; the "Headline" field <span class="note">bold line under the image</span></span></div>
+    <div class="step-row"><span>Claude's <b style="color: var(--gold);">description</b> &rarr; the "Description" field <span class="note">small grey line, sometimes hidden</span></span></div>
+    <div class="step-row"><span>Call to action button: pick <b style="color: var(--gold);">"Download"</b> or "Learn more"</span></div>
+  </div>
+  <p class="subtitle" style="margin-top: 14px;">Paste one piece at a time and watch the preview update. If it reads like a real ad, it is one.</p>
+  <div class="checkpoint">Image, headline and text all show in the ad preview. It looks like an ad you'd scroll past. Thumbs up.</div>
+  <aside class="notes">The classic mistake: pasting all three pieces into the Primary text field. Do this step on the projector deliberately slowly, one field at a time, pointing at where each piece lands in the preview. The preview updating live is the payoff moment; let them enjoy it.</aside>
+</div>
+
+<!-- 31 -->
+<div class="slide" data-section="Module 4">
+  <p class="kicker">Step 9 of 10<span style="color: var(--faint); font-weight: 600;"> &middot; ~10 min</span></p>
+  <h2>The <span class="accent">instant form</span></h2>
+  <div class="split">
+    <div>
+      <div class="steps" style="margin-top: 24px;">
+        <div class="step-row">Destination &rarr; <b style="color: var(--gold);">Instant Form</b> &rarr; Create Form</div>
+        <div class="step-row">Form type: <b style="color: var(--gold);">More Volume</b> <span class="note">not Higher Intent</span></div>
+        <div class="step-row">Questions: full name + phone <span class="note">Facebook pre-fills both</span></div>
+        <div class="step-row">Add question &rarr; Short answer: <b style="color: var(--gold);">"What's your biggest financial concern right now?"</b></div>
+        <div class="step-row">Thank-you screen: "Thanks! I'll be in touch within 24 hours." &rarr; Publish</div>
+      </div>
+      <div class="checkpoint">The form is attached and visible in the ad preview. Thumbs up.</div>
+    </div>
+    <div>
+      <div class="shot-wrap">
+        <img class="shot" src="shots/meta-instant-form.png" alt="Meta instant form builder showing Add question menu and form preview">
+        <div class="pin" style="left: 3.5%; top: 61%; width: 13.5%; height: 6.5%;"></div>
+        <div class="pin-label" style="left: 18.5%; top: 62%;">1. click</div>
+        <div class="pin" style="left: 5.5%; top: 76.5%; width: 14%; height: 7%;"></div>
+        <div class="pin-label" style="left: 21%; top: 78%;">2. Short answer</div>
+      </div>
+      <p class="shot-cap">The form builder. Your custom question goes in via "Add question", type Short answer.</p>
+    </div>
+  </div>
+  <aside class="notes">10 min. The custom question is the gold: it hands them the opening line for the follow-up call. More Volume over Higher Intent because beginners need lead flow to learn from. Form won't save: check required fields, or switch browser.</aside>
+</div>
+
+<!-- 32 -->
+<div class="slide" data-section="Module 4">
+  <p class="kicker">Step 10 of 10<span style="color: var(--faint); font-weight: 600;"> &middot; ~5 min</span></p>
+  <h2>Final check before <span class="accent">launch</span></h2>
+  <ul class="points" style="columns: 2; column-gap: 60px; font-size: clamp(15px, 1.8vw, 21px); margin-top: 28px;">
+    <li>Objective: Leads</li>
+    <li>Location: Singapore</li>
+    <li>Age range set</li>
+    <li>3-5 interests added</li>
+    <li>Budget: $5-10/day</li>
+    <li>Schedule: 3 days, starting today</li>
+    <li>Page selected, Lead Ads Terms accepted</li>
+    <li>Image: your lead magnet cover</li>
+    <li>Copy: primary text, headline, description</li>
+    <li>Call-to-action button set</li>
+    <li>Instant form: name, phone, custom question</li>
+  </ul>
+  <aside class="notes">Read each item aloud, room checks along. Give 2-3 minutes for fixes. Hands up for help. Nobody publishes yet; we launch together on the next slide.</aside>
+</div>
+
+<!-- 33 -->
+<div class="slide center" data-section="Module 4">
+  <p class="kicker">Everyone together</p>
+  <h1>3... 2... 1... <span class="accent">Publish</span></h1>
+  <p class="subtitle" style="margin-top: 40px;">"In Review" for 15-60 minutes is normal.<br>Once approved, it starts running.</p>
+  <aside class="notes">Make it a moment. Countdown out loud, everyone clicks together. Then let it land: their first ever ad campaign is live. Applause. If someone's publish fails, note it and fix during Module 5.</aside>
+</div>
+
+<!-- 34 -->
+<div class="slide" data-section="Module 4">
+  <p class="kicker">It happened</p>
+  <h2>You just did something <span class="accent">95% of advisors</span> never have</h2>
+  <p class="subtitle" style="max-width: 880px;">A lead generation system, built with AI, live on Meta. While it goes through review, two things worth knowing:</p>
+  <div class="cols">
+    <div class="card">
+      <h3>Ad rejected?</h3>
+      <p>Normal for financial services. The usual offenders: "guaranteed", "100%", "risk-free", "no risk", any income promise ("earn $X"), before/after money claims. Remove the word, resubmit, approved. Not a failure.</p>
+    </div>
+    <div class="card">
+      <h3>Still "In Review" tonight?</h3>
+      <p>Also normal. Finance ads get extra checks. Leave it alone; most approve within a few hours.</p>
+    </div>
+  </div>
+  <aside class="notes">Pre-empt the two panic messages you'd otherwise get tonight. Rejection is a policy filter, not a verdict on them. The banned-word list doubles as compliance hygiene: if Meta rejects it, their company's compliance team probably would too. Then straight into Module 5: "so what do you do when the leads arrive?"</aside>
+</div>
+
+<!-- ============ MODULE 5 ============ -->
+
+<!-- 35 -->
+<div class="slide divider" data-section="Module 5" id="m5">
+  <div class="big-num">5</div>
+  <div><span class="pill">Module 5 &middot; 30 min</span><span class="pill mode">Discussion</span></div>
+  <h1>What happens <span class="accent">next</span></h1>
+  <p class="subtitle">Your ad is in review. Perfect timing to set up everything that happens when the first lead arrives.</p>
+  <aside class="notes">Energy management: the room just peaked at Publish. This module converts that high into follow-through: where leads appear, how fast to reply, the rules that stop them killing the campaign at 10pm tonight, and the week-one plan.</aside>
+</div>
+
+<div class="slide" data-section="Module 5">
+  <p class="kicker">Your leads</p>
+  <h2>Where your <span class="accent">leads live</span></h2>
+  <div class="split">
+    <div>
+      <div class="steps" style="margin-top: 24px;">
+        <div class="step-row"><span>Campaign numbers: Ads Manager &rarr; your campaign &rarr; <b style="color: var(--gold);">Results column</b></span></div>
+        <div class="step-row"><span>The actual people: business.facebook.com &rarr; <b style="color: var(--gold);">Leads Centre</b>. Name, phone, and their answer to your question.</span></div>
+        <div class="step-row"><span>Or download a spreadsheet: your ad &rarr; Instant Form &rarr; <b style="color: var(--gold);">Download</b></span></div>
+        <div class="step-row"><span>Turn on notifications in the Meta Business Suite app so leads ping your phone</span></div>
+      </div>
+    </div>
+    <div>
+      <img class="shot" src="shots/meta-leads-center.png" alt="Meta Business Suite sidebar with Leads Centre highlighted" style="max-height: 54vh;">
+      <p class="shot-cap">Leads Centre in Meta Business Suite. Every form fill lands here.</p>
+    </div>
+  </div>
+  <aside class="notes">Most beginners never find their own leads; they see "3 results" in Ads Manager and don't know where the phone numbers are. Leads Centre is the answer, and the mobile app notification is what makes the 2-hour follow-up rule physically possible.</aside>
+</div>
+
+<!-- follow-up message -->
+<div class="slide" data-section="Module 5">
+  <p class="kicker">Week 2 upgrade</p>
+  <h2>When leads look <span class="accent">fake</span></h2>
+  <div class="steps">
+    <div class="step-row"><span>Wrong numbers usually aren't lies. Meta pre-fills the phone field from an old profile. Fix: form settings &rarr; turn <b style="color: var(--gold);">autofill off</b></span></div>
+    <div class="step-row"><span>Still messy? Switch the form type to <b style="color: var(--gold);">Higher Intent</b> and turn on <b style="color: var(--gold);">one-time-passcode verification</b>. Every number gets confirmed by SMS.</span></div>
+    <div class="step-row"><span>Expect the trade: fewer leads, each one real. Do this only when calls, not lead flow, are the bottleneck</span></div>
+    <div class="step-row"><span>End-screen extras worth adding: <b style="color: var(--gold);">chat on WhatsApp</b> and <b style="color: var(--gold);">View file</b>, which hands over your guide instantly</span></div>
+  </div>
+  <aside class="notes">All four are 2025 Meta features most tutorials don't cover yet. Sequence matters: launch on More Volume (the Module 4 default) and only add friction once the diary fills with dead numbers. The passcode toggle only exists under the Higher Intent form type. The WhatsApp end-screen action is gold for Singapore: the lead starts the chat themselves, so the follow-up lands in an existing conversation instead of arriving from an unknown number.</aside>
+</div>
+
+<div class="slide" data-section="Module 5">
+  <p class="kicker">The follow-up</p>
+  <h2>Reply in <span class="accent">minutes</span> (Prompt 3)</h2>
+  <div class="steps" style="margin-top: 8px;">
+    <div class="step-row"><span>Call first. Then WhatsApp. Never ignore.</span></div>
+    <div class="step-row"><span>The agency bar is <b style="color: var(--gold);">15-30 minutes</b>. A morning and evening sweep is the floor, not the goal</span></div>
+    <div class="step-row"><span>Their answer to <b style="color: var(--gold);">"biggest financial concern"</b> goes into the prompt; that's your opening line</span></div>
+  </div>
+  <div class="prompt" style="margin-top: 20px;">
+    <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    <pre>Someone just filled in my Meta lead form. Their details:
+- Name: <span class="ph">[NAME]</span>
+- Phone: <span class="ph">[PHONE]</span>
+- Biggest financial concern: <span class="ph">[CONCERN]</span>
+
+Write me a short WhatsApp message (under 100 words) to follow up.
+Be warm, reference their specific concern, and suggest a quick 15-min call.
+No hard sell.</pre>
+  </div>
+  <aside class="notes">A lead contacted in 5 minutes is warm; the same lead tomorrow is cold. The 15-30 minute bar comes from the agencies that do this at scale; without a team, sweep twice a day minimum. Speed beats craft: a decent message now outperforms a perfect one tomorrow. This prompt is on their cheat sheet.</aside>
+</div>
+
+<div class="slide" data-section="Module 5">
+  <p class="kicker">Principles</p>
+  <h2>Why speed <span class="accent">wins</span></h2>
+  <div class="snap">
+    <table class="nums">
+      <tr><td class="n">Minutes, not hours</td><td>Call within minutes and they remember filling the form. Call tomorrow and you're a cold call.</td></tr>
+      <tr><td class="n">First responder wins</td><td>Prospects fill 2-3 forms in one scrolling session. The first advisor to reach them takes the meeting.</td></tr>
+      <tr><td class="n">Speed beats polish</td><td>A decent WhatsApp in 10 minutes beats a perfect one tomorrow. Prompt 3 makes speed free.</td></tr>
+      <tr><td class="n">Call, then text</td><td>Ring once, then WhatsApp. The missed call makes your message familiar instead of random.</td></tr>
+      <tr><td class="n">Open with their concern</td><td>They told you their biggest worry on the form. That's your first line, not your pitch.</td></tr>
+      <tr><td class="n">Make fast the default</td><td>Notifications on, sheet auto-filling, prompt saved. Speed should be the lazy option.</td></tr>
+    </table>
+    <p class="foot">Speed-to-lead principles &middot; AI Ads Launch Lab &middot; @leotan_js</p>
+  </div>
+  <aside class="notes">The research behind this is old and unambiguous (the InsideSales/MIT lead-response study found contact rates collapse within the first hour); keep the slide qualitative and put numbers in your own words if asked. This slide is why the custom form question and the Zapier bonus exist - the system is built so that being fast requires no discipline.</aside>
+</div>
+
+<!-- 36 -->
+<div class="slide" data-section="Module 5">
+  <p class="kicker">The rules</p>
+  <h2>Four rules that save your <span class="accent">first campaign</span></h2>
+  <div class="cols">
+    <div class="card">
+      <h3>The 48-hour rule</h3>
+      <p>Don't touch the ad for 48 hours. Meta's algorithm is learning; every edit resets it.</p>
+    </div>
+    <div class="card">
+      <h3>When to kill</h3>
+      <p>48 hours + 500 impressions + zero leads: change the copy or image and relaunch. Edit, don't delete.</p>
+    </div>
+    <div class="card">
+      <h3>When to scale</h3>
+      <p>Cost per lead under $10 for 3+ days: raise the budget 20%. Don't double it overnight.</p>
+    </div>
+    <div class="card">
+      <h3>Rejected?</h3>
+      <p>Remove "guaranteed", "100%", income claims. Edit, resubmit, move on.</p>
+    </div>
+  </div>
+  <aside class="notes">The 48-hour rule is the one they'll break. They'll check at 10pm, see 2 dollars spent and no leads, and want to change everything. Say it twice: leave it alone for 48 hours.</aside>
+</div>
+
+<!-- 37: first week timeline -->
+<div class="slide" data-section="Module 5">
+  <p class="kicker">The plan</p>
+  <h2>Your first week, <span class="accent">day by day</span></h2>
+  <div class="steps">
+    <div class="step-row"><span><b style="color: var(--gold);">Today:</b> launched. Close the laptop. Seriously.</span></div>
+    <div class="step-row"><span><b style="color: var(--gold);">Day 1-2:</b> don't touch the ad. Follow up any lead within 2 hours.</span></div>
+    <div class="step-row"><span><b style="color: var(--gold);">Day 3:</b> check cost per lead. Under $10 = working. Over $15 or zero leads = edit copy or image, relaunch.</span></div>
+    <div class="step-row"><span><b style="color: var(--gold);">Day 5-7:</b> working? Raise budget 20% and extend the end date. Not working? New angle, relaunch. Either way you've spent under $30 to learn.</span></div>
+    <div class="step-row"><span><b style="color: var(--gold);">Week 2:</b> build lead magnet #2 with the same three prompts. 30 minutes this time.</span></div>
+  </div>
+  <aside class="notes">This slide is the anti-abandonment plan. Most first campaigns die because nobody told the owner what "normal" looks like on day 2 (a few dollars spent, maybe zero leads). Walk each day slowly. Day 3 check-in message from you comes on cue, so they know they're not alone.</aside>
+</div>
+
+<div class="slide" data-section="Module 5">
+  <p class="kicker">Expectations</p>
+  <h2>Slow is <span class="accent">normal</span></h2>
+  <div class="steps">
+    <div class="step-row"><span>Day 3, $15 spent, nothing booked? <b style="color: var(--gold);">You're on schedule.</b> Even the agencies see first appointments in week 1-2</span></div>
+    <div class="step-row"><span>A lead that books this month becomes a client in 1-3 months. October leads close in December.</span></div>
+    <div class="step-row"><span>About <b style="color: var(--gold);">2 in 3</b> booked appointments show up. For cold traffic that's a good rate, not a failure</span></div>
+    <div class="step-row"><span>Lumpy months are the lag, not luck. Judge the machine by the quarter, not the week</span></div>
+  </div>
+  <p class="subtitle" style="margin-top: 30px;">You're not selling $10 stickers. Nobody moves their retirement savings from one scroll.</p>
+  <aside class="notes">Straight from the advisor-agency case studies: 65% show rate is called good for cold traffic, booking cycles run 1-2 weeks, and closes lag appointments by 1-3 months. This slide exists because the number one killer of first campaigns is the advisor pulling the plug on day 3. The "$10 stickers" line is from an agency owner who runs ads for advisors at scale - steal it.</aside>
+</div>
+
+<div class="slide" data-section="Module 5">
+  <p class="kicker">Keep these</p>
+  <h2>The numbers that <span class="accent">matter</span></h2>
+  <div class="snap">
+    <table class="nums">
+      <tr><td class="n">$5-10 / day</td><td>starting budget. Don't raise it on day one.</td></tr>
+      <tr><td class="n">$3-15</td><td>normal cost per lead in Singapore</td></tr>
+      <tr><td class="n">3 days</td><td>minimum test before judging anything</td></tr>
+      <tr><td class="n">48 hours</td><td>hands off the ad while Meta learns</td></tr>
+      <tr><td class="n">500 + 0</td><td>500 impressions, zero leads: change copy or image, relaunch</td></tr>
+      <tr><td class="n">under $10, 3 days</td><td>cost per lead this good: raise budget 20%</td></tr>
+      <tr><td class="n">30 min</td><td>the pro bar for contacting a new lead. Two hours is the ceiling, not the target.</td></tr>
+    </table>
+    <p class="foot">The operating numbers &middot; AI Ads Launch Lab &middot; @leotan_js</p>
+  </div>
+  <aside class="notes">Another phone-photo slide; say so. This one table answers 90% of the WhatsApp group questions in week one: is my CPL normal, when do I touch it, when do I scale.</aside>
+</div>
+
+<!-- 38 -->
+<div class="slide" data-section="Module 5">
+  <p class="kicker">Calibration</p>
+  <h2>What the pros <span class="accent">pay</span></h2>
+  <div class="snap">
+    <table class="nums">
+      <tr><td class="n">US$5.30</td><td>cost per lead in a published advisor case study ($100/day, 452 leads)</td></tr>
+      <tr><td class="n">US$120-350</td><td>cost per booked meeting across advisor-agency accounts</td></tr>
+      <tr><td class="n">US$200-1,000</td><td>per appointment as target wealth rises ($100k minimum up to $1M+ portfolios)</td></tr>
+      <tr><td class="n">5x</td><td>the average return those agencies report on that spend</td></tr>
+      <tr><td class="n">US$2,000</td><td>true cost per conversation when you BUY leads: $200 each, 1 in 10 answers</td></tr>
+      <tr><td class="n">Your $5/day</td><td>is the same machine at a smaller dial. Same math, same levers, and the list is yours.</td></tr>
+    </table>
+    <p class="foot">US advisor-agency benchmarks, 2025-26 &middot; AI Ads Launch Lab &middot; @leotan_js</p>
+  </div>
+  <aside class="notes">Numbers from agencies that run Meta ads exclusively for financial advisors (Ash Davis, Clients Blackbox); labelled US so nobody reads them as SGD promises. Two jobs here: calibration, so an $8 CPL doesn't cause panic, and the lead-buying killer: bought leads look cheap per lead and cost $1,000-2,000 per actual conversation once the 1-in-10 contact rate is priced in. Owning the machine is the entire point of today.</aside>
+</div>
+
+<div class="slide" data-section="Module 5">
+  <p class="kicker">Zoom out</p>
+  <h2>You now own a <span class="accent">system</span></h2>
+  <div class="flow" style="justify-content: flex-start;">
+    <span class="accent">AI writes</span>
+    <span class="arrow">&rarr;</span>
+    <span class="accent">Meta distributes</span>
+    <span class="arrow">&rarr;</span>
+    <span class="accent">You close</span>
+  </div>
+  <p class="subtitle" style="margin-top: 44px; max-width: 880px;">Repeat it: new lead magnet, new audience, new campaign. Same three prompts every time. The system generates leads while you do what you're actually good at: advising.</p>
+  <aside class="notes">The mindset close. Today wasn't about one campaign; they learned a repeatable loop. Campaign 2 takes 30 minutes because the prompts and templates are already theirs.</aside>
+</div>
+
+<div class="slide" data-section="Module 5">
+  <p class="kicker">The whole thing</p>
+  <h2>Your lead system, <span class="accent">one screen</span></h2>
+  <div class="snap">
+    <div class="pm">
+      <div class="stage">
+        <h4>1 &middot; BUILD</h4>
+        <p>ChatGPT writes, designs + covers it<br>(Prompts 1, 1b, 1c; Claude works too)<br>~45 min, reusable forever</p>
+      </div>
+      <div class="arr">&rarr;</div>
+      <div class="stage">
+        <h4>2 &middot; LAUNCH</h4>
+        <p>Meta Leads campaign<br>$5/day, 3-day test<br>instant form: name + phone + concern</p>
+      </div>
+      <div class="arr">&rarr;</div>
+      <div class="stage">
+        <h4>3 &middot; CAPTURE</h4>
+        <p>Leads land in Leads Centre<br>phone app notifies you<br>(or Zapier &rarr; Google Sheet)</p>
+      </div>
+      <div class="arr">&rarr;</div>
+      <div class="stage">
+        <h4>4 &middot; FOLLOW UP</h4>
+        <p>Within 2 hours<br>AI writes the message (Prompt 3)<br>call first, then WhatsApp</p>
+      </div>
+      <div class="arr">&rarr;</div>
+      <div class="stage">
+        <h4>5 &middot; IMPROVE</h4>
+        <p>48h hands off, then read the numbers<br>kill or scale 20%<br>new magnet next week &rarr; back to 1</p>
+      </div>
+    </div>
+    <p class="foot">The system &middot; AI writes, Meta distributes, you close &middot; AI Ads Launch Lab &middot; @leotan_js</p>
+  </div>
+  <aside class="notes">The all-in-one. Phone photos welcome; this is the picture they should see when they think "my lead system". Point at stage 5's loop back to stage 1: it's a wheel, not a line. Every bonus module upgrades one box: Lovable adds a front door to stage 2, ChatGPT feeds stage 5's tests, Zapier upgrades stage 3.</aside>
+</div>
+
+<!-- 38 -->
+<div class="slide center" data-section="Module 5">
+  <h1>Keep <span class="accent">going</span></h1>
+  <p class="subtitle">Scan, follow, and DM the word <span class="accent" style="font-weight:700;">ADS</span> to get the support group invite.</p>
+  <div class="qr-box" style="padding: 12px;"><img src="shots/qr-instagram.png" alt="QR code linking to Leo Tan's Instagram @leotan_js" style="width: 100%; height: 100%; object-fit: contain;"></div>
+  <p style="font-size: clamp(15px,1.7vw,19px); color: var(--dim);">@leotan_js &middot; share wins, ask questions, get help with your ads</p>
+  <p style="font-size: clamp(16px,1.9vw,22px); color: var(--muted); margin-top: 40px;">Tomorrow you get: the cheat sheet, this deck, and a check-in.<br>Let the ad run. Follow up fast. See you in the group.</p>
+  <p style="font-size: clamp(14px,1.6vw,18px); color: var(--dim); margin-top: 24px;">And when your campaign is running: <a class="jump" href="#bonus">three bonus modules</a> wait after this slide.</p>
+  <aside class="notes">Q&amp;A happens on this slide. The QR goes to instagram.com/leotan_js; DMs with the word ADS get the WhatsApp group invite (swap the QR for a direct WhatsApp group QR once the group link exists - regenerate at api.qrserver.com). Mention the day-3 check-in so they expect it. Last line of the day: "You walked in this morning without a lead system. You're walking out with one that's already live."</aside>
+</div>
+
+<!-- ============ BONUS MODULES ============ -->
+
+<div class="slide divider" data-section="Bonus" id="bonus">
+  <div class="big-num">+</div>
+  <div><span class="pill">Bonus modules</span><span class="pill mode">Self-paced, at home this week</span></div>
+  <h1>Three <span class="accent">upgrades</span></h1>
+  <div class="steps" style="margin-top: 32px; max-width: 820px;">
+    <div class="step-row"><span><a class="jump" href="#bonus-a"><b style="color: var(--gold);">A. A landing page</b> built by AI, in Lovable</a>. About 30 minutes.</span></div>
+    <div class="step-row"><span><a class="jump" href="#bonus-b"><b style="color: var(--gold);">B. More ad images</b> from ChatGPT</a>, so you can test what works. 15 minutes.</span></div>
+    <div class="step-row"><span><a class="jump" href="#bonus-c"><b style="color: var(--gold);">C. Leads auto-saved</b> to a Google Sheet with Zapier</a>. 20 minutes.</span></div>
+  </div>
+  <p class="subtitle" style="margin-top: 32px;">Your campaign works without any of these. Do them once it's running.</p>
+  <aside class="notes">Present these in 5 minutes or skip entirely and let the deck link do the teaching; every slide is written to be followed alone at home. The order matters: campaign first, upgrades after. Don't let anyone build a landing page instead of launching today.</aside>
+</div>
+
+<!-- BONUS A: LOVABLE -->
+
+<div class="slide" data-section="Bonus A" id="bonus-a">
+  <p class="kicker">Bonus A &middot; Landing pages</p>
+  <h2>When a form isn't <span class="accent">enough</span></h2>
+  <div class="cols">
+    <div class="card">
+      <h3>Instant form (what you built)</h3>
+      <p>Fastest for cold audiences inside Facebook. Pre-filled, two taps, done. Keep it as your main lead engine.</p>
+    </div>
+    <div class="card">
+      <h3>A landing page</h3>
+      <p>A link you own. Put it in your Instagram bio, WhatsApp status, email signature, or a QR code at a roadshow. Room to build trust: what's inside, who you are, why you.</p>
+    </div>
+  </div>
+  <p class="subtitle" style="margin-top: 28px;">You're not choosing. The form gets leads from ads; the page catches everyone else.</p>
+  <aside class="notes">Frame it as addition, not replacement. Their instant form campaign stays untouched. The landing page serves every channel that is NOT a Meta ad: bio links, QR codes, referrals who want to check them out first.</aside>
+</div>
+
+<div class="slide" data-section="Bonus A">
+  <p class="kicker">Principles</p>
+  <h2>What makes a landing page <span class="accent">convert</span></h2>
+  <div class="snap">
+    <table class="nums">
+      <tr><td class="n">One page, one action</td><td>Every extra link is a leak. Your page has one button.</td></tr>
+      <tr><td class="n">Five-word promise</td><td>Above the fold: what they get, instantly clear. Visitors decide in seconds.</td></tr>
+      <tr><td class="n">Match the ad</td><td>The page repeats the exact promise that earned the click. A new message means an instant bounce.</td></tr>
+      <tr><td class="n">Shrink the ask</td><td>A WhatsApp tap beats a six-field form. Friction kills more conversions than anything you write.</td></tr>
+      <tr><td class="n">Proof at the button</td><td>Your credential or one testimonial sits next to the decision, not in the footer.</td></tr>
+      <tr><td class="n">Built for thumbs</td><td>Everyone arrives from a phone feed. If it needs pinching to read, it's broken.</td></tr>
+    </table>
+    <p class="foot">Landing page principles &middot; AI Ads Launch Lab &middot; @leotan_js</p>
+  </div>
+  <aside class="notes">These six are the brief you're giving Lovable in the next slides - the prompt on the next step encodes them. When students iterate ('make the hero shorter'), they're enforcing these principles with words. Worth saying: a page that violates these but looks beautiful still loses to an ugly page that obeys them.</aside>
+</div>
+
+<div class="slide" data-section="Bonus A">
+  <p class="kicker">Step 1 of 4</p>
+  <h2>Open <span class="accent">Lovable</span></h2>
+  <div class="split">
+    <div>
+      <div class="steps" style="margin-top: 24px;">
+        <div class="step-row"><span>Go to <b style="color: var(--gold);">lovable.dev</b> and sign up (free tier is enough for this)</span></div>
+        <div class="step-row"><span>You get one box. You describe the website you want in plain English; Lovable builds it.</span></div>
+        <div class="step-row"><span>Same skill as Claude and ChatGPT: say what you want, look at the result, ask for changes</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="shot-wrap">
+        <img class="shot" src="shots/lovable-home.png" alt="Lovable homepage with the prompt box">
+        <div class="pin" style="left: 22.5%; top: 46%; width: 54.5%; height: 17.5%;"></div>
+        <div class="pin-label" style="left: 22.5%; top: 65.5%;">your whole website starts here</div>
+      </div>
+      <p class="shot-cap">lovable.dev. One box, plain English.</p>
+    </div>
+  </div>
+  <aside class="notes">Free tier gives daily credits; one landing page fits comfortably. If they've used Claude today, this feels familiar immediately: it's a chat that happens to output a website.</aside>
+</div>
+
+<div class="slide" data-section="Bonus A">
+  <p class="kicker">Step 2 of 4</p>
+  <h2>The landing page <span class="accent">prompt</span></h2>
+  <div class="prompt">
+    <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    <pre>Build me a one-page landing page for my free guide "<span class="ph">[GUIDE TITLE]</span>".
+I'm a financial advisor in Singapore. My audience is working adults aged 25-40.
+
+Sections:
+1. Hero: the guide title, one line on why it matters, and a button
+   "Get the free guide on WhatsApp" linking to
+   https://wa.me/<span class="ph">[YOUR PHONE, e.g. 6591234567]</span>?text=Hi! I'd like the free guide.
+2. What's inside: my guide's 5 points as short bullets
+3. About me: 2-3 sentences and a photo placeholder
+4. Footer: my name, phone, email
+
+Style: clean and professional, navy blue and gold, large text, mobile-first.</pre>
+  </div>
+  <p class="subtitle" style="margin-top: 16px; max-width: 980px;">The button opens WhatsApp instead of a contact form on purpose: a form needs a database behind it, a WhatsApp chat lands straight on your phone.</p>
+  <aside class="notes">The wa.me trick is the whole module: beginner landing pages die because the contact form saves to nowhere. A WhatsApp deep link needs zero setup, and the lead arrives as a conversation they can answer from anywhere. Phone format: country code, no plus, no spaces.</aside>
+</div>
+
+<div class="slide" data-section="Bonus A">
+  <p class="kicker">Step 3 of 4</p>
+  <h2>Talk until it looks <span class="accent">right</span></h2>
+  <div class="split">
+    <div>
+      <div class="steps" style="margin-top: 24px;">
+        <div class="step-row"><span>Lovable builds for a minute, then shows your page in the preview</span></div>
+        <div class="step-row"><span>Ask for changes in the chat, one at a time:<span class="note" style="display:block;">"Make the hero shorter" &middot; "Add 3 client testimonials" &middot; "Feel more premium" &middot; "Show the mobile view"</span></span></div>
+        <div class="step-row"><span>Read every word before you ship it. Your name is on it, compliance rules apply.</span></div>
+      </div>
+      <div class="checkpoint">The preview looks like a page you'd be proud to put in your bio. Thumbs up.</div>
+    </div>
+    <div>
+      <div class="shot-wrap">
+        <img class="shot" src="shots/lovable-editor.png" alt="Lovable editor with chat on the left and live preview on the right">
+        <div class="pin" style="left: 0.8%; top: 87%; width: 28.5%; height: 11.5%;"></div>
+        <div class="pin-label" style="left: 1%; top: 83%;">ask for changes here</div>
+        <div class="pin-label" style="left: 45%; top: 3%;">live preview of your page</div>
+      </div>
+      <p class="shot-cap">The editor: chat on the left, your page on the right. Same rhythm as Claude.</p>
+    </div>
+  </div>
+  <aside class="notes">One change per message beats a paragraph of changes; easier to undo, easier to see what did what. The screenshot shows a real project (mine); theirs will show their landing page in the preview.</aside>
+</div>
+
+<div class="slide" data-section="Bonus A">
+  <p class="kicker">Step 4 of 4</p>
+  <h2>Publish and <span class="accent">use it</span></h2>
+  <div class="split">
+    <div>
+      <div class="steps" style="margin-top: 24px;">
+        <div class="step-row"><span>Click <b style="color: var(--gold);">Publish</b> (top right) and confirm. Your page is live at <b style="color: var(--gold);">yourname.lovable.app</b></span></div>
+        <div class="step-row"><span>Open the link on your phone. Tap the WhatsApp button. It should start a chat with you.</span></div>
+        <div class="step-row"><span>Then put the link to work: Instagram bio, WhatsApp status, email signature</span></div>
+      </div>
+      <div class="checkpoint">The live link works on your phone and the button messages you. Thumbs up.</div>
+    </div>
+    <div>
+      <div class="shot-wrap">
+        <img class="shot" src="shots/lovable-editor.png" alt="Lovable editor with the Publish button top right">
+        <div class="pin" style="left: 93.5%; top: 4.5%; width: 6%; height: 5.5%;"></div>
+        <div class="pin-label" style="left: 68%; top: 5%;">when it's ready</div>
+      </div>
+      <p class="shot-cap">Publish is one button, top right. Free lovable.app address included.</p>
+    </div>
+  </div>
+  <aside class="notes">The phone test matters: most traffic to this page will be mobile. If someone wants their own domain later, Lovable supports custom domains on paid plans; the free lovable.app link is fine to start.</aside>
+</div>
+
+<!-- BONUS B: CHATGPT ADS -->
+
+<div class="slide" data-section="Bonus B" id="bonus-b">
+  <p class="kicker">Bonus B &middot; Ad images with ChatGPT</p>
+  <h2>One image is a guess. <span class="accent">Three is a test.</span></h2>
+  <ul class="points" style="margin-top: 28px;">
+    <li>The image decides whether anyone stops scrolling. It's most of your ad's performance.</li>
+    <li>Your Module 2 cover is image #1. The same trick generates #2 and #3 in a minute.</li>
+    <li>Run them against each other and let the numbers pick, not your taste.</li>
+    <li>Your prompts travel: Prompt 2 from today works in ChatGPT word for word.<span class="sub">Claude, ChatGPT, Lovable: same skill, different tools. Describe, look, refine.</span></li>
+  </ul>
+  <aside class="notes">This module doubles as the mindset payoff: prompting is one skill they now own, portable across every AI tool. Free ChatGPT includes image generation with daily limits; that's enough for 2-3 ad images.</aside>
+</div>
+
+<div class="slide" data-section="Bonus B">
+  <p class="kicker">Step 1 of 3</p>
+  <h2>Generate images <span class="accent">#2 and #3</span></h2>
+  <div class="split" style="align-items: start;">
+    <div>
+      <div class="steps" style="margin-top: 20px;">
+        <div class="step-row"><span>Go to <b style="color: var(--gold);">chatgpt.com</b>, log in</span></div>
+        <div class="step-row"><span>Click <b style="color: var(--gold);">Tools &rarr; Create an image</b> (or just paste the prompt; it works either way)</span></div>
+      </div>
+      <div class="prompt" style="margin-top: 16px;">
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+        <pre>Create a square 1:1 Facebook ad image for a free PDF guide called
+"<span class="ph">[GUIDE TITLE]</span>". Professional financial-services style, navy blue
+and gold, the guide title in large bold text, a small "FREE GUIDE"
+badge, clean simple background, no people, space around the text.</pre>
+      </div>
+    </div>
+    <div>
+      <img class="shot" src="shots/chatgpt-create-image.png" alt="ChatGPT Tools menu with Create an image highlighted">
+      <p class="shot-cap">The Tools menu in ChatGPT. "Create an image" is the one boxed in orange.</p>
+    </div>
+  </div>
+  <aside class="notes">Why no people in the prompt: AI faces still look slightly off and finance ads with odd faces get skipped or reported. Text-forward, clean layouts read as trustworthy and pass Meta review easily.</aside>
+</div>
+
+<div class="slide" data-section="Bonus B">
+  <p class="kicker">Step 2 of 3</p>
+  <h2>Fix it with <span class="accent">words</span>, then download</h2>
+  <div class="steps">
+    <div class="step-row"><span>"Make the title text bigger"</span></div>
+    <div class="step-row"><span>"More contrast, the text is hard to read"</span></div>
+    <div class="step-row"><span>"Try a version with a Singapore skyline, subtle, in the background"</span></div>
+    <div class="step-row"><span><b style="color: var(--gold);">Check the spelling in the image.</b> AI images still garble text sometimes; if the title is mangled, say "regenerate with the exact text [TITLE]"</span></div>
+    <div class="step-row"><span>Happy? Hover the image, click download</span></div>
+  </div>
+  <div class="checkpoint">You have 1-2 new ad images saved, titles spelled correctly. Thumbs up.</div>
+  <aside class="notes">The spelling check is non-negotiable; a misspelled guide title in an ad reads as a scam. Two good variants beat five mediocre ones. Keep each image visually different (colour, layout), otherwise the test teaches nothing.</aside>
+</div>
+
+<div class="slide" data-section="Bonus B">
+  <p class="kicker">Step 3 of 3</p>
+  <h2>Test it in <span class="accent">Ads Manager</span></h2>
+  <div class="steps">
+    <div class="step-row"><span>Ads Manager &rarr; your campaign &rarr; select your ad &rarr; <b style="color: var(--gold);">Duplicate</b></span></div>
+    <div class="step-row"><span>In the copy, change <b style="color: var(--gold);">only the image</b>. Same text, same form, same audience.</span></div>
+    <div class="step-row"><span>Run both for 3 days on the same budget</span></div>
+    <div class="step-row"><span>Keep the one with the cheaper leads, pause the other. That's A/B testing; you now do it.</span></div>
+  </div>
+  <div class="checkpoint">Two ads live, identical except the image. Winner decided by cost per lead, not by taste.</div>
+  <aside class="notes">Change one variable only, or the result means nothing. This is the habit that separates people who "ran an ad once" from people with a lead system: every week, one small test.</aside>
+</div>
+
+<!-- BONUS C: ZAPIER -->
+
+<div class="slide" data-section="Bonus C" id="bonus-c">
+  <p class="kicker">Bonus C &middot; Zapier</p>
+  <h2>Every lead, <span class="accent">auto-saved</span> to a sheet</h2>
+  <ul class="points" style="margin-top: 24px;">
+    <li>Right now your leads live inside Meta's Leads Centre. Fine for one campaign; messy by campaign three.</li>
+    <li>A Zap watches your lead form and copies each new lead into a Google Sheet the second it arrives</li>
+    <li>One sheet = your follow-up list, your notes, your history. Nothing slips.</li>
+  </ul>
+  <div class="checkpoint" style="border-color: rgba(232,185,49,0.5); background: rgba(232,185,49,0.08); color: var(--gold);">Heads up: Facebook Lead Ads is a premium Zapier app. You need a paid Zapier plan (from about US$20/month). Not ready to pay? Download leads from Leads Centre weekly instead; this module will wait.</div>
+  <aside class="notes">Be upfront about the paywall or you'll get angry messages Tuesday night. The value case: one missed lead pays for months of Zapier. But weekly manual CSV downloads are genuinely fine at low volume; this is a convenience upgrade, not a requirement.</aside>
+</div>
+
+<div class="slide" data-section="Bonus C">
+  <p class="kicker">Step 1 of 5</p>
+  <h2>Prepare the <span class="accent">sheet</span></h2>
+  <div class="split">
+    <div>
+      <div class="steps" style="margin-top: 24px;">
+        <div class="step-row"><span>Create a new Google Sheet, name it something like <b style="color: var(--gold);">"My Leads"</b></span></div>
+        <div class="step-row"><span>Row 1 = one column per detail: <b style="color: var(--gold);">Name, Phone, Concern, Date</b></span></div>
+        <div class="step-row"><span>That's it. Zapier will fill the rows.</span></div>
+      </div>
+      <div class="checkpoint">A sheet with 4 headers in row 1. Thumbs up.</div>
+    </div>
+    <div>
+      <div class="shot-wrap">
+        <img class="shot" src="shots/zap-sheet-prep.png" alt="Google Sheet with header columns for lead data">
+        <div class="pin" style="left: 3.5%; top: 31.5%; width: 93%; height: 9.5%;"></div>
+        <div class="pin-label" style="left: 3.5%; top: 43%;">headers = your form's questions</div>
+      </div>
+      <p class="shot-cap">Match the headers to what your instant form collects.</p>
+    </div>
+  </div>
+  <aside class="notes">Zapier reads the header row to offer field mapping later, so set headers BEFORE building the Zap. "Concern" is their answer to the custom question; it's the most valuable column in the sheet.</aside>
+</div>
+
+<div class="slide" data-section="Bonus C">
+  <p class="kicker">Step 2 of 5</p>
+  <h2>The trigger: <span class="accent">a new lead</span></h2>
+  <div class="split">
+    <div>
+      <div class="steps" style="margin-top: 24px;">
+        <div class="step-row"><span>zapier.com &rarr; <b style="color: var(--gold);">Create &rarr; Zap</b></span></div>
+        <div class="step-row"><span>Trigger app: <b style="color: var(--gold);">Facebook Lead Ads</b></span></div>
+        <div class="step-row"><span>Trigger event: <b style="color: var(--gold);">New Lead</b></span></div>
+        <div class="step-row"><span>Connect your Facebook account (same login as Ads Manager)</span></div>
+      </div>
+      <div class="checkpoint">Trigger shows Facebook Lead Ads + New Lead + your account. Thumbs up.</div>
+    </div>
+    <div>
+      <div class="shot-wrap">
+        <img class="shot" src="shots/zap-trigger.png" alt="Zapier trigger setup with Facebook Lead Ads and New Lead event">
+        <div class="pin" style="left: 2%; top: 32.5%; width: 95%; height: 9%;"></div>
+        <div class="pin-label" style="left: 2%; top: 43%;">pick New Lead</div>
+      </div>
+      <p class="shot-cap">The trigger: "when this happens". Note the Premium badge next to the app name.</p>
+    </div>
+  </div>
+  <aside class="notes">A Zap is two halves: trigger (when this happens) and action (do this). If Facebook asks about permissions during connect, grant leads access; business portfolio admins may need the "for Business admins" variant, which the setup screen links to.</aside>
+</div>
+
+<div class="slide" data-section="Bonus C">
+  <p class="kicker">Step 3 of 5</p>
+  <h2>Point it at <span class="accent">your form</span></h2>
+  <div class="split">
+    <div>
+      <div class="steps" style="margin-top: 24px;">
+        <div class="step-row"><span>Page: <b style="color: var(--gold);">your Facebook Business Page</b></span></div>
+        <div class="step-row"><span>Form: <b style="color: var(--gold);">the instant form you built in Module 4</b></span></div>
+        <div class="step-row"><span>Continue, then <b style="color: var(--gold);">Test trigger</b>: Zapier pulls in a sample lead</span></div>
+      </div>
+      <div class="checkpoint">Test trigger finds your form and shows lead data. Thumbs up.</div>
+    </div>
+    <div>
+      <div class="shot-wrap">
+        <img class="shot" src="shots/zap-page-form.png" alt="Zapier configure screen selecting Facebook Page and lead form">
+        <div class="pin" style="left: 2%; top: 26.5%; width: 95%; height: 9.5%;"></div>
+        <div class="pin-label" style="left: 2%; top: 37.5%;">your Page</div>
+        <div class="pin" style="left: 4%; top: 62%; width: 92%; height: 8%;"></div>
+        <div class="pin-label" style="left: 4%; top: 71%;">your form</div>
+      </div>
+      <p class="shot-cap">Pick the Page, then the form. Both dropdowns load from your account.</p>
+    </div>
+  </div>
+  <aside class="notes">Gotcha from the blue banner on this screen: editing a form in Meta gives it a NEW ID, and the Zap keeps watching the old one. Any time you edit your instant form, come back here and re-select it. No test lead found? Submit one via Meta's Lead Ads Testing Tool at facebook.com/business/lead-ads-testing.</aside>
+</div>
+
+<div class="slide" data-section="Bonus C">
+  <p class="kicker">Step 4 of 5</p>
+  <h2>The action: <span class="accent">write a row</span></h2>
+  <div class="split">
+    <div>
+      <div class="steps" style="margin-top: 24px;">
+        <div class="step-row"><span>Action app: <b style="color: var(--gold);">Google Sheets</b></span></div>
+        <div class="step-row"><span>Action event: <b style="color: var(--gold);">Create Spreadsheet Row</b></span></div>
+        <div class="step-row"><span>Connect your Google account, then pick your <b style="color: var(--gold);">"My Leads"</b> sheet and Sheet1</span></div>
+      </div>
+      <div class="checkpoint">Action shows Google Sheets + Create Spreadsheet Row + your sheet. Thumbs up.</div>
+    </div>
+    <div>
+      <div class="shot-wrap">
+        <img class="shot" src="shots/zap-action.png" alt="Zapier action setup with Google Sheets Create Spreadsheet Row">
+        <div class="pin" style="left: 2%; top: 34.5%; width: 95%; height: 8.5%;"></div>
+        <div class="pin-label" style="left: 2%; top: 44.5%;">Create Spreadsheet Row</div>
+      </div>
+      <p class="shot-cap">The action: "do this". One new row per lead.</p>
+    </div>
+  </div>
+  <aside class="notes">"Create Spreadsheet Row" exactly; there's a similarly named "Create Multiple Rows" that confuses people. If their sheet doesn't appear in the dropdown, it's usually the wrong Google account connected.</aside>
+</div>
+
+<div class="slide" data-section="Bonus C">
+  <p class="kicker">Step 5 of 5</p>
+  <h2>Map, test, <span class="accent">switch on</span></h2>
+  <div class="split">
+    <div>
+      <div class="steps" style="margin-top: 24px;">
+        <div class="step-row"><span>Match each column to the lead data: Name &rarr; full name, Phone &rarr; phone number, Concern &rarr; your custom question</span></div>
+        <div class="step-row"><span><b style="color: var(--gold);">Test step</b>: a row appears in your sheet. Go look at it.</span></div>
+        <div class="step-row"><span>Click <b style="color: var(--gold);">Publish</b>. The Zap now runs by itself, every lead, forever.</span></div>
+      </div>
+      <div class="checkpoint">A test row sits in your Google Sheet and the Zap shows "On". Done.</div>
+    </div>
+    <div>
+      <div class="shot-wrap">
+        <img class="shot" src="shots/zap-test.png" alt="Zapier test step showing lead data mapped to sheet columns">
+        <div class="pin" style="left: 2.5%; top: 62%; width: 60%; height: 14%;"></div>
+        <div class="pin-label" style="left: 2.5%; top: 78%;">your lead's details, mapped</div>
+      </div>
+      <p class="shot-cap">The test shows exactly what lands in each column before anything goes live.</p>
+    </div>
+  </div>
+  <aside class="notes">Full-circle moment for the workshop: ad runs 24/7, form fills itself, Zapier files each lead into the sheet, and their only job is the 2-hour follow-up call. That's a lead system, built in an afternoon by someone who'd never run an ad before today.</aside>
+</div>
+
+<!-- appendix quick fixes -->
+<div class="slide" data-section="Appendix" id="fixes">
+  <p class="kicker">Appendix</p>
+  <h2>Quick <span class="accent">fixes</span></h2>
+  <div class="cols dense" style="margin-top: 20px; gap: 14px;">
+    <div class="card">
+      <h3>Can't find the Create button</h3>
+      <p>Top-left corner of Ads Manager. It's green. If the whole layout looks different, you're on business.facebook.com; go to adsmanager.facebook.com.</p>
+    </div>
+    <div class="card">
+      <h3>My Page isn't in the dropdown</h3>
+      <p>You're probably not an admin of that Page. Check the Page's settings, or create a new Page at facebook.com/pages/create (2 minutes).</p>
+    </div>
+    <div class="card">
+      <h3>Image looks cropped or blurry</h3>
+      <p>Ask ChatGPT: "give me the same image as a square 1:1, high resolution" and download the new version.</p>
+    </div>
+    <div class="card">
+      <h3>The AI's copy is too long</h3>
+      <p>Reply: "Make the primary text shorter, under 125 characters." It will comply.</p>
+    </div>
+    <div class="card">
+      <h3>Form won't save</h3>
+      <p>A required field is empty (usually the privacy policy or thank-you screen). Fill everything, or switch browser.</p>
+    </div>
+    <div class="card">
+      <h3>Way behind everyone?</h3>
+      <p>Pair with a neighbour who's done, watch the projector, and finish at home tonight with the cheat sheet. Launching tomorrow still counts.</p>
+    </div>
+  </div>
+  <aside class="notes">Backup slide, not part of the main flow. Jump here during hands-on chaos by typing the slide number in the URL hash, or just read fixes aloud. Mirrors the troubleshooting table in the Module 4 facilitator guide.</aside>
+</div>
+
+<div class="progress" id="progress"></div>
+<div class="hud">
+  <span class="section-label" id="sectionLabel"></span>
+  <span class="counter"><span id="current">1</span> / <span id="total"></span></span>
+  <button onclick="prevSlide(); this.blur()" aria-label="Previous">&#8592;</button>
+  <button onclick="nextSlide(); this.blur()" aria-label="Next">&#8594;</button>
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
+  let current = 0;
+  document.getElementById('total').textContent = total;
+
+  function showSlide(n) {
+    slides[current].classList.remove('active');
+    current = Math.max(0, Math.min(n, total - 1));
+    slides[current].classList.add('active');
+    document.getElementById('current').textContent = current + 1;
+    document.getElementById('sectionLabel').textContent = slides[current].dataset.section || '';
+    document.getElementById('progress').style.width = (((current + 1) / total) * 100) + '%';
+    history.replaceState(null, '', '#' + (current + 1));
+  }
+
+  function nextSlide() { showSlide(current + 1); }
+  function prevSlide() { showSlide(current - 1); }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); nextSlide(); }
+    if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); prevSlide(); }
+    if (e.key === 'Home') { e.preventDefault(); showSlide(0); }
+    if (e.key === 'End') { e.preventDefault(); showSlide(total - 1); }
+    if (e.key === 'n' || e.key === 'N') { document.body.classList.toggle('show-notes'); }
+    if (e.key === 'f' || e.key === 'F') {
+      document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
+    }
+  });
+
+  let touchX = null;
+  document.addEventListener('touchstart', (e) => { touchX = e.touches[0].clientX; });
+  document.addEventListener('touchend', (e) => {
+    if (touchX === null) return;
+    const dx = e.changedTouches[0].clientX - touchX;
+    if (dx < -50) nextSlide();
+    if (dx > 50) prevSlide();
+    touchX = null;
+  });
+
+  function copyPrompt(btn) {
+    const text = btn.parentElement.querySelector('pre').textContent.trim();
+    const done = () => {
+      btn.textContent = 'Copied';
+      setTimeout(() => { btn.textContent = 'Copy'; }, 1500);
+    };
+    const fallback = () => {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand('copy'); done(); } catch (err) { btn.textContent = 'Copy failed'; }
+      ta.remove();
+    };
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text).then(done).catch(fallback);
+    } else {
+      fallback();
+    }
+  }
+
+  function goToHash() {
+    const raw = decodeURIComponent(location.hash.slice(1));
+    const n = parseInt(raw, 10);
+    if (!isNaN(n) && n >= 1 && n <= total) { showSlide(n - 1); return; }
+    const el = raw ? document.getElementById(raw) : null;
+    if (el && el.classList.contains('slide')) { showSlide(Array.prototype.indexOf.call(slides, el)); return; }
+    showSlide(0);
+  }
+  window.addEventListener('hashchange', goToHash);
+  goToHash();
+</script>
+
+</body>
+</html>
