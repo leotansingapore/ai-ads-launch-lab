@@ -75,12 +75,23 @@ beliefs a prospect needs before saying yes.
 
 ## v2 slide changes
 
-New slides (5): financial-products category compliance (Module 3), Problem-Agitate-Solve
-copy formula (Module 3), "when leads look fake" 2025 form features (Module 5), "slow is
-normal" sales-cycle expectations (Module 5), "what the pros pay" benchmark table (Module 5).
+New slides (8):
+- "My clients aren't scrolling Facebook" myth-bust with case-study numbers (Module 1)
+- "They Google you before they book" reputation gate (Module 1)
+- Financial-products ad category compliance (Module 3)
+- Problem-Agitate-Solve copy formula (Module 3)
+- "When leads look fake" 2025 form features (Module 5)
+- "What to say when they answer" first-call script (Module 5)
+- "Slow is normal" sales-cycle expectations (Module 5)
+- "What the pros pay" benchmark table (Module 5)
 
-Revised slides (5): budget reality check (agency starting budgets + never boost a post),
-lead magnet principles (ebook-is-dead row), follow-up speed (15-30 minute bar), operating
-numbers table (30-minute contact row), title (v2 marker).
+Rewritten content (10): what-is-a-lead-magnet (give away what others charge for), lead
+magnet principles (one-sharp-pain row, ebook-is-dead row), lead-form-ads rationale (CPM
+economics + volume/quality trade in notes), targeting (copy-does-the-filtering + spider
+story), budget (agency starting budgets + never boost a post), campaign objective (Meta is
+literal), Prompt 2 (PAS structure, problem-first rule, and rejection-trigger words baked
+into the prompt itself), CTA button microcopy (avoid Sign Up), instant form thank-you
+screen (pre-frame the WhatsApp so the number isn't screened), follow-up speed (15-30
+minute bar) and the operating numbers table to match.
 
-v1 stays untouched at workshop-deck.html; v2 is workshop-deck-v2.html.
+v1 stays untouched at workshop-deck.html; v2 is workshop-deck-v2.html (82 slides).
