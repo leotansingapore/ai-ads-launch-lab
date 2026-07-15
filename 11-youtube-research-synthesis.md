@@ -106,3 +106,12 @@ convert), the prompts encode the videos' methods (Burch's feedback loop, Lian's 
 PAS with banned words), and every slide's presenter note names its source video. Only the
 repo's Ads Manager screenshots and the Instagram QR carry over as assets. A closing slide
 credits the source channels.
+
+2026-07-15 critical-review pass (64 slides): added a setup gate up front (Page, ad account,
+billing, AI login - links the pre-flight page), touch-swipe and on-screen nav buttons,
+a worked "what a good reply looks like" example, a Singapore PDPA/compliance slide,
+Prompt 4 for the five-message nurture arc, an S$3-15 CPL calibration row, a quick-fixes
+appendix (#fixes), and all-3-variations ad assembly per Ben Heath's multi-text advice.
+Four single-source claims were softened to "the agencies report" phrasing. Presenter
+notes are now gated behind ?notes in the URL (N key does nothing without it).
+cheat-sheet-v3.html matches the v3 prompt set; the old cheat-sheet.html stays for v1.
