@@ -15,7 +15,10 @@
 html,body{height:100%}
 body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;overflow:hidden}
 #bar{position:fixed;top:0;left:0;height:4px;background:var(--gold);width:0;z-index:40;transition:width .25s}
-#ctr{position:fixed;bottom:22px;right:26px;color:var(--faint);font-size:14px;z-index:40;letter-spacing:.04em}
+#ctr{position:fixed;bottom:34px;right:132px;color:var(--faint);font-size:14px;z-index:40;letter-spacing:.04em}
+#navbtns{position:fixed;bottom:18px;right:22px;z-index:45;display:flex;gap:10px}
+#navbtns button{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--panel);color:var(--text);font-size:18px;cursor:pointer}
+#navbtns button:hover,#navbtns button:active{border-color:var(--gold)}
 #act{position:fixed;bottom:22px;left:26px;color:var(--faint);font-size:12px;z-index:40;letter-spacing:.14em;text-transform:uppercase;font-weight:700}
 .s{display:none;position:absolute;inset:0;flex-direction:column;justify-content:safe center;overflow-y:auto;overflow-x:hidden;padding:5vh 7vw 9vh}
 .s.on{display:flex}
@@ -75,14 +78,16 @@ img{max-width:100%}
 }
 @media print{
   body{overflow:visible}
-  .s{display:flex!important;position:relative;page-break-after:always;height:100vh}
-  #bar,#ctr,#act{display:none}
+  .s{display:flex!important;position:static;height:auto;min-height:100vh;page-break-after:always;overflow:visible}
+  #bar,#ctr,#act,#navbtns{display:none}
+  aside.notes{display:none!important}
 }
 </style>
 </head>
 <body>
 <div id="bar"></div>
 <div id="ctr"></div>
+<div id="navbtns"><button id="prevB" aria-label="Previous slide">&larr;</button><button id="nextB" aria-label="Next slide">&rarr;</button></div>
 <div id="act"></div>
 
 <!-- ============ WELCOME ============ -->
@@ -92,7 +97,7 @@ img{max-width:100%}
   <p class="sub">Build a lead machine in one evening: a free guide, a $5-a-day ad,<br>and a follow-up system that runs before you wake up.</p>
   <p style="margin-top:52px;color:var(--dim);font-size:clamp(15px,1.8vw,20px)">Leo Tan &nbsp;|&nbsp; @leotan_js &nbsp;|&nbsp; v3</p>
   <p style="margin-top:22px;color:var(--faint);font-size:clamp(12px,1.3vw,15px)">Built from what 16 of the most-watched ads educators on YouTube actually teach</p>
-  <p style="margin-top:10px;color:var(--faint);font-size:clamp(11px,1.2vw,14px)">&rarr; advance &middot; N presenter notes &middot; F fullscreen</p>
+  <p id="hint" style="margin-top:10px;color:var(--faint);font-size:clamp(11px,1.2vw,14px)">&rarr; or swipe to advance &middot; F fullscreen</p>
   <aside class="notes">Up as people arrive. This deck is a ground-up build from a 16-video research sweep (July 2026): Ben Heath, Davie Fogarty, Ash Davis, Clients Blackbox, Shauna Thoresen, Hormozi, Gillen, Lalonde and others. Every act's notes cite where its material came from. Workshop is 3.5 hours with one break.</aside>
 </section>
 
@@ -106,6 +111,19 @@ img{max-width:100%}
   </div>
   <p class="sub">Laptops open. Phones charged. We build, not browse.</p>
   <aside class="notes">Deliverables up front, because every source video that holds attention opens with the concrete payoff. Scripts-before-leads is Hormozi's "an ounce of pre is worth a pound of post" - we honour it by writing Act 5's scripts tonight, not after the first missed lead.</aside>
+</section>
+
+<section class="s" data-act="Welcome">
+  <p class="kicker">Before anything</p>
+  <h2>Four green lights, <span class="a">now</span></h2>
+  <div class="rows">
+    <div class="row"><span>A <b>Facebook Page</b> for your practice exists - a personal profile can't run ads</span></div>
+    <div class="row"><span><b>facebook.com/adsmanager</b> opens. If it asks you to create an ad account, say yes now.</span></div>
+    <div class="row"><span>A <b>payment method</b> is saved under Billing. Two minutes now; at 9pm it's the wall between you and Publish.</span></div>
+    <div class="row"><span><b>ChatGPT or Claude</b> is logged in, in a second tab</span></div>
+  </div>
+  <p class="sub">Anything red? Full walkthrough: <a href="pre-flight-checklist.html" style="color:var(--gold)">the pre-flight checklist</a>. Fix it during Act 1 - you have 20 minutes.</p>
+  <aside class="notes">The single most common workshop staller is the payment wall at Publish, which is why billing sits here, three hours early. Anyone missing a Page or ad account works the pre-flight page during Act 1's concept slides and the break; pair them with a green-lit neighbour so they don't lose the ideas.</aside>
 </section>
 
 <section class="s" data-act="Welcome">
@@ -314,6 +332,33 @@ free guide could help with. Number them, one line each.</pre>
 </section>
 
 <section class="s" data-act="Act 2">
+  <p class="kicker">Check your result</p>
+  <h2>What a good reply <span class="a">looks like</span></h2>
+  <div class="cards two">
+    <div class="card">
+      <h3>Keep: specific and felt</h3>
+      <ul>
+        <li>"Worried CPF LIFE payouts won't cover monthly expenses after 65"</li>
+        <li>"Started investing late and afraid it's too late to catch up"</li>
+        <li>"No idea if their insurance policies overlap or leave gaps"</li>
+      </ul>
+    </div>
+    <div class="card bad">
+      <h3>Reject: abstract and bland</h3>
+      <ul>
+        <li>"Lack of financial literacy"</li>
+        <li>"Difficulty budgeting effectively"</li>
+        <li>"Uncertainty about the future"</li>
+      </ul>
+    </div>
+  </div>
+  <div class="rows" style="margin-top:18px">
+    <div class="row"><span>Same test for titles: <b>"5 CPF Mistakes Singaporeans Make Before 40"</b> beats "A Complete Guide to Financial Wellness"</span></div>
+  </div>
+  <aside class="notes">Calibration slide, because rooms stall on "is mine OK?". The left column uses the client's own words and a specific fear; the right column is what the AI produces when the prompt lacked a WHO. Anyone holding a right-column list re-runs Prompt 1 with a sharper audience line - which mirrors Cody Burch rejecting half of every AI list on camera.</aside>
+</section>
+
+<section class="s" data-act="Act 2">
   <p class="kicker">Hands-on &middot; ~5 min</p>
   <h2>Prompt 1b: the <span class="a">outline</span> first</h2>
   <div class="prompt">
@@ -393,7 +438,7 @@ the main colour, clean large title text, no faces, no clutter.</pre>
 <section class="s center divider" id="ad" data-act="Act 3">
   <p class="n">ACT 3 &middot; 35 MIN</p>
   <h1>The <span class="a">ad</span></h1>
-  <p class="sub">Five settings, one message. Everything else stays on default.</p>
+  <p class="sub">Five settings, one message; fifteen minutes of ideas, then twenty of building.<br>Open Ads Manager in a tab now, so it's warm when we get there.</p>
   <aside class="notes">Ben Heath's recurring rule shapes this whole act: every advanced feature "complicates the process and becomes a barrier to entry." We touch five things and deliberately ignore the rest.</aside>
 </section>
 
@@ -428,7 +473,7 @@ the main colour, clean large title text, no faces, no clutter.</pre>
     <div class="row"><span>Campaign setup asks about <b>Special Ad Categories</b>. If it lists <b>Financial products and services</b>, that's you. Declare it.</span></div>
     <div class="row"><span>Declaring it locks some age and gender targeting. That's fine: your copy does the targeting.</span></div>
     <div class="row"><span>Skipping it feels clever until Meta notices: rejected ads, then the account. Bans follow the <b>person and IP</b>, not the account.</span></div>
-    <div class="row"><span>A fresh account won't reset you. One honest checkbox versus Meta ads, forever.</span></div>
+    <div class="row"><span>Don't bet on a fresh-account reset. One honest checkbox versus Meta ads, maybe forever.</span></div>
   </div>
   <aside class="notes">Shauna Thoresen verified this directly with Meta staff after bad advice circulated that solo agents were exempt: "I'm sorry to tell you, that's absolutely not true." Her documented case: a group whose marketer gamed the system 5-6 years ago still can't create ad accounts today - the ban is IP and person level. US insurance agents were swept in wholesale in January 2025.</aside>
 </section>
@@ -466,7 +511,7 @@ the main colour, clean large title text, no faces, no clutter.</pre>
     <div class="card"><h3>Solve</h3><p>"My free guide shows three ways to protect yourself. Download it below."</p></div>
   </div>
   <div class="rows" style="margin-top:18px">
-    <div class="row"><span>"Worried about running out of money in retirement?" speaks to <b>2 in 3</b> readers. "Hi, I'm John from XYZ Financial" speaks to almost none.</span></div>
+    <div class="row"><span>The agencies' testing: "Worried about running out of money in retirement?" reaches about <b>2 in 3</b> readers. "Hi, I'm John from XYZ Financial" reaches almost none.</span></div>
     <div class="row"><span>Your angle picks your leads: tax content pulls wealthier prospects, income-planning content pulls pre-retirees</span></div>
   </div>
   <aside class="notes">Problem-Agitate-Solve, demonstrated live by Clients Blackbox with the exact sequence-of-returns example on the cards. The 2-in-3 versus almost-none contrast is his. The angle-picks-your-leads lever is from his Feb 2026 case study: tax messaging pulled wealthier leads than the client wanted; income messaging held the target band.</aside>
@@ -538,7 +583,7 @@ the main colour, clean large title text, no faces, no clutter.</pre>
       <div class="shotwrap">
         <img class="shot" src="shots/lead-ad-example.png" alt="A real financial services lead ad with a free guide as the offer">
       </div>
-      <p class="shotcap">A real advisor lead ad: guide cover as image, problem-first copy, Download button. Yours in 10 minutes.</p>
+      <p class="shotcap">A real mortgage adviser's lead ad: guide cover as image, problem-first copy, Download button. Yours in 10 minutes.</p>
     </div>
   </div>
   <aside class="notes">"Pixelated product images and boring ads" are Fogarty's two named newbie sins. The square+vertical pair is Gillen's; the be-PG-early warning is Fogarty's account-warming advice. The screenshot is the north star - point at each part and name where tonight it comes from.</aside>
@@ -565,7 +610,7 @@ Write me:
 Rules: no "guaranteed", no "100%", no income promises, no jargon.
 Give me 3 variations, each with a different problem angle.</pre>
   </div>
-  <div class="check">Three variations on screen. Pick the one whose opening question your clients actually say out loud.</div>
+  <div class="check">Three variations on screen. All three get used in the next step - pick the truest to lead the preview.</div>
   <aside class="notes">The prompt bakes in the research so the output is right by default: PAS structure and the problem-first rule (Blackbox), short copy - "people just aren't going to bother to read essays" (Ben Heath), and the banned words that trigger rejection in this category. The pick-the-real-question test keeps them from choosing the cleverest variation over the truest.</aside>
 </section>
 
@@ -575,11 +620,11 @@ Give me 3 variations, each with a different problem angle.</pre>
   <div class="rows">
     <div class="row"><span>Upload your cover image</span></div>
     <div class="row"><span>Primary text &rarr; the top field. Headline &rarr; the bold line. Description &rarr; the small grey one.</span></div>
-    <div class="row"><span>One piece at a time, watching the preview update</span></div>
+    <div class="row"><span>Paste <b>all 3 variations</b>: primary text and headline each take multiple options ("+ Add text option"). Meta shows each person the version they're most likely to stop on.</span></div>
     <div class="row"><span>Button: <b>Download</b>. It matches the promise. Avoid "Sign Up" - it reads like commitment.</span></div>
   </div>
-  <div class="check">The preview looks like an ad you'd actually see. Boring is the other sin - if it reads flat, swap to variation two.</div>
-  <aside class="notes">The Download-not-Sign-Up microcopy rule is Gillen's: "Sign Up" and "Subscribe" trigger commitment friction even when technically accurate; low-commitment verbs lift completion. The one-piece-at-a-time pacing prevents the classic error of pasting all three texts into one field.</aside>
+  <div class="check">The preview looks like an ad you'd actually see, and all 3 text options are loaded.</div>
+  <aside class="notes">The Download-not-Sign-Up microcopy rule is Gillen's: "Sign Up" and "Subscribe" trigger commitment friction even when technically accurate; low-commitment verbs lift completion. Loading all three variations is Ben Heath's: Meta persona-matches copy per viewer, so variety is free performance. Watch for the classic error of pasting all three texts into ONE field instead of separate options.</aside>
 </section>
 
 <!-- ============ ACT 4: THE FORM ============ -->
@@ -597,7 +642,7 @@ Give me 3 variations, each with a different problem angle.</pre>
   <div class="rows">
     <div class="row"><span>No website, no landing page, no developer. The form opens in-app, instantly.</span></div>
     <div class="row"><span>Meta pre-fills their name and number: <b>one tap</b> to finish</span></div>
-    <div class="row"><span>Meta rewards you for keeping users in-app: instant forms get <b>cheaper impressions</b> than off-site funnels</span></div>
+    <div class="row"><span>Staying in-app is what Meta's auction rewards: agencies see <b>cheaper impressions</b> for instant forms than off-site funnels</span></div>
     <div class="row"><span>The honest trade: more leads, rougher quality than a website funnel. At $5/day, volume to learn from wins.</span></div>
   </div>
   <aside class="notes">The CPM insight is Lalonde speaking as the algorithm: "I make more money the more time someone spends on my app... so I don't send them out of the app." The volume-vs-quality trade is named by Blake Bauer; we take volume deliberately and fix quality in Act 5 and the upgrade slide.</aside>
@@ -721,6 +766,19 @@ Give me 3 variations, each with a different problem angle.</pre>
 </section>
 
 <section class="s" data-act="Act 5">
+  <p class="kicker">The Singapore rules</p>
+  <h2>Fast, and <span class="a">clean</span></h2>
+  <div class="rows">
+    <div class="row"><span>Their form fill is consent to get the guide and hear back <b>about it</b> - not to join a broadcast list</span></div>
+    <div class="row"><span>Open by identifying yourself and referencing their request. One "please stop" = stop, immediately.</span></div>
+    <div class="row"><span>Keep the lead record: the form, the date, what they asked for. That's your PDPA paper trail.</span></div>
+    <div class="row"><span>Tied advisors: your firm may require compliance sign-off on the ad and the guide. Ask <b>before</b> it runs, not after.</span></div>
+  </div>
+  <p class="sub">General guidance, not legal advice. Your compliance desk outranks this slide.</p>
+  <aside class="notes">The US research says nothing about Singapore law, so this slide fills the gap conservatively: one-to-one replies about something the person requested are the safest PDPA ground; cold broadcasts to collected numbers are where advisors get burned, because DNC rules bite once messages stop being about their request. The firm sign-off line matters for tied advisors - internal ad-approval processes exist and skipping them risks more than a rejected ad.</aside>
+</section>
+
+<section class="s" data-act="Act 5">
   <p class="kicker">Hands-on &middot; ~5 min</p>
   <h2>Prompt 3: the message, written <span class="a">now</span></h2>
   <div class="prompt">
@@ -761,6 +819,26 @@ this week. No selling, no jargon.</pre>
     <tr><td class="k">Day 10</td><td>soft close: "the 15-minute chat is still open this week"</td></tr>
   </table>
   <aside class="notes">Adapted from Gillen's Klaviyo "competition series": instant confirm with brand intro, founder story, social proof, differentiation, then conditional reminders. He calls the sequence "the secret sauce that gets you the extra sales" - the ad captures, the sequence converts. WhatsApp or email, same arc; AI drafts all five in one prompt if they ask it to.</aside>
+</section>
+
+<section class="s" data-act="Act 5">
+  <p class="kicker">Hands-on &middot; ~4 min</p>
+  <h2>Prompt 4: five messages, <span class="a">drafted once</span></h2>
+  <div class="prompt">
+    <button class="copy" onclick="copyP(this)">Copy</button>
+    <pre>Leads downloaded my free guide "<span class="ph">[TITLE]</span>" but haven't booked a call.
+Write my 5-message WhatsApp follow-up arc, under 60 words each:
+
+Day 0: deliver the guide + one line on who I am
+Day 2: my story - why I do this work. Facts: <span class="ph">[2 REAL FACTS ABOUT YOU]</span>
+Day 4: one client outcome, anonymised: <span class="ph">[WHAT HAPPENED]</span>
+Day 7: expand one tip from the guide with something extra
+Day 10: soft reminder that the free 15-minute chat is still open
+
+Warm, plain English, no jargon, no selling before Day 10.</pre>
+  </div>
+  <div class="check">Five messages saved next to your Prompt 3 template. The whole follow-up system now exists before your first lead does.</div>
+  <aside class="notes">Completes the pre-built system: Prompt 3 covers the hot window, this covers the patient arc from the previous slide. The placeholders force the two inputs the AI can't invent - real facts about them and a real outcome. Day numbers are a rhythm, not a law; skip a beat the moment a reply comes in.</aside>
 </section>
 
 <section class="s" data-act="Act 5">
@@ -826,7 +904,7 @@ this week. No selling, no jargon.</pre>
   <div class="rows">
     <div class="row"><span>Day 3, $15 spent, nothing booked? <b>You're on schedule.</b> The agencies see first appointments in week 1-2.</span></div>
     <div class="row"><span>A lead that books this month becomes a client in 1-3 months. October leads close in December.</span></div>
-    <div class="row"><span>About <b>2 in 3</b> booked appointments show up. For cold traffic that's a good rate, not a failure.</span></div>
+    <div class="row"><span>The case-study show rate: about <b>2 in 3</b> booked appointments turn up. For cold traffic that's good, not failure.</span></div>
     <div class="row"><span>Lumpy months are the lag, not luck. Judge the machine by the quarter.</span></div>
   </div>
   <p class="sub">You're not selling $10 stickers. Nobody moves their retirement savings from one scroll.</p>
@@ -839,6 +917,7 @@ this week. No selling, no jargon.</pre>
   <div class="snap">
     <table class="tbl">
       <tr><td class="k">$5-10 / day</td><td>starting budget. Don't raise it on day one.</td></tr>
+      <tr><td class="k">S$3-15</td><td>a normal cost per lead in Singapore at this budget. The US$5.30 case study is the good end.</td></tr>
       <tr><td class="k">48 hours</td><td>hands off while Meta learns. Every edit resets the clock.</td></tr>
       <tr><td class="k">3 days + 500</td><td>minimum spend and impressions before judging anything</td></tr>
       <tr><td class="k">+20%</td><td>the scale step when cost per lead is good 3 days running</td></tr>
@@ -857,7 +936,7 @@ this week. No selling, no jargon.</pre>
     <div class="row"><span>Advertise from Business Manager, real name matching your ID. Turn on <b>2FA</b> and add one trusted backup admin.</span></div>
     <div class="row"><span>Pay by card, not PayPal. New Pages should post a little before advertising.</span></div>
     <div class="row"><span>Never boost, never skip the financial category, never run "guaranteed returns"</span></div>
-    <div class="row"><span>Bans follow the person and the IP. There is no fresh-account reset.</span></div>
+    <div class="row"><span>Documented bans have followed the person and the IP for years. Don't count on a fresh-account reset.</span></div>
   </div>
   <aside class="notes">Fogarty's ban-avoidance section, the most detailed in the research: aged accounts, matching legal names, 2FA on every user, backup admin, no PayPal (higher observed ban rate), warm up new Pages. Thoresen supplies the permanence: a group whose marketer gamed the rules years ago still can't open ad accounts.</aside>
 </section>
@@ -889,6 +968,20 @@ this week. No selling, no jargon.</pre>
     <p class="foot">The lead machine &middot; AI Ads Launch Lab &middot; @leotan_js</p>
   </div>
   <aside class="notes">The assembly recap. Everything on this table got built or written tonight. Photo-this slide - it's the one they'll actually look back at.</aside>
+</section>
+
+<section class="s" data-act="Act 6" id="fixes">
+  <p class="kicker">Appendix</p>
+  <h2>Quick <span class="a">fixes</span></h2>
+  <table class="tbl">
+    <tr><td class="k">No file from the AI</td><td>ask for the HTML in a code block, paste into a text editor, save as guide.html</td></tr>
+    <tr><td class="k">Ugly PDF</td><td>you asked for a PDF. Ask for print-styled HTML instead, open it, Cmd+P, save as PDF.</td></tr>
+    <tr><td class="k">Form won't save</td><td>a required field is empty - usually the privacy policy link. Still stuck? Different browser.</td></tr>
+    <tr><td class="k">"In review" for hours</td><td>normal on new accounts. Don't edit - edits restart the queue. Check tomorrow.</td></tr>
+    <tr><td class="k">Rejected</td><td>hunt for "guaranteed", "100%", income promises. Remove, resubmit, move on.</td></tr>
+    <tr><td class="k">Can't find your leads</td><td>business.facebook.com &rarr; All tools &rarr; Leads Center. Or turn on email delivery.</td></tr>
+  </table>
+  <aside class="notes">The six failures that actually happen, collected from the live dry-runs and the research. Point people here instead of debugging one-on-one from the stage. The deck URL plus #fixes deep-links straight to this slide.</aside>
 </section>
 
 <section class="s" data-act="Act 6">
@@ -939,7 +1032,7 @@ addEventListener('hashchange', fromHash);
 addEventListener('keydown', e => {
   if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); go(cur + 1); }
   else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); go(cur - 1); }
-  else if (e.key === 'n' || e.key === 'N') document.body.classList.toggle('shownotes');
+  else if ((e.key === 'n' || e.key === 'N') && NOTES_OK) document.body.classList.toggle('shownotes');
   else if (e.key === 'f' || e.key === 'F') {
     document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
   }
@@ -954,6 +1047,21 @@ function copyP(btn){
     setTimeout(() => btn.textContent = 'Copy', 1200);
   });
 }
+const NOTES_OK = new URLSearchParams(location.search).has('notes');
+if (NOTES_OK) {
+  const h = document.getElementById('hint');
+  if (h) h.innerHTML += ' &middot; N presenter notes';
+}
+document.getElementById('prevB').addEventListener('click', () => go(cur - 1));
+document.getElementById('nextB').addEventListener('click', () => go(cur + 1));
+let tX = null, tY = null;
+addEventListener('touchstart', e => { tX = e.touches[0].clientX; tY = e.touches[0].clientY; }, {passive: true});
+addEventListener('touchend', e => {
+  if (tX === null) return;
+  const dx = e.changedTouches[0].clientX - tX, dy = e.changedTouches[0].clientY - tY;
+  if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5) { dx < 0 ? go(cur + 1) : go(cur - 1); }
+  tX = tY = null;
+}, {passive: true});
 fromHash();
 </script>
 </body>

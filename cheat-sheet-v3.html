@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>AI Prompt Cheat Sheet v3 - AI Ads Launch Lab</title>
+<style>
+:root{--bg:#0b0e14;--panel:#141a28;--text:#e9ebf1;--dim:#a0a8ba;--faint:#5c657a;--gold:#e9b23d;--line:#242c40}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.5;padding:40px 6vw 80px;max-width:920px;margin:0 auto}
+h1{font-size:clamp(28px,5vw,42px);margin-bottom:6px}
+.a{color:var(--gold)}
+.lede{color:var(--dim);margin-bottom:34px}
+h2{font-size:clamp(18px,3vw,24px);margin:38px 0 6px;color:var(--gold)}
+h2 .when{color:var(--faint);font-size:.65em;font-weight:600;margin-left:8px}
+p.use{color:var(--dim);font-size:15px;margin-bottom:10px}
+.prompt{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:10px;padding:16px 18px;position:relative}
+.prompt pre{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:13.5px;line-height:1.55;white-space:pre-wrap}
+.ph{color:var(--gold);font-weight:700}
+.copy{position:absolute;top:10px;right:10px;background:var(--gold);color:#14161c;border:none;border-radius:7px;font-weight:800;font-size:12px;padding:5px 12px;cursor:pointer}
+table{width:100%;border-collapse:collapse;margin-top:10px}
+td{padding:9px 12px;border-bottom:1px solid var(--line);font-size:14.5px;color:var(--dim);vertical-align:top}
+td.k{color:var(--gold);font-weight:800;white-space:nowrap;width:1%;padding-right:22px}
+.foot{color:var(--faint);font-size:12px;margin-top:46px;letter-spacing:.06em}
+@media print{
+  :root{--bg:#ffffff;--panel:#f5f2ea;--text:#191919;--dim:#444;--faint:#888;--gold:#946e12;--line:#ddd}
+  body{padding:0 0 20px}
+  .copy{display:none}
+  h2{page-break-after:avoid}
+  .prompt{page-break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<h1>AI Prompt <span class="a">Cheat Sheet</span> v3</h1>
+<p class="lede">ChatGPT or Claude, either works. Words in <span class="ph">[GOLD]</span> are yours to replace. Prompts run in order; each builds on the last, in the same chat.</p>
+
+<h2>Prompt 1 - find the pain <span class="when">Act 2</span></h2>
+<p class="use">The guide topic comes from their problems, not your services.</p>
+<div class="prompt"><button class="copy" onclick="cp(this)">Copy</button><pre>I'm a financial advisor in Singapore. My clients are <span class="ph">[WHO YOU SERVE,
+e.g. working parents in their late 30s]</span>.
+
+List 10 specific money problems they lose sleep over that a short
+free guide could help with. Number them, one line each.</pre></div>
+<p class="use" style="margin-top:8px">Then: <b>"I like number X. Give me 5 guide titles for it - specific, no clever wordplay."</b></p>
+
+<h2>Prompt 1b - the outline first <span class="when">Act 2</span></h2>
+<p class="use">Approve the skeleton before any writing happens. Edit it in chat.</p>
+<div class="prompt"><button class="copy" onclick="cp(this)">Copy</button><pre>You're helping me write that guide: <span class="ph">[PASTE YOUR TITLE]</span>.
+
+Give me a 6-section outline, one line per section, ending with a
+final section that invites the reader to a free 15-minute call.
+Wait for my OK before writing anything.</pre></div>
+
+<h2>Prompt 1c - write it print-ready <span class="when">Act 2</span></h2>
+<p class="use">HTML then browser-print beats asking for a PDF. Download, open, Cmd+P, save as PDF.</p>
+<div class="prompt"><button class="copy" onclick="cp(this)">Copy</button><pre>Write the full guide from that outline as ONE self-contained HTML file,
+styled for print: A4, clean typography, a page break between sections.
+
+Plain English, no jargon, 10-minute read. Use short paragraphs,
+checklists and concrete numbers. End with the free 15-minute call
+invitation and my contact: <span class="ph">[NAME, PHONE]</span>.
+
+Give it to me as a downloadable file.</pre></div>
+
+<h2>Prompt 1d - the cover <span class="when">Act 2</span></h2>
+<p class="use">The cover doubles as your ad image. If the title text renders badly, ask for no text and add it yourself.</p>
+<div class="prompt"><button class="copy" onclick="cp(this)">Copy</button><pre>Create a cover image for my guide "<span class="ph">[TITLE]</span>".
+Professional and calm, financial-planning feel, <span class="ph">[YOUR COLOUR]</span> as
+the main colour, clean large title text, no faces, no clutter.</pre></div>
+
+<h2>Prompt 2 - the ad copy <span class="when">Act 3</span></h2>
+<p class="use">Problem-first, never name-first. Use all 3 variations in Meta's multiple text options.</p>
+<div class="prompt"><button class="copy" onclick="cp(this)">Copy</button><pre>I'm running a Meta lead form ad for my financial advisory practice
+in Singapore.
+
+My free guide: <span class="ph">[TITLE]</span>.
+The one problem it solves: <span class="ph">[THE PROBLEM]</span>.
+My audience: <span class="ph">[WHO IT'S FOR]</span>.
+
+Write me:
+1) Primary text (under 125 characters). Open with their problem as a
+   question. Never open with my name or my firm.
+2) Headline (under 40 characters): the guide's name plus the word "free"
+3) Description (under 30 characters)
+
+Rules: no "guaranteed", no "100%", no income promises, no jargon.
+Give me 3 variations, each with a different problem angle.</pre></div>
+
+<h2>Prompt 3 - the follow-up message <span class="when">Act 5</span></h2>
+<p class="use">Save the output as a template now. Their form answer is the first line.</p>
+<div class="prompt"><button class="copy" onclick="cp(this)">Copy</button><pre>A lead just filled in my Meta form for my free guide "<span class="ph">[TITLE]</span>".
+
+Name: <span class="ph">[NAME]</span>
+Their biggest money worry: <span class="ph">[THEIR ANSWER]</span>
+
+Write a WhatsApp message under 80 words: warm, reference their exact
+worry in the first line, attach the guide, and offer a 15-minute call
+this week. No selling, no jargon.</pre></div>
+
+<h2>Prompt 4 - the five-message arc <span class="when">Act 5</span></h2>
+<p class="use">For leads who take the guide but don't book. Draft once, reuse forever.</p>
+<div class="prompt"><button class="copy" onclick="cp(this)">Copy</button><pre>Leads downloaded my free guide "<span class="ph">[TITLE]</span>" but haven't booked a call.
+Write my 5-message WhatsApp follow-up arc, under 60 words each:
+
+Day 0: deliver the guide + one line on who I am
+Day 2: my story - why I do this work. Facts: <span class="ph">[2 REAL FACTS ABOUT YOU]</span>
+Day 4: one client outcome, anonymised: <span class="ph">[WHAT HAPPENED]</span>
+Day 7: expand one tip from the guide with something extra
+Day 10: soft reminder that the free 15-minute chat is still open
+
+Warm, plain English, no jargon, no selling before Day 10.</pre></div>
+
+<h2>The operating numbers</h2>
+<table>
+  <tr><td class="k">$5-10 / day</td><td>starting budget. Don't raise it on day one.</td></tr>
+  <tr><td class="k">S$3-15</td><td>a normal cost per lead in Singapore at this budget</td></tr>
+  <tr><td class="k">48 hours</td><td>hands off while Meta learns. Every edit resets the clock.</td></tr>
+  <tr><td class="k">3 days + 500</td><td>minimum spend and impressions before judging anything</td></tr>
+  <tr><td class="k">+20%</td><td>the scale step when cost per lead is good 3 days running</td></tr>
+  <tr><td class="k">30 min</td><td>the contact bar. Two hours is the ceiling, not the target.</td></tr>
+  <tr><td class="k">2 / day</td><td>lead sweeps, morning and evening</td></tr>
+</table>
+
+<h2>Quick fixes</h2>
+<table>
+  <tr><td class="k">No file from the AI</td><td>ask for the HTML in a code block, paste into a text editor, save as guide.html</td></tr>
+  <tr><td class="k">Ugly PDF</td><td>ask for print-styled HTML instead, open it, Cmd+P, save as PDF</td></tr>
+  <tr><td class="k">Form won't save</td><td>a required field is empty - usually the privacy policy link</td></tr>
+  <tr><td class="k">"In review" for hours</td><td>normal on new accounts. Don't edit. Check tomorrow.</td></tr>
+  <tr><td class="k">Rejected</td><td>remove "guaranteed", "100%", income promises. Resubmit, move on.</td></tr>
+  <tr><td class="k">Can't find your leads</td><td>business.facebook.com &rarr; All tools &rarr; Leads Center</td></tr>
+</table>
+
+<p class="foot">AI ADS LAUNCH LAB &middot; DECK V3 &middot; @LEOTAN_JS &middot; PRINT: CMD+P</p>
+
+<script>
+function cp(btn){
+  navigator.clipboard.writeText(btn.parentElement.querySelector('pre').innerText).then(() => {
+    btn.textContent = 'Copied';
+    setTimeout(() => btn.textContent = 'Copy', 1200);
+  });
+}
+</script>
+</body>
+</html>
